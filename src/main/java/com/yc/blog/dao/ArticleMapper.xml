@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yc.blog.dao.ArticleMapper">
+  <resultMap id="BaseResultMap" type="com.yc.blog.bean.Article">
+    <id column="artid" jdbcType="INTEGER" property="artid" />
+    <result column="author" jdbcType="VARCHAR" property="author" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="cateid" jdbcType="INTEGER" property="cateid" />
+    <result column="imgs" jdbcType="VARCHAR" property="imgs" />
+    <result column="arttime" jdbcType="TIMESTAMP" property="arttime" />
+    <result column="readcnt" jdbcType="INTEGER" property="readcnt" />
+    <result column="artstatus" jdbcType="INTEGER" property="artstatus" />
+    <result column="arttemp" jdbcType="VARCHAR" property="arttemp" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.yc.blog.bean.Article">
+    <result column="content" jdbcType="LONGVARCHAR" property="content" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    artid, author, title, cateid, imgs, arttime, readcnt, artstatus, arttemp
+  </sql>
+  <sql id="Blob_Column_List">
+    content
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.yc.blog.bean.ArticleExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from article
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.yc.blog.bean.ArticleExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from article
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from article
+    where artid = #{artid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from article
+    where artid = #{artid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.yc.blog.bean.ArticleExample">
+    delete from article
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.yc.blog.bean.Article">
+    insert into article (artid, author, title, 
+      cateid, imgs, arttime, 
+      readcnt, artstatus, arttemp, 
+      content)
+    values (#{artid,jdbcType=INTEGER}, #{author,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, 
+      #{cateid,jdbcType=INTEGER}, #{imgs,jdbcType=VARCHAR}, #{arttime,jdbcType=TIMESTAMP}, 
+      #{readcnt,jdbcType=INTEGER}, #{artstatus,jdbcType=INTEGER}, #{arttemp,jdbcType=VARCHAR}, 
+      #{content,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yc.blog.bean.Article">
+    insert into article
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="artid != null">
+        artid,
+      </if>
+      <if test="author != null">
+        author,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="cateid != null">
+        cateid,
+      </if>
+      <if test="imgs != null">
+        imgs,
+      </if>
+      <if test="arttime != null">
+        arttime,
+      </if>
+      <if test="readcnt != null">
+        readcnt,
+      </if>
+      <if test="artstatus != null">
+        artstatus,
+      </if>
+      <if test="arttemp != null">
+        arttemp,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="artid != null">
+        #{artid,jdbcType=INTEGER},
+      </if>
+      <if test="author != null">
+        #{author,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="cateid != null">
+        #{cateid,jdbcType=INTEGER},
+      </if>
+      <if test="imgs != null">
+        #{imgs,jdbcType=VARCHAR},
+      </if>
+      <if test="arttime != null">
+        #{arttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="readcnt != null">
+        #{readcnt,jdbcType=INTEGER},
+      </if>
+      <if test="artstatus != null">
+        #{artstatus,jdbcType=INTEGER},
+      </if>
+      <if test="arttemp != null">
+        #{arttemp,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.yc.blog.bean.ArticleExample" resultType="java.lang.Long">
+    select count(*) from article
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update article
+    <set>
+      <if test="record.artid != null">
+        artid = #{record.artid,jdbcType=INTEGER},
+      </if>
+      <if test="record.author != null">
+        author = #{record.author,jdbcType=VARCHAR},
+      </if>
+      <if test="record.title != null">
+        title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cateid != null">
+        cateid = #{record.cateid,jdbcType=INTEGER},
+      </if>
+      <if test="record.imgs != null">
+        imgs = #{record.imgs,jdbcType=VARCHAR},
+      </if>
+      <if test="record.arttime != null">
+        arttime = #{record.arttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.readcnt != null">
+        readcnt = #{record.readcnt,jdbcType=INTEGER},
+      </if>
+      <if test="record.artstatus != null">
+        artstatus = #{record.artstatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.arttemp != null">
+        arttemp = #{record.arttemp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.content != null">
+        content = #{record.content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update article
+    set artid = #{record.artid,jdbcType=INTEGER},
+      author = #{record.author,jdbcType=VARCHAR},
+      title = #{record.title,jdbcType=VARCHAR},
+      cateid = #{record.cateid,jdbcType=INTEGER},
+      imgs = #{record.imgs,jdbcType=VARCHAR},
+      arttime = #{record.arttime,jdbcType=TIMESTAMP},
+      readcnt = #{record.readcnt,jdbcType=INTEGER},
+      artstatus = #{record.artstatus,jdbcType=INTEGER},
+      arttemp = #{record.arttemp,jdbcType=VARCHAR},
+      content = #{record.content,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update article
+    set artid = #{record.artid,jdbcType=INTEGER},
+      author = #{record.author,jdbcType=VARCHAR},
+      title = #{record.title,jdbcType=VARCHAR},
+      cateid = #{record.cateid,jdbcType=INTEGER},
+      imgs = #{record.imgs,jdbcType=VARCHAR},
+      arttime = #{record.arttime,jdbcType=TIMESTAMP},
+      readcnt = #{record.readcnt,jdbcType=INTEGER},
+      artstatus = #{record.artstatus,jdbcType=INTEGER},
+      arttemp = #{record.arttemp,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yc.blog.bean.Article">
+    update article
+    <set>
+      <if test="author != null">
+        author = #{author,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="cateid != null">
+        cateid = #{cateid,jdbcType=INTEGER},
+      </if>
+      <if test="imgs != null">
+        imgs = #{imgs,jdbcType=VARCHAR},
+      </if>
+      <if test="arttime != null">
+        arttime = #{arttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="readcnt != null">
+        readcnt = #{readcnt,jdbcType=INTEGER},
+      </if>
+      <if test="artstatus != null">
+        artstatus = #{artstatus,jdbcType=INTEGER},
+      </if>
+      <if test="arttemp != null">
+        arttemp = #{arttemp,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where artid = #{artid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.yc.blog.bean.Article">
+    update article
+    set author = #{author,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      cateid = #{cateid,jdbcType=INTEGER},
+      imgs = #{imgs,jdbcType=VARCHAR},
+      arttime = #{arttime,jdbcType=TIMESTAMP},
+      readcnt = #{readcnt,jdbcType=INTEGER},
+      artstatus = #{artstatus,jdbcType=INTEGER},
+      arttemp = #{arttemp,jdbcType=VARCHAR},
+      content = #{content,jdbcType=LONGVARCHAR}
+    where artid = #{artid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yc.blog.bean.Article">
+    update article
+    set author = #{author,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      cateid = #{cateid,jdbcType=INTEGER},
+      imgs = #{imgs,jdbcType=VARCHAR},
+      arttime = #{arttime,jdbcType=TIMESTAMP},
+      readcnt = #{readcnt,jdbcType=INTEGER},
+      artstatus = #{artstatus,jdbcType=INTEGER},
+      arttemp = #{arttemp,jdbcType=VARCHAR}
+    where artid = #{artid,jdbcType=INTEGER}
+  </update>
+</mapper>

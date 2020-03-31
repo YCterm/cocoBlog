@@ -1,0 +1,15 @@
+#服务器端口：80
+server:
+  port: 80
+  
+spring:
+  #连接数据库配置  
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/cocoblog
+    username: root
+    password: a
+    driver-class-name: com.mysql.jdbc.Driver
+
+#bean实体类位置     
+mybatis:
+  type-aliases-package: com.yc.blog
