@@ -1,0 +1,764 @@
+<!DOCTYPE HTML>
+<html> 
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=10,IE=9,IE=8,ie=7">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+     <title>袁志蒙个人博客 - YzmCMS博客</title>
+	<meta name="keywords" content="个人博客,袁志蒙个人博客,技术博客,个人原创博客,php博客,个人原创网站" />
+	<meta name="description" content="YzmCMS官方博客，袁志蒙的个人博客，学习并分享PHP、Linux、MySQL和前端技术等WEB知识，记录生活的点点滴滴，是一个互联网从业者值得收藏的网站。" />
+    <link rel='stylesheet' id='open_social_css-css' href='https://blog.yzmcms.com/common/static/css/os.css' type='text/css' media='all' />
+    <link rel="stylesheet" href="https://blog.yzmcms.com/common/static/css/style.css?v=2020" media="all">
+	<link rel="stylesheet" href="https://blog.yzmcms.com/common/static/css/swiper.min.css" media="all">
+	<link href="https://blog.yzmcms.com/common/static/css/font-awesome.min.css" rel="stylesheet" media="screen">
+	<!-- <script type="text/javascript" src="https://blog.yzmcms.com/common/static/js/base.loading.js"></script>	 -->
+  </head>
+  
+  <body class="home blog">
+    <div class="placeholder"></div>		
+<!--[if lt IE 9]>
+  <script src="https://blog.yzmcms.com/common/static/js/html5.js"></script>
+<![endif]-->
+<script src="https://blog.yzmcms.com/common/static/js/jquery.js"></script>
+<script>window._deel = {
+	maillist: '',
+	maillistCode: '',
+	commenton: 0,
+	roll: [0, 0]
+  }</script>
+<script type="text/javascript">$(function() {
+	$(window).scroll(function() {
+	  $offset = $('.placeholder').offset(); //不能用自身的div，不然滚动起来会很卡
+	  if ($(window).scrollTop() > $offset.top) {
+		$('.header').css({
+		  'position': 'fixed',
+		  'top': '0px',
+		  'left': $offset.left + 'px',
+		  'z-index': '999'
+		});
+		$(".container").css({
+		  "margin-top": "93px"
+		});
+	  } else {
+		$('.header').removeAttr('style');
+		$('.container').removeAttr('style');
+	  }
+	});
+  })
+</script>	
+<header class="header" style="height: 52px;">
+  <div class="navbar">
+	<h1 class="logo">
+	  <a href="index.html" title="袁志蒙个人博客 - YzmCMS博客" alt="袁志蒙个人博客 - YzmCMS博客">袁志蒙个人博客 - YzmCMS博客</a></h1>
+	<ul class="nav">
+	  <li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-home"><a href="index.html">首页</a></li>
+					    <li class="menu-item menu-item-type-custom menu-item-object-custom  menu-item-has-children">
+		<a href="lead.html">前端</a><ul class="sub-menu">
+			<!-- 这里是二级栏目的循环，不需要的可以删除，代码开始 -->
+			 
+											<li class="menu-item menu-item-type-taxonomy menu-item-object-category"><a href="https://blog.yzmcms.com/htm/">html</a></li>
+								<li class="menu-item menu-item-type-taxonomy menu-item-object-category"><a href="https://blog.yzmcms.com/css/">css</a></li>
+								<li class="menu-item menu-item-type-taxonomy menu-item-object-category"><a href="https://blog.yzmcms.com/js/">js</a></li>
+					
+						<!-- 这里是二级栏目的循环，不需要的可以删除，代码结束 -->
+		</ul></li>
+				    <li class="menu-item menu-item-type-custom menu-item-object-custom  menu-item-has-children">
+		<a href="program.html">程序</a><ul class="sub-menu">
+			<!-- 这里是二级栏目的循环，不需要的可以删除，代码开始 -->
+			 
+											<li class="menu-item menu-item-type-taxonomy menu-item-object-category"><a href="https://blog.yzmcms.com/php/">php</a></li>
+								<li class="menu-item menu-item-type-taxonomy menu-item-object-category"><a href="https://blog.yzmcms.com/mysql/">mysql</a></li>
+								<li class="menu-item menu-item-type-taxonomy menu-item-object-category"><a href="https://blog.yzmcms.com/server/">server</a></li>
+					
+						<!-- 这里是二级栏目的循环，不需要的可以删除，代码结束 -->
+		</ul></li>
+				    <li class="menu-item menu-item-type-custom menu-item-object-custom  menu-item-has-children">
+		<a href="life.html">生活</a><ul class="sub-menu">
+			<!-- 这里是二级栏目的循环，不需要的可以删除，代码开始 -->
+						<!-- 这里是二级栏目的循环，不需要的可以删除，代码结束 -->
+		</ul></li>
+				    <li class="menu-item menu-item-type-custom menu-item-object-custom  menu-item-has-children">
+		<a href="amusement.html">娱乐</a><ul class="sub-menu">
+			<!-- 这里是二级栏目的循环，不需要的可以删除，代码开始 -->
+						<!-- 这里是二级栏目的循环，不需要的可以删除，代码结束 -->
+		</ul></li>
+				    <li class="menu-item menu-item-type-custom menu-item-object-custom  menu-item-has-children">
+		<a href="about.html">关于</a><ul class="sub-menu">
+			<!-- 这里是二级栏目的循环，不需要的可以删除，代码开始 -->
+			 
+											<li class="menu-item menu-item-type-taxonomy menu-item-object-category"><a href="init.html">留言联系</a></li>
+								<li class="menu-item menu-item-type-taxonomy menu-item-object-category"><a href="aboutauthor.html">关于作者</a></li>
+								<li class="menu-item menu-item-type-taxonomy menu-item-object-category"><a href="">官方论坛</a></li>
+					
+						<!-- 这里是二级栏目的循环，不需要的可以删除，代码结束 -->
+		</ul></li>
+		
+	</ul>
+	<div class="menu pull-right">
+	  <form name="formsearch" action="https://blog.yzmcms.com/search/index/init.html" method="get">
+		<input class="search-input" name="q" id="search-keyword" type="text" required="required" placeholder=" 输入你要找的内容" />
+		<button type="submit" class="searchbtn" title="搜一下！">
+			<!-- <input type="hidden" name="modelid" value="1" id="modelid" /> -->
+		  	<i class="fa"></i>
+		</button>
+	  </form>
+	</div>
+	
+	<div id="mobile_nav">
+		<div class="nav_box"><span class="navicon"></span></div>
+		<ul class="nav_ul">
+			<li><a href="index.html">首页</a></li>
+								<li><a href="lead.html">前端</a></li>
+								<li><a href="program.html">程序</a></li>
+								<li><a href="life.html">生活</a></li>
+								<li><a href="amusement.html">娱乐</a></li>
+								<li><a href="about.html">关于</a></li>
+				
+		</ul>
+	</div>	
+</header>    <script type="text/javascript" src="https://blog.yzmcms.com/common/static/js/swiper.min.js"></script>	
+    <section class="container">
+      <div class="banner banner-navbar">
+			<div class="swiper-container">
+				<div class="swiper-wrapper">
+											
+					<div class="swiper-slide"><a href="https://www.yzmcms.com" target="_blank"><img src="/uploads/202001/11/200111075456968.jpg" alt="YzmCMS轻松建站，更自由"></a></div>
+						
+					<div class="swiper-slide"><a href="https://blog.yzmcms.com/shenghuo/86.html" target="_blank"><img src="/uploads/202001/11/200111075535707.jpg" alt="为什么要开发自己的CMS?"></a></div>
+						
+					<div class="swiper-slide"><a href="https://www.yzmcms.com" target="_blank"><img src="/uploads/202001/11/200111075614137.jpg" alt="YzmCMS开源CMS"></a></div>
+									</div>
+				<div class="swiper-pagination"></div>
+				<div class="swiper-button-next"></div>
+				<div class="swiper-button-prev"></div>
+			</div>
+      </div>
+    <script>
+		var swiper = new Swiper('.swiper-container', {
+			pagination: '.swiper-pagination',
+			nextButton: '.swiper-button-next',
+			prevButton: '.swiper-button-prev',
+			paginationClickable: true,
+			spaceBetween: 30,
+			centeredSlides: true,
+			autoplay: 5000,
+			autoplayDisableOnInteraction: false,
+			loop: true
+		});
+    </script>
+      <div class="content-wrap">
+        <div class="content">
+          <div class="sticky">
+            <h2 class="title">特别推荐</h2>
+            <ul>
+								 				  <li class="item"><a href="https://blog.yzmcms.com/php/192.html" target="_blank">
+                  <img src="https://www.yzmcms.com/doc/images/1.png" alt="YzmCMS v5.5正式版发布" title="YzmCMS v5.5正式版发布"/>
+                  <h3>YzmCMS v5.5正式版发布</h3>
+                  <p class="muted">产品说明：YzmCMS是一款轻量级开源内容管理系统，它采用OOP（面向对象）方式自主开...</p></a></li>
+				 				  <li class="item"><a href="https://blog.yzmcms.com/php/90.html" target="_blank">
+                  <img src="/uploads/thumbnail/20160718143025480.png" alt="YzmCMS常见问题汇总" title="YzmCMS常见问题汇总"/>
+                  <h3>YzmCMS常见问题汇总</h3>
+                  <p class="muted">1、YzmCMS如何安装？浏览器访问http://www.yourname.com/index.html(yourname表示...</p></a></li>
+				 				  <li class="item"><a href="https://blog.yzmcms.com/php/89.html" target="_blank">
+                  <img src="/uploads/thumbnail/20160718143025480.png" alt="YzmCMS二次开发手册" title="YzmCMS二次开发手册"/>
+                  <h3>YzmCMS二次开发手册</h3>
+                  <p class="muted">YzmCMS是采用MVC设计模式开发,基于模块和操作的方式进行访问，采用单一入口模式进...</p></a></li>
+				 				  <li class="item"><a href="https://blog.yzmcms.com/shenghuo/86.html" target="_blank">
+                  <img src="/uploads/thumbnail/20160706200134550.jpg" alt="为什么要开发自己的CMS？" title="为什么要开发自己的CMS？"/>
+                  <h3>为什么要开发自己的CMS？</h3>
+                  <p class="muted">作为一名WEB开发人员，有很多人问过我一个相同的问题：市面上的CMS那么多，为什么...</p></a></li>
+				 				  <li class="item"><a href="https://blog.yzmcms.com/php/76.html" target="_blank">
+                  <img src="/uploads/thumbnail/20160727104459505.jpg" alt="YzmCMS标签大全" title="YzmCMS标签大全"/>
+                  <h3>YzmCMS标签大全</h3>
+                  <p class="muted">YzmCMS的模板标签大全，简单方便，您制作模板时可以参考该标签语法，适用版本：Yzm...</p></a></li>
+				 				  <li class="item"><a href="https://blog.yzmcms.com/php/74.html" target="_blank">
+                  <img src="/uploads/thumbnail/20160722152027943.jpg" alt="YzmCMS短标签及模板语法" title="YzmCMS短标签及模板语法"/>
+                  <h3>YzmCMS短标签及模板语法</h3>
+                  <p class="muted">YzmCMS 3.0及以上模板语法及短标签大全（自建模板必看）。站点名称：{$site[site_...</p></a></li>
+				             </ul>
+          </div>
+          <h2 class="title">最新发布</h2>
+		  		   
+			<article class="excerpt">
+            <div class="focus">
+              <a href="https://blog.yzmcms.com/php/198.html" class="thumbnail" target="_blank">
+                <img src="https://blog.yzmcms.com/uploads/thumbnail/20160705180250573.jpg" alt="PHP实现RSA或RSA2算法的签名和验签" title="PHP实现RSA或RSA2算法的签名和验签"/></a>
+            </div>
+            <header>
+              <h2>
+                <a href="https://blog.yzmcms.com/php/198.html" title="PHP实现RSA或RSA2算法的签名和验签" target="_blank">PHP实现RSA或RSA2算法的签名和验签</a></h2>
+            </header>
+            <p class="note">写了一个用PHP生成PSA和RSA2算法签名和验签的工具类，在支付等接口方面通常会用到，下面是代码：class RSA2{
+    /**
+     * RSA2签名
+    ...</p>
+            <p>
+              <span class="muted">
+                <i class="icon-user icon12"></i> 袁志蒙</span>
+              <span class="muted">
+                <i class="ico icon-time icon12"></i> 2020-03-18</span>
+              <span class="muted">
+                <i class="ico icon-eye-open icon12"></i> 108次浏览</span>
+            </p>
+          </article>		  
+		  
+		   
+			<article class="excerpt">
+            <div class="focus">
+              <a href="https://blog.yzmcms.com/shenghuo/197.html" class="thumbnail" target="_blank">
+                <img src="/uploads/202003/12/200312092942978.jpg" alt="盗版YzmCMS系统，从未见过这么贱的人！" title="盗版YzmCMS系统，从未见过这么贱的人！"/></a>
+            </div>
+            <header>
+              <h2>
+                <a href="https://blog.yzmcms.com/shenghuo/197.html" title="盗版YzmCMS系统，从未见过这么贱的人！" target="_blank">盗版YzmCMS系统，从未见过这么贱的人！</a></h2>
+            </header>
+            <p class="note">今天发现一个盗版YzmCMS的人，下载YzmCMS然后把系统“yzm”相关字眼全部修改成了他的“xiu”，我仔细查看了一下他的源码，关于带有“yzm”...</p>
+            <p>
+              <span class="muted">
+                <i class="icon-user icon12"></i> 袁志蒙</span>
+              <span class="muted">
+                <i class="ico icon-time icon12"></i> 2020-03-12</span>
+              <span class="muted">
+                <i class="ico icon-eye-open icon12"></i> 251次浏览</span>
+            </p>
+          </article>		  
+		  
+		   
+			<article class="excerpt">
+            <div class="focus">
+              <a href="https://blog.yzmcms.com/css/196.html" class="thumbnail" target="_blank">
+                <img src="/uploads/202003/04/200304121335900.png" alt="css3中常见的单位及总结" title="css3中常见的单位及总结"/></a>
+            </div>
+            <header>
+              <h2>
+                <a href="https://blog.yzmcms.com/css/196.html" title="css3中常见的单位及总结" target="_blank">css3中常见的单位及总结</a></h2>
+            </header>
+            <p class="note">css3中常见的单位：1. px：绝对单位，页面按精确像素展示2. em：相对单位，基准点为父节点字体的大小，如果自身定义了font-size按自身来计算（浏览器默认字体是16px），整个页面内1em不是一个固定的值...</p>
+            <p>
+              <span class="muted">
+                <i class="icon-user icon12"></i> 管理员</span>
+              <span class="muted">
+                <i class="ico icon-time icon12"></i> 2020-03-04</span>
+              <span class="muted">
+                <i class="ico icon-eye-open icon12"></i> 185次浏览</span>
+            </p>
+          </article>		  
+		  
+		   
+			<article class="excerpt">
+            <div class="focus">
+              <a href="https://blog.yzmcms.com/mysql/195.html" class="thumbnail" target="_blank">
+                <img src="https://blog.yzmcms.com/uploads/thumbnail/20170331160032157.jpg" alt="[Err] 1055 - Expression #1 of ORDER BY clause is not in GROUP BY clause and contains nonaggregated column &#039;information_schema.PROFILING.SEQ&#039;" title="[Err] 1055 - Expression #1 of ORDER BY clause is not in GROUP BY clause and contains nonaggregated column &#039;information_schema.PROFILING.SEQ&#039;"/></a>
+            </div>
+            <header>
+              <h2>
+                <a href="https://blog.yzmcms.com/mysql/195.html" title="[Err] 1055 - Expression #1 of ORDER BY clause is not in GROUP BY clause and contains nonaggregated column &#039;information_schema.PROFILING.SEQ&#039;" target="_blank">[Err] 1055 - Expression #1 of ORDER BY clause is not in GROUP BY clause and contains nonaggregated column &#039;information_schema.PROFILING.SEQ&#039;</a></h2>
+            </header>
+            <p class="note">MySQL升级5.7以后经常会出现这种错误：[Err] 1055 - Expression #1 of ORDER BY clause is not in GROUP BY clause and co...</p>
+            <p>
+              <span class="muted">
+                <i class="icon-user icon12"></i> 管理员</span>
+              <span class="muted">
+                <i class="ico icon-time icon12"></i> 2020-02-19</span>
+              <span class="muted">
+                <i class="ico icon-eye-open icon12"></i> 308次浏览</span>
+            </p>
+          </article>		  
+		  
+		   
+			<article class="excerpt">
+            <div class="focus">
+              <a href="https://blog.yzmcms.com/php/194.html" class="thumbnail" target="_blank">
+                <img src="https://blog.yzmcms.com/uploads/thumbnail/20160705180250573.jpg" alt="php数组字段相似度排序" title="php数组字段相似度排序"/></a>
+            </div>
+            <header>
+              <h2>
+                <a href="https://blog.yzmcms.com/php/194.html" title="php数组字段相似度排序" target="_blank">php数组字段相似度排序</a></h2>
+            </header>
+            <p class="note">今天有一个客户有这么一个需求，要求对某篇文章的相关内容的列表，在跟文章标题进行相似度排序，于是想了又想，写了一个小算法，可以根据关键字相似度对数组某个字段进行排序...</p>
+            <p>
+              <span class="muted">
+                <i class="icon-user icon12"></i> 管理员</span>
+              <span class="muted">
+                <i class="ico icon-time icon12"></i> 2020-01-29</span>
+              <span class="muted">
+                <i class="ico icon-eye-open icon12"></i> 316次浏览</span>
+            </p>
+          </article>		  
+		  
+		   
+			<article class="excerpt">
+            <div class="focus">
+              <a href="https://blog.yzmcms.com/css/193.html" class="thumbnail" target="_blank">
+                <img src="/uploads/202001/21/200121033552473.png" alt="分享一款纯css3+JS实现的漂亮的404页面" title="分享一款纯css3+JS实现的漂亮的404页面"/></a>
+            </div>
+            <header>
+              <h2>
+                <a href="https://blog.yzmcms.com/css/193.html" title="分享一款纯css3+JS实现的漂亮的404页面" target="_blank">分享一款纯css3+JS实现的漂亮的404页面</a></h2>
+            </header>
+            <p class="note">分享一款纯css3+JS实现的漂亮的404页面，无需加载任何图片，纯代码实现雪花渲染，有详细的代码提供大家学习，感兴趣的朋友可以参考下...</p>
+            <p>
+              <span class="muted">
+                <i class="icon-user icon12"></i> 管理员</span>
+              <span class="muted">
+                <i class="ico icon-time icon12"></i> 2020-01-21</span>
+              <span class="muted">
+                <i class="ico icon-eye-open icon12"></i> 391次浏览</span>
+            </p>
+          </article>		  
+		  
+		   
+			<article class="excerpt">
+            <div class="focus">
+              <a href="https://blog.yzmcms.com/php/192.html" class="thumbnail" target="_blank">
+                <img src="https://www.yzmcms.com/doc/images/1.png" alt="YzmCMS v5.5正式版发布" title="YzmCMS v5.5正式版发布"/></a>
+            </div>
+            <header>
+              <h2>
+                <a href="https://blog.yzmcms.com/php/192.html" title="YzmCMS v5.5正式版发布" target="_blank">YzmCMS v5.5正式版发布</a></h2>
+            </header>
+            <p class="note">产品说明：YzmCMS是一款轻量级开源内容管理系统，它采用OOP（面向对象）方式自主开发的框架。基于PHP+Mysql架构，并采用MVC框架式开发的一款高效开源的内容管理系统，可运行在Linux、Wi...</p>
+            <p>
+              <span class="muted">
+                <i class="icon-user icon12"></i> 袁志蒙</span>
+              <span class="muted">
+                <i class="ico icon-time icon12"></i> 2020-01-05</span>
+              <span class="muted">
+                <i class="ico icon-eye-open icon12"></i> 1778次浏览</span>
+            </p>
+          </article>		  
+		  
+		   
+			<article class="excerpt">
+            <div class="focus">
+              <a href="https://blog.yzmcms.com/php/191.html" class="thumbnail" target="_blank">
+                <img src="/uploads/thumbnail/20160705180250573.jpg" alt="php反射机制（Reflection API）" title="php反射机制（Reflection API）"/></a>
+            </div>
+            <header>
+              <h2>
+                <a href="https://blog.yzmcms.com/php/191.html" title="php反射机制（Reflection API）" target="_blank">php反射机制（Reflection API）</a></h2>
+            </header>
+            <p class="note">PHP Reflection API是PHP5才有的新功能，它是用来导出或提取出关于类、方法、属性、参数等的详细信息，包括注释。用得比较多的就只有两个ReflectionClass与ReflectionObject，两个的用法都一样，只是前者针对类，后者针对对象，后者是继承前者的类...</p>
+            <p>
+              <span class="muted">
+                <i class="icon-user icon12"></i> 袁志蒙</span>
+              <span class="muted">
+                <i class="ico icon-time icon12"></i> 2019-12-25</span>
+              <span class="muted">
+                <i class="ico icon-eye-open icon12"></i> 324次浏览</span>
+            </p>
+          </article>		  
+		  
+		   
+			<article class="excerpt">
+            <div class="focus">
+              <a href="https://blog.yzmcms.com/shenghuo/190.html" class="thumbnail" target="_blank">
+                <img src="/uploads/thumbnail/20160722152027943.jpg" alt="最近的烦心事有点多" title="最近的烦心事有点多"/></a>
+            </div>
+            <header>
+              <h2>
+                <a href="https://blog.yzmcms.com/shenghuo/190.html" title="最近的烦心事有点多" target="_blank">最近的烦心事有点多</a></h2>
+            </header>
+            <p class="note">最近烦心事有点多，上火啊，比如今天就遇到一个用户，是对我这么评价的（打马部分是该用户昵称）：说我态度不好，说我cms开源还收费，失败？我来解释一下：首先开源和免费是不同的概念，开源是为了程序更加健壮...</p>
+            <p>
+              <span class="muted">
+                <i class="icon-user icon12"></i> 袁志蒙</span>
+              <span class="muted">
+                <i class="ico icon-time icon12"></i> 2019-12-06</span>
+              <span class="muted">
+                <i class="ico icon-eye-open icon12"></i> 794次浏览</span>
+            </p>
+          </article>		  
+		  
+		   
+			<article class="excerpt">
+            <div class="focus">
+              <a href="https://blog.yzmcms.com/php/189.html" class="thumbnail" target="_blank">
+                <img src="/uploads/thumbnail/20161020105837961.png" alt="YzmCMS v5.4正式版发布" title="YzmCMS v5.4正式版发布"/></a>
+            </div>
+            <header>
+              <h2>
+                <a href="https://blog.yzmcms.com/php/189.html" title="YzmCMS v5.4正式版发布" target="_blank">YzmCMS v5.4正式版发布</a></h2>
+            </header>
+            <p class="note">产品说明：YzmCMS是一款轻量级开源内容管理系统，它采用OOP（面向对象）方式自主开发的框架。基于PHP+Mysql架构，并采用MVC框架式开发的一款高效开源的内容管理系统，可运行在Linux、Wi...</p>
+            <p>
+              <span class="muted">
+                <i class="icon-user icon12"></i> 袁志蒙</span>
+              <span class="muted">
+                <i class="ico icon-time icon12"></i> 2019-10-20</span>
+              <span class="muted">
+                <i class="ico icon-eye-open icon12"></i> 1714次浏览</span>
+            </p>
+          </article>		  
+		  
+		   
+			<article class="excerpt">
+            <div class="focus">
+              <a href="https://blog.yzmcms.com/css/188.html" class="thumbnail" target="_blank">
+                <img src="/uploads/thumbnail/20190916213923655.png" alt="CSS3弹性Flex布局" title="CSS3弹性Flex布局"/></a>
+            </div>
+            <header>
+              <h2>
+                <a href="https://blog.yzmcms.com/css/188.html" title="CSS3弹性Flex布局" target="_blank">CSS3弹性Flex布局</a></h2>
+            </header>
+            <p class="note">一、Flex布局是什么？Flex是Flexible Box的缩写，意为”弹性布局”，用来为盒状模型提供最大的灵活性。任何一个容器都可以指定为Flex布局。.box{
+  display: flex;...</p>
+            <p>
+              <span class="muted">
+                <i class="icon-user icon12"></i> 袁志蒙</span>
+              <span class="muted">
+                <i class="ico icon-time icon12"></i> 2019-09-16</span>
+              <span class="muted">
+                <i class="ico icon-eye-open icon12"></i> 650次浏览</span>
+            </p>
+          </article>		  
+		  
+		   
+			<article class="excerpt">
+            <div class="focus">
+              <a href="https://blog.yzmcms.com/mysql/187.html" class="thumbnail" target="_blank">
+                <img src="/uploads/thumbnail/20160827130034852.jpg" alt="MySQL悲观锁和乐观锁（并发控制）" title="MySQL悲观锁和乐观锁（并发控制）"/></a>
+            </div>
+            <header>
+              <h2>
+                <a href="https://blog.yzmcms.com/mysql/187.html" title="MySQL悲观锁和乐观锁（并发控制）" target="_blank">MySQL悲观锁和乐观锁（并发控制）</a></h2>
+            </header>
+            <p class="note">做商城开发时经常会遇到高并发的问题，除了使用Redis队列等技术外，也可以使用Mysql数据库的“锁”机制。悲观锁：一般使用 select ...for update 对所选择的数据进行加锁处理，例如select * from yzm_order...</p>
+            <p>
+              <span class="muted">
+                <i class="icon-user icon12"></i> 袁志蒙</span>
+              <span class="muted">
+                <i class="ico icon-time icon12"></i> 2019-07-27</span>
+              <span class="muted">
+                <i class="ico icon-eye-open icon12"></i> 1370次浏览</span>
+            </p>
+          </article>		  
+		  
+		   
+			<article class="excerpt">
+            <div class="focus">
+              <a href="https://blog.yzmcms.com/php/186.html" class="thumbnail" target="_blank">
+                <img src="/uploads/thumbnail/20161020105837961.png" alt="YzmCMS v5.3正式版发布" title="YzmCMS v5.3正式版发布"/></a>
+            </div>
+            <header>
+              <h2>
+                <a href="https://blog.yzmcms.com/php/186.html" title="YzmCMS v5.3正式版发布" target="_blank">YzmCMS v5.3正式版发布</a></h2>
+            </header>
+            <p class="note">产品说明：YzmCMS是一款轻量级开源内容管理系统，它采用OOP（面向对象）方式自主开发的框架。基于PHP+Mysql架构，并采用MVC框架式开发的一款高效开源的内容管理系统，可运行在Linux、Wi...</p>
+            <p>
+              <span class="muted">
+                <i class="icon-user icon12"></i> 袁志蒙</span>
+              <span class="muted">
+                <i class="ico icon-time icon12"></i> 2019-07-01</span>
+              <span class="muted">
+                <i class="ico icon-eye-open icon12"></i> 1925次浏览</span>
+            </p>
+          </article>		  
+		  
+		   
+			<article class="excerpt">
+            <div class="focus">
+              <a href="https://blog.yzmcms.com/js/185.html" class="thumbnail" target="_blank">
+                <img src="/uploads/thumbnail/20190408234510691.jpg" alt="JS里charCodeAt()和fromCharCode()方法拓展应用：加密与解密" title="JS里charCodeAt()和fromCharCode()方法拓展应用：加密与解密"/></a>
+            </div>
+            <header>
+              <h2>
+                <a href="https://blog.yzmcms.com/js/185.html" title="JS里charCodeAt()和fromCharCode()方法拓展应用：加密与解密" target="_blank">JS里charCodeAt()和fromCharCode()方法拓展应用：加密与解密</a></h2>
+            </header>
+            <p class="note">JS里charCodeAt()和fromCharCode()方法拓展应用：加密与解密JS实现客户端的网页加密解密技术，可用作选择性隐蔽展示。当然客户端的加密安全度是不能与服务器相提并论，肯定不能用于密...</p>
+            <p>
+              <span class="muted">
+                <i class="icon-user icon12"></i> 袁志蒙</span>
+              <span class="muted">
+                <i class="ico icon-time icon12"></i> 2019-04-08</span>
+              <span class="muted">
+                <i class="ico icon-eye-open icon12"></i> 787次浏览</span>
+            </p>
+          </article>		  
+		  
+		   
+			<article class="excerpt">
+            <div class="focus">
+              <a href="https://blog.yzmcms.com/server/184.html" class="thumbnail" target="_blank">
+                <img src="/uploads/thumbnail/20171227225821497.png" alt="PHP操作Redis常见方法整理" title="PHP操作Redis常见方法整理"/></a>
+            </div>
+            <header>
+              <h2>
+                <a href="https://blog.yzmcms.com/server/184.html" title="PHP操作Redis常见方法整理" target="_blank">PHP操作Redis常见方法整理</a></h2>
+            </header>
+            <p class="note">redis的操作命令很多的，下面整理一下php处理redis的常见方法：1.Connection $redis = new Redis();
+$redis->connect('127.0.0.1',6379,1);//短链接，本地host，端口为6379...</p>
+            <p>
+              <span class="muted">
+                <i class="icon-user icon12"></i> 袁志蒙</span>
+              <span class="muted">
+                <i class="ico icon-time icon12"></i> 2019-03-29</span>
+              <span class="muted">
+                <i class="ico icon-eye-open icon12"></i> 667次浏览</span>
+            </p>
+          </article>		  
+		  
+		 		  
+        </div>
+      </div>
+      </div>
+      <aside class="sidebar">
+        <div class="widget">
+		  <h3 class="widget_tit">热门标签</h3>
+          <div class="tag_list">
+            <ul>
+												   <li><a href="https://blog.yzmcms.com/search/index/tag/id/13.html" target="_blank">服务器</a></li>	
+								   <li><a href="https://blog.yzmcms.com/search/index/tag/id/12.html" target="_blank">摄影</a></li>	
+								   <li><a href="https://blog.yzmcms.com/search/index/tag/id/11.html" target="_blank">欣赏</a></li>	
+								   <li><a href="https://blog.yzmcms.com/search/index/tag/id/10.html" target="_blank">html</a></li>	
+								   <li><a href="https://blog.yzmcms.com/search/index/tag/id/9.html" target="_blank">js</a></li>	
+								   <li><a href="https://blog.yzmcms.com/search/index/tag/id/8.html" target="_blank">css</a></li>	
+								   <li><a href="https://blog.yzmcms.com/search/index/tag/id/7.html" target="_blank">搞笑</a></li>	
+								   <li><a href="https://blog.yzmcms.com/search/index/tag/id/6.html" target="_blank">娱乐</a></li>	
+								   <li><a href="https://blog.yzmcms.com/search/index/tag/id/5.html" target="_blank">MySQL</a></li>	
+								   <li><a href="https://blog.yzmcms.com/search/index/tag/id/4.html" target="_blank">PHP</a></li>	
+								   <li><a href="https://blog.yzmcms.com/search/index/tag/id/3.html" target="_blank">YzmCMS</a></li>	
+								   <li><a href="https://blog.yzmcms.com/search/index/tag/id/2.html" target="_blank">生活</a></li>	
+								   <li><a href="https://blog.yzmcms.com/search/index/tag/id/1.html" target="_blank">博客</a></li>	
+						 
+			</ul>
+          </div>
+        </div>	  
+        <div class="widget d_postlist">
+          <h3 class="widget_tit">推荐文章</h3>
+          <ul>
+		  		   
+				  
+				<li><a href="https://blog.yzmcms.com/php/198.html">
+                <span class="thumbnail">
+                  <img src="https://blog.yzmcms.com/uploads/thumbnail/20160705180250573.jpg" alt="PHP实现RSA或RSA2算法的签名和验签" title="PHP实现RSA或RSA2算法的签名和验签"/></span>
+                <span class="text">PHP实现RSA或RSA2算法的签名和验签</span>
+                <span class="muted">2020-2020-03-18</span>
+                <span class="muted">
+                  <span class="ds-thread-count" data-replace="1">108次阅读</span>
+                </span>
+               </a>
+			   </li>				  
+				  	  
+		    
+				  
+				<li><a href="https://blog.yzmcms.com/css/196.html">
+                <span class="thumbnail">
+                  <img src="/uploads/202003/04/200304121335900.png" alt="css3中常见的单位及总结" title="css3中常见的单位及总结"/></span>
+                <span class="text">css3中常见的单位及总结</span>
+                <span class="muted">2020-2020-03-04</span>
+                <span class="muted">
+                  <span class="ds-thread-count" data-replace="1">185次阅读</span>
+                </span>
+               </a>
+			   </li>				  
+				  	  
+		    
+				  
+				<li><a href="https://blog.yzmcms.com/mysql/195.html">
+                <span class="thumbnail">
+                  <img src="https://blog.yzmcms.com/uploads/thumbnail/20170331160032157.jpg" alt="[Err] 1055 - Expression #1 of ORDER BY clause is not in GROUP BY clause and contains nonaggregated column &#039;information_schema.PROFILING.SEQ&#039;" title="[Err] 1055 - Expression #1 of ORDER BY clause is not in GROUP BY clause and contains nonaggregated column &#039;information_schema.PROFILING.SEQ&#039;"/></span>
+                <span class="text">[Err] 1055 - Expression #1 of ORDER BY clause is not in GROUP BY clause and contains nonaggregated column &#039;information_schema.PROFILING.SEQ&#039;</span>
+                <span class="muted">2020-2020-02-19</span>
+                <span class="muted">
+                  <span class="ds-thread-count" data-replace="1">308次阅读</span>
+                </span>
+               </a>
+			   </li>				  
+				  	  
+		    
+				  
+				<li><a href="https://blog.yzmcms.com/php/194.html">
+                <span class="thumbnail">
+                  <img src="https://blog.yzmcms.com/uploads/thumbnail/20160705180250573.jpg" alt="php数组字段相似度排序" title="php数组字段相似度排序"/></span>
+                <span class="text">php数组字段相似度排序</span>
+                <span class="muted">2020-2020-01-29</span>
+                <span class="muted">
+                  <span class="ds-thread-count" data-replace="1">316次阅读</span>
+                </span>
+               </a>
+			   </li>				  
+				  	  
+		    
+				  
+				<li><a href="https://blog.yzmcms.com/css/193.html">
+                <span class="thumbnail">
+                  <img src="/uploads/202001/21/200121033552473.png" alt="分享一款纯css3+JS实现的漂亮的404页面" title="分享一款纯css3+JS实现的漂亮的404页面"/></span>
+                <span class="text">分享一款纯css3+JS实现的漂亮的404页面</span>
+                <span class="muted">2020-2020-01-21</span>
+                <span class="muted">
+                  <span class="ds-thread-count" data-replace="1">391次阅读</span>
+                </span>
+               </a>
+			   </li>				  
+				  	  
+		    
+				  
+				<li><a href="https://blog.yzmcms.com/php/192.html">
+                <span class="thumbnail">
+                  <img src="https://www.yzmcms.com/doc/images/1.png" alt="YzmCMS v5.5正式版发布" title="YzmCMS v5.5正式版发布"/></span>
+                <span class="text">YzmCMS v5.5正式版发布</span>
+                <span class="muted">2020-2020-01-05</span>
+                <span class="muted">
+                  <span class="ds-thread-count" data-replace="1">1778次阅读</span>
+                </span>
+               </a>
+			   </li>				  
+				  	  
+		             </ul>
+        </div>
+        <div class="widget">
+		  <h3 class="widget_tit">最新评论</h3>
+          <div class="com_list">
+		   		   <ul>
+				
+				<li>
+					<span class="comment_article"><a href="https://blog.yzmcms.com/html/shenghuo/122.html" title="YzmCMS将继续100%开源">YzmCMS将继续100%开源</a></span>
+					<span class="comment_comment">网友评论：希望作者考虑买一次授权  可以授权多个域名的这种方式</span>
+				</li>
+				
+				<li>
+					<span class="comment_article"><a href="https://blog.yzmcms.com/html/shenghuo/122.html" title="YzmCMS将继续100%开源">YzmCMS将继续100%开源</a></span>
+					<span class="comment_comment">网友评论：其实像我，我一般也是用网上大神的cms（yzmcms暂时还没有用过，这几天听QQ群里有人推荐，所以过来先了解一下），但是我有时候接个仿站业务才500块800块，要是保留您的版权客户又不让，其实我也知道这样不好，但是为了生活也是没办法，但是我也不会在后台改成是我的版权，如果客户要求的话，我会去掉版权信息
+要是说购买授权的话，我一个业务一整套做下来也就几百块，（仿个站我也要花个3天5天做好模板，还要给客户七改改八改改，整个业务下来平均时间一般在15天左右）我说这话的意思不是不想买版权，而是想说希望您能考虑一下，比如说企业购买版权和个人用户购买分开收费，或者说买一次版权限制授权多少个域名不要每一个域名就要买一次授权，虽然可能一个域名的授权费用比较便宜 但是像我如果接个站  整个费用才几百块，我也是真的买不起的感觉，如果觉得我说的不好 您别审核我留言吧，我也不会到处乱说，我这点良心还是有的</span>
+				</li>
+				
+				<li>
+					<span class="comment_article"><a href="https://blog.yzmcms.com/html/shenghuo/190.html" title="最近的烦心事有点多">最近的烦心事有点多</a></span>
+					<span class="comment_comment">网友评论：支持作者  支持开源  建议作者可以搞一个授权的大包 </span>
+				</li>
+				
+				<li>
+					<span class="comment_article"><a href="/php/198.html" title="PHP实现RSA或RSA2算法的签名和验签">PHP实现RSA或RSA2算法的签名和验签</a></span>
+					<span class="comment_comment">网友评论：多端</span>
+				</li>
+				
+				<li>
+					<span class="comment_article"><a href="/css/196.html" title="css3中常见的单位及总结">css3中常见的单位及总结</a></span>
+					<span class="comment_comment">网友评论：有收获！</span>
+				</li>
+				
+				<li>
+					<span class="comment_article"><a href="/shenghuo/197.html" title="盗版YzmCMS系统，从未见过这么贱的人！">盗版YzmCMS系统，从未见过这么贱的人！</a></span>
+					<span class="comment_comment">网友评论：这种人就该得肺炎<img src="https://blog.yzmcms.com/common/static/images/face/28.gif"/></span>
+				</li>
+				
+				<li>
+					<span class="comment_article"><a href="https://blog.yzmcms.com/html/php/192.html" title="YzmCMS v5.5正式版发布">YzmCMS v5.5正式版发布</a></span>
+					<span class="comment_comment">网友评论：大神，能否把模板调用数据的标签改成像织梦那样子呢</span>
+				</li>
+				
+				<li>
+					<span class="comment_article"><a href="https://blog.yzmcms.com/html/shenghuo/190.html" title="最近的烦心事有点多">最近的烦心事有点多</a></span>
+					<span class="comment_comment">网友评论：支持作者很好用</span>
+				</li>
+				
+				<li>
+					<span class="comment_article"><a href="https://blog.yzmcms.com/html/php/189.html" title="YzmCMS v5.4正式版发布">YzmCMS v5.4正式版发布</a></span>
+					<span class="comment_comment">网友评论：想问问博主，请问博主选服务器是选什么类型的，带宽多少，cpu，多少核</span>
+				</li>
+				
+				<li>
+					<span class="comment_article"><a href="https://blog.yzmcms.com/html/php/96.html" title="json_encode不转义中文汉字的方法">json_encode不转义中文汉字的方法</a></span>
+					<span class="comment_comment">网友评论：感谢，可以正常显示中文了。</span>
+				</li>
+			 
+			</ul>
+          </div>
+        </div>	
+		<div class="widget d_textbanner">
+			<a class="style03" target="_blank" href="https://www.yzmcms.com/">
+			<strong>赞助开发</strong>
+			<h2>支持一下作者</h2>
+			<p>
+			请留下赞助人姓名和联系人方式，如需帮助，我会优先解决您的问题！
+			<br>
+			您的支持是我们最大的动力！
+			<br>
+			<img src="https://www.yzmcms.com/common/static/images/zfb.png">
+			</p>
+			</a>
+		</div>	
+		<div class="widget d_textbanner">
+			<h3>分享网站</h3>
+			<div class="sidebar_share">
+			<a rel="nofollow" class="share_weixin" onclick='yzmcms_share_wechat("https://blog.yzmcms.com/");' title="分享到微信">微信</a>
+			<a rel="nofollow" href="http://connect.qq.com/widget/shareqq/index.html?title=分享一个不错的网站&summary=https://blog.yzmcms.com/&pics=&url=https://blog.yzmcms.com/" class="share_qq" target="_blank" title="分享到QQ">Q Q</a>
+			<a rel="nofollow" href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://blog.yzmcms.com/&desc=分享一个不错的网站" class="share_qzone" target="_blank" title="分享到QQ空间">空间</a>
+			<a rel="nofollow" href="http://service.weibo.com/share/share.php?url=https://blog.yzmcms.com/&title=分享一个不错的网站&appkey=&searchPic=true" class="share_weibo" target="_blank" title="分享到微博">微博</a>
+			</div>
+		</div>						
+      </aside>
+    </section>
+
+    <div class="IndexLinkListWrap">
+      <div class="moketitle" style="font-size: 15px;">友情链接</div>
+      <ul class="friendlyLink">
+      					<li><a href="https://www.yzmcms.com/" target="_blank" title="YzmCMS官方网站">YzmCMS官方网站</a></li>
+				<li><a href="https://bbs.yzmcms.com/" target="_blank" title="YzmCMS官方论坛">YzmCMS官方论坛</a></li>
+				<li><a href="https://www.duoguyu.com/" target="_blank" title="多骨鱼">多骨鱼</a></li>
+				<li><a href="https://www.yangqq.com" target="_blank" title="杨青博客">杨青博客</a></li>
+				<li><a href="https://www.yezismile.com" target="_blank" title="叶子博客">叶子博客</a></li>
+				<li><a href="https://masuit.com" target="_blank" title="懒得勤快">懒得勤快</a></li>
+				<li><a href="https://lovefc.cn/" target="_blank" title="封尘博客">封尘博客</a></li>
+				<li><a href="http://www.shuchengxian.com/" target="_blank" title="高蒙博客">高蒙博客</a></li>
+				<li><a href="https://www.fx99.cn/" target="_blank" title="飞信网">飞信网</a></li>
+				<li><a href="https://www.hackersb.cn/" target="_blank" title="王松_Striker">王松_Striker</a></li>
+				<li><a href="https://www.weiyiqi.net/" target="_blank" title="魏义齐博客">魏义齐博客</a></li>
+				<li><a href="https://www.jiangmiyun.com/" target="_blank" title="江米智云">江米智云</a></li>
+				<li><a href="https://www.nnmutong.com/" target="_blank" title="牧童个人博客">牧童个人博客</a></li>
+					
+       </ul>
+    </div>
+    <footer class="footer">
+      <div class="footer-inner">
+        <div style="padding:0 20px;overflow:hidden;">
+          <div class="copyright pull-left">
+            <a href="https://blog.yzmcms.com/" target="_blank">Powered By YzmCMS内容管理系统 © 2014-2020 袁志蒙工作室</a> | 京ICP备16034624号</div>
+          <div class="trackcode pull-right"><script src="https://s4.cnzz.com/z_stat.php?id=1259844929&web_id=1259844929" language="JavaScript"></script></div>
+        </div>
+      </div>
+    </footer>
+	<div id="button">
+	<a href="javascript:;" rel="nofollow" class="totop" title="返回顶部"></a>
+	<a href="https://www.yzmcms.com/" target="_blank" class="guanwang" title="返回官网"></a>
+	<a href="https://blog.yzmcms.com/guestbook/index/init.html"  target="_blank" class="lianxi" title="留言联系"></a>
+	</div>
+	
+	
+   <div id="share_wechat" style="display:none;position:fixed;left:0%;top:0%;z-index:99;width:100%;height:100%;background:rgba(0,0,0,0.3);"><div style="position:fixed;border-radius:3px;left:50%;top:50%;z-index:100;width:260px;margin-left:-140px;margin-top:-200px;background:#fff;padding:20px 25px 15px 25px;text-align:center"><span title="关闭" onclick="yzmcms_share_wechat()" style="width:100%;font-size:14px;color:#333;cursor:pointer;margin-bottom:10px;float:right;text-align:right">关闭</span><img src="https://blog.yzmcms.com/common/static/images/share_code.png" width="220"><p style="text-align:center;font-size:16px">用微信“扫一扫”</p></div></div>
+	<script type="text/javascript">
+		$(document).ready(function() {
+	    $(function(){
+	        $(window).scroll(function(){
+	            if($(this).scrollTop() > 300){
+	                $('.totop').fadeIn();
+	            }else{
+	                $('.totop').fadeOut();
+	            }
+	        });
+	        $('.totop').click(function(){
+	            $('body,html').animate({scrollTop:0},300);
+	        })
+	    })
+
+		});
+		
+		function yzmcms_share_wechat(){ 
+			  $("#share_wechat").toggle();
+		}
+		
+		window.onload = function (){
+			var nav_box = document.getElementsByClassName("nav_box")[0];
+			var ul = document.getElementsByClassName("nav_ul")[0];
+			nav_box.onclick = function (){
+				var style = ul.style;
+				style.display = style.display == "block" ? "none" : "block";
+				nav_box.className = style.display == "block" ? "open" : ""
+			}
+		}
+
+		console.log("没有来自内心的渴望，就不可能取得成功！\n我一直从未放弃过，\n成长就是不断探索的过程！");
+	</script>	
+  </body>
+</html>

@@ -1,0 +1,488 @@
+<!DOCTYPE HTML>
+<html>
+  
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=10,IE=9,IE=8,ie=7">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <title>前端_袁志蒙个人博客 - YzmCMS博客</title>
+	<meta name="keywords" content="个人博客模板,前端技术分享,前端技术网站,web前端技术,模板分享" />
+	<meta name="description" content="YzmCMS官方博客，袁志蒙的个人博客，学习并分享PHP、Linux、MySQL和前端技术等WEB知识，记录生活的点点滴滴，是一个互联网从业者值得收藏的网站。" />
+    <link rel='stylesheet' id='open_social_css-css' href='https://blog.yzmcms.com/common/static/css/os.css' type='text/css' media='all' />
+    <link rel="stylesheet" href="https://blog.yzmcms.com/common/static/css/style.css?v=2020" media="all">
+    <link href="https://blog.yzmcms.com/common/static/css/font-awesome.min.css" rel="stylesheet" media="screen">
+  </head>
+  
+  <body class="home blog">
+    <div class="placeholder"></div>	
+<!--[if lt IE 9]>
+  <script src="https://blog.yzmcms.com/common/static/js/html5.js"></script>
+<![endif]-->
+<script src="https://blog.yzmcms.com/common/static/js/jquery.js"></script>
+<script>window._deel = {
+	maillist: '',
+	maillistCode: '',
+	commenton: 0,
+	roll: [0, 0]
+  }</script>
+<script type="text/javascript">$(function() {
+	$(window).scroll(function() {
+	  $offset = $('.placeholder').offset(); //不能用自身的div，不然滚动起来会很卡
+	  if ($(window).scrollTop() > $offset.top) {
+		$('.header').css({
+		  'position': 'fixed',
+		  'top': '0px',
+		  'left': $offset.left + 'px',
+		  'z-index': '999'
+		});
+		$(".container").css({
+		  "margin-top": "93px"
+		});
+	  } else {
+		$('.header').removeAttr('style');
+		$('.container').removeAttr('style');
+	  }
+	});
+  })
+</script>	
+<header class="header" style="height: 52px;">
+  <div class="navbar">
+	<h1 class="logo">
+	  <a href="https://blog.yzmcms.com/" title="袁志蒙个人博客 - YzmCMS博客" alt="袁志蒙个人博客 - YzmCMS博客">袁志蒙个人博客 - YzmCMS博客</a></h1>
+	<ul class="nav">
+	  <li class="menu-item menu-item-type-custom menu-item-object-custom  menu-item-home"><a href="https://blog.yzmcms.com/">首页</a></li>
+					    <li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-has-children">
+		<a href="https://blog.yzmcms.com/qianduan/">前端</a><ul class="sub-menu">
+			<!-- 这里是二级栏目的循环，不需要的可以删除，代码开始 -->
+			 
+											<li class="menu-item menu-item-type-taxonomy menu-item-object-category"><a href="https://blog.yzmcms.com/htm/">html</a></li>
+								<li class="menu-item menu-item-type-taxonomy menu-item-object-category"><a href="https://blog.yzmcms.com/css/">css</a></li>
+								<li class="menu-item menu-item-type-taxonomy menu-item-object-category"><a href="https://blog.yzmcms.com/js/">js</a></li>
+					
+						<!-- 这里是二级栏目的循环，不需要的可以删除，代码结束 -->
+		</ul></li>
+				    <li class="menu-item menu-item-type-custom menu-item-object-custom  menu-item-has-children">
+		<a href="https://blog.yzmcms.com/chengxu/">程序</a><ul class="sub-menu">
+			<!-- 这里是二级栏目的循环，不需要的可以删除，代码开始 -->
+			 
+											<li class="menu-item menu-item-type-taxonomy menu-item-object-category"><a href="https://blog.yzmcms.com/php/">php</a></li>
+								<li class="menu-item menu-item-type-taxonomy menu-item-object-category"><a href="https://blog.yzmcms.com/mysql/">mysql</a></li>
+								<li class="menu-item menu-item-type-taxonomy menu-item-object-category"><a href="https://blog.yzmcms.com/server/">server</a></li>
+					
+						<!-- 这里是二级栏目的循环，不需要的可以删除，代码结束 -->
+		</ul></li>
+				    <li class="menu-item menu-item-type-custom menu-item-object-custom  menu-item-has-children">
+		<a href="https://blog.yzmcms.com/shenghuo/">生活</a><ul class="sub-menu">
+			<!-- 这里是二级栏目的循环，不需要的可以删除，代码开始 -->
+						<!-- 这里是二级栏目的循环，不需要的可以删除，代码结束 -->
+		</ul></li>
+				    <li class="menu-item menu-item-type-custom menu-item-object-custom  menu-item-has-children">
+		<a href="https://blog.yzmcms.com/yule/">娱乐</a><ul class="sub-menu">
+			<!-- 这里是二级栏目的循环，不需要的可以删除，代码开始 -->
+						<!-- 这里是二级栏目的循环，不需要的可以删除，代码结束 -->
+		</ul></li>
+				    <li class="menu-item menu-item-type-custom menu-item-object-custom  menu-item-has-children">
+		<a href="https://blog.yzmcms.com/guanyu/">关于</a><ul class="sub-menu">
+			<!-- 这里是二级栏目的循环，不需要的可以删除，代码开始 -->
+			 
+											<li class="menu-item menu-item-type-taxonomy menu-item-object-category"><a href="/guestbook/index/init.html">留言联系</a></li>
+								<li class="menu-item menu-item-type-taxonomy menu-item-object-category"><a href="https://blog.yzmcms.com/guanyuzuozhe/">关于作者</a></li>
+								<li class="menu-item menu-item-type-taxonomy menu-item-object-category"><a href="https://bbs.yzmcms.com">官方论坛</a></li>
+					
+						<!-- 这里是二级栏目的循环，不需要的可以删除，代码结束 -->
+		</ul></li>
+		
+	</ul>
+	<div class="menu pull-right">
+	  <form name="formsearch" action="https://blog.yzmcms.com/search/index/init.html" method="get">
+		<input class="search-input" name="q" id="search-keyword" type="text" required="required" placeholder=" 输入你要找的内容" />
+		<button type="submit" class="searchbtn" title="搜一下！">
+			<!-- <input type="hidden" name="modelid" value="1" id="modelid" /> -->
+		  	<i class="fa"></i>
+		</button>
+	  </form>
+	</div>
+	
+	<div id="mobile_nav">
+		<div class="nav_box"><span class="navicon"></span></div>
+		<ul class="nav_ul">
+			<li><a href="https://blog.yzmcms.com/">首页</a></li>
+								<li><a href="https://blog.yzmcms.com/qianduan/">前端</a></li>
+								<li><a href="https://blog.yzmcms.com/chengxu/">程序</a></li>
+								<li><a href="https://blog.yzmcms.com/shenghuo/">生活</a></li>
+								<li><a href="https://blog.yzmcms.com/yule/">娱乐</a></li>
+								<li><a href="https://blog.yzmcms.com/guanyu/">关于</a></li>
+				
+		</ul>
+	</div>	
+</header>    <section class="container">
+      <div class="content-wrap">
+        <div class="content">
+          <header class="archive-header">
+            <h1>前端</h1>
+          </header>
+		  						<article class="excerpt">
+            <div class="focus">
+              <a href="https://blog.yzmcms.com/css/196.html" class="thumbnail" target="_blank">
+                <img src="/uploads/202003/04/200304121335900.png" alt="css3中常见的单位及总结" title="css3中常见的单位及总结" /></a>
+            </div>
+            <header>
+              <h2>
+                <a href="https://blog.yzmcms.com/css/196.html" target="_blank">css3中常见的单位及总结</a></h2>
+            </header>
+            <p class="note">css3中常见的单位：1. px：绝对单位，页面按精确像素展示2. em：相对单位，基准点为父节点字体的大小，如果自身定义了font-size按自身来计算（浏览器默认字体是16px），整个页面内1em不是一个固定的值...</p>
+            <p>
+              <span class="muted">
+                <i class="icon-user icon12"></i>管理员</span>
+              <span class="muted">
+                <i class="ico icon-time icon12"></i>2020-03-04</span>
+              <span class="muted">
+                <i class="ico icon-eye-open icon12"></i>185</script>次浏览</span>
+            </p>
+          </article>			
+						<article class="excerpt">
+            <div class="focus">
+              <a href="https://blog.yzmcms.com/css/193.html" class="thumbnail" target="_blank">
+                <img src="/uploads/202001/21/200121033552473.png" alt="分享一款纯css3+JS实现的漂亮的404页面" title="分享一款纯css3+JS实现的漂亮的404页面" /></a>
+            </div>
+            <header>
+              <h2>
+                <a href="https://blog.yzmcms.com/css/193.html" target="_blank">分享一款纯css3+JS实现的漂亮的404页面</a></h2>
+            </header>
+            <p class="note">分享一款纯css3+JS实现的漂亮的404页面，无需加载任何图片，纯代码实现雪花渲染，有详细的代码提供大家学习，感兴趣的朋友可以参考下...</p>
+            <p>
+              <span class="muted">
+                <i class="icon-user icon12"></i>管理员</span>
+              <span class="muted">
+                <i class="ico icon-time icon12"></i>2020-01-21</span>
+              <span class="muted">
+                <i class="ico icon-eye-open icon12"></i>391</script>次浏览</span>
+            </p>
+          </article>			
+						<article class="excerpt">
+            <div class="focus">
+              <a href="https://blog.yzmcms.com/css/188.html" class="thumbnail" target="_blank">
+                <img src="/uploads/thumbnail/20190916213923655.png" alt="CSS3弹性Flex布局" title="CSS3弹性Flex布局" /></a>
+            </div>
+            <header>
+              <h2>
+                <a href="https://blog.yzmcms.com/css/188.html" target="_blank">CSS3弹性Flex布局</a></h2>
+            </header>
+            <p class="note">一、Flex布局是什么？Flex是Flexible Box的缩写，意为”弹性布局”，用来为盒状模型提供最大的灵活性。任何一个容器都可以指定为Flex布局。.box{
+  display: flex;...</p>
+            <p>
+              <span class="muted">
+                <i class="icon-user icon12"></i>袁志蒙</span>
+              <span class="muted">
+                <i class="ico icon-time icon12"></i>2019-09-16</span>
+              <span class="muted">
+                <i class="ico icon-eye-open icon12"></i>650</script>次浏览</span>
+            </p>
+          </article>			
+						<article class="excerpt">
+            <div class="focus">
+              <a href="https://blog.yzmcms.com/js/185.html" class="thumbnail" target="_blank">
+                <img src="/uploads/thumbnail/20190408234510691.jpg" alt="JS里charCodeAt()和fromCharCode()方法拓展应用：加密与解密" title="JS里charCodeAt()和fromCharCode()方法拓展应用：加密与解密" /></a>
+            </div>
+            <header>
+              <h2>
+                <a href="https://blog.yzmcms.com/js/185.html" target="_blank">JS里charCodeAt()和fromCharCode()方法拓展应用：加密与解密</a></h2>
+            </header>
+            <p class="note">JS里charCodeAt()和fromCharCode()方法拓展应用：加密与解密JS实现客户端的网页加密解密技术，可用作选择性隐蔽展示。当然客户端的加密安全度是不能与服务器相提并论，肯定不能用于密...</p>
+            <p>
+              <span class="muted">
+                <i class="icon-user icon12"></i>袁志蒙</span>
+              <span class="muted">
+                <i class="ico icon-time icon12"></i>2019-04-08</span>
+              <span class="muted">
+                <i class="ico icon-eye-open icon12"></i>787</script>次浏览</span>
+            </p>
+          </article>			
+						<article class="excerpt">
+            <div class="focus">
+              <a href="https://blog.yzmcms.com/htm/175.html" class="thumbnail" target="_blank">
+                <img src="/uploads/thumbnail/20181104223408664.jpg" alt="YzmCMS响应式博客模板，免费下载" title="YzmCMS响应式博客模板，免费下载" /></a>
+            </div>
+            <header>
+              <h2>
+                <a href="https://blog.yzmcms.com/htm/175.html" target="_blank">YzmCMS响应式博客模板，免费下载</a></h2>
+            </header>
+            <p class="note">yzmcms响应式博客模板，适合于文章、博客、新闻站使用，自适应ipad、手机端，主题代码结构简洁，html和css的注释非常清楚，前台页面也是很清新明了的，容易做seo优化，文章阅读方便，最主要的是免费下载，赶紧下载使用吧...</p>
+            <p>
+              <span class="muted">
+                <i class="icon-user icon12"></i>袁志蒙</span>
+              <span class="muted">
+                <i class="ico icon-time icon12"></i>2018-11-04</span>
+              <span class="muted">
+                <i class="ico icon-eye-open icon12"></i>2503</script>次浏览</span>
+            </p>
+          </article>			
+						<article class="excerpt">
+            <div class="focus">
+              <a href="https://blog.yzmcms.com/htm/170.html" class="thumbnail" target="_blank">
+                <img src="/uploads/thumbnail/20180913155130124.jpg" alt="HTML5 服务器发送事件(Server-Sent Events)" title="HTML5 服务器发送事件(Server-Sent Events)" /></a>
+            </div>
+            <header>
+              <h2>
+                <a href="https://blog.yzmcms.com/htm/170.html" target="_blank">HTML5 服务器发送事件(Server-Sent Events)</a></h2>
+            </header>
+            <p class="note">服务器向浏览器推送信息，除了 WebSocket，还有一种方法：Server-Sent Events（以下简称 SSE）。本文介绍它的用法。一、SSE 的本质严格地说，HTTP 协议无法做到服务器主动...</p>
+            <p>
+              <span class="muted">
+                <i class="icon-user icon12"></i>袁志蒙</span>
+              <span class="muted">
+                <i class="ico icon-time icon12"></i>2018-09-13</span>
+              <span class="muted">
+                <i class="ico icon-eye-open icon12"></i>613</script>次浏览</span>
+            </p>
+          </article>			
+						<article class="excerpt">
+            <div class="focus">
+              <a href="https://blog.yzmcms.com/htm/165.html" class="thumbnail" target="_blank">
+                <img src="https://www.yzmcms.com/uploads/201808/07/180807112707714.png" alt="YzmCMS响应式大气企业网站模板" title="YzmCMS响应式大气企业网站模板" /></a>
+            </div>
+            <header>
+              <h2>
+                <a href="https://blog.yzmcms.com/htm/165.html" target="_blank">YzmCMS响应式大气企业网站模板</a></h2>
+            </header>
+            <p class="note">分享一款YzmCMS响应式大气企业网站模板，此模板由郭健精心为YzmCMS量身打造的一款高品质的原创模板，此模板多端响应式、可自由配色（5套）、商务大气、内容页样式已预设好、支持模板扩展、永久更新...</p>
+            <p>
+              <span class="muted">
+                <i class="icon-user icon12"></i>袁志蒙</span>
+              <span class="muted">
+                <i class="ico icon-time icon12"></i>2018-08-08</span>
+              <span class="muted">
+                <i class="ico icon-eye-open icon12"></i>1381</script>次浏览</span>
+            </p>
+          </article>			
+						<article class="excerpt">
+            <div class="focus">
+              <a href="https://blog.yzmcms.com/htm/156.html" class="thumbnail" target="_blank">
+                <img src="/uploads/thumbnail/20180613171720985.jpg" alt="HTML5 WebSocket笔记" title="HTML5 WebSocket笔记" /></a>
+            </div>
+            <header>
+              <h2>
+                <a href="https://blog.yzmcms.com/htm/156.html" target="_blank">HTML5 WebSocket笔记</a></h2>
+            </header>
+            <p class="note">一、为什么需要 WebSocket？初次接触 WebSocket 的人，都会问同样的问题：我们已经有了 HTTP 协议，为什么还需要另一个协议？它能带来什么好处？答案很简单，因为 HTTP 协议有一个...</p>
+            <p>
+              <span class="muted">
+                <i class="icon-user icon12"></i>袁志蒙</span>
+              <span class="muted">
+                <i class="ico icon-time icon12"></i>2018-06-13</span>
+              <span class="muted">
+                <i class="ico icon-eye-open icon12"></i>614</script>次浏览</span>
+            </p>
+          </article>			
+						<article class="excerpt">
+            <div class="focus">
+              <a href="https://blog.yzmcms.com/js/153.html" class="thumbnail" target="_blank">
+                <img src="/uploads/thumbnail/20170405134918292.png" alt="通过new FormData对象异步上传文件" title="通过new FormData对象异步上传文件" /></a>
+            </div>
+            <header>
+              <h2>
+                <a href="https://blog.yzmcms.com/js/153.html" target="_blank">通过new FormData对象异步上传文件</a></h2>
+            </header>
+            <p class="note">现在有一个场景，一个form表单里面，除了普通的数据外，还有文件上传input[type=file]，怎么可以ajax异步提交呢？如果采用表单serialize()序列化用Ajax的方式提交，也无法把...</p>
+            <p>
+              <span class="muted">
+                <i class="icon-user icon12"></i>袁志蒙</span>
+              <span class="muted">
+                <i class="ico icon-time icon12"></i>2018-05-29</span>
+              <span class="muted">
+                <i class="ico icon-eye-open icon12"></i>823</script>次浏览</span>
+            </p>
+          </article>			
+						<article class="excerpt">
+            <div class="focus">
+              <a href="https://blog.yzmcms.com/htm/145.html" class="thumbnail" target="_blank">
+                <img src="/uploads/20180402/th_15226775985280.png" alt="YzmCMS模板-多骨鱼站点主题" title="YzmCMS模板-多骨鱼站点主题" /></a>
+            </div>
+            <header>
+              <h2>
+                <a href="https://blog.yzmcms.com/htm/145.html" target="_blank">YzmCMS模板-多骨鱼站点主题</a></h2>
+            </header>
+            <p class="note">分享一款非常漂亮的YzmCMS前端模板,该模板由多骨鱼先生奉献，模板名称：duoguyu_v3(多骨鱼)模板，演示地址：www.duoguyu.com,安装方法：1.将下载好的模板解压，对应目录复制到您的站点...</p>
+            <p>
+              <span class="muted">
+                <i class="icon-user icon12"></i>袁志蒙</span>
+              <span class="muted">
+                <i class="ico icon-time icon12"></i>2018-04-02</span>
+              <span class="muted">
+                <i class="ico icon-eye-open icon12"></i>1832</script>次浏览</span>
+            </p>
+          </article>			
+					  
+          <div class="pagenavi clearfix">
+            <div class="pages">
+              <span class="pageinfo">共<strong>4</strong>页<strong>34</strong>条记录</span><a href="https://blog.yzmcms.com/qianduan/list_1.html" class="homepage">首页</a><a href="https://blog.yzmcms.com/qianduan/list_1.html" class="nopage">上页</a><a href="https://blog.yzmcms.com/qianduan/list_1.html" class="listpage curpage">1</a><a href="https://blog.yzmcms.com/qianduan/list_2.html" class="listpage">2</a><a href="https://blog.yzmcms.com/qianduan/list_3.html" class="listpage">3</a><a href="https://blog.yzmcms.com/qianduan/list_4.html" class="listpage">4</a><a href="https://blog.yzmcms.com/qianduan/list_2.html" class="nextpage">下页</a><a href="https://blog.yzmcms.com/qianduan/list_4.html" class="endpage">尾页</a>            </div>
+          </div>
+        </div>
+      </div>
+      <aside class="sidebar">
+        <div class="widget d_postlist">
+          <h3 class="widget_tit">频道点击排行</h3>
+          <ul>
+						  	
+			   <li><a href="https://blog.yzmcms.com/htm/175.html">
+                <span class="thumbnail">
+                  <img src="/uploads/thumbnail/20181104223408664.jpg" alt="YzmCMS响应式博客模板，免费下载" title="YzmCMS响应式博客模板，免费下载"/></span>
+                <span class="text">YzmCMS响应式博客模板，免费下载</span>
+                <span class="muted">2018-11-04</span>
+                <span class="muted">
+                  <span class="ds-thread-count" data-replace="1">2503次阅读</span>
+                </span>
+              </a></li>
+			  	
+			   <li><a href="https://blog.yzmcms.com/htm/145.html">
+                <span class="thumbnail">
+                  <img src="/uploads/20180402/th_15226775985280.png" alt="YzmCMS模板-多骨鱼站点主题" title="YzmCMS模板-多骨鱼站点主题"/></span>
+                <span class="text">YzmCMS模板-多骨鱼站点主题</span>
+                <span class="muted">2018-04-02</span>
+                <span class="muted">
+                  <span class="ds-thread-count" data-replace="1">1832次阅读</span>
+                </span>
+              </a></li>
+			  	
+			   <li><a href="https://blog.yzmcms.com/htm/116.html">
+                <span class="thumbnail">
+                  <img src="/uploads/thumbnail/20170928112604659.png" alt="解决 'autocomplete=&quot;off&quot;' 无效 的问题" title="解决 'autocomplete=&quot;off&quot;' 无效 的问题"/></span>
+                <span class="text">解决 'autocomplete=&quot;off&quot;' 无效 的问题</span>
+                <span class="muted">2017-09-28</span>
+                <span class="muted">
+                  <span class="ds-thread-count" data-replace="1">1804次阅读</span>
+                </span>
+              </a></li>
+			  	
+			   <li><a href="https://blog.yzmcms.com/htm/130.html">
+                <span class="thumbnail">
+                  <img src="/uploads/thumbnail/20180125162352498.jpg" alt="YzmCMS模板-响应式HTML5黑白系个人网站主题" title="YzmCMS模板-响应式HTML5黑白系个人网站主题"/></span>
+                <span class="text">YzmCMS模板-响应式HTML5黑白系个人网站主题</span>
+                <span class="muted">2018-01-25</span>
+                <span class="muted">
+                  <span class="ds-thread-count" data-replace="1">1733次阅读</span>
+                </span>
+              </a></li>
+			  	
+			   <li><a href="https://blog.yzmcms.com/htm/120.html">
+                <span class="thumbnail">
+                  <img src="/uploads/thumbnail/20171219212052361.png" alt="YzmCMS响应式简约模板" title="YzmCMS响应式简约模板"/></span>
+                <span class="text">YzmCMS响应式简约模板</span>
+                <span class="muted">2017-12-19</span>
+                <span class="muted">
+                  <span class="ds-thread-count" data-replace="1">1509次阅读</span>
+                </span>
+              </a></li>
+			  	
+			   <li><a href="https://blog.yzmcms.com/css/141.html">
+                <span class="thumbnail">
+                  <img src="/uploads/thumbnail/20180317011118814.jpg" alt="css3+js来写一个手机导航菜单" title="css3+js来写一个手机导航菜单"/></span>
+                <span class="text">css3+js来写一个手机导航菜单</span>
+                <span class="muted">2018-03-17</span>
+                <span class="muted">
+                  <span class="ds-thread-count" data-replace="1">1473次阅读</span>
+                </span>
+              </a></li>
+			            </ul>
+        </div>
+		<div class="widget d_textbanner">
+		<h3 class="widget_tit">文章归档(近18个月)</h3>
+		           <ul style="margin-top:15px">
+			  	
+					<li><a href="https://blog.yzmcms.com/search/index/archives/pubtime/1583295317.html" target="_blank">2020年03月(3)</a></li>
+			  	
+					<li><a href="https://blog.yzmcms.com/search/index/archives/pubtime/1582100653.html" target="_blank">2020年02月(1)</a></li>
+			  	
+					<li><a href="https://blog.yzmcms.com/search/index/archives/pubtime/1578221763.html" target="_blank">2020年01月(3)</a></li>
+			  	
+					<li><a href="https://blog.yzmcms.com/search/index/archives/pubtime/1575646513.html" target="_blank">2019年12月(2)</a></li>
+			  	
+					<li><a href="https://blog.yzmcms.com/search/index/archives/pubtime/1571565025.html" target="_blank">2019年10月(1)</a></li>
+			  	
+					<li><a href="https://blog.yzmcms.com/search/index/archives/pubtime/1568643310.html" target="_blank">2019年09月(1)</a></li>
+			  	
+					<li><a href="https://blog.yzmcms.com/search/index/archives/pubtime/1564242790.html" target="_blank">2019年07月(2)</a></li>
+			  	
+					<li><a href="https://blog.yzmcms.com/search/index/archives/pubtime/1554739001.html" target="_blank">2019年04月(1)</a></li>
+			  	
+					<li><a href="https://blog.yzmcms.com/search/index/archives/pubtime/1551675458.html" target="_blank">2019年03月(4)</a></li>
+			  	
+					<li><a href="https://blog.yzmcms.com/search/index/archives/pubtime/1544550554.html" target="_blank">2018年12月(2)</a></li>
+			  	
+					<li><a href="https://blog.yzmcms.com/search/index/archives/pubtime/1541342215.html" target="_blank">2018年11月(4)</a></li>
+			  	
+					<li><a href="https://blog.yzmcms.com/search/index/archives/pubtime/1540541419.html" target="_blank">2018年10月(3)</a></li>
+			  	
+					<li><a href="https://blog.yzmcms.com/search/index/archives/pubtime/1535802909.html" target="_blank">2018年09月(4)</a></li>
+			  	
+					<li><a href="https://blog.yzmcms.com/search/index/archives/pubtime/1533396955.html" target="_blank">2018年08月(5)</a></li>
+			  	
+					<li><a href="https://blog.yzmcms.com/search/index/archives/pubtime/1530896913.html" target="_blank">2018年07月(5)</a></li>
+			  	
+					<li><a href="https://blog.yzmcms.com/search/index/archives/pubtime/1528892704.html" target="_blank">2018年06月(4)</a></li>
+			  	
+					<li><a href="https://blog.yzmcms.com/search/index/archives/pubtime/1525713177.html" target="_blank">2018年05月(4)</a></li>
+			  	
+					<li><a href="https://blog.yzmcms.com/search/index/archives/pubtime/1522678932.html" target="_blank">2018年04月(5)</a></li>
+			   
+          </ul>
+		</div>
+        <div class="widget widget_text">
+          <div class="textwidget">
+            <a href="https://www.yzmcms.com/" target="_blank" title="免费开源CMS"><img src="https://blog.yzmcms.com/common/static/images/ad2.jpg"></a>
+          </div>
+        </div>  
+      </aside>﻿
+	  </section>
+    <footer class="footer">
+      <div class="footer-inner">
+        <div style="padding:0 20px;overflow:hidden;">
+          <div class="copyright pull-left">
+            <a href="https://blog.yzmcms.com/" target="_blank">Powered By YzmCMS内容管理系统 © 2014-2020 袁志蒙工作室</a> | 京ICP备16034624号</div>
+          <div class="trackcode pull-right"><script src="https://s4.cnzz.com/z_stat.php?id=1259844929&web_id=1259844929" language="JavaScript"></script></div>
+        </div>
+      </div>
+    </footer>
+	<div id="button">
+	<a href="javascript:;" rel="nofollow" class="totop" title="返回顶部"></a>
+	<a href="https://www.yzmcms.com/" target="_blank" class="guanwang" title="返回官网"></a>
+	<a href="https://blog.yzmcms.com/guestbook/index/init.html"  target="_blank" class="lianxi" title="留言联系"></a>
+	</div>
+	
+	
+   <div id="share_wechat" style="display:none;position:fixed;left:0%;top:0%;z-index:99;width:100%;height:100%;background:rgba(0,0,0,0.3);"><div style="position:fixed;border-radius:3px;left:50%;top:50%;z-index:100;width:260px;margin-left:-140px;margin-top:-200px;background:#fff;padding:20px 25px 15px 25px;text-align:center"><span title="关闭" onclick="yzmcms_share_wechat()" style="width:100%;font-size:14px;color:#333;cursor:pointer;margin-bottom:10px;float:right;text-align:right">关闭</span><img src="https://blog.yzmcms.com/common/static/images/share_code.png" width="220"><p style="text-align:center;font-size:16px">用微信“扫一扫”</p></div></div>
+	<script type="text/javascript">
+		$(document).ready(function() {
+	    $(function(){
+	        $(window).scroll(function(){
+	            if($(this).scrollTop() > 300){
+	                $('.totop').fadeIn();
+	            }else{
+	                $('.totop').fadeOut();
+	            }
+	        });
+	        $('.totop').click(function(){
+	            $('body,html').animate({scrollTop:0},300);
+	        })
+	    })
+
+		});
+		
+		function yzmcms_share_wechat(){ 
+			  $("#share_wechat").toggle();
+		}
+		
+		window.onload = function (){
+			var nav_box = document.getElementsByClassName("nav_box")[0];
+			var ul = document.getElementsByClassName("nav_ul")[0];
+			nav_box.onclick = function (){
+				var style = ul.style;
+				style.display = style.display == "block" ? "none" : "block";
+				nav_box.className = style.display == "block" ? "open" : ""
+			}
+		}
+
+		console.log("没有来自内心的渴望，就不可能取得成功！\n我一直从未放弃过，\n成长就是不断探索的过程！");
+	</script>	
+  </body>
+</html>

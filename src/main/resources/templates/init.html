@@ -1,0 +1,245 @@
+<!DOCTYPE HTML>
+<html> 
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=10,IE=9,IE=8,ie=7">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <title>留言反馈_袁志蒙个人博客 - YzmCMS博客</title>
+	<meta name="keywords" content="个人博客,袁志蒙个人博客,技术博客,个人原创博客,php博客,个人原创网站" />
+	<meta name="description" content="YzmCMS官方博客，袁志蒙的个人博客，学习并分享PHP、Linux、MySQL和前端技术等WEB知识，记录生活的点点滴滴，是一个互联网从业者值得收藏的网站。" />
+    <link rel='stylesheet' id='open_social_css-css' href='https://blog.yzmcms.com/common/static/css/os.css' type='text/css' media='all' />
+    <link rel="stylesheet" href="https://blog.yzmcms.com/common/static/css/style.css?v=2020" media="all">
+    <link href="https://blog.yzmcms.com/common/static/css/font-awesome.min.css" rel="stylesheet" media="screen">
+  </head>
+<body>
+<!--[if lt IE 9]>
+  <script src="https://blog.yzmcms.com/common/static/js/html5.js"></script>
+<![endif]-->
+<script src="https://blog.yzmcms.com/common/static/js/jquery.js"></script>
+<script>window._deel = {
+	maillist: '',
+	maillistCode: '',
+	commenton: 0,
+	roll: [0, 0]
+  }</script>
+<script type="text/javascript">$(function() {
+	$(window).scroll(function() {
+	  $offset = $('.placeholder').offset(); //不能用自身的div，不然滚动起来会很卡
+	  if ($(window).scrollTop() > $offset.top) {
+		$('.header').css({
+		  'position': 'fixed',
+		  'top': '0px',
+		  'left': $offset.left + 'px',
+		  'z-index': '999'
+		});
+		$(".container").css({
+		  "margin-top": "93px"
+		});
+	  } else {
+		$('.header').removeAttr('style');
+		$('.container').removeAttr('style');
+	  }
+	});
+  })
+</script>	
+<header class="header" style="height: 52px;">
+  <div class="navbar">
+	<h1 class="logo">
+	  <a href="https://blog.yzmcms.com/" title="袁志蒙个人博客 - YzmCMS博客" alt="袁志蒙个人博客 - YzmCMS博客">袁志蒙个人博客 - YzmCMS博客</a></h1>
+	<ul class="nav">
+	  <li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-home"><a href="https://blog.yzmcms.com/">首页</a></li>
+					    <li class="menu-item menu-item-type-custom menu-item-object-custom  menu-item-has-children">
+		<a href="https://blog.yzmcms.com/qianduan/">前端</a><ul class="sub-menu">
+			<!-- 这里是二级栏目的循环，不需要的可以删除，代码开始 -->
+			 
+											<li class="menu-item menu-item-type-taxonomy menu-item-object-category"><a href="https://blog.yzmcms.com/htm/">html</a></li>
+								<li class="menu-item menu-item-type-taxonomy menu-item-object-category"><a href="https://blog.yzmcms.com/css/">css</a></li>
+								<li class="menu-item menu-item-type-taxonomy menu-item-object-category"><a href="https://blog.yzmcms.com/js/">js</a></li>
+					
+						<!-- 这里是二级栏目的循环，不需要的可以删除，代码结束 -->
+		</ul></li>
+				    <li class="menu-item menu-item-type-custom menu-item-object-custom  menu-item-has-children">
+		<a href="https://blog.yzmcms.com/chengxu/">程序</a><ul class="sub-menu">
+			<!-- 这里是二级栏目的循环，不需要的可以删除，代码开始 -->
+			 
+											<li class="menu-item menu-item-type-taxonomy menu-item-object-category"><a href="https://blog.yzmcms.com/php/">php</a></li>
+								<li class="menu-item menu-item-type-taxonomy menu-item-object-category"><a href="https://blog.yzmcms.com/mysql/">mysql</a></li>
+								<li class="menu-item menu-item-type-taxonomy menu-item-object-category"><a href="https://blog.yzmcms.com/server/">server</a></li>
+					
+						<!-- 这里是二级栏目的循环，不需要的可以删除，代码结束 -->
+		</ul></li>
+				    <li class="menu-item menu-item-type-custom menu-item-object-custom  menu-item-has-children">
+		<a href="https://blog.yzmcms.com/shenghuo/">生活</a><ul class="sub-menu">
+			<!-- 这里是二级栏目的循环，不需要的可以删除，代码开始 -->
+						<!-- 这里是二级栏目的循环，不需要的可以删除，代码结束 -->
+		</ul></li>
+				    <li class="menu-item menu-item-type-custom menu-item-object-custom  menu-item-has-children">
+		<a href="https://blog.yzmcms.com/yule/">娱乐</a><ul class="sub-menu">
+			<!-- 这里是二级栏目的循环，不需要的可以删除，代码开始 -->
+						<!-- 这里是二级栏目的循环，不需要的可以删除，代码结束 -->
+		</ul></li>
+				    <li class="menu-item menu-item-type-custom menu-item-object-custom  menu-item-has-children">
+		<a href="https://blog.yzmcms.com/guanyu/">关于</a><ul class="sub-menu">
+			<!-- 这里是二级栏目的循环，不需要的可以删除，代码开始 -->
+			 
+											<li class="menu-item menu-item-type-taxonomy menu-item-object-category"><a href="/guestbook/index/init.html">留言联系</a></li>
+								<li class="menu-item menu-item-type-taxonomy menu-item-object-category"><a href="https://blog.yzmcms.com/guanyuzuozhe/">关于作者</a></li>
+								<li class="menu-item menu-item-type-taxonomy menu-item-object-category"><a href="https://bbs.yzmcms.com">官方论坛</a></li>
+					
+						<!-- 这里是二级栏目的循环，不需要的可以删除，代码结束 -->
+		</ul></li>
+		
+	</ul>
+	<div class="menu pull-right">
+	  <form name="formsearch" action="https://blog.yzmcms.com/search/index/init.html" method="get">
+		<input class="search-input" name="q" id="search-keyword" type="text" required="required" placeholder=" 输入你要找的内容" />
+		<button type="submit" class="searchbtn" title="搜一下！">
+			<!-- <input type="hidden" name="modelid" value="1" id="modelid" /> -->
+		  	<i class="fa"></i>
+		</button>
+	  </form>
+	</div>
+	
+	<div id="mobile_nav">
+		<div class="nav_box"><span class="navicon"></span></div>
+		<ul class="nav_ul">
+			<li><a href="https://blog.yzmcms.com/">首页</a></li>
+								<li><a href="https://blog.yzmcms.com/qianduan/">前端</a></li>
+								<li><a href="https://blog.yzmcms.com/chengxu/">程序</a></li>
+								<li><a href="https://blog.yzmcms.com/shenghuo/">生活</a></li>
+								<li><a href="https://blog.yzmcms.com/yule/">娱乐</a></li>
+								<li><a href="https://blog.yzmcms.com/guanyu/">关于</a></li>
+				
+		</ul>
+	</div>	
+</header><script type="text/javascript" src="https://blog.yzmcms.com/common/static/plugin/layer/layer.js"></script>
+<section class="container">
+		<div class="page_left">
+		<ul>
+												<li>
+				<a href="/guestbook/index/init.html"  class="cur" >留言联系</a>
+			</li>		
+						<li>
+				<a href="https://blog.yzmcms.com/guanyuzuozhe/"  >关于作者</a>
+			</li>		
+						<li>
+				<a href="https://bbs.yzmcms.com"   target="_blank" >官方论坛</a>
+			</li>		
+			       </ul>
+		</div>
+		<div class="page_right">
+		   <h1 class="page_title">留言联系</h1>   
+		   <div class="page_content">
+				<form action="" method="post" name="guest" onsubmit="return check()">
+					<table class='message_table'>
+					<tr>
+					<td>留言主题</td>
+					<td><input name='title' type='text' class='input_text' /><span class='xing'>*</span></td>
+					</tr>
+					<tr>
+					<td>联系人</td>
+					<td><input name='name' type='text' class='input_text' /><span class='xing'>*</span></td>
+					</tr>
+					<tr>
+					<td>Email</td>
+					<td><input name='email' type='email' class='input_text' /></td>
+					</tr>
+					<tr>
+					<td>QQ</td>
+					<td><input name='qq' type='text' class='input_text' /></td>
+					</tr>		
+					<tr>
+					<td>留言内容</td>
+					<td><textarea name='bookmsg' cols='50' rows='6' class='textarea_text'></textarea><span class='xing'>*</span></td>
+					</tr>
+					<tr>
+					<td>验证码</td>
+					<td><input name="code" type="text" class='input_text' style="width:100px;margin:5px 10px 10px 0;"><img src="https://blog.yzmcms.com/api/index/code.html" onclick="this.src=this.src+'?'" style="cursor:pointer;" title="看不清？点击更换"><span class='xing'>*</span></td>
+					</tr>		
+					<tr><td></td>
+					<td><input type="submit" name="dosubmit" value="提交留言" class="dosubmit" style="width:100%;max-width:320px"></td>
+					</tr>
+					</table>
+				</form>
+				<div style="margin-top:30px">
+				   <p>YzmCMS留言板</p>
+				   <p>1.您的每一条留言，管理员将会认真查看。</p>
+				   <p>2.请您填写正确的联系方式，方便我们与您取得联系。</p>
+				
+				</div>
+		   </div>
+		</div> 
+ </section>
+ <script type="text/javascript">
+ 	function check(){
+ 		if(document.guest.title.value==""){
+ 			layer.msg("留言主题不能为空！", {icon: 2});
+ 			return false;
+ 		}
+ 		if(document.guest.name.value==""){
+ 			layer.msg("联系人不能为空！", {icon: 2});
+ 			return false;
+ 		}
+ 		if(document.guest.bookmsg.value==""){
+ 			layer.msg("留言内容不能为空！", {icon: 2});
+ 			return false;
+ 		}
+ 		if(document.guest.code.value==""){
+ 			layer.msg("验证码不能为空！", {icon: 2});
+ 			return false;
+ 		}		
+ 		return true;
+ 	}
+ </script>
+     <footer class="footer">
+      <div class="footer-inner">
+        <div style="padding:0 20px;overflow:hidden;">
+          <div class="copyright pull-left">
+            <a href="https://blog.yzmcms.com/" target="_blank">Powered By YzmCMS内容管理系统 © 2014-2020 袁志蒙工作室</a> | 京ICP备16034624号</div>
+          <div class="trackcode pull-right"><script src="https://s4.cnzz.com/z_stat.php?id=1259844929&web_id=1259844929" language="JavaScript"></script></div>
+        </div>
+      </div>
+    </footer>
+	<div id="button">
+	<a href="javascript:;" rel="nofollow" class="totop" title="返回顶部"></a>
+	<a href="https://www.yzmcms.com/" target="_blank" class="guanwang" title="返回官网"></a>
+	<a href="https://blog.yzmcms.com/guestbook/index/init.html"  target="_blank" class="lianxi" title="留言联系"></a>
+	</div>
+	
+	
+   <div id="share_wechat" style="display:none;position:fixed;left:0%;top:0%;z-index:99;width:100%;height:100%;background:rgba(0,0,0,0.3);"><div style="position:fixed;border-radius:3px;left:50%;top:50%;z-index:100;width:260px;margin-left:-140px;margin-top:-200px;background:#fff;padding:20px 25px 15px 25px;text-align:center"><span title="关闭" onclick="yzmcms_share_wechat()" style="width:100%;font-size:14px;color:#333;cursor:pointer;margin-bottom:10px;float:right;text-align:right">关闭</span><img src="https://blog.yzmcms.com/common/static/images/share_code.png" width="220"><p style="text-align:center;font-size:16px">用微信“扫一扫”</p></div></div>
+	<script type="text/javascript">
+		$(document).ready(function() {
+	    $(function(){
+	        $(window).scroll(function(){
+	            if($(this).scrollTop() > 300){
+	                $('.totop').fadeIn();
+	            }else{
+	                $('.totop').fadeOut();
+	            }
+	        });
+	        $('.totop').click(function(){
+	            $('body,html').animate({scrollTop:0},300);
+	        })
+	    })
+
+		});
+		
+		function yzmcms_share_wechat(){ 
+			  $("#share_wechat").toggle();
+		}
+		
+		window.onload = function (){
+			var nav_box = document.getElementsByClassName("nav_box")[0];
+			var ul = document.getElementsByClassName("nav_ul")[0];
+			nav_box.onclick = function (){
+				var style = ul.style;
+				style.display = style.display == "block" ? "none" : "block";
+				nav_box.className = style.display == "block" ? "open" : ""
+			}
+		}
+
+		console.log("没有来自内心的渴望，就不可能取得成功！\n我一直从未放弃过，\n成长就是不断探索的过程！");
+	</script>	
+  </body>
+</html>

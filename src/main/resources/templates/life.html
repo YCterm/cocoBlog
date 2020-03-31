@@ -1,0 +1,500 @@
+<!DOCTYPE HTML>
+<html>
+  
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=10,IE=9,IE=8,ie=7">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <title>生活_袁志蒙个人博客 - YzmCMS博客</title>
+	<meta name="keywords" content="YzmCMS官方博客,个人博客,袁志蒙,记录生活,个人成长,个人经历,博客成长" />
+	<meta name="description" content="YzmCMS官方博客，袁志蒙的个人博客，学习并分享PHP、Linux、MySQL和前端技术等WEB知识，记录生活的点点滴滴，是一个互联网从业者值得收藏的网站。" />
+    <link rel='stylesheet' id='open_social_css-css' href='https://blog.yzmcms.com/common/static/css/os.css' type='text/css' media='all' />
+    <link rel="stylesheet" href="https://blog.yzmcms.com/common/static/css/style.css?v=2020" media="all">
+    <link href="https://blog.yzmcms.com/common/static/css/font-awesome.min.css" rel="stylesheet" media="screen">
+  </head>
+  
+  <body class="home blog">
+    <div class="placeholder"></div>	
+<!--[if lt IE 9]>
+  <script src="https://blog.yzmcms.com/common/static/js/html5.js"></script>
+<![endif]-->
+<script src="https://blog.yzmcms.com/common/static/js/jquery.js"></script>
+<script>window._deel = {
+	maillist: '',
+	maillistCode: '',
+	commenton: 0,
+	roll: [0, 0]
+  }</script>
+<script type="text/javascript">$(function() {
+	$(window).scroll(function() {
+	  $offset = $('.placeholder').offset(); //不能用自身的div，不然滚动起来会很卡
+	  if ($(window).scrollTop() > $offset.top) {
+		$('.header').css({
+		  'position': 'fixed',
+		  'top': '0px',
+		  'left': $offset.left + 'px',
+		  'z-index': '999'
+		});
+		$(".container").css({
+		  "margin-top": "93px"
+		});
+	  } else {
+		$('.header').removeAttr('style');
+		$('.container').removeAttr('style');
+	  }
+	});
+  })
+</script>	
+<header class="header" style="height: 52px;">
+  <div class="navbar">
+	<h1 class="logo">
+	  <a href="https://blog.yzmcms.com/" title="袁志蒙个人博客 - YzmCMS博客" alt="袁志蒙个人博客 - YzmCMS博客">袁志蒙个人博客 - YzmCMS博客</a></h1>
+	<ul class="nav">
+	  <li class="menu-item menu-item-type-custom menu-item-object-custom  menu-item-home"><a href="https://blog.yzmcms.com/">首页</a></li>
+					    <li class="menu-item menu-item-type-custom menu-item-object-custom  menu-item-has-children">
+		<a href="https://blog.yzmcms.com/qianduan/">前端</a><ul class="sub-menu">
+			<!-- 这里是二级栏目的循环，不需要的可以删除，代码开始 -->
+			 
+											<li class="menu-item menu-item-type-taxonomy menu-item-object-category"><a href="https://blog.yzmcms.com/htm/">html</a></li>
+								<li class="menu-item menu-item-type-taxonomy menu-item-object-category"><a href="https://blog.yzmcms.com/css/">css</a></li>
+								<li class="menu-item menu-item-type-taxonomy menu-item-object-category"><a href="https://blog.yzmcms.com/js/">js</a></li>
+					
+						<!-- 这里是二级栏目的循环，不需要的可以删除，代码结束 -->
+		</ul></li>
+				    <li class="menu-item menu-item-type-custom menu-item-object-custom  menu-item-has-children">
+		<a href="https://blog.yzmcms.com/chengxu/">程序</a><ul class="sub-menu">
+			<!-- 这里是二级栏目的循环，不需要的可以删除，代码开始 -->
+			 
+											<li class="menu-item menu-item-type-taxonomy menu-item-object-category"><a href="https://blog.yzmcms.com/php/">php</a></li>
+								<li class="menu-item menu-item-type-taxonomy menu-item-object-category"><a href="https://blog.yzmcms.com/mysql/">mysql</a></li>
+								<li class="menu-item menu-item-type-taxonomy menu-item-object-category"><a href="https://blog.yzmcms.com/server/">server</a></li>
+					
+						<!-- 这里是二级栏目的循环，不需要的可以删除，代码结束 -->
+		</ul></li>
+				    <li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-has-children">
+		<a href="https://blog.yzmcms.com/shenghuo/">生活</a><ul class="sub-menu">
+			<!-- 这里是二级栏目的循环，不需要的可以删除，代码开始 -->
+						<!-- 这里是二级栏目的循环，不需要的可以删除，代码结束 -->
+		</ul></li>
+				    <li class="menu-item menu-item-type-custom menu-item-object-custom  menu-item-has-children">
+		<a href="https://blog.yzmcms.com/yule/">娱乐</a><ul class="sub-menu">
+			<!-- 这里是二级栏目的循环，不需要的可以删除，代码开始 -->
+						<!-- 这里是二级栏目的循环，不需要的可以删除，代码结束 -->
+		</ul></li>
+				    <li class="menu-item menu-item-type-custom menu-item-object-custom  menu-item-has-children">
+		<a href="https://blog.yzmcms.com/guanyu/">关于</a><ul class="sub-menu">
+			<!-- 这里是二级栏目的循环，不需要的可以删除，代码开始 -->
+			 
+											<li class="menu-item menu-item-type-taxonomy menu-item-object-category"><a href="/guestbook/index/init.html">留言联系</a></li>
+								<li class="menu-item menu-item-type-taxonomy menu-item-object-category"><a href="https://blog.yzmcms.com/guanyuzuozhe/">关于作者</a></li>
+								<li class="menu-item menu-item-type-taxonomy menu-item-object-category"><a href="https://bbs.yzmcms.com">官方论坛</a></li>
+					
+						<!-- 这里是二级栏目的循环，不需要的可以删除，代码结束 -->
+		</ul></li>
+		
+	</ul>
+	<div class="menu pull-right">
+	  <form name="formsearch" action="https://blog.yzmcms.com/search/index/init.html" method="get">
+		<input class="search-input" name="q" id="search-keyword" type="text" required="required" placeholder=" 输入你要找的内容" />
+		<button type="submit" class="searchbtn" title="搜一下！">
+			<!-- <input type="hidden" name="modelid" value="1" id="modelid" /> -->
+		  	<i class="fa"></i>
+		</button>
+	  </form>
+	</div>
+	
+	<div id="mobile_nav">
+		<div class="nav_box"><span class="navicon"></span></div>
+		<ul class="nav_ul">
+			<li><a href="https://blog.yzmcms.com/">首页</a></li>
+								<li><a href="https://blog.yzmcms.com/qianduan/">前端</a></li>
+								<li><a href="https://blog.yzmcms.com/chengxu/">程序</a></li>
+								<li><a href="https://blog.yzmcms.com/shenghuo/">生活</a></li>
+								<li><a href="https://blog.yzmcms.com/yule/">娱乐</a></li>
+								<li><a href="https://blog.yzmcms.com/guanyu/">关于</a></li>
+				
+		</ul>
+	</div>	
+</header>    <section class="container">
+      <div class="content-wrap">
+        <div class="content">
+          <header class="archive-header">
+            <h1>生活</h1>
+          </header>
+		  						<article class="excerpt">
+            <div class="focus">
+              <a href="https://blog.yzmcms.com/shenghuo/197.html" class="thumbnail" target="_blank">
+                <img src="/uploads/202003/12/200312092942978.jpg" alt="盗版YzmCMS系统，从未见过这么贱的人！" title="盗版YzmCMS系统，从未见过这么贱的人！" /></a>
+            </div>
+            <header>
+              <h2>
+                <a href="https://blog.yzmcms.com/shenghuo/197.html" target="_blank">盗版YzmCMS系统，从未见过这么贱的人！</a></h2>
+            </header>
+            <p class="note">今天发现一个盗版YzmCMS的人，下载YzmCMS然后把系统“yzm”相关字眼全部修改成了他的“xiu”，我仔细查看了一下他的源码，关于带有“yzm”...</p>
+            <p>
+              <span class="muted">
+                <i class="icon-user icon12"></i>袁志蒙</span>
+              <span class="muted">
+                <i class="ico icon-time icon12"></i>2020-03-12</span>
+              <span class="muted">
+                <i class="ico icon-eye-open icon12"></i>251</script>次浏览</span>
+            </p>
+          </article>			
+						<article class="excerpt">
+            <div class="focus">
+              <a href="https://blog.yzmcms.com/shenghuo/190.html" class="thumbnail" target="_blank">
+                <img src="/uploads/thumbnail/20160722152027943.jpg" alt="最近的烦心事有点多" title="最近的烦心事有点多" /></a>
+            </div>
+            <header>
+              <h2>
+                <a href="https://blog.yzmcms.com/shenghuo/190.html" target="_blank">最近的烦心事有点多</a></h2>
+            </header>
+            <p class="note">最近烦心事有点多，上火啊，比如今天就遇到一个用户，是对我这么评价的（打马部分是该用户昵称）：说我态度不好，说我cms开源还收费，失败？我来解释一下：首先开源和免费是不同的概念，开源是为了程序更加健壮...</p>
+            <p>
+              <span class="muted">
+                <i class="icon-user icon12"></i>袁志蒙</span>
+              <span class="muted">
+                <i class="ico icon-time icon12"></i>2019-12-06</span>
+              <span class="muted">
+                <i class="ico icon-eye-open icon12"></i>794</script>次浏览</span>
+            </p>
+          </article>			
+						<article class="excerpt">
+            <div class="focus">
+              <a href="https://blog.yzmcms.com/shenghuo/171.html" class="thumbnail" target="_blank">
+                <img src="/uploads/thumbnail/20180924003613758.jpg" alt="又是一年中秋佳节" title="又是一年中秋佳节" /></a>
+            </div>
+            <header>
+              <h2>
+                <a href="https://blog.yzmcms.com/shenghuo/171.html" target="_blank">又是一年中秋佳节</a></h2>
+            </header>
+            <p class="note">盛夏已退，秋凉如水，光阴荏苒，岁月如梭，转眼间又是一年中秋节。今夜天空阴沉、灰蒙，月亮也无情地收起娇羞的脸庞，悄悄的躲在厚厚的云层后面，忽隐忽现，忽明忽暗，走近阳台，推窗远眺，阵阵秋风袭来，心头不觉一...</p>
+            <p>
+              <span class="muted">
+                <i class="icon-user icon12"></i>袁志蒙</span>
+              <span class="muted">
+                <i class="ico icon-time icon12"></i>2018-09-24</span>
+              <span class="muted">
+                <i class="ico icon-eye-open icon12"></i>741</script>次浏览</span>
+            </p>
+          </article>			
+						<article class="excerpt">
+            <div class="focus">
+              <a href="https://blog.yzmcms.com/shenghuo/131.html" class="thumbnail" target="_blank">
+                <img src="/uploads/thumbnail/20180130182450162.jpg" alt="华为手机又遭美国封杀，最大运营商暂停销售，网友称是保卫苹果？" title="华为手机又遭美国封杀，最大运营商暂停销售，网友称是保卫苹果？" /></a>
+            </div>
+            <header>
+              <h2>
+                <a href="https://blog.yzmcms.com/shenghuo/131.html" target="_blank">华为手机又遭美国封杀，最大运营商暂停销售，网友称是保卫苹果？</a></h2>
+            </header>
+            <p class="note">1月30日，彭博社援引知情人士消息称，因为美国政府的压力，电信运营商Verizon（威瑞森）放弃了销售华为Mate 10 Pro的计划。Verizon是美国第一大移动运营商。本月早些时候，美国第二大移...</p>
+            <p>
+              <span class="muted">
+                <i class="icon-user icon12"></i>袁志蒙</span>
+              <span class="muted">
+                <i class="ico icon-time icon12"></i>2018-01-30</span>
+              <span class="muted">
+                <i class="ico icon-eye-open icon12"></i>504</script>次浏览</span>
+            </p>
+          </article>			
+						<article class="excerpt">
+            <div class="focus">
+              <a href="https://blog.yzmcms.com/shenghuo/127.html" class="thumbnail" target="_blank">
+                <img src="/uploads/thumbnail/20180111172000712.jpg" alt="馬說" title="馬說" /></a>
+            </div>
+            <header>
+              <h2>
+                <a href="https://blog.yzmcms.com/shenghuo/127.html" target="_blank">馬說</a></h2>
+            </header>
+            <p class="note">世有伯乐，然后有千里马。千里马常有，而伯乐不常有。故虽有名马，祗辱于奴隶人之手，骈死于槽枥之间，不以千里称也。马之千里者，一食或尽粟一石。食马者不知其能千里而食也。是马也，虽有千里之能，食不饱，力不足...</p>
+            <p>
+              <span class="muted">
+                <i class="icon-user icon12"></i>袁志蒙</span>
+              <span class="muted">
+                <i class="ico icon-time icon12"></i>2018-01-11</span>
+              <span class="muted">
+                <i class="ico icon-eye-open icon12"></i>592</script>次浏览</span>
+            </p>
+          </article>			
+						<article class="excerpt">
+            <div class="focus">
+              <a href="https://blog.yzmcms.com/shenghuo/122.html" class="thumbnail" target="_blank">
+                <img src="/uploads/thumbnail/20160727104459505.jpg" alt="YzmCMS将继续100%开源" title="YzmCMS将继续100%开源" /></a>
+            </div>
+            <header>
+              <h2>
+                <a href="https://blog.yzmcms.com/shenghuo/122.html" target="_blank">YzmCMS将继续100%开源</a></h2>
+            </header>
+            <p class="note">过几天将要发布YzmCMS 3.6版本了，在这里有一件事不得不说一下，由于本程序是完全开源免费的，一直以来也没盈利和收入，最近发现了很多公司和个人下载后的第一件事就是先把我的CMS版权先删除掉，，，无...</p>
+            <p>
+              <span class="muted">
+                <i class="icon-user icon12"></i>袁志蒙</span>
+              <span class="muted">
+                <i class="ico icon-time icon12"></i>2017-12-28</span>
+              <span class="muted">
+                <i class="ico icon-eye-open icon12"></i>1009</script>次浏览</span>
+            </p>
+          </article>			
+						<article class="excerpt">
+            <div class="focus">
+              <a href="https://blog.yzmcms.com/shenghuo/115.html" class="thumbnail" target="_blank">
+                <img src="/uploads/thumbnail/20170926180823261.jpg" alt="致時光" title="致時光" /></a>
+            </div>
+            <header>
+              <h2>
+                <a href="https://blog.yzmcms.com/shenghuo/115.html" target="_blank">致時光</a></h2>
+            </header>
+            <p class="note">时光，用它的姿态流逝着，有些人，有些事，有些爱成了记忆中最温暖的风景，有些记忆注定无法剪断，有些人注定无法抹去，曾经的缘分，断线在岁月的天涯。就让此时的昏黄灯光，铺洒成点点行行的短词长句。候你，低唱。...</p>
+            <p>
+              <span class="muted">
+                <i class="icon-user icon12"></i>袁志蒙</span>
+              <span class="muted">
+                <i class="ico icon-time icon12"></i>2017-09-26</span>
+              <span class="muted">
+                <i class="ico icon-eye-open icon12"></i>794</script>次浏览</span>
+            </p>
+          </article>			
+						<article class="excerpt">
+            <div class="focus">
+              <a href="https://blog.yzmcms.com/shenghuo/113.html" class="thumbnail" target="_blank">
+                <img src="/uploads/thumbnail/20170913111505427.jpg" alt="谈一谈今天发布的iPhone8" title="谈一谈今天发布的iPhone8" /></a>
+            </div>
+            <header>
+              <h2>
+                <a href="https://blog.yzmcms.com/shenghuo/113.html" target="_blank">谈一谈今天发布的iPhone8</a></h2>
+            </header>
+            <p class="note">今天凌晨1点iPhone的发布会，在此之前，关于iPhone8真消息和假消息被炒作的新闻满天飞。关于价格的版本就有多个，有的说至少1000美金起卖，有的说没那么高，不然没销量。为了提振中国区的销量，苹...</p>
+            <p>
+              <span class="muted">
+                <i class="icon-user icon12"></i>袁志蒙</span>
+              <span class="muted">
+                <i class="ico icon-time icon12"></i>2017-09-13</span>
+              <span class="muted">
+                <i class="ico icon-eye-open icon12"></i>443</script>次浏览</span>
+            </p>
+          </article>			
+						<article class="excerpt">
+            <div class="focus">
+              <a href="https://blog.yzmcms.com/shenghuo/97.html" class="thumbnail" target="_blank">
+                <img src="/uploads/thumbnail/20160705165039586.jpg" alt="注册一个域名怎么这么难？" title="注册一个域名怎么这么难？" /></a>
+            </div>
+            <header>
+              <h2>
+                <a href="https://blog.yzmcms.com/shenghuo/97.html" target="_blank">注册一个域名怎么这么难？</a></h2>
+            </header>
+            <p class="note">​一直想买一个自己的域名，2014年的时候看了看“yuanzhimeng.com”没人注册，然后当时心想这么长的域名应该没人要吧？现在也用不到，以后在买吧，可是2015年想买在看的时候，已经有人买了，，当时有点后悔，后来这几年我一直关注的这个域名，然而在今年...</p>
+            <p>
+              <span class="muted">
+                <i class="icon-user icon12"></i>袁志蒙</span>
+              <span class="muted">
+                <i class="ico icon-time icon12"></i>2017-04-17</span>
+              <span class="muted">
+                <i class="ico icon-eye-open icon12"></i>1029</script>次浏览</span>
+            </p>
+          </article>			
+						<article class="excerpt">
+            <div class="focus">
+              <a href="https://blog.yzmcms.com/shenghuo/87.html" class="thumbnail" target="_blank">
+                <img src="/uploads/20170328/th_1490677611817.jpeg" alt="当你想放弃时，看看这个漫画！" title="当你想放弃时，看看这个漫画！" /></a>
+            </div>
+            <header>
+              <h2>
+                <a href="https://blog.yzmcms.com/shenghuo/87.html" target="_blank">当你想放弃时，看看这个漫画！</a></h2>
+            </header>
+            <p class="note">这篇东西转自一位有思想的研究生！她看到这篇漫画，觉得很不错，我看后也觉得值得我们思考，尤其是当我们抱怨时！第一幅漫画中，每个人都背负着一个沉...</p>
+            <p>
+              <span class="muted">
+                <i class="icon-user icon12"></i>袁志蒙</span>
+              <span class="muted">
+                <i class="ico icon-time icon12"></i>2017-03-28</span>
+              <span class="muted">
+                <i class="ico icon-eye-open icon12"></i>662</script>次浏览</span>
+            </p>
+          </article>			
+					  
+          <div class="pagenavi clearfix">
+            <div class="pages">
+              <span class="pageinfo">共<strong>3</strong>页<strong>30</strong>条记录</span><a href="https://blog.yzmcms.com/shenghuo/list_1.html" class="homepage">首页</a><a href="https://blog.yzmcms.com/shenghuo/list_1.html" class="nopage">上页</a><a href="https://blog.yzmcms.com/shenghuo/list_1.html" class="listpage curpage">1</a><a href="https://blog.yzmcms.com/shenghuo/list_2.html" class="listpage">2</a><a href="https://blog.yzmcms.com/shenghuo/list_3.html" class="listpage">3</a><a href="https://blog.yzmcms.com/shenghuo/list_2.html" class="nextpage">下页</a><a href="https://blog.yzmcms.com/shenghuo/list_3.html" class="endpage">尾页</a>            </div>
+          </div>
+        </div>
+      </div>
+      <aside class="sidebar">
+        <div class="widget d_postlist">
+          <h3 class="widget_tit">频道点击排行</h3>
+          <ul>
+						  	
+			   <li><a href="https://blog.yzmcms.com/shenghuo/86.html">
+                <span class="thumbnail">
+                  <img src="/uploads/thumbnail/20160706200134550.jpg" alt="为什么要开发自己的CMS？" title="为什么要开发自己的CMS？"/></span>
+                <span class="text">为什么要开发自己的CMS？</span>
+                <span class="muted">2017-03-25</span>
+                <span class="muted">
+                  <span class="ds-thread-count" data-replace="1">5325次阅读</span>
+                </span>
+              </a></li>
+			  	
+			   <li><a href="https://blog.yzmcms.com/shenghuo/67.html">
+                <span class="thumbnail">
+                  <img src="/uploads/thumbnail/20160722152027943.jpg" alt="说说用CMS建站修改版权的那些事" title="说说用CMS建站修改版权的那些事"/></span>
+                <span class="text">说说用CMS建站修改版权的那些事</span>
+                <span class="muted">2016-12-09</span>
+                <span class="muted">
+                  <span class="ds-thread-count" data-replace="1">1312次阅读</span>
+                </span>
+              </a></li>
+			  	
+			   <li><a href="https://blog.yzmcms.com/shenghuo/2.html">
+                <span class="thumbnail">
+                  <img src="/uploads/thumbnail/20160705165141108.jpg" alt="致我逝去的大学时光" title="致我逝去的大学时光"/></span>
+                <span class="text">致我逝去的大学时光</span>
+                <span class="muted">2016-07-05</span>
+                <span class="muted">
+                  <span class="ds-thread-count" data-replace="1">1073次阅读</span>
+                </span>
+              </a></li>
+			  	
+			   <li><a href="https://blog.yzmcms.com/shenghuo/97.html">
+                <span class="thumbnail">
+                  <img src="/uploads/thumbnail/20160705165039586.jpg" alt="注册一个域名怎么这么难？" title="注册一个域名怎么这么难？"/></span>
+                <span class="text">注册一个域名怎么这么难？</span>
+                <span class="muted">2017-04-17</span>
+                <span class="muted">
+                  <span class="ds-thread-count" data-replace="1">1029次阅读</span>
+                </span>
+              </a></li>
+			  	
+			   <li><a href="https://blog.yzmcms.com/shenghuo/38.html">
+                <span class="thumbnail">
+                  <img src="/uploads/thumbnail/20160803110607827.jpg" alt="为什么现在人都玩微信不玩QQ了" title="为什么现在人都玩微信不玩QQ了"/></span>
+                <span class="text">为什么现在人都玩微信不玩QQ了</span>
+                <span class="muted">2016-08-03</span>
+                <span class="muted">
+                  <span class="ds-thread-count" data-replace="1">1011次阅读</span>
+                </span>
+              </a></li>
+			  	
+			   <li><a href="https://blog.yzmcms.com/shenghuo/122.html">
+                <span class="thumbnail">
+                  <img src="/uploads/thumbnail/20160727104459505.jpg" alt="YzmCMS将继续100%开源" title="YzmCMS将继续100%开源"/></span>
+                <span class="text">YzmCMS将继续100%开源</span>
+                <span class="muted">2017-12-28</span>
+                <span class="muted">
+                  <span class="ds-thread-count" data-replace="1">1009次阅读</span>
+                </span>
+              </a></li>
+			            </ul>
+        </div>
+		<div class="widget d_textbanner">
+		<h3 class="widget_tit">文章归档(近18个月)</h3>
+		           <ul style="margin-top:15px">
+			  	
+					<li><a href="https://blog.yzmcms.com/search/index/archives/pubtime/1583295317.html" target="_blank">2020年03月(3)</a></li>
+			  	
+					<li><a href="https://blog.yzmcms.com/search/index/archives/pubtime/1582100653.html" target="_blank">2020年02月(1)</a></li>
+			  	
+					<li><a href="https://blog.yzmcms.com/search/index/archives/pubtime/1578221763.html" target="_blank">2020年01月(3)</a></li>
+			  	
+					<li><a href="https://blog.yzmcms.com/search/index/archives/pubtime/1575646513.html" target="_blank">2019年12月(2)</a></li>
+			  	
+					<li><a href="https://blog.yzmcms.com/search/index/archives/pubtime/1571565025.html" target="_blank">2019年10月(1)</a></li>
+			  	
+					<li><a href="https://blog.yzmcms.com/search/index/archives/pubtime/1568643310.html" target="_blank">2019年09月(1)</a></li>
+			  	
+					<li><a href="https://blog.yzmcms.com/search/index/archives/pubtime/1564242790.html" target="_blank">2019年07月(2)</a></li>
+			  	
+					<li><a href="https://blog.yzmcms.com/search/index/archives/pubtime/1554739001.html" target="_blank">2019年04月(1)</a></li>
+			  	
+					<li><a href="https://blog.yzmcms.com/search/index/archives/pubtime/1551675458.html" target="_blank">2019年03月(4)</a></li>
+			  	
+					<li><a href="https://blog.yzmcms.com/search/index/archives/pubtime/1544550554.html" target="_blank">2018年12月(2)</a></li>
+			  	
+					<li><a href="https://blog.yzmcms.com/search/index/archives/pubtime/1541342215.html" target="_blank">2018年11月(4)</a></li>
+			  	
+					<li><a href="https://blog.yzmcms.com/search/index/archives/pubtime/1540541419.html" target="_blank">2018年10月(3)</a></li>
+			  	
+					<li><a href="https://blog.yzmcms.com/search/index/archives/pubtime/1535802909.html" target="_blank">2018年09月(4)</a></li>
+			  	
+					<li><a href="https://blog.yzmcms.com/search/index/archives/pubtime/1533396955.html" target="_blank">2018年08月(5)</a></li>
+			  	
+					<li><a href="https://blog.yzmcms.com/search/index/archives/pubtime/1530896913.html" target="_blank">2018年07月(5)</a></li>
+			  	
+					<li><a href="https://blog.yzmcms.com/search/index/archives/pubtime/1528892704.html" target="_blank">2018年06月(4)</a></li>
+			  	
+					<li><a href="https://blog.yzmcms.com/search/index/archives/pubtime/1525713177.html" target="_blank">2018年05月(4)</a></li>
+			  	
+					<li><a href="https://blog.yzmcms.com/search/index/archives/pubtime/1522678932.html" target="_blank">2018年04月(5)</a></li>
+			   
+          </ul>
+		</div>
+<!-- 		<div class="widget d_textbanner">
+			<a class="style03" target="_blank" href="https://www.yzmcms.com/">
+			<strong>赞助开发</strong>
+			<h2>支持一下作者</h2>
+			<p>
+			请留下赞助人姓名和联系人方式，如需帮助，我会优先解决您的问题！
+			<br>
+			您的支持是我们最大的动力！
+			<br>
+			<img src="https://www.yzmcms.com/common/static/images/zfb.png">
+			</p>
+			</a>
+		</div> -->
+        <div class="widget widget_text">
+          <div class="textwidget">
+            <a href="https://www.yzmcms.com/" target="_blank" title="免费开源CMS"><img src="https://blog.yzmcms.com/common/static/images/ad2.jpg"></a>
+          </div>
+        </div>       
+      </aside>﻿
+	  </section>
+    <footer class="footer">
+      <div class="footer-inner">
+        <div style="padding:0 20px;overflow:hidden;">
+          <div class="copyright pull-left">
+            <a href="https://blog.yzmcms.com/" target="_blank">Powered By YzmCMS内容管理系统 © 2014-2020 袁志蒙工作室</a> | 京ICP备16034624号</div>
+          <div class="trackcode pull-right"><script src="https://s4.cnzz.com/z_stat.php?id=1259844929&web_id=1259844929" language="JavaScript"></script></div>
+        </div>
+      </div>
+    </footer>
+	<div id="button">
+	<a href="javascript:;" rel="nofollow" class="totop" title="返回顶部"></a>
+	<a href="https://www.yzmcms.com/" target="_blank" class="guanwang" title="返回官网"></a>
+	<a href="https://blog.yzmcms.com/guestbook/index/init.html"  target="_blank" class="lianxi" title="留言联系"></a>
+	</div>
+	
+	
+   <div id="share_wechat" style="display:none;position:fixed;left:0%;top:0%;z-index:99;width:100%;height:100%;background:rgba(0,0,0,0.3);"><div style="position:fixed;border-radius:3px;left:50%;top:50%;z-index:100;width:260px;margin-left:-140px;margin-top:-200px;background:#fff;padding:20px 25px 15px 25px;text-align:center"><span title="关闭" onclick="yzmcms_share_wechat()" style="width:100%;font-size:14px;color:#333;cursor:pointer;margin-bottom:10px;float:right;text-align:right">关闭</span><img src="https://blog.yzmcms.com/common/static/images/share_code.png" width="220"><p style="text-align:center;font-size:16px">用微信“扫一扫”</p></div></div>
+	<script type="text/javascript">
+		$(document).ready(function() {
+	    $(function(){
+	        $(window).scroll(function(){
+	            if($(this).scrollTop() > 300){
+	                $('.totop').fadeIn();
+	            }else{
+	                $('.totop').fadeOut();
+	            }
+	        });
+	        $('.totop').click(function(){
+	            $('body,html').animate({scrollTop:0},300);
+	        })
+	    })
+
+		});
+		
+		function yzmcms_share_wechat(){ 
+			  $("#share_wechat").toggle();
+		}
+		
+		window.onload = function (){
+			var nav_box = document.getElementsByClassName("nav_box")[0];
+			var ul = document.getElementsByClassName("nav_ul")[0];
+			nav_box.onclick = function (){
+				var style = ul.style;
+				style.display = style.display == "block" ? "none" : "block";
+				nav_box.className = style.display == "block" ? "open" : ""
+			}
+		}
+
+		console.log("没有来自内心的渴望，就不可能取得成功！\n我一直从未放弃过，\n成长就是不断探索的过程！");
+	</script>	
+  </body>
+</html>
