@@ -10,7 +10,7 @@
   </resultMap>
   
   <select id="getMenu" resultType="com.yc.blog.bean.Category">
-  	select * from category where catename = #{catename} and label is not null;
+  	select * from category where catename = #{catename} and label is not null and catestatus = 1;
   </select>
   
   <sql id="Example_Where_Clause">
