@@ -5,8 +5,14 @@
     <id column="cateid" jdbcType="INTEGER" property="cateid" />
     <result column="catename" jdbcType="VARCHAR" property="catename" />
     <result column="label" jdbcType="VARCHAR" property="label" />
-    <result column="catestatus" jdbcType="INTEGER" property="catestatus" />
+    <result column="catestatus" jdbcType="INTEGER" property="catestatus" />   
+    <collection property="menuList" column="catename" select="getMenu"></collection>   
   </resultMap>
+  
+  <select id="getMenu" resultType="com.yc.blog.bean.Category">
+  	select * from category where catename = #{catename} and label is not null;
+  </select>
+  
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">

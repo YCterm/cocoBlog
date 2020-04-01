@@ -1,5 +1,7 @@
 package com.yc.blog.bean;
 
+import java.util.List;
+
 public class Category {
     private Integer cateid;
 
@@ -8,8 +10,18 @@ public class Category {
     private String label;
 
     private Integer catestatus;
+    
+    private List<Category> menuList;
+    
+    public List<Category> getMenuList() {
+		return menuList;
+	}
 
-    public Integer getCateid() {
+	public void setMenuList(List<Category> menuList) {
+		this.menuList = menuList;
+	}
+
+	public Integer getCateid() {
         return cateid;
     }
 
@@ -40,4 +52,11 @@ public class Category {
     public void setCatestatus(Integer catestatus) {
         this.catestatus = catestatus;
     }
+
+	@Override
+	public String toString() {
+		return "Category [cateid=" + cateid + ", catename=" + catename + ", label=" + label + ", catestatus="
+				+ catestatus + ", menuList=" + menuList + "]";
+	}
+       
 }
