@@ -34,7 +34,7 @@ public class Action {
 	@ModelAttribute
 	public ModelAndView init(ModelAndView mav) {
 		CategoryExample ce = new CategoryExample();
-		ce.createCriteria().andLabelIsNull();
+		ce.createCriteria().andLabelIsNull().andCatestatusEqualTo(1);
 		List<Category> groupList = cm.selectByExample(ce);
 		mav.addObject("groupList", groupList);
 		return mav;
@@ -50,26 +50,51 @@ public class Action {
 	//控制显示content文本长度
 	private static final int CONTENT = 200;
 	//每页多少条文章
-	private static final int ART_NUMBER = 5;
+	private static final int ART_NUMBER = 4;
 	@GetMapping({"html","css","js","xml","php","mysql","java","c","spring"})
 	public ModelAndView getData(@RequestParam(defaultValue = "1")Integer page, ModelAndView mav,HttpServletRequest rq) {		
 		String requestPath = rq.getServletPath();
 		String label = requestPath.substring(requestPath.indexOf("/")+1); 
 		CategoryExample ce = new CategoryExample();
-		ce.createCriteria().andLabelEqualTo(label);
+		ce.createCriteria().andLabelEqualTo(label).andCatestatusEqualTo(1);
 		List<Category> menuList = cm.selectByExample(ce);
 		//如果不存在，跳回index
 		if(menuList.size()<1) {
 			mav.setViewName("redirect:/");
 			return mav;
 		}		
-		int cateid = menuList.get(0).getCateid();
+		int cateid = menuList.get(0).getCateid();		
+		//计算页码
+		Map<String,Integer> pageMap = getPageNumber(page,cateid);
+		//获取文章数据
 		ArticleExample ae = new ArticleExample();
-		ae.createCriteria().andCateidEqualTo(cateid);
-		PageHelper.startPage(page, ART_NUMBER);
+		ae.createCriteria().andCateidEqualTo(cateid).andArtstatusEqualTo(1);
+		PageHelper.startPage(pageMap.get("currentPage"), ART_NUMBER);
 		List<Article> artcleList = am.selectByExampleWithBLOBs(ae);
 		//清洗html标签
-		for(Article temp : artcleList) {
+		artcleList = cleanHTML(artcleList);
+		
+		//TODO：其他模块数据
+		
+		//类型
+		mav.addObject("type", label);
+		//文章
+		mav.addObject("artcleList", artcleList);
+		//页码
+		mav.addObject("artcleSize", pageMap.get("artcleSize"));
+		mav.addObject("allPage", pageMap.get("allPage"));
+		mav.addObject("prevPage", pageMap.get("prevPage"));
+		mav.addObject("nextPage", pageMap.get("nextPage"));
+		mav.addObject("page", page);	
+		mav.setViewName("lead.html");
+		return mav;
+	}
+	
+	/* content文字内容html标签清洗方法 
+	 * 参数：需要被清洗文章(Article)组(List)
+	 */
+	private List<Article> cleanHTML(List<Article> originalList){
+		for(Article temp : originalList) {
 			String tempStr = Jsoup.parse(temp.getContent()).text();
 			//过长的文本被省略
 			int tempStrLen = tempStr.length();
@@ -78,9 +103,17 @@ public class Action {
 			}
 			temp.setContent(tempStr);
 		}
-		//计算页码
+		return originalList;
+	}
+	
+	/* 获取页码
+	 * 参数：1.当前页码(currentPage)
+	 *     2.类型id(cateid)
+	 */
+	private Map<String,Integer> getPageNumber(int currentPage,int cateid){
+		Map<String,Integer> pageMap = new HashMap<String,Integer>();
 		ArticleExample aelen = new ArticleExample();
-		aelen.createCriteria().andCateidEqualTo(cateid);		
+		aelen.createCriteria().andCateidEqualTo(cateid).andArtstatusEqualTo(1);		
 		int artcleSize = am.selectByExampleWithBLOBs(aelen).size();
 		int allPage = 0;
 		if((artcleSize % ART_NUMBER) == 0) {
@@ -92,24 +125,15 @@ public class Action {
 		} else {
 			allPage = artcleSize / ART_NUMBER + 1;
 		}
-		
-		int prevPage = page-1<1 ? page : page - 1;
-		int nextPage = page+1>allPage ? page : page + 1;
-		System.out.println(allPage);
-		
-		//类型
-		mav.addObject("type", label);
-		//文章
-		mav.addObject("artcleList", artcleList);
-		//页码
-		mav.addObject("artcleSize", artcleSize);
-		mav.addObject("allPage", allPage);
-		mav.addObject("prevPage", prevPage);
-		mav.addObject("nextPage", nextPage);
-		mav.addObject("page", page);
-		
-		mav.setViewName("lead.html");
-		return mav;
+		currentPage = currentPage > 0 && currentPage < allPage + 1 ? currentPage : 1 ;
+		int prevPage = currentPage - 1 <= 1 ? 1 : (currentPage > allPage ? 1 : currentPage - 1);
+		int nextPage = currentPage + 1 >= allPage ? allPage : (currentPage < 1 ? 1 : currentPage + 1);				
+		pageMap.put("artcleSize", artcleSize);
+		pageMap.put("allPage", allPage);
+		pageMap.put("prevPage", prevPage);
+		pageMap.put("nextPage", nextPage);
+		pageMap.put("currentPage", currentPage);		
+		return pageMap;
 	}
 
 }
