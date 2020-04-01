@@ -13,3 +13,13 @@ spring:
 #bean实体类位置     
 mybatis:
   type-aliases-package: com.yc.blog
+  
+#测试类配置  
+logging:
+  level:
+    com:
+      yc:
+        blog:
+          #dao: debug
+          #web:
+            #hyq: warn
