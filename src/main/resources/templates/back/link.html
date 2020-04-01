@@ -8,7 +8,7 @@
     <title></title>  
     <link rel="stylesheet" href="css/pintuer.css">
     <link rel="stylesheet" href="css/admin.css">
-     <link href="css/bootstrap.min.css" rel="stylesheet" />
+      <link href="css/bootstrap.min.css" rel="stylesheet" />
         <link href="css/codemirror.css" rel="stylesheet">
         <link rel="stylesheet" href="css/ace.min.css" />
         <link rel="stylesheet" href="css/font-awesome.min.css" />
@@ -18,7 +18,7 @@
 <body>
 <form method="post" action="">
   <div class="panel admin-panel">
-    <div class="panel-head"><strong class="icon-reorder"> 游客管理</strong></div>
+    <div class="panel-head"><strong class="icon-reorder">友情链接</strong></div>
     <div class="padding border-bottom">
       <ul class="search">
         <li>
@@ -30,27 +30,24 @@
     <table class="table table-hover text-center">
       <tr>
         <th >ID</th>
-        <th>昵称</th>       
-        <th>电话</th>
-        <th>邮箱</th>
-         <th width="120">创建时间</th>
-           <th >状态</th>
-        <th width="300"> 操作</th>       
+        <th>名称</th>       
+        <th>链接地址</th>
+        <th>状态</th>
+        <th width="300">操作</th>       
       </tr>      
         <tr>
           <td><input type="checkbox" name="id[]" value="1" />
             1</td>
           <td>神夜</td>
           <td>13420925611</td>
-          <td>564379992@qq.com</td>  
-          <td>2016-07-01</td>
           <td class="td-status"><span class="label label-success radius">已启用</span></td>
       <td class="td-manage">
         <a  href="javascript:;" title="停用"  class="btn btn-xs btn-success"><i class="fa fa-check  bigger-120"></i></a>  
         <a title="编辑" href="javascript:;"  class="btn btn-xs btn-info" ><i class="fa fa-edit bigger-120"></i></a>       
         <a title="删除" href="javascript:;"   class="btn btn-xs btn-warning" ><i class="fa fa-trash  bigger-120"></i></a>
-       </td> </tr>
-     <tr>
+       </td>
+        </tr>
+      <tr>
         <td colspan="8"><div class="pagelist"> <a href="">上一页</a> <a href="">下一页</a><a href="">尾页</a> </div></td>
       </tr>
     </table>
@@ -91,6 +88,23 @@ function DelSelect(){
 		return false;
 	}
 }
-
+/*用户-停用*/
+function member_stop(obj,id){
+	layer.confirm('确认要停用吗？',function(index){
+		$(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" class="btn btn-xs " onClick="member_start(this,id)" href="javascript:;" title="启用"><i class="fa fa-close bigger-120"></i></a>');
+		$(obj).parents("tr").find(".td-status").html('<span class="label label-defaunt radius">已停用</span>');
+		$(obj).remove();
+		layer.msg('已停用!',{icon: 5,time:1000});
+	});
+}
+/*用户-启用*/
+function member_start(obj,id){
+	layer.confirm('确认要启用吗？',function(index){
+		$(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" class="btn btn-xs btn-success" onClick="member_stop(this,id)" href="javascript:;" title="停用"><i class="fa fa-check  bigger-120"></i></a>');
+		$(obj).parents("tr").find(".td-status").html('<span class="label label-success radius">已启用</span>');
+		$(obj).remove();
+		layer.msg('已启用!',{icon: 6,time:1000});
+	});
+}
 </script>
 </body></html>
