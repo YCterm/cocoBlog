@@ -8,9 +8,9 @@ import org.jsoup.Jsoup;
 import org.springframework.stereotype.Component;
 
 import com.yc.blog.bean.Article;
+
 /**
- * @author Hooy 
- * 工具类
+ * @author Hooy 工具类
  */
 @Component
 public class BizUtil {

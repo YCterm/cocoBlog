@@ -7,12 +7,12 @@ public class Category {
 
     private String catename;
 
-    private String label;
+    private Integer supercateid;
 
     private Integer catestatus;
     
     private List<Category> menuList;
-    
+
     public List<Category> getMenuList() {
 		return menuList;
 	}
@@ -37,12 +37,12 @@ public class Category {
         this.catename = catename == null ? null : catename.trim();
     }
 
-    public String getLabel() {
-        return label;
+    public Integer getSupercateid() {
+        return supercateid;
     }
 
-    public void setLabel(String label) {
-        this.label = label == null ? null : label.trim();
+    public void setSupercateid(Integer supercateid) {
+        this.supercateid = supercateid;
     }
 
     public Integer getCatestatus() {
@@ -52,11 +52,4 @@ public class Category {
     public void setCatestatus(Integer catestatus) {
         this.catestatus = catestatus;
     }
-
-	@Override
-	public String toString() {
-		return "Category [cateid=" + cateid + ", catename=" + catename + ", label=" + label + ", catestatus="
-				+ catestatus + ", menuList=" + menuList + "]";
-	}
-       
 }

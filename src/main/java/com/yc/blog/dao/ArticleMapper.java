@@ -4,33 +4,38 @@ import com.yc.blog.bean.Article;
 import com.yc.blog.bean.ArticleExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
 public interface ArticleMapper {
-    long countByExample(ArticleExample example);
+	List<Article> getGroupArtSize(@Param("array") List<Integer> array);
 
-    int deleteByExample(ArticleExample example);
+	List<Article> getGroupArt(@Param("array") List<Integer> array, @Param("page") int page);
 
-    int deleteByPrimaryKey(Integer artid);
+	long countByExample(ArticleExample example);
 
-    int insert(Article record);
+	int deleteByExample(ArticleExample example);
 
-    int insertSelective(Article record);
+	int deleteByPrimaryKey(Integer artid);
 
-    List<Article> selectByExampleWithBLOBs(ArticleExample example);
+	int insert(Article record);
 
-    List<Article> selectByExample(ArticleExample example);
+	int insertSelective(Article record);
 
-    Article selectByPrimaryKey(Integer artid);
+	List<Article> selectByExampleWithBLOBs(ArticleExample example);
 
-    int updateByExampleSelective(@Param("record") Article record, @Param("example") ArticleExample example);
+	List<Article> selectByExample(ArticleExample example);
 
-    int updateByExampleWithBLOBs(@Param("record") Article record, @Param("example") ArticleExample example);
+	Article selectByPrimaryKey(Integer artid);
 
-    int updateByExample(@Param("record") Article record, @Param("example") ArticleExample example);
+	int updateByExampleSelective(@Param("record") Article record, @Param("example") ArticleExample example);
 
-    int updateByPrimaryKeySelective(Article record);
+	int updateByExampleWithBLOBs(@Param("record") Article record, @Param("example") ArticleExample example);
 
-    int updateByPrimaryKeyWithBLOBs(Article record);
+	int updateByExample(@Param("record") Article record, @Param("example") ArticleExample example);
 
-    int updateByPrimaryKey(Article record);
+	int updateByPrimaryKeySelective(Article record);
+
+	int updateByPrimaryKeyWithBLOBs(Article record);
+
+	int updateByPrimaryKey(Article record);
 }

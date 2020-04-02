@@ -82,7 +82,7 @@
 					<p>
 						<span class="muted"> <i class="icon-user icon12"></i><b
 							th:text="${artcle.author}">匿名</b></span> <span class="muted"> <i
-							class="ico icon-time icon12"></i><b th:text="${artcle.arttime}">1970-01-01</b></span>
+							class="ico icon-time icon12"></i><b th:text="${#dates.format(artcle.arttime, 'yyyy-MM-dd')}">1970-01-01</b></span>
 						<span class="muted"> <i class="ico icon-eye-open icon12"></i><b
 							th:text="${artcle.readcnt}">0</b>次浏览
 						</span>
@@ -91,25 +91,19 @@
 
 				<div class="pagenavi clearfix">
 					<div class="pages">
-						<span class="pageinfo">共<strong th:text="${allPage}">0</strong>页<strong th:text="${artcleSize}">0</strong>条记录
-						</span><a th:href="${type}+'?page=1'"
-							class="homepage">首页</a><a
-							th:href="${type}+'?page='+${prevPage}"
-							class="nopage">上页</a>
-							
-							<span th:each="pageNum : ${#numbers.sequence(1,allPage)}">
-								<a th:if="${pageNum}!=${page}" th:href="${type}+'?page='+${pageNum}" class="listpage">
-									<span th:text="${pageNum}"></span>
-								</a>
-								<a th:if="${pageNum}==${page}" th:href="${type}+'?page='+${pageNum}" class="listpage curpage">
-									<span th:text="${pageNum}"></span>
-								</a>
-							</span>
-							
-							<a th:href="${type}+'?page='+${nextPage}"
-							class="nextpage">下页</a><a
-							th:href="${type}+'?page='+${allPage}"
-							class="endpage">尾页</a>
+						<span class="pageinfo">共<strong th:text="${allPage}">0</strong>页<strong
+							th:text="${artcleSize}">0</strong>条记录
+						</span><a th:href="${type}+'?page=1'" class="homepage">首页</a><a
+							th:href="${type}+'?page='+${prevPage}" class="nopage">上页</a> <span
+							th:each="pageNum : ${#numbers.sequence(1,allPage)}"> <a
+							th:if="${pageNum}!=${page}" th:href="${type}+'?page='+${pageNum}"
+							class="listpage"> <span th:text="${pageNum}"></span>
+						</a> <a th:if="${pageNum}==${page}"
+							th:href="${type}+'?page='+${pageNum}" class="listpage curpage">
+								<span th:text="${pageNum}"></span>
+						</a>
+						</span> <a th:href="${type}+'?page='+${nextPage}" class="nextpage">下页</a><a
+							th:href="${type}+'?page='+${allPage}" class="endpage">尾页</a>
 					</div>
 				</div>
 			</div>
@@ -119,65 +113,17 @@
 				<h3 class="widget_tit">频道点击排行</h3>
 				<ul>
 
-					<li><a href="https://blog.yzmcms.com/htm/175.html"> <span
+					<li th:each="hotart:${hotArtList}"><a href="https://blog.yzmcms.com/htm/175.html"> <span
 							class="thumbnail"> <img
 								src="/uploads/thumbnail/20181104223408664.jpg"
-								alt="YzmCMS响应式博客模板，免费下载" title="YzmCMS响应式博客模板，免费下载" /></span> <span
-							class="text">YzmCMS响应式博客模板，免费下载</span> <span class="muted">2018-11-04</span>
-							<span class="muted"> <span class="ds-thread-count"
-								data-replace="1">2503次阅读</span>
+								alt="图片维护" th:title="${hotart.title}" /></span> <span th:text="${hotart.title}"
+							class="text">维护</span> <span th:text="${#dates.format(hotart.arttime, 'yyyy-MM-dd')}" class="muted">1970-01-01</span>
+							<span class="muted"> <span th:text="${hotart.readcnt}" class="ds-thread-count"
+								data-replace="1">0</span>次阅读
 						</span>
 					</a></li>
 
-					<li><a href="https://blog.yzmcms.com/htm/145.html"> <span
-							class="thumbnail"> <img
-								src="/uploads/20180402/th_15226775985280.png"
-								alt="YzmCMS模板-多骨鱼站点主题" title="YzmCMS模板-多骨鱼站点主题" /></span> <span
-							class="text">YzmCMS模板-多骨鱼站点主题</span> <span class="muted">2018-04-02</span>
-							<span class="muted"> <span class="ds-thread-count"
-								data-replace="1">1832次阅读</span>
-						</span>
-					</a></li>
 
-					<li><a href="https://blog.yzmcms.com/htm/116.html"> <span
-							class="thumbnail"> <img
-								src="/uploads/thumbnail/20170928112604659.png"
-								alt="解决 'autocomplete=&quot;off&quot;' 无效 的问题"
-								title="解决 'autocomplete=&quot;off&quot;' 无效 的问题" /></span> <span
-							class="text">解决 'autocomplete=&quot;off&quot;' 无效 的问题</span> <span
-							class="muted">2017-09-28</span> <span class="muted"> <span
-								class="ds-thread-count" data-replace="1">1804次阅读</span>
-						</span>
-					</a></li>
-
-					<li><a href="https://blog.yzmcms.com/htm/130.html"> <span
-							class="thumbnail"> <img
-								src="/uploads/thumbnail/20180125162352498.jpg"
-								alt="YzmCMS模板-响应式HTML5黑白系个人网站主题"
-								title="YzmCMS模板-响应式HTML5黑白系个人网站主题" /></span> <span class="text">YzmCMS模板-响应式HTML5黑白系个人网站主题</span>
-							<span class="muted">2018-01-25</span> <span class="muted">
-								<span class="ds-thread-count" data-replace="1">1733次阅读</span>
-						</span>
-					</a></li>
-
-					<li><a href="https://blog.yzmcms.com/htm/120.html"> <span
-							class="thumbnail"> <img
-								src="/uploads/thumbnail/20171219212052361.png"
-								alt="YzmCMS响应式简约模板" title="YzmCMS响应式简约模板" /></span> <span class="text">YzmCMS响应式简约模板</span>
-							<span class="muted">2017-12-19</span> <span class="muted">
-								<span class="ds-thread-count" data-replace="1">1509次阅读</span>
-						</span>
-					</a></li>
-
-					<li><a href="https://blog.yzmcms.com/css/141.html"> <span
-							class="thumbnail"> <img
-								src="/uploads/thumbnail/20180317011118814.jpg"
-								alt="css3+js来写一个手机导航菜单" title="css3+js来写一个手机导航菜单" /></span> <span
-							class="text">css3+js来写一个手机导航菜单</span> <span class="muted">2018-03-17</span>
-							<span class="muted"> <span class="ds-thread-count"
-								data-replace="1">1473次阅读</span>
-						</span>
-					</a></li>
 				</ul>
 			</div>
 			<div class="widget d_textbanner">
