@@ -14,6 +14,10 @@ import com.yc.blog.bean.Article;
  */
 @Component
 public class BizUtil {
+	/*
+	 * 频道点击排行展示数量
+	 */
+	public static final int HOTRANKING = 5;
 
 	/*
 	 * content文字内容html标签清洗方法 参数：需要被清洗文章(Article)组(List)
@@ -38,7 +42,7 @@ public class BizUtil {
 	 * 获取页码 参数：1.当前页码(currentPage) 2.记录总条数(cateid)
 	 */
 	// 每页多少条文章
-	public static final int ART_NUMBER = 4;
+	public static final int ART_NUMBER = 5;
 
 	public Map<String, Integer> getPageNumber(int currentPage, int artcleSize) {
 		Map<String, Integer> pageMap = new HashMap<String, Integer>();

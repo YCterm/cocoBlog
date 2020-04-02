@@ -23,7 +23,7 @@
 				or cateid =
 				#{item,jdbcType=INTEGER}
 			</foreach>
-			order by readcnt desc limit 0,5
+			and artstatus = 1
 		</where>
 	</select>
 
@@ -35,8 +35,22 @@
 				or cateid =
 				#{item,jdbcType=INTEGER}
 			</foreach>
-			limit #{page,jdbcType=INTEGER},4
+			and artstatus = 1
 		</where>
+		order by arttime desc limit #{page,jdbcType=INTEGER},#{artnumber,jdbcType=INTEGER}
+	</select>
+	
+	<select id="getGroupHotArt" parameterType="list"
+		resultType="com.yc.blog.bean.Article">
+		select * from article
+		<where>
+			<foreach collection="array" item="item">
+				or cateid =
+				#{item,jdbcType=INTEGER}
+			</foreach>
+			and artstatus = 1
+		</where>
+		order by readcnt desc limit 0,#{hotartnumber,jdbcType=INTEGER}
 	</select>
 
 	<resultMap extends="BaseResultMap" id="ResultMapWithBLOBs"

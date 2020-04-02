@@ -4,13 +4,14 @@ import com.yc.blog.bean.Article;
 import com.yc.blog.bean.ArticleExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
 
 public interface ArticleMapper {
 	List<Article> getGroupArtSize(@Param("array") List<Integer> array);
 
-	List<Article> getGroupArt(@Param("array") List<Integer> array, @Param("page") int page);
+	List<Article> getGroupArt(@Param("array") List<Integer> array, @Param("page") int page,@Param("artnumber") int artnumber);
 
+	List<Article> getGroupHotArt(@Param("array") List<Integer> array,@Param("hotartnumber") int hotartnumber);
+	
 	long countByExample(ArticleExample example);
 
 	int deleteByExample(ArticleExample example);
