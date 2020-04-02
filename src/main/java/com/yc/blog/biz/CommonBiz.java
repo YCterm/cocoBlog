@@ -73,7 +73,7 @@ public class CommonBiz {
 
 	// group获取页面文章
 	public List<Article> getGroupShorArt(List<Integer> menuCateidList, int currentPage) {
-		List<Article> articleList = am.getGroupArt(menuCateidList, (currentPage - 1) * 4);
+		List<Article> articleList = am.getGroupArt(menuCateidList, (currentPage - 1) * BizUtil.ART_NUMBER,BizUtil.ART_NUMBER);
 		return articleList = bu.cleanHTML(articleList);
 
 	}
@@ -83,13 +83,13 @@ public class CommonBiz {
 		ArticleExample ae = new ArticleExample();
 		ae.createCriteria().andCateidEqualTo(cateid).andArtstatusEqualTo(1);
 		ae.setOrderByClause("readcnt desc");
-		PageHelper.startPage(1, 5);
+		PageHelper.startPage(1, BizUtil.HOTRANKING); 
 		return am.selectByExample(ae);
 	}
 
 	// group频道点击排行文章
 	public List<Article> getGroupHotArt(List<Integer> menuCateidList) {
-		return am.getGroupArtSize(menuCateidList);
+		return am.getGroupHotArt(menuCateidList, BizUtil.HOTRANKING);
 	}
 
 }
