@@ -20,6 +20,6 @@ logging:
     com:
       yc:
         blog:
-          #dao: debug
+          dao: debug
           #web:
             #hyq: warn

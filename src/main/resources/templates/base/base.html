@@ -20,12 +20,12 @@
 				</li>
 				<li th:each="group : ${groupList}"
 					class="menu-item menu-item-type-custom menu-item-object-custom  menu-item-has-children">
-					<a th:text="${group.catename}" href="lead.html">维护</a>
+					<a th:text="${group.catename}" th:href="'/catalog/'+${group.catename}">维护</a>
 					<ul class="sub-menu">
 						<!-- 这里是二级栏目的循环，不需要的可以删除，代码开始 -->
 						<li th:each="menu : ${group.menuList}"
 							class="menu-item menu-item-type-taxonomy menu-item-object-category">
-							<a th:text="${menu.label}" th:href="${menu.label}">维护</a></li>
+							<a th:text="${menu.catename}" th:href="'/catalog/'+${group.catename}+'/'+${menu.catename}">维护</a></li>
 
 						<!-- 这里是二级栏目的循环，不需要的可以删除，代码结束 -->
 					</ul>

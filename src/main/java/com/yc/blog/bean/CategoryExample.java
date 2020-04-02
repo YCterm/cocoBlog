@@ -234,73 +234,63 @@ public class CategoryExample {
             return (Criteria) this;
         }
 
-        public Criteria andLabelIsNull() {
-            addCriterion("label is null");
+        public Criteria andSupercateidIsNull() {
+            addCriterion("supercateid is null");
             return (Criteria) this;
         }
 
-        public Criteria andLabelIsNotNull() {
-            addCriterion("label is not null");
+        public Criteria andSupercateidIsNotNull() {
+            addCriterion("supercateid is not null");
             return (Criteria) this;
         }
 
-        public Criteria andLabelEqualTo(String value) {
-            addCriterion("label =", value, "label");
+        public Criteria andSupercateidEqualTo(Integer value) {
+            addCriterion("supercateid =", value, "supercateid");
             return (Criteria) this;
         }
 
-        public Criteria andLabelNotEqualTo(String value) {
-            addCriterion("label <>", value, "label");
+        public Criteria andSupercateidNotEqualTo(Integer value) {
+            addCriterion("supercateid <>", value, "supercateid");
             return (Criteria) this;
         }
 
-        public Criteria andLabelGreaterThan(String value) {
-            addCriterion("label >", value, "label");
+        public Criteria andSupercateidGreaterThan(Integer value) {
+            addCriterion("supercateid >", value, "supercateid");
             return (Criteria) this;
         }
 
-        public Criteria andLabelGreaterThanOrEqualTo(String value) {
-            addCriterion("label >=", value, "label");
+        public Criteria andSupercateidGreaterThanOrEqualTo(Integer value) {
+            addCriterion("supercateid >=", value, "supercateid");
             return (Criteria) this;
         }
 
-        public Criteria andLabelLessThan(String value) {
-            addCriterion("label <", value, "label");
+        public Criteria andSupercateidLessThan(Integer value) {
+            addCriterion("supercateid <", value, "supercateid");
             return (Criteria) this;
         }
 
-        public Criteria andLabelLessThanOrEqualTo(String value) {
-            addCriterion("label <=", value, "label");
+        public Criteria andSupercateidLessThanOrEqualTo(Integer value) {
+            addCriterion("supercateid <=", value, "supercateid");
             return (Criteria) this;
         }
 
-        public Criteria andLabelLike(String value) {
-            addCriterion("label like", value, "label");
+        public Criteria andSupercateidIn(List<Integer> values) {
+            addCriterion("supercateid in", values, "supercateid");
             return (Criteria) this;
         }
 
-        public Criteria andLabelNotLike(String value) {
-            addCriterion("label not like", value, "label");
+        public Criteria andSupercateidNotIn(List<Integer> values) {
+            addCriterion("supercateid not in", values, "supercateid");
             return (Criteria) this;
         }
 
-        public Criteria andLabelIn(List<String> values) {
-            addCriterion("label in", values, "label");
+        public Criteria andSupercateidBetween(Integer value1, Integer value2) {
+            addCriterion("supercateid between", value1, value2, "supercateid");
             return (Criteria) this;
         }
 
-        public Criteria andLabelNotIn(List<String> values) {
-            addCriterion("label not in", values, "label");
-            return (Criteria) this;
-        }
-
-        public Criteria andLabelBetween(String value1, String value2) {
-            addCriterion("label between", value1, value2, "label");
-            return (Criteria) this;
-        }
-
-        public Criteria andLabelNotBetween(String value1, String value2) {
-            addCriterion("label not between", value1, value2, "label");
+        public Criteria andSupercateidNotBetween(Integer value1, Integer value2) {
+            addCriterion("supercateid not between", value1, value2, "supercateid");
             return (Criteria) this;
         }
 
