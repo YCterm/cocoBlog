@@ -14,20 +14,22 @@
 			property="artstatus" />
 		<result column="arttemp" jdbcType="VARCHAR" property="arttemp" />
 	</resultMap>
-
-	<select id="getGroupArtSize" parameterType="list"
+	
+	<select id="getGroupArtArticle" parameterType="list"
 		resultType="com.yc.blog.bean.Article">
 		select * from article
 		<where>
 			<foreach collection="array" item="item">
 				or cateid =
 				#{item,jdbcType=INTEGER}
-			</foreach>
+			</foreach>			
+        	<if test="time != null">and arttime like #{time}</if>
 			and artstatus = 1
 		</where>
+		order by arttime desc limit #{page,jdbcType=INTEGER},#{ART_NUMBER,jdbcType=INTEGER}
 	</select>
 
-	<select id="getGroupArt" parameterType="list"
+	<select id="getGroupAllArtSize" parameterType="list"
 		resultType="com.yc.blog.bean.Article">
 		select * from article
 		<where>
@@ -35,12 +37,12 @@
 				or cateid =
 				#{item,jdbcType=INTEGER}
 			</foreach>
+			<if test="time != null">and arttime like #{time}</if>
 			and artstatus = 1
 		</where>
-		order by arttime desc limit #{page,jdbcType=INTEGER},#{artnumber,jdbcType=INTEGER}
 	</select>
 	
-	<select id="getGroupHotArt" parameterType="list"
+	<select id="getGroupHotArticle" parameterType="list"
 		resultType="com.yc.blog.bean.Article">
 		select * from article
 		<where>
@@ -50,7 +52,7 @@
 			</foreach>
 			and artstatus = 1
 		</where>
-		order by readcnt desc limit 0,#{hotartnumber,jdbcType=INTEGER}
+		order by readcnt desc limit 0,#{HOTRANKING,jdbcType=INTEGER}
 	</select>
 
 	<resultMap extends="BaseResultMap" id="ResultMapWithBLOBs"

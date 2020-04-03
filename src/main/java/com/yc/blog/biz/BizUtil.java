@@ -25,7 +25,7 @@ public class BizUtil {
 	// 控制显示content文本长度
 	private static final int CONTENT = 200;
 
-	public List<Article> cleanHTML(List<Article> originalList) {
+	public List<Article> cleanHTML(List<Article> originalList) {		
 		for (Article temp : originalList) {
 			String tempStr = Jsoup.parse(temp.getContent()).text();
 			// 过长的文本被省略

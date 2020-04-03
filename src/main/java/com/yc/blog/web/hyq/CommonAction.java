@@ -29,8 +29,8 @@ public class CommonAction {
 
 	@ModelAttribute
 	public ModelAndView init(ModelAndView mav) {
-		List<Category> groupList = cb.getGroup();
-		mav.addObject("groupList", groupList);
+		List<Category> header = cb.getHeader();
+		mav.addObject("groupList", header);
 		return mav;
 	}
 
@@ -41,36 +41,23 @@ public class CommonAction {
 	}
 
 	@GetMapping("catalog/{grouplabel}/{menulabel}")
-	public ModelAndView getMenuData(@RequestParam(defaultValue = "1") Integer page, ModelAndView mav,
+	public ModelAndView getMenuData(@RequestParam(defaultValue = "1") Integer page,
+			@RequestParam(required = false) String time, ModelAndView mav,
 			@PathVariable("grouplabel") String grouplabel, @PathVariable("menulabel") String menulabel) {
 
-		List<Category> menuList = cb.getMenu(menulabel);
+		Integer cateid = cb.getCateCateid(menulabel);
+		List<Article> mainArtList = cb.getArtArticle(cateid, page, time);
 
-		// 安全检验
-		if (menuList.size() < 1) {
-			mav.setViewName("redirect:/");
-			return mav;
-		}
+		Integer mainAllArtSize = cb.getAllArtSize(cateid, time);
+		Map<String, Integer> pageMap = cb.getPageMap(page, mainAllArtSize);
 
-		int cateid = menuList.get(0).getCateid();
-		// 获取页面全部文章数量
-		int artcleSize = cb.getArtcleSize(cateid);
-
-		// 计算页码
-		Map<String, Integer> pageMap = cb.getPageMap(page, artcleSize);
-		// 分页 当前页几条记录
-		List<Article> articleList = cb.getShorArt(cateid, pageMap.get("currentPage"));
-
-		// 频道点击排行
-		List<Article> hotArtList = cb.getHotArt(cateid);
-
-		// TODO：其他模块数据
+		List<Article> hotArtList = cb.getHotArticle(cateid);
 
 		// 推送包------------------------------------------------
 		// 类型
 		mav.addObject("type", menulabel);
 		// 主文章
-		mav.addObject("artcleList", articleList);
+		mav.addObject("artcleList", mainArtList);
 		// 频道点击排行
 		mav.addObject("hotArtList", hotArtList);
 		// 页码
@@ -84,40 +71,24 @@ public class CommonAction {
 	}
 
 	@GetMapping("catalog/{grouplabel}")
-	public ModelAndView getGroupData(@RequestParam(defaultValue = "1") Integer page, ModelAndView mav,
+	public ModelAndView getGroupData(@RequestParam(defaultValue = "1") Integer page,
+			@RequestParam(required = false) String time, ModelAndView mav,
 			@PathVariable("grouplabel") String grouplabel) {
 
-		List<Category> groupList = cb.getMenu(grouplabel);
-		int groupid = groupList.get(0).getCateid();
-		List<Category> menuList = cb.getMenu(groupid);
+		Integer groupCateid = cb.getCateCateid(grouplabel);
+		List<Integer> menuCateid = cb.getCateCateid(groupCateid);
+		List<Article> mainArtList = cb.getArtArticle(menuCateid, page, time);
 
-		// 安全检验
-		if (groupList.size() < 1 || menuList.size() < 1) {
-			mav.setViewName("redirect:/");
-			return mav;
-		}
+		Integer mainAllArtSize = cb.getAllArtSize(menuCateid, time);
+		Map<String, Integer> pageMap = cb.getPageMap(page, mainAllArtSize);
 
-		List<Integer> menuCateidList = new ArrayList<Integer>();
-		for (Category menu : menuList) {
-			menuCateidList.add(menu.getCateid());
-		}
-		// 获取页面全部文章数量
-		int artcleSize = cb.getGroupArtcleSize(menuCateidList);
-
-		// 计算页码
-		Map<String, Integer> pageMap = cb.getPageMap(page, artcleSize);
-
-		// 分页 当前页几条记录
-		List<Article> articleList = cb.getGroupShorArt(menuCateidList, page);
-
-		// 频道点击排行
-		List<Article> hotArtList = cb.getGroupHotArt(menuCateidList);
+		List<Article> hotArtList = cb.getHotArticle(menuCateid);
 
 		// 推送包------------------------------------------------
 		// 类型
 		mav.addObject("type", grouplabel);
 		// 主文章
-		mav.addObject("artcleList", articleList);
+		mav.addObject("artcleList", mainArtList);
 		// 频道点击排行
 		mav.addObject("hotArtList", hotArtList);
 		// 页码
