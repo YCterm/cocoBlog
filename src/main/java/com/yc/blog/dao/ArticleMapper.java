@@ -6,11 +6,11 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface ArticleMapper {
-	List<Article> getGroupArtSize(@Param("array") List<Integer> array);
+	List<Article> getGroupArtArticle(@Param("array") List<Integer> array, @Param("page") int page,@Param("ART_NUMBER") int ART_NUMBER,@Param("time") String time);
+	
+	List<Article> getGroupAllArtSize(@Param("array") List<Integer> array, @Param("time") String time);
 
-	List<Article> getGroupArt(@Param("array") List<Integer> array, @Param("page") int page,@Param("artnumber") int artnumber);
-
-	List<Article> getGroupHotArt(@Param("array") List<Integer> array,@Param("hotartnumber") int hotartnumber);
+	List<Article> getGroupHotArticle(@Param("array") List<Integer> array,@Param("HOTRANKING") int HOTRANKING);
 	
 	long countByExample(ArticleExample example);
 
