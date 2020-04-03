@@ -1,5 +1,8 @@
 package com.yc.blog.biz;
 
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,6 +21,10 @@ public class BizUtil {
 	 * 频道点击排行展示数量
 	 */
 	public static final int HOTRANKING = 5;
+	/*
+	 * 文章归档展示数量
+	 */
+	public static final int TIMECLASSIFICATION = 8;
 
 	/*
 	 * content文字内容html标签清洗方法 参数：需要被清洗文章(Article)组(List)
@@ -25,7 +32,7 @@ public class BizUtil {
 	// 控制显示content文本长度
 	private static final int CONTENT = 200;
 
-	public List<Article> cleanHTML(List<Article> originalList) {		
+	public List<Article> cleanHTML(List<Article> originalList) {
 		for (Article temp : originalList) {
 			String tempStr = Jsoup.parse(temp.getContent()).text();
 			// 过长的文本被省略
@@ -65,6 +72,24 @@ public class BizUtil {
 		pageMap.put("nextPage", nextPage);
 		pageMap.put("currentPage", currentPage);
 		return pageMap;
+	}
+
+	/*
+	 * 日期转换处理 String->Date,nextDate
+	 */
+	//时间跨越 默认24h
+	public static final long LONGTIME = 24 * 60 * 60 * 1000;
+
+	public List<Date> transTime(String time) {
+		List<Date> timeDateList = new ArrayList<Date>();
+		String[] timesplit = time.split("-");
+		Calendar calendar = Calendar.getInstance();
+		calendar.set(Integer.parseInt(timesplit[0]), Integer.parseInt(timesplit[1]) - 1, Integer.parseInt(timesplit[2]),
+				0, 0, 0);
+		long nextDayTime = calendar.getTimeInMillis() + LONGTIME;
+		timeDateList.add(calendar.getTime());
+		timeDateList.add(new Date(nextDayTime));
+		return timeDateList;
 	}
 
 }

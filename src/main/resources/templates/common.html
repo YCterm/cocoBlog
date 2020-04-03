@@ -93,17 +93,37 @@
 					<div class="pages">
 						<span class="pageinfo">共<strong th:text="${allPage}">0</strong>页<strong
 							th:text="${artcleSize}">0</strong>条记录
-						</span><a th:href="${type}+'?page=1'" class="homepage">首页</a><a
-							th:href="${type}+'?page='+${prevPage}" class="nopage">上页</a> <span
-							th:each="pageNum : ${#numbers.sequence(1,allPage)}"> <a
-							th:if="${pageNum}!=${page}" th:href="${type}+'?page='+${pageNum}"
-							class="listpage"> <span th:text="${pageNum}"></span>
-						</a> <a th:if="${pageNum}==${page}"
-							th:href="${type}+'?page='+${pageNum}" class="listpage curpage">
+						</span>
+						
+						<a th:if="${time}==null" th:href="${type} + '?page=1'" class="homepage">首页</a>
+						<a th:if="${time}!=null" th:href="${type} + '?page=1&time=' + ${time} " class="homepage">首页</a>
+						
+						<a th:if="${time}==null" th:href="${type} + '?page='+${prevPage}" class="nopage">上页</a>
+						<a th:if="${time}!=null" th:href="${type} + '?page='+${prevPage} + '&time=' + ${time}" class="nopage">上页</a>
+						
+						<span th:each="pageNum : ${#numbers.sequence(1,allPage)}"> 
+							<span th:if="${time}==null">
+							<a th:if="${pageNum}!=${page}" th:href="${type}+'?page='+${pageNum}" class="listpage">
 								<span th:text="${pageNum}"></span>
-						</a>
-						</span> <a th:href="${type}+'?page='+${nextPage}" class="nextpage">下页</a><a
-							th:href="${type}+'?page='+${allPage}" class="endpage">尾页</a>
+							</a> 
+							<a th:if="${pageNum}==${page}" th:href="${type}+'?page='+${pageNum}" class="listpage curpage">
+								<span th:text="${pageNum}"></span>
+							</a>
+							</span>
+							<span th:if="${time}!=null">
+							<a th:if="${pageNum}!=${page}" th:href="${type} + '?page=' + ${pageNum} + '&time=' + ${time}" class="listpage">
+								<span th:text="${pageNum}"></span>
+							</a> 
+							<a th:if="${pageNum}==${page}" th:href="${type}+'?page='+${pageNum} + '&time=' + ${time}" class="listpage curpage">
+								<span th:text="${pageNum}"></span>
+							</a>
+							</span>
+						</span>
+						<a th:if="${time}==null" th:href="${type}+'?page='+${nextPage}" class="nextpage">下页</a>
+						<a th:if="${time}!=null" th:href="${type}+'?page='+${nextPage} + '&time=' + ${time}" class="nextpage">下页</a>
+						
+						<a th:if="${time}==null" th:href="${type}+'?page='+${allPage}" class="endpage">尾页</a>
+						<a th:if="${time}!=null" th:href="${type}+'?page='+${allPage} + '&time=' + ${time}" class="endpage">尾页</a>
 					</div>
 				</div>
 			</div>
@@ -129,79 +149,11 @@
 			<div class="widget d_textbanner">
 				<h3 class="widget_tit">文章归档(近18个月)</h3>
 				<ul style="margin-top: 15px">
-
-					<li><a
-						href="https://blog.yzmcms.com/search/index/archives/pubtime/1583295317.html"
-						target="_blank">2020年03月(3)</a></li>
-
-					<li><a
-						href="https://blog.yzmcms.com/search/index/archives/pubtime/1582100653.html"
-						target="_blank">2020年02月(1)</a></li>
-
-					<li><a
-						href="https://blog.yzmcms.com/search/index/archives/pubtime/1578221763.html"
-						target="_blank">2020年01月(3)</a></li>
-
-					<li><a
-						href="https://blog.yzmcms.com/search/index/archives/pubtime/1575646513.html"
-						target="_blank">2019年12月(2)</a></li>
-
-					<li><a
-						href="https://blog.yzmcms.com/search/index/archives/pubtime/1571565025.html"
-						target="_blank">2019年10月(1)</a></li>
-
-					<li><a
-						href="https://blog.yzmcms.com/search/index/archives/pubtime/1568643310.html"
-						target="_blank">2019年09月(1)</a></li>
-
-					<li><a
-						href="https://blog.yzmcms.com/search/index/archives/pubtime/1564242790.html"
-						target="_blank">2019年07月(2)</a></li>
-
-					<li><a
-						href="https://blog.yzmcms.com/search/index/archives/pubtime/1554739001.html"
-						target="_blank">2019年04月(1)</a></li>
-
-					<li><a
-						href="https://blog.yzmcms.com/search/index/archives/pubtime/1551675458.html"
-						target="_blank">2019年03月(4)</a></li>
-
-					<li><a
-						href="https://blog.yzmcms.com/search/index/archives/pubtime/1544550554.html"
-						target="_blank">2018年12月(2)</a></li>
-
-					<li><a
-						href="https://blog.yzmcms.com/search/index/archives/pubtime/1541342215.html"
-						target="_blank">2018年11月(4)</a></li>
-
-					<li><a
-						href="https://blog.yzmcms.com/search/index/archives/pubtime/1540541419.html"
-						target="_blank">2018年10月(3)</a></li>
-
-					<li><a
-						href="https://blog.yzmcms.com/search/index/archives/pubtime/1535802909.html"
-						target="_blank">2018年09月(4)</a></li>
-
-					<li><a
-						href="https://blog.yzmcms.com/search/index/archives/pubtime/1533396955.html"
-						target="_blank">2018年08月(5)</a></li>
-
-					<li><a
-						href="https://blog.yzmcms.com/search/index/archives/pubtime/1530896913.html"
-						target="_blank">2018年07月(5)</a></li>
-
-					<li><a
-						href="https://blog.yzmcms.com/search/index/archives/pubtime/1528892704.html"
-						target="_blank">2018年06月(4)</a></li>
-
-					<li><a
-						href="https://blog.yzmcms.com/search/index/archives/pubtime/1525713177.html"
-						target="_blank">2018年05月(4)</a></li>
-
-					<li><a
-						href="https://blog.yzmcms.com/search/index/archives/pubtime/1522678932.html"
-						target="_blank">2018年04月(5)</a></li>
-
+					<li th:each="tal : ${timeArtList}">
+						<a th:text="${tal.time}+'('+${tal.amount}+')'" th:href="${type}+'?time=' + ${tal.time}"
+						   target="_blank">2020年03月(3)
+						</a>
+					</li>
 				</ul>
 			</div>
 			<div class="widget widget_text">
