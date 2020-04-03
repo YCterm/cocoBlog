@@ -2,16 +2,24 @@ package com.yc.blog.dao;
 
 import com.yc.blog.bean.Article;
 import com.yc.blog.bean.ArticleExample;
+import com.yc.blog.bean.container.TimeBean;
+
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface ArticleMapper {
-	List<Article> getGroupArtArticle(@Param("array") List<Integer> array, @Param("page") int page,@Param("ART_NUMBER") int ART_NUMBER,@Param("time") String time);
-	
+	List<Article> getGroupArtArticle(@Param("array") List<Integer> array, @Param("page") int page,
+			@Param("ART_NUMBER") int ART_NUMBER, @Param("time") String time);
+
 	List<Article> getGroupAllArtSize(@Param("array") List<Integer> array, @Param("time") String time);
 
-	List<Article> getGroupHotArticle(@Param("array") List<Integer> array,@Param("HOTRANKING") int HOTRANKING);
-	
+	List<Article> getGroupHotArticle(@Param("array") List<Integer> array, @Param("HOTRANKING") int HOTRANKING);
+
+	List<TimeBean> getTimeList(@Param("cateid") int cateid, @Param("TIMECLASSIFICATION") int TIMECLASSIFICATION);
+
+	List<TimeBean> getGroupTimeList(@Param("array") List<Integer> array,
+			@Param("TIMECLASSIFICATION") int TIMECLASSIFICATION);
+
 	long countByExample(ArticleExample example);
 
 	int deleteByExample(ArticleExample example);
