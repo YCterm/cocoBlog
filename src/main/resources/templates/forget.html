@@ -1,0 +1,103 @@
+<!--
+Author: xmoban.cn
+Author URL: http://www.xmoban.cn
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+<!DOCTYPE html>
+<html>
+<head>
+<title>Internship Sign In & Sign Up Form a Responsive Widget Template :: xmoban.cn</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="Internship Sign In & Sign Up Form Responsive Widget,Login form widgets, Sign up Web forms , Login signup Responsive web form,Flat Pricing table,Flat Drop downs,Registration Forms,News letter Forms,Elements" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!-- Custom Theme files -->
+<link href="css/font-awesome.min.css" rel="stylesheet" type="text/css" media="all">
+<link href="css/snow.css" rel="stylesheet" type="text/css" media="all" />
+<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
+<!-- //Custom Theme files -->
+<!-- web font -->
+<link href="//fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
+<link href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+
+<!-- //web font -->
+</head>
+ 
+<body>
+<div class="snow-container">
+			  <div class="snow foreground"></div>
+			  <div class="snow foreground layered"></div>
+			  <div class="snow middleground"></div>
+			  <div class="snow middleground layered"></div>
+			  <div class="snow background"></div>
+			  <div class="snow background layered"></div>
+			</div>
+
+<div class="top-buttons-agileinfo">
+<a href="login.html"  class="active">登录</a><a href="signup.html">忘记密码</a>
+</div>
+<h1>Forgot Password</h1>
+<div class="main-agileits">
+<!--form-stars-here-->
+		<div class="form-w3-agile">
+			<h2 class="sub-agileits-w3layouts">忘记密码</h2>
+			<form id="repasswordform">
+					<input type="text" name="user" placeholder="用户名"  value="Your Full Name" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Your Full Name';}">
+					<input type="password" name="passsword" placeholder="重置密码" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '';}">
+					<input type="password" name="repasssword" placeholder="确认密码"onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '';}">
+					<input type="text" name="uemail" placeholder="email"  value="Email@address.com" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Email@address.com';}">
+					
+					<input type="text" placeholder="验证码" name="verificationCode"  value="Verification Code" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Verification Code';}">
+					<a href="forget" class="forgot-w3layouts"><font style="color:red;">Forgot Password ?</font></a>
+				<div class="buttons">
+				<input value="提交 " onclick="resetPassword()" class="forget" type="button" style="margin-right: 20px; margin-top: 20px;">
+				<input value="发送验证码邮件" id="verification" onclick="sendVerificationCode()" type="button" style="margin-right: 45px; margin-top: 20px;">
+			</div>
+				<p class="p-bottom-w3ls"><a href="tosignup">Sign Up here</a>if u do not have an account yet.</p>
+			</form>
+		</div>
+		</div>
+<!--//form-ends-here-->
+<!-- copyright -->
+	<div class="copyright w3-agile">
+		<p> © 2017 Internship Sign In & Sign Up Form . All rights reserved | Design by <a href="http://www.xmoban.cn/" target="_blank">xmoban.cn</a></p>
+	</div>
+	<!-- //copyright --> 
+	<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+	<script type="text/javascript">
+	function sendVerificationCode(){
+		var user=$("#repasswordform>input[name='user']").val();
+		var uemail=$("#repasswordform>input[name='uemail']").val();
+		$.post("getVerificationCode",{user:user,uemail:uemail},function(result){
+			if(result.resultCode==1){
+				if (result.resultCode == 1) {
+					alert(result.message);
+				}
+				if (result.resultCode == 2) {
+					alert(result.message);
+				}
+				if (result.resultCode == 0) {
+					alert(result.message);
+				}
+			}
+		})
+	}
+	function resetPassword(){
+		$.post("repassword",$("#repasswordform").serialize(),function(result){
+			if (result.resultCode == 1) {
+				alert(result.message);
+				setTimeout("location.href = 'login.html'",3000);//3000毫秒后跳转
+			}
+			if (result.resultCode == 2) {
+				alert(result.message);
+			}
+			if (result.resultCode == 0) {
+				alert(result.message);
+			}
+		})
+	}
+	
+	</script>
+</body>
+</html>
