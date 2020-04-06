@@ -2,11 +2,13 @@ package com.yc.blog.web.hyq;
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
+import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import com.yc.blog.bean.User;
+import com.yc.blog.bean.UserExample;
 import com.yc.blog.biz.BizException1;
 import com.yc.blog.biz.UserBiz;
 import com.yc.blog.dao.UserMapper;
@@ -80,8 +83,7 @@ public class UserAction {
 			mav.addObject("msg",e.getMessage());
 			mav.setViewName("login");
 		}
-		return mav; 
-		
+		return mav; 		
 	}
 
 
@@ -257,5 +259,25 @@ public class UserAction {
 			e.printStackTrace();
 			return new Result(2, e.getMessage(), null);
 		}
+	}
+	
+	
+	/**
+	 * @author Hooy
+	 * 修改个人资料页面原始信息自动填充
+	 */
+	@PostMapping("getUserInfo")
+	@ResponseBody
+	public Result getUserInfo(@SessionAttribute("loginedUser") User user) {
+		//获取当前用户的账号
+		String uname = user.getUnamme();
+		UserExample ue = new UserExample();
+		ue.createCriteria().andUnammeEqualTo(uname);
+		List<User> userList = um.selectByExample(ue);
+		if(userList.size() < 1) {
+			return new Result(0,"请先登录",null);
+		}
+		User loginedUser = userList.get(0);	
+		return new Result(1,"加载成功",loginedUser);
 	}
 }

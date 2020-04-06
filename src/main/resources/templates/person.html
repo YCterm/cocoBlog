@@ -80,81 +80,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 </script>
 <body>
-<header class="header" style="height: 52px;">
-  <div class="navbar">
-	<h1 class="logo">
-	  <a href="index.html" title="袁志蒙个人博客 - YzmCMS博客" alt="袁志蒙个人博客 - YzmCMS博客">袁志蒙个人博客 - YzmCMS博客</a></h1>
-	<ul class="nav">
-	
-	 	
-			    <li class="menu-item menu-item-type-custom menu-item-object-custom  menu-item-has-children">
-		<a href="login.html">登录</a><ul class="sub-menu">
-			<!-- 这里是二级栏目的循环，不需要的可以删除，代码开始 -->
-			 
-				<li class="menu-item menu-item-type-taxonomy menu-item-object-category">
-				<a href="person.html">个人信息</a></li>
-					
-						<!-- 这里是二级栏目的循环，不需要的可以删除，代码结束 -->
-		</ul></li>	
-	  <li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-home"><a href="index">首页</a></li>
-					    <li class="menu-item menu-item-type-custom menu-item-object-custom  menu-item-has-children">
-		<a href="lead.html">前端</a><ul class="sub-menu">
-			<!-- 这里是二级栏目的循环，不需要的可以删除，代码开始 -->
-			 
-											<li class="menu-item menu-item-type-taxonomy menu-item-object-category"><a href="https://blog.yzmcms.com/htm/">html</a></li>
-								<li class="menu-item menu-item-type-taxonomy menu-item-object-category"><a href="https://blog.yzmcms.com/css/">css</a></li>
-								<li class="menu-item menu-item-type-taxonomy menu-item-object-category"><a href="https://blog.yzmcms.com/js/">js</a></li>
-					
-						<!-- 这里是二级栏目的循环，不需要的可以删除，代码结束 -->
-		</ul></li>
-				    <li class="menu-item menu-item-type-custom menu-item-object-custom  menu-item-has-children">
-		<a href="program.html">程序</a><ul class="sub-menu">
-			<!-- 这里是二级栏目的循环，不需要的可以删除，代码开始 -->
-			 
-											<li class="menu-item menu-item-type-taxonomy menu-item-object-category"><a href="https://blog.yzmcms.com/php/">php</a></li>
-								<li class="menu-item menu-item-type-taxonomy menu-item-object-category"><a href="https://blog.yzmcms.com/mysql/">mysql</a></li>
-								<li class="menu-item menu-item-type-taxonomy menu-item-object-category"><a href="https://blog.yzmcms.com/server/">server</a></li>
-					
-						<!-- 这里是二级栏目的循环，不需要的可以删除，代码结束 -->
-		</ul></li>
-				    <li class="menu-item menu-item-type-custom menu-item-object-custom  menu-item-has-children">
-		<a href="life.html">生活</a><ul class="sub-menu">
-			<!-- 这里是二级栏目的循环，不需要的可以删除，代码开始 -->
-						<!-- 这里是二级栏目的循环，不需要的可以删除，代码结束 -->
-		</ul></li>
-				    <li class="menu-item menu-item-type-custom menu-item-object-custom  menu-item-has-children">
-		<a href="amusement.html">娱乐</a><ul class="sub-menu">
-			<!-- 这里是二级栏目的循环，不需要的可以删除，代码开始 -->
-						<!-- 这里是二级栏目的循环，不需要的可以删除，代码结束 -->
-		</ul></li>
-				    <li class="menu-item menu-item-type-custom menu-item-object-custom  menu-item-has-children">
-		<a href="about.html">关于</a><ul class="sub-menu">
-			<!-- 这里是二级栏目的循环，不需要的可以删除，代码开始 -->
-			 
-											<li class="menu-item menu-item-type-taxonomy menu-item-object-category"><a href="init.html">留言联系</a></li>
-								<li class="menu-item menu-item-type-taxonomy menu-item-object-category"><a href="aboutauthor.html">关于作者</a></li>
-								<li class="menu-item menu-item-type-taxonomy menu-item-object-category"><a href="">官方论坛</a></li>
-					
-						<!-- 这里是二级栏目的循环，不需要的可以删除，代码结束 -->
-		</ul></li>
-
- 	</ul>
-	 
-	
-	<div id="mobile_nav">
-		<div class="nav_box"><span class="navicon"></span></div>
-		<ul class="nav_ul">
-			<li><a href="index.html">首页</a></li>
-								<li><a href="lead.html">前端</a></li>
-								<li><a href="program.html">程序</a></li>
-								<li><a href="life.html">生活</a></li>
-								<li><a href="amusement.html">娱乐</a></li>
-								<li><a href="about.html">关于</a></li>
-				
-		</ul>
-	</div>
-		
-</header> 
+<div th:replace="base/base::.header"></div>	 
 
 	<div class="main" >
 		<div class="content">
@@ -209,30 +135,29 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 											
 													<h3>Settings</h3>
 												<h4>用户名</h4>
-												
-													<input id="unamme" name="unamme" type="text" value="" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '';}">	
+													<input id="unamme" name="unamme" type="text" value="" disabled="disabled">	
 												
 												<h4>昵称</h4>
 												
-													<input id="nickname" name="nickname" type="text" value="" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '';}">	
+													<input id="nickname" name="nickname" type="text" value="">	
 												
 												<h4>旧密码</h4>
 											
-													<input id="originalPassword" name="originalPassword" type="password" value="" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '';}">	
+													<input id="originalPassword" name="originalPassword" type="password" value="" >	
 												<h4>新密码</h4>
 											
-													<input id="newPassword" name="newPassword" type="password" value="" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '';}">	
+													<input id="newPassword" name="newPassword" type="password" value="" >	
 												<h4>确认新密码</h4>
 											
-													<input id="confirmNewPassword" name="confirmNewPassword" type="password" value="" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '';}">	
+													<input id="confirmNewPassword" name="confirmNewPassword" type="password" value="" >	
 												
 												<h4>电话</h4>
 											
-													<input id="uphone" name="uphone" type="text" value="" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '';}">	
+													<input id="uphone" name="uphone" type="text" value="" >	
 												
 												<h4>邮箱</h4>
 												
-													<input id="uemail" name="uemail" type="text" value="" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '';}">	
+													<input id="uemail" name="uemail" type="text" value="" >	
 												
 											
 										</div>	
@@ -298,7 +223,33 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						}) 
 					 
 				})
-			</script>
+				
+					//author：hooy
+					//修改个人资料页面原始信息自动填充
+					$(document).ready(function() {
+						$.ajax({
+							type:"POST",
+							url:"getUserInfo",
+								success:function(data){
+								if(data.resultCode === 1){
+									var obj = data.data;
+									$('#unamme').val(obj.unamme);
+									$('#nickname').val(obj.nickname);
+									$('#uphone').val(obj.uphone);
+									$('#uemail').val(obj.uemail);
+								}else{
+									alert(data.message);
+									window.location.href = 'login.html';
+								}
+							},
+							error:function(){
+								alert("请先登录");
+								window.location.href = 'login.html';
+							}
+						
+						});
+					});
+				</script>
 			
 </body>
 </html>

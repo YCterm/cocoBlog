@@ -1,9 +1,15 @@
 package com.yc.blog.bean;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class User {
-    private Integer uid;
+public class User implements Serializable{
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	private Integer uid;
 
     private String unamme;
 
@@ -112,4 +118,13 @@ public class User {
     public void setUtemp(String utemp) {
         this.utemp = utemp == null ? null : utemp.trim();
     }
+
+	@Override
+	public String toString() {
+		return "User [uid=" + uid + ", unamme=" + unamme + ", nickname=" + nickname + ", passsword=" + passsword
+				+ ", uphone=" + uphone + ", uemail=" + uemail + ", head=" + head + ", createtime=" + createtime
+				+ ", ustatus=" + ustatus + ", utype=" + utype + ", utemp=" + utemp + "]";
+	}
+    
+    
 }
