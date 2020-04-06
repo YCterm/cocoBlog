@@ -2,20 +2,24 @@ package com.yc.blog.web.hyq;
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
+import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import com.yc.blog.bean.User;
+import com.yc.blog.bean.UserExample;
 import com.yc.blog.biz.BizException1;
 import com.yc.blog.biz.UserBiz;
 import com.yc.blog.dao.UserMapper;
@@ -24,6 +28,7 @@ import com.yc.blog.utils.ThumbnailatorUtil;
 import com.yc.blog.vo.Result;
 
 @Controller
+@SessionAttributes("loginedUser")
 public class UserAction {
 
 	@Resource
@@ -66,13 +71,14 @@ public class UserAction {
 	@RequestMapping("dologin")
 	@ResponseBody
 	public Result dologin(@RequestParam("unamme") String unamme, @RequestParam("passsword") String passsword,
-			HttpServletRequest request, HttpServletResponse response) {
+			HttpServletRequest request, HttpServletResponse response,Model mov) {
 		// 清空session内容
 		request.getSession().invalidate();
 		try {
 			// 获取ubiz中已登录的职员信息
 			User user = ubiz.loginUser(unamme, passsword);
 			request.getSession().setAttribute("user", user);
+			mov.addAttribute("loginedUser",user);
 			return new Result(1, "登录成功！", null);
 		} catch (BizException1 e) {
 			e.printStackTrace();
@@ -254,5 +260,25 @@ public class UserAction {
 			e.printStackTrace();
 			return new Result(2, e.getMessage(), null);
 		}
+	}
+	
+	
+	/**
+	 * @author Hooy
+	 * 修改个人资料页面原始信息自动填充
+	 */
+	@PostMapping("getUserInfo")
+	@ResponseBody
+	public Result getUserInfo(@SessionAttribute("loginedUser") User user) {
+		//获取当前用户的账号
+		String uname = user.getUnamme();
+		UserExample ue = new UserExample();
+		ue.createCriteria().andUnammeEqualTo(uname);
+		List<User> userList = um.selectByExample(ue);
+		if(userList.size() < 1) {
+			return new Result(0,"请先登录",null);
+		}
+		User loginedUser = userList.get(0);	
+		return new Result(1,"加载成功",loginedUser);
 	}
 }
