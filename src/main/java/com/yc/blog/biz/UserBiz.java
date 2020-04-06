@@ -36,14 +36,12 @@ public class UserBiz {
 	 * @return
 	 * @throws BizException
 	 */
-	public User loginUser(String unamme, String passsword) throws BizException1 {
+	public User loginUser(User user) throws BizException1 {
 		MD5Util objMD5Util = new MD5Util();
-		// 存放登录用的信息
-		User user = null;
 		UserExample userExample = new UserExample();
 		// 判断用户名和密码是否合法
-		userExample.or().andUnammeEqualTo(unamme).andPassswordEqualTo(objMD5Util.MD5(passsword));
-		userExample.or().andNicknameEqualTo(unamme).andPassswordEqualTo(objMD5Util.MD5(passsword));
+		userExample.createCriteria().andUnammeEqualTo(user.getUnamme()).andPassswordEqualTo(objMD5Util.MD5(user.getPasssword())).
+		andNicknameEqualTo(user.getUnamme()).andPassswordEqualTo(objMD5Util.MD5(user.getPasssword()));
 
 		// 存放从数据库中查找到的登录用户的信息
 		List<User> listuser = um.selectByExample(userExample);
@@ -54,7 +52,7 @@ public class UserBiz {
 			user = listuser.get(0);
 			user.setPasssword("");
 			System.out.println(user);
-			return user;
+			return listuser.get(0);
 		}
 
 	}

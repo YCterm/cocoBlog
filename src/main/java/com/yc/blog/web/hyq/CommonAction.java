@@ -28,7 +28,7 @@ public class CommonAction {
 	}
 
 	@GetMapping({ "/", "index", "index.html" })
-	public ModelAndView getIndex(ModelAndView mav) {
+	public static ModelAndView getIndex(ModelAndView mav) {
 		mav.setViewName("index.html");
 		return mav;
 	}

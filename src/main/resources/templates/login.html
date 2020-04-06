@@ -41,7 +41,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!--form-stars-here-->
 		<div class="form-w3-agile">
 			<h2 class="sub-agileits-w3layouts">Sign In</h2>
-			<form id="logInForm">
+			<form id="logInForm" action="dologin" method="post">
 				<div id="alertDiv" class="alert alert-warning alert-dismissable"
 					style="display: none">
 					<button type="button" class="close" data-dismiss="alert"
@@ -67,7 +67,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	</div>
 	<!-- //copyright --> 
 	<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
-	<script type="text/javascript">
+	<!-- <script type="text/javascript">
 			function signIn(){
 				$.post('dologin',$('#logInForm').serialize(),function(result){
 					if(result.resultCode==2){
@@ -80,6 +80,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					}
 				})
 			}
-	</script>
+	</script> -->
 </body>
 </html>
