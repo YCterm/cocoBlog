@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import com.yc.blog.bean.User;
@@ -24,6 +25,7 @@ import com.yc.blog.utils.ThumbnailatorUtil;
 import com.yc.blog.vo.Result;
 
 @Controller
+@SessionAttributes("loginedUser")
 public class UserAction {
 
 	@Resource
@@ -32,11 +34,15 @@ public class UserAction {
 	@Resource
 	private UserMapper um;
 
-	@GetMapping("login.html")
-	public String dologin() {
-		return "login";
-	}
-
+	/*
+	 * @GetMapping("login.html") public String dologin() { return "login"; }
+	 */
+		@GetMapping("login.html")
+		public ModelAndView dologin(ModelAndView mav) {
+			mav.setViewName("login");
+			return mav;
+		}
+		
 	@GetMapping("signup.html")
 	public String tosignup() {
 
@@ -54,8 +60,6 @@ public class UserAction {
 	  public String person() { 
 		  return "person";
 	  }
-	
-
 	/**
 	 * 登录
 	 * 
@@ -63,25 +67,24 @@ public class UserAction {
 	 * @param mav
 	 * @return
 	 */
-	@RequestMapping("dologin")
+	@PostMapping("dologin")
 	@ResponseBody
-	public Result dologin(@RequestParam("unamme") String unamme, @RequestParam("passsword") String passsword,
-			HttpServletRequest request, HttpServletResponse response) {
-		// 清空session内容
-		request.getSession().invalidate();
+	public ModelAndView dologin(User user,ModelAndView mav) {
 		try {
 			// 获取ubiz中已登录的职员信息
-			User user = ubiz.loginUser(unamme, passsword);
-			request.getSession().setAttribute("user", user);
-			return new Result(1, "登录成功！", null);
+			User us = ubiz.loginUser(user);
+			mav.addObject("loginedUser",us);
+			return CommonAction.getIndex(mav);
 		} catch (BizException1 e) {
 			e.printStackTrace();
-			return new Result(2, e.getMessage(), unamme);
-		} catch (Exception e) {
-			return new Result(0, "系统繁忙，请稍后再试！", null);
+			mav.addObject("msg",e.getMessage());
+			mav.setViewName("login");
 		}
-
+		return mav; 
+		
 	}
+
+
 
 	/**
 	 * 验证用户名是否被注册
@@ -198,7 +201,7 @@ public class UserAction {
 	 * @param originalPassword		原密码
 	 * @param confirmNewPassword	确认新密码
 	 * @param newPassword			新密码
-	 * @param profileModifyFile		头像
+	 * @param head					头像
 	 * @param request
 	 * @param response
 	 * @return
