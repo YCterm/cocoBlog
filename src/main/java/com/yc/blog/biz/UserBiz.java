@@ -216,9 +216,10 @@ public class UserBiz {
 			if(	 ! logineduser.getPasssword().equals(objMD5Util.MD5(oldPassword))) {
 				throw new BizException1("原密码输入错误，请认真核对后输入！");
 			}else {
-				if(oldPassword.equals(newPassword)) {
-					throw new BizException1("原密码与新密码输入一致，请重新输入！");
-				}else {
+			/*
+			 * if(oldPassword.equals(newPassword)) { throw new
+			 * BizException1("原密码与新密码输入一致，请重新输入！"); }else {
+			 */
 					if(  ! newPassword.equals(repasssword) ) {
 						throw new BizException1("输入的两次新密码不一致，请仔细核对后输入");
 					}
@@ -229,7 +230,7 @@ public class UserBiz {
 					um.updateByPrimaryKeySelective(user);
 					return true;
 				}
-			}
+		/* } */
 		
 	}
 
@@ -275,16 +276,16 @@ public class UserBiz {
 	 * @return
 	 */
 	public boolean updateHead(User logineduser,String head) {
-		if(head==null) {
-			return false;
-		}else {
+		/*
+		 * if(head==null) { return false; }else {
+		 */
 			User user = new User();
 			user.setUid(logineduser.getUid());
 			user.setHead(head);
 			System.out.println("head+++++"+user.getHead());
 			um.updateByPrimaryKeySelective(user);
 			return true;
-		}
+		/* } */
 	}
 	/**
 	 * 修改用户名
@@ -298,7 +299,7 @@ public class UserBiz {
 		}else {
 			User user = new User();
 			user.setUid(logineduser.getUid());
-			user.setUphone(unamme);
+			user.setUnamme(unamme);
 			um.updateByPrimaryKeySelective(user);
 			return true;
 		}
@@ -315,7 +316,7 @@ public class UserBiz {
 		}else {
 			User user = new User();
 			user.setUid(logineduser.getUid());
-			user.setUphone(nickname);
+			user.setNickname(nickname);
 			um.updateByPrimaryKeySelective(user);
 			return true;
 		}
