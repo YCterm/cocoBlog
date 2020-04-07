@@ -8,10 +8,8 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
@@ -212,56 +210,66 @@ public class UserAction {
 	 */
 	@PostMapping("updateInfo")
 	@ResponseBody
-	public Result updateInfo(@SessionAttribute("user") User user, String uemail,String unamme,String nickname, 
+	public Result updateInfo(@SessionAttribute("loginedUser") User user, String uemail,String unamme,String nickname, 
 			String uphone,String originalPassword, String confirmNewPassword, String newPassword,
 			MultipartFile head,HttpServletRequest request,
-			HttpServletResponse response) throws IllegalStateException, IOException {
+			HttpServletResponse response) throws IllegalStateException, IOException, BizException1 {
 	
-		try {
-			//获取文件名
-			String strFilename=head.getOriginalFilename();
-			//原文件存储路径
-			File OriginalFile = new File("c:/coco/originalImg");
-			if( !OriginalFile.exists()) {
-				OriginalFile.mkdirs();
-			}
-			File ProfileFile = new File("c:/coco/new");
-			if( !ProfileFile.exists()) {
-				ProfileFile.mkdirs();
-			}
-			//获取磁盘路径
-			String strDiskPath = "c:/coco/originalImg/"+strFilename;
-			
-			System.out.println("上传图片路径===="+strDiskPath);
+		//获取文件名
+		String strFilename=head.getOriginalFilename();
+		//原文件存储路径
+		File OriginalFile = new File("c:/coco/originalImg");
+		if( !OriginalFile.exists()) {
+			OriginalFile.mkdirs();
+		}
+		File ProfileFile = new File("c:/coco/new");
+		if( !ProfileFile.exists()) {
+			ProfileFile.mkdirs();
+		}
+		//获取磁盘路径
+		String strDiskPath = "c:/coco/originalImg/"+strFilename;
 		
-			//以磁盘路径创建文件
-			File objFile = new File(strDiskPath);
-			head.transferTo(objFile);
-			System.out.println("文件名===="+objFile);
-			//使用ThumbnailatiorUtil工具类 进行图片的像素(50*50）压缩
-			ThumbnailatorUtil objThumbnailatorUtil =new ThumbnailatorUtil();
-			//创建文件夹存放压缩后的图片
-			String strProfileDiskPath = "c:/coco/new/"+strFilename;
-			System.out.println("保存图片路径===="+strProfileDiskPath);
-			objThumbnailatorUtil.changeImgSize(strDiskPath, strProfileDiskPath);
-			
-			ubiz.updateUnamme(user, unamme);
-			ubiz.updateNickname(user, nickname);
+		System.out.println("上传图片路径===="+strDiskPath);
+
+		//以磁盘路径创建文件
+		File objFile = new File(strDiskPath);
+		head.transferTo(objFile);
+		System.out.println("文件名===="+objFile);
+		//使用ThumbnailatiorUtil工具类 进行图片的像素(50*50）压缩
+		ThumbnailatorUtil objThumbnailatorUtil =new ThumbnailatorUtil();
+		//创建文件夹存放压缩后的图片
+		String strProfileDiskPath = "c:/coco/new/"+strFilename;
+		System.out.println("保存图片路径===="+strProfileDiskPath);
+		objThumbnailatorUtil.changeImgSize(strDiskPath, strProfileDiskPath);
+		
+		ubiz.updateUnamme(user, unamme);
+		ubiz.updateNickname(user, nickname);
+		
+		/*
+		 * ubiz.updatePasssword(user,newPassword,confirmNewPassword, originalPassword);
+		 */
+		ubiz.updateUphone(user, uphone);
+		ubiz.updateUemail(user, uemail);
+		
+		
+		
+		ubiz.updateHead(user, strFilename);
+		return new Result(1, "信息修改成功", null);
+	}
+	
+	@PostMapping("passwordInfo")
+	@ResponseBody
+	public Result passwordInfo(@SessionAttribute("loginedUser") User user,String originalPassword, String confirmNewPassword, String newPassword,
+			MultipartFile head,HttpServletRequest request,
+			HttpServletResponse response) throws IllegalStateException, IOException{
+		 try {
 			ubiz.updatePasssword(user,newPassword,confirmNewPassword, originalPassword);
-			ubiz.updateUphone(user, uphone);
-			ubiz.updateUemail(user, uemail);
-			
-			
-			
-			ubiz.updateHead(user, strFilename);
 			return new Result(1, "信息修改成功", null);
 		} catch (BizException1 e) {
 			e.printStackTrace();
 			return new Result(2, e.getMessage(), null);
 		}
 	}
-	
-	
 	/**
 	 * @author Hooy
 	 * 修改个人资料页面原始信息自动填充
@@ -280,4 +288,5 @@ public class UserAction {
 		User loginedUser = userList.get(0);	
 		return new Result(1,"加载成功",loginedUser);
 	}
+	
 }
