@@ -6,6 +6,7 @@ import com.yc.blog.bean.container.TimeBean;
 
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
 public interface ArticleMapper {
 	List<Article> getGroupArtArticle(@Param("array") List<Integer> array, @Param("page") int page,
@@ -19,6 +20,15 @@ public interface ArticleMapper {
 
 	List<TimeBean> getGroupTimeList(@Param("array") List<Integer> array,
 			@Param("TIMECLASSIFICATION") int TIMECLASSIFICATION);
+	
+	List<Article> getRandomArticle();
+	
+	@Select(value = { "SELECT * FROM article WHERE cateid = #{cateid,jdbcType=INTEGER} ORDER BY RAND() LIMIT 5" })
+	List<Article> getRecommendArticle(@Param("cateid") int cateid);
+	
+	Article getPrevArticle(@Param("number") int number);
+	
+	Article getNextArticle(@Param("number") int number);
 
 	long countByExample(ArticleExample example);
 

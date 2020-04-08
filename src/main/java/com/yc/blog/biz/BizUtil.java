@@ -78,7 +78,7 @@ public class BizUtil {
 	 * 日期转换处理 String->Date,nextDate
 	 */
 	//时间跨越 默认24h
-	public static final long LONGTIME = 24 * 60 * 60 * 1000;
+	public static final long LONGTIME = 24 * 60 * 60 * 1000 - 1;
 
 	public List<Date> transTime(String time) {
 		List<Date> timeDateList = new ArrayList<Date>();

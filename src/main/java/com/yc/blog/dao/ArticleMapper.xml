@@ -70,6 +70,18 @@
 		</where>
 		group by date(arttime) order by arttime desc limit 0,#{TIMECLASSIFICATION,jdbcType=INTEGER};
 	</select>
+	
+	<select id="getRandomArticle" resultType="com.yc.blog.bean.Article">
+		SELECT * FROM article where artstatus = 1 ORDER BY RAND() LIMIT 5
+	</select>
+	
+	<select id="getPrevArticle" resultType="com.yc.blog.bean.Article">
+		SELECT * FROM article WHERE artid &lt; #{number,jdbcType=INTEGER} and artstatus = 1 ORDER BY artid DESC LIMIT 1
+	</select>
+	
+	<select id="getNextArticle" resultType="com.yc.blog.bean.Article">
+		SELECT * FROM article WHERE artid &gt; #{number,jdbcType=INTEGER} and artstatus = 1 ORDER BY artid ASC LIMIT 1
+	</select>
 
 	<resultMap extends="BaseResultMap" id="ResultMapWithBLOBs"
 		type="com.yc.blog.bean.Article">
