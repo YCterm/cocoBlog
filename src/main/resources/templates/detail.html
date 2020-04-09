@@ -57,6 +57,17 @@
 				}
 			});
 		})
+		
+		
+		function sendComment(){
+			//thymeleaf框架内获取session
+			var loginedUser = '[[${session.loginedUser}]]';
+			if(loginedUser==""){
+				alert("请先登录！");
+				return false;
+			}
+			alert("正在发送数据！")
+		}
 	</script>
 	<div th:replace="base/base::.header"></div>
 	<section class="container">
@@ -91,20 +102,23 @@
 							<div id='tag741ea220ff5887504d724069fe0ee1bf'>
 
 								<dd th:each="ra : ${randomArticle}">
-									<a href="https://blog.yzmcms.com/htm/133.html" th:title="${ra.title}"> <img
+									<a th:href="'/detail/' + ${ra.artid}"
+										th:title="${ra.title}"> <img
 										src="https://www.yzmcms.com/uploads/201802/01/180201081943386.jpg"
 										alt="图片损坏"> <span th:text="${ra.title}">标题维护</span></a>
 								</dd>
-								
+
 							</div>
 						</dl>
 					</div>
 					<!--related:end-->
 				</article>
 				<nav class="article-nav">
-					<span th:if="${prevArticle != null}" class="article-nav-prev">上一篇：<a th:text="${prevArticle.title}"
-						th:href="'/detail/' + ${prevArticle.artid}">维护</a></span> <span th:if="${nextArticle != null}"
-						class="article-nav-next">下一篇：<a th:text="${nextArticle.title}"
+					<span th:if="${prevArticle != null}" class="article-nav-prev">上一篇：<a
+						th:text="${prevArticle.title}"
+						th:href="'/detail/' + ${prevArticle.artid}">维护</a></span> <span
+						th:if="${nextArticle != null}" class="article-nav-next">下一篇：<a
+						th:text="${nextArticle.title}"
 						th:href="'/detail/' + ${nextArticle.artid}">维护</a></span>
 				</nav>
 				<!--comment-->
@@ -119,19 +133,14 @@
 					<div class="comment_box">
 						<div class="comment">
 							<div class="com_form">
-								<form action="https://blog.yzmcms.com/comment/index/init.html"
-									method="post" onsubmit="return check_comm(this)">
-									<input type="hidden" name="modelid" value="1"> <input
-										type="hidden" name="catid" value="9"> <input
-										type="hidden" name="id" value="90"> <input
-										type="hidden" name="title" value="YzmCMS常见问题汇总"> <input
-										type="hidden" name="url"
-										value="https://blog.yzmcms.com/php/90.html">
+								<form onsubmit="return sendComment()" >
+									
 									<textarea class="textarea" id="content" name="content"
 										placeholder="让评论变得如此简单~"></textarea>
 									<p>
 										<input type="submit" class="sub_btn" name="dosubmit"
-											value="提交" style="width: 100px"><span class="emotion">表情</span><span
+											value="提交" style="width: 100px">
+											<span class="emotion">表情</span><span
 											class="yzm"><img
 											src="https://blog.yzmcms.com/api/index/code.html"
 											onclick="this.src=this.src+'?'" style="cursor: pointer;"
@@ -143,10 +152,10 @@
 						</div>
 						<div class="clearfix"></div>
 						<div class="comment_list">
-							<div class="comment_list_top">共20条评论</div>
+							<div class="comment_list_top">共<span th:text="${commentListSize}">0</span>条评论</div>
 							<div class="comment_list_body">
 								<ul>
-									<li>
+									<li th:each="cl : ${commentList}">
 										<!--<a class="user_pic" href="https://blog.yzmcms.com/member/myhome/init/userid/0.html" target="blank"><img src="https://blog.yzmcms.com/common/static/images/default.gif" height="35" width="35"></a>-->
 										<p class="user_pic">
 											<img
@@ -155,10 +164,25 @@
 										</p>
 										<div class="comm_right">
 											<!--<a class="user_name" href="https://blog.yzmcms.com/member/myhome/init/userid/0.html" target="blank">YzmCMS博客网友</a>-->
-											<p>网友评论：</p>
-											<p>你这后台是用的什么富媒体编辑器啊</p>
+											<p><span th:text="${cl.user.unamme}">网友评论</span>：</p>
+											<!-- 直接回复文章 -->
+											<p th:if="${cl.recomid == null}" th:text="${cl.comcontent}">评论内容</p>
+											<!-- 回复评论者 -->
+											<p th:if="${cl.recomid != null}">
+												<a href="javascript:void(0);" class="user_name" rel="nofollow">
+												<strong th:if="${cl.user.ustatus == 1}" style="color: #DE4C1C"><span th:text="${cl.user.unamme}">管理员</span>(管理员)</strong>
+												<strong th:if="${cl.user.ustatus == 2}" th:text="${cl.user.unamme}" >粉丝</strong>
+												</a>
+												回复 
+												<a href="javascript:void(0);" class="user_name" rel="nofollow">
+												<strong th:if="${cl.reUser.ustatus == 1}" style="color: #DE4C1C"><span th:text="${cl.reUser.unamme}">管理员</span>(管理员)</strong>
+												<strong th:if="${cl.reUser.ustatus == 2}" th:text="${cl.reUser.unamme}" >粉丝</strong>
+												</a>
+												<span th:text="${cl.comcontent}"></span>
+											</p>
+											
 											<p>
-												<span class="comm_time">2019-12-17 21:16:27</span> <a
+												<span class="comm_time" th:text="${#dates.format(cl.comtime, 'yyyy-MM-dd hh:mm:ss')}">评论时间</span> <a
 													href="javascript:toreply('510');" class="comm_a">回复</a>
 											</p>
 											<div id="rep_510" class="none">
@@ -185,788 +209,7 @@
 											</div>
 										</div>
 									</li>
-									<li>
-										<!--<a class="user_pic" href="https://blog.yzmcms.com/member/myhome/init/userid/0.html" target="blank"><img src="https://blog.yzmcms.com/common/static/images/default.gif" height="35" width="35"></a>-->
-										<p class="user_pic">
-											<img
-												src="https://blog.yzmcms.com/common/static/images/default.gif"
-												height="35" width="35">
-										</p>
-										<div class="comm_right">
-											<!--<a class="user_name" href="https://blog.yzmcms.com/member/myhome/init/userid/0.html" target="blank">YzmCMS博客网友</a>-->
-											<p>网友评论：</p>
-											<p>怎么调用多级栏目呀？三级以上的</p>
-											<p>
-												<span class="comm_time">2019-02-18 14:47:10</span> <a
-													href="javascript:toreply('454');" class="comm_a">回复</a>
-											</p>
-											<div id="rep_454" class="none">
-												<form
-													action="https://blog.yzmcms.com/comment/index/init.html"
-													method="post" onsubmit="return check_rep(this)">
-													<input type="hidden" name="modelid" value="1"> <input
-														type="hidden" name="catid" value="9"> <input
-														type="hidden" name="id" value="90"> <input
-														type="hidden" name="title" value="YzmCMS常见问题汇总"> <input
-														type="hidden" name="url"
-														value="https://blog.yzmcms.com/php/90.html"> <input
-														type="hidden" name="reply" value="454"> <input
-														type="hidden" name="reply_to" value="YzmCMS博客网友">
-													<textarea name="content" class="textarea textarea2"
-														placeholder="让评论变得如此简单~"></textarea>
-													<input type="submit" class="sub_btn static" name="dosubmit"
-														value="提交" style="width: 100px"> <span
-														class="yzm yzm2"><img src=""
-														onclick="this.src='https://blog.yzmcms.com/api/index/code.html?v='+Math.random()"
-														style="cursor: pointer;" alt="点击加载" title="看不清？点击更换"><input
-														type="text" name="code" required="required"></span>
-												</form>
-											</div>
-										</div>
-									</li>
-									<li>
-										<!--<a class="user_pic" href="https://blog.yzmcms.com/member/myhome/init/userid/0.html" target="blank"><img src="https://blog.yzmcms.com/common/static/images/default.gif" height="35" width="35"></a>-->
-										<p class="user_pic">
-											<img
-												src="https://blog.yzmcms.com/common/static/images/default.gif"
-												height="35" width="35">
-										</p>
-										<div class="comm_right">
-											<!--<a class="user_name" href="https://blog.yzmcms.com/member/myhome/init/userid/0.html" target="blank">YzmCMS博客网友</a>-->
-											<p>网友评论：</p>
-											<p>
-												<a href="javascript:void(0);" class="user_name"
-													rel="nofollow">YzmCMS博客网友</a> 回复 <a
-													href="javascript:void(0);" class="user_name" rel="nofollow">YzmCMS博客网友</a>
-												：test测试404
-											</p>
-											<p>
-												<span class="comm_time">2019-01-18 13:05:47</span> <a
-													href="javascript:toreply('446');" class="comm_a">回复</a>
-											</p>
-											<div id="rep_446" class="none">
-												<form
-													action="https://blog.yzmcms.com/comment/index/init.html"
-													method="post" onsubmit="return check_rep(this)">
-													<input type="hidden" name="modelid" value="1"> <input
-														type="hidden" name="catid" value="9"> <input
-														type="hidden" name="id" value="90"> <input
-														type="hidden" name="title" value="YzmCMS常见问题汇总"> <input
-														type="hidden" name="url"
-														value="https://blog.yzmcms.com/php/90.html"> <input
-														type="hidden" name="reply" value="446"> <input
-														type="hidden" name="reply_to" value="YzmCMS博客网友">
-													<textarea name="content" class="textarea textarea2"
-														placeholder="让评论变得如此简单~"></textarea>
-													<input type="submit" class="sub_btn static" name="dosubmit"
-														value="提交" style="width: 100px"> <span
-														class="yzm yzm2"><img src=""
-														onclick="this.src='https://blog.yzmcms.com/api/index/code.html?v='+Math.random()"
-														style="cursor: pointer;" alt="点击加载" title="看不清？点击更换"><input
-														type="text" name="code" required="required"></span>
-												</form>
-											</div>
-										</div>
-									</li>
-									<li>
-										<!--<a class="user_pic" href="https://blog.yzmcms.com/member/myhome/init/userid/0.html" target="blank"><img src="https://blog.yzmcms.com/common/static/images/default.gif" height="35" width="35"></a>-->
-										<p class="user_pic">
-											<img
-												src="https://blog.yzmcms.com/common/static/images/default.gif"
-												height="35" width="35">
-										</p>
-										<div class="comm_right">
-											<!--<a class="user_name" href="https://blog.yzmcms.com/member/myhome/init/userid/0.html" target="blank">YzmCMS博客网友</a>-->
-											<p>网友评论：</p>
-											<p>支持博主，太好的cms了，真心喜欢</p>
-											<p>
-												<span class="comm_time">2019-01-02 20:04:18</span> <a
-													href="javascript:toreply('441');" class="comm_a">回复</a>
-											</p>
-											<div id="rep_441" class="none">
-												<form
-													action="https://blog.yzmcms.com/comment/index/init.html"
-													method="post" onsubmit="return check_rep(this)">
-													<input type="hidden" name="modelid" value="1"> <input
-														type="hidden" name="catid" value="9"> <input
-														type="hidden" name="id" value="90"> <input
-														type="hidden" name="title" value="YzmCMS常见问题汇总"> <input
-														type="hidden" name="url"
-														value="https://blog.yzmcms.com/php/90.html"> <input
-														type="hidden" name="reply" value="441"> <input
-														type="hidden" name="reply_to" value="YzmCMS博客网友">
-													<textarea name="content" class="textarea textarea2"
-														placeholder="让评论变得如此简单~"></textarea>
-													<input type="submit" class="sub_btn static" name="dosubmit"
-														value="提交" style="width: 100px"> <span
-														class="yzm yzm2"><img src=""
-														onclick="this.src='https://blog.yzmcms.com/api/index/code.html?v='+Math.random()"
-														style="cursor: pointer;" alt="点击加载" title="看不清？点击更换"><input
-														type="text" name="code" required="required"></span>
-												</form>
-											</div>
-										</div>
-									</li>
-									<li>
-										<!--<a class="user_pic" href="https://blog.yzmcms.com/member/myhome/init/userid/0.html" target="blank"><img src="https://blog.yzmcms.com/common/static/images/default.gif" height="35" width="35"></a>-->
-										<p class="user_pic">
-											<img
-												src="https://blog.yzmcms.com/common/static/images/default.gif"
-												height="35" width="35">
-										</p>
-										<div class="comm_right">
-											<!--<a class="user_name" href="https://blog.yzmcms.com/member/myhome/init/userid/0.html" target="blank">YzmCMS博客网友</a>-->
-											<p>网友评论：</p>
-											<p>
-												<a href="javascript:void(0);" class="user_name"
-													rel="nofollow"><strong style="color: #DE4C1C">管理员</strong></a>
-												回复 <a href="javascript:void(0);" class="user_name"
-													rel="nofollow">YzmCMS博客网友</a>
-												：纯静态页面已经是过去时的技术了，而且静态页面多的话，大量占用服务器空间，更新比较慢，而现在YZMCMS系统做了充分的优化，运行程序仅占用极少的资源，维护起来也比较方便，所以不需要采用静态页面技术
-											</p>
-											<p>
-												<span class="comm_time">2018-09-27 20:29:09</span> <a
-													href="javascript:toreply('394');" class="comm_a">回复</a>
-											</p>
-											<div id="rep_394" class="none">
-												<form
-													action="https://blog.yzmcms.com/comment/index/init.html"
-													method="post" onsubmit="return check_rep(this)">
-													<input type="hidden" name="modelid" value="1"> <input
-														type="hidden" name="catid" value="9"> <input
-														type="hidden" name="id" value="90"> <input
-														type="hidden" name="title" value="YzmCMS常见问题汇总"> <input
-														type="hidden" name="url"
-														value="https://blog.yzmcms.com/php/90.html"> <input
-														type="hidden" name="reply" value="394"> <input
-														type="hidden" name="reply_to" value="YzmCMS博客网友">
-													<textarea name="content" class="textarea textarea2"
-														placeholder="让评论变得如此简单~"></textarea>
-													<input type="submit" class="sub_btn static" name="dosubmit"
-														value="提交" style="width: 100px"> <span
-														class="yzm yzm2"><img src=""
-														onclick="this.src='https://blog.yzmcms.com/api/index/code.html?v='+Math.random()"
-														style="cursor: pointer;" alt="点击加载" title="看不清？点击更换"><input
-														type="text" name="code" required="required"></span>
-												</form>
-											</div>
-										</div>
-									</li>
-									<li>
-										<!--<a class="user_pic" href="https://blog.yzmcms.com/member/myhome/init/userid/0.html" target="blank"><img src="https://blog.yzmcms.com/common/static/images/default.gif" height="35" width="35"></a>-->
-										<p class="user_pic">
-											<img
-												src="https://blog.yzmcms.com/common/static/images/default.gif"
-												height="35" width="35">
-										</p>
-										<div class="comm_right">
-											<!--<a class="user_name" href="https://blog.yzmcms.com/member/myhome/init/userid/0.html" target="blank">YzmCMS博客网友</a>-->
-											<p>网友评论：</p>
-											<p>CMS只能伪静态，不能纯静态？</p>
-											<p>
-												<span class="comm_time">2018-09-27 16:01:48</span> <a
-													href="javascript:toreply('393');" class="comm_a">回复</a>
-											</p>
-											<div id="rep_393" class="none">
-												<form
-													action="https://blog.yzmcms.com/comment/index/init.html"
-													method="post" onsubmit="return check_rep(this)">
-													<input type="hidden" name="modelid" value="1"> <input
-														type="hidden" name="catid" value="9"> <input
-														type="hidden" name="id" value="90"> <input
-														type="hidden" name="title" value="YzmCMS常见问题汇总"> <input
-														type="hidden" name="url"
-														value="https://blog.yzmcms.com/php/90.html"> <input
-														type="hidden" name="reply" value="393"> <input
-														type="hidden" name="reply_to" value="YzmCMS博客网友">
-													<textarea name="content" class="textarea textarea2"
-														placeholder="让评论变得如此简单~"></textarea>
-													<input type="submit" class="sub_btn static" name="dosubmit"
-														value="提交" style="width: 100px"> <span
-														class="yzm yzm2"><img src=""
-														onclick="this.src='https://blog.yzmcms.com/api/index/code.html?v='+Math.random()"
-														style="cursor: pointer;" alt="点击加载" title="看不清？点击更换"><input
-														type="text" name="code" required="required"></span>
-												</form>
-											</div>
-										</div>
-									</li>
-									<li>
-										<!--<a class="user_pic" href="https://blog.yzmcms.com/member/myhome/init/userid/0.html" target="blank"><img src="https://blog.yzmcms.com/common/static/images/default.gif" height="35" width="35"></a>-->
-										<p class="user_pic">
-											<img
-												src="https://blog.yzmcms.com/common/static/images/default.gif"
-												height="35" width="35">
-										</p>
-										<div class="comm_right">
-											<!--<a class="user_name" href="https://blog.yzmcms.com/member/myhome/init/userid/0.html" target="blank">YzmCMS博客网友</a>-->
-											<p>网友评论：</p>
-											<p>
-												<a href="javascript:void(0);" class="user_name"
-													rel="nofollow"><strong style="color: #DE4C1C">管理员</strong></a>
-												回复 <a href="javascript:void(0);" class="user_name"
-													rel="nofollow">YzmCMS博客网友</a> ：先阅读安装说明文件，在进行安装！
-											</p>
-											<p>
-												<span class="comm_time">2018-07-07 10:44:45</span> <a
-													href="javascript:toreply('382');" class="comm_a">回复</a>
-											</p>
-											<div id="rep_382" class="none">
-												<form
-													action="https://blog.yzmcms.com/comment/index/init.html"
-													method="post" onsubmit="return check_rep(this)">
-													<input type="hidden" name="modelid" value="1"> <input
-														type="hidden" name="catid" value="9"> <input
-														type="hidden" name="id" value="90"> <input
-														type="hidden" name="title" value="YzmCMS常见问题汇总"> <input
-														type="hidden" name="url"
-														value="https://blog.yzmcms.com/php/90.html"> <input
-														type="hidden" name="reply" value="382"> <input
-														type="hidden" name="reply_to" value="YzmCMS博客网友">
-													<textarea name="content" class="textarea textarea2"
-														placeholder="让评论变得如此简单~"></textarea>
-													<input type="submit" class="sub_btn static" name="dosubmit"
-														value="提交" style="width: 100px"> <span
-														class="yzm yzm2"><img src=""
-														onclick="this.src='https://blog.yzmcms.com/api/index/code.html?v='+Math.random()"
-														style="cursor: pointer;" alt="点击加载" title="看不清？点击更换"><input
-														type="text" name="code" required="required"></span>
-												</form>
-											</div>
-										</div>
-									</li>
-									<li>
-										<!--<a class="user_pic" href="https://blog.yzmcms.com/member/myhome/init/userid/0.html" target="blank"><img src="https://blog.yzmcms.com/common/static/images/default.gif" height="35" width="35"></a>-->
-										<p class="user_pic">
-											<img
-												src="https://blog.yzmcms.com/common/static/images/default.gif"
-												height="35" width="35">
-										</p>
-										<div class="comm_right">
-											<!--<a class="user_name" href="https://blog.yzmcms.com/member/myhome/init/userid/0.html" target="blank">YzmCMS博客网友</a>-->
-											<p>网友评论：</p>
-											<p>安装时出现：Can not connect to MySQL server!</p>
-											<p>
-												<span class="comm_time">2018-07-07 04:08:35</span> <a
-													href="javascript:toreply('381');" class="comm_a">回复</a>
-											</p>
-											<div id="rep_381" class="none">
-												<form
-													action="https://blog.yzmcms.com/comment/index/init.html"
-													method="post" onsubmit="return check_rep(this)">
-													<input type="hidden" name="modelid" value="1"> <input
-														type="hidden" name="catid" value="9"> <input
-														type="hidden" name="id" value="90"> <input
-														type="hidden" name="title" value="YzmCMS常见问题汇总"> <input
-														type="hidden" name="url"
-														value="https://blog.yzmcms.com/php/90.html"> <input
-														type="hidden" name="reply" value="381"> <input
-														type="hidden" name="reply_to" value="YzmCMS博客网友">
-													<textarea name="content" class="textarea textarea2"
-														placeholder="让评论变得如此简单~"></textarea>
-													<input type="submit" class="sub_btn static" name="dosubmit"
-														value="提交" style="width: 100px"> <span
-														class="yzm yzm2"><img src=""
-														onclick="this.src='https://blog.yzmcms.com/api/index/code.html?v='+Math.random()"
-														style="cursor: pointer;" alt="点击加载" title="看不清？点击更换"><input
-														type="text" name="code" required="required"></span>
-												</form>
-											</div>
-										</div>
-									</li>
-									<li>
-										<!--<a class="user_pic" href="https://blog.yzmcms.com/member/myhome/init/userid/0.html" target="blank"><img src="https://blog.yzmcms.com/common/static/images/default.gif" height="35" width="35"></a>-->
-										<p class="user_pic">
-											<img
-												src="https://blog.yzmcms.com/common/static/images/default.gif"
-												height="35" width="35">
-										</p>
-										<div class="comm_right">
-											<!--<a class="user_name" href="https://blog.yzmcms.com/member/myhome/init/userid/0.html" target="blank">YzmCMS博客网友</a>-->
-											<p>网友评论：</p>
-											<p>
-												<a href="javascript:void(0);" class="user_name"
-													rel="nofollow"><strong style="color: #DE4C1C">管理员</strong></a>
-												回复 <a href="javascript:void(0);" class="user_name"
-													rel="nofollow">YzmCMS博客网友</a>
-												：该页面存在SQL语法错误，请开启APP_DEBUG查看详细错误.
-											</p>
-											<p>
-												<span class="comm_time">2018-06-21 16:37:06</span> <a
-													href="javascript:toreply('379');" class="comm_a">回复</a>
-											</p>
-											<div id="rep_379" class="none">
-												<form
-													action="https://blog.yzmcms.com/comment/index/init.html"
-													method="post" onsubmit="return check_rep(this)">
-													<input type="hidden" name="modelid" value="1"> <input
-														type="hidden" name="catid" value="9"> <input
-														type="hidden" name="id" value="90"> <input
-														type="hidden" name="title" value="YzmCMS常见问题汇总"> <input
-														type="hidden" name="url"
-														value="https://blog.yzmcms.com/php/90.html"> <input
-														type="hidden" name="reply" value="379"> <input
-														type="hidden" name="reply_to" value="YzmCMS博客网友">
-													<textarea name="content" class="textarea textarea2"
-														placeholder="让评论变得如此简单~"></textarea>
-													<input type="submit" class="sub_btn static" name="dosubmit"
-														value="提交" style="width: 100px"> <span
-														class="yzm yzm2"><img src=""
-														onclick="this.src='https://blog.yzmcms.com/api/index/code.html?v='+Math.random()"
-														style="cursor: pointer;" alt="点击加载" title="看不清？点击更换"><input
-														type="text" name="code" required="required"></span>
-												</form>
-											</div>
-										</div>
-									</li>
-									<li>
-										<!--<a class="user_pic" href="https://blog.yzmcms.com/member/myhome/init/userid/0.html" target="blank"><img src="https://blog.yzmcms.com/common/static/images/default.gif" height="35" width="35"></a>-->
-										<p class="user_pic">
-											<img
-												src="https://blog.yzmcms.com/common/static/images/default.gif"
-												height="35" width="35">
-										</p>
-										<div class="comm_right">
-											<!--<a class="user_name" href="https://blog.yzmcms.com/member/myhome/init/userid/0.html" target="blank">YzmCMS博客网友</a>-->
-											<p>网友评论：</p>
-											<p>采集后 导入文章 会出现 MySQL Error! 麻烦博主什么时候看看是什么问题</p>
-											<p>
-												<span class="comm_time">2018-06-19 11:03:43</span> <a
-													href="javascript:toreply('378');" class="comm_a">回复</a>
-											</p>
-											<div id="rep_378" class="none">
-												<form
-													action="https://blog.yzmcms.com/comment/index/init.html"
-													method="post" onsubmit="return check_rep(this)">
-													<input type="hidden" name="modelid" value="1"> <input
-														type="hidden" name="catid" value="9"> <input
-														type="hidden" name="id" value="90"> <input
-														type="hidden" name="title" value="YzmCMS常见问题汇总"> <input
-														type="hidden" name="url"
-														value="https://blog.yzmcms.com/php/90.html"> <input
-														type="hidden" name="reply" value="378"> <input
-														type="hidden" name="reply_to" value="YzmCMS博客网友">
-													<textarea name="content" class="textarea textarea2"
-														placeholder="让评论变得如此简单~"></textarea>
-													<input type="submit" class="sub_btn static" name="dosubmit"
-														value="提交" style="width: 100px"> <span
-														class="yzm yzm2"><img src=""
-														onclick="this.src='https://blog.yzmcms.com/api/index/code.html?v='+Math.random()"
-														style="cursor: pointer;" alt="点击加载" title="看不清？点击更换"><input
-														type="text" name="code" required="required"></span>
-												</form>
-											</div>
-										</div>
-									</li>
-									<li>
-										<!--<a class="user_pic" href="https://blog.yzmcms.com/member/myhome/init/userid/0.html" target="blank"><img src="https://blog.yzmcms.com/common/static/images/default.gif" height="35" width="35"></a>-->
-										<p class="user_pic">
-											<img
-												src="https://blog.yzmcms.com/common/static/images/default.gif"
-												height="35" width="35">
-										</p>
-										<div class="comm_right">
-											<!--<a class="user_name" href="https://blog.yzmcms.com/member/myhome/init/userid/0.html" target="blank">YzmCMS博客网友</a>-->
-											<p>网友评论：</p>
-											<p>
-												大神 采集能做个教程不 有点看不懂<img src="/common/static/images/face/4.gif" />
-											</p>
-											<p>
-												<span class="comm_time">2018-06-19 10:10:55</span> <a
-													href="javascript:toreply('377');" class="comm_a">回复</a>
-											</p>
-											<div id="rep_377" class="none">
-												<form
-													action="https://blog.yzmcms.com/comment/index/init.html"
-													method="post" onsubmit="return check_rep(this)">
-													<input type="hidden" name="modelid" value="1"> <input
-														type="hidden" name="catid" value="9"> <input
-														type="hidden" name="id" value="90"> <input
-														type="hidden" name="title" value="YzmCMS常见问题汇总"> <input
-														type="hidden" name="url"
-														value="https://blog.yzmcms.com/php/90.html"> <input
-														type="hidden" name="reply" value="377"> <input
-														type="hidden" name="reply_to" value="YzmCMS博客网友">
-													<textarea name="content" class="textarea textarea2"
-														placeholder="让评论变得如此简单~"></textarea>
-													<input type="submit" class="sub_btn static" name="dosubmit"
-														value="提交" style="width: 100px"> <span
-														class="yzm yzm2"><img src=""
-														onclick="this.src='https://blog.yzmcms.com/api/index/code.html?v='+Math.random()"
-														style="cursor: pointer;" alt="点击加载" title="看不清？点击更换"><input
-														type="text" name="code" required="required"></span>
-												</form>
-											</div>
-										</div>
-									</li>
-									<li>
-										<!--<a class="user_pic" href="https://blog.yzmcms.com/member/myhome/init/userid/0.html" target="blank"><img src="https://blog.yzmcms.com/common/static/images/default.gif" height="35" width="35"></a>-->
-										<p class="user_pic">
-											<img
-												src="https://blog.yzmcms.com/common/static/images/default.gif"
-												height="35" width="35">
-										</p>
-										<div class="comm_right">
-											<!--<a class="user_name" href="https://blog.yzmcms.com/member/myhome/init/userid/0.html" target="blank">YzmCMS博客网友</a>-->
-											<p>网友评论：</p>
-											<p>到此一游</p>
-											<p>
-												<span class="comm_time">2018-05-17 15:13:56</span> <a
-													href="javascript:toreply('370');" class="comm_a">回复</a>
-											</p>
-											<div id="rep_370" class="none">
-												<form
-													action="https://blog.yzmcms.com/comment/index/init.html"
-													method="post" onsubmit="return check_rep(this)">
-													<input type="hidden" name="modelid" value="1"> <input
-														type="hidden" name="catid" value="9"> <input
-														type="hidden" name="id" value="90"> <input
-														type="hidden" name="title" value="YzmCMS常见问题汇总"> <input
-														type="hidden" name="url"
-														value="https://blog.yzmcms.com/php/90.html"> <input
-														type="hidden" name="reply" value="370"> <input
-														type="hidden" name="reply_to" value="YzmCMS博客网友">
-													<textarea name="content" class="textarea textarea2"
-														placeholder="让评论变得如此简单~"></textarea>
-													<input type="submit" class="sub_btn static" name="dosubmit"
-														value="提交" style="width: 100px"> <span
-														class="yzm yzm2"><img src=""
-														onclick="this.src='https://blog.yzmcms.com/api/index/code.html?v='+Math.random()"
-														style="cursor: pointer;" alt="点击加载" title="看不清？点击更换"><input
-														type="text" name="code" required="required"></span>
-												</form>
-											</div>
-										</div>
-									</li>
-									<li>
-										<!--<a class="user_pic" href="https://blog.yzmcms.com/member/myhome/init/userid/0.html" target="blank"><img src="https://blog.yzmcms.com/common/static/images/default.gif" height="35" width="35"></a>-->
-										<p class="user_pic">
-											<img
-												src="https://blog.yzmcms.com/common/static/images/default.gif"
-												height="35" width="35">
-										</p>
-										<div class="comm_right">
-											<!--<a class="user_name" href="https://blog.yzmcms.com/member/myhome/init/userid/0.html" target="blank">YzmCMS博客网友</a>-->
-											<p>网友评论：</p>
-											<p>CDN的https虚拟主机，安装后，页面布局混乱，貌似无法加载JS文件，求解，谢谢！</p>
-											<p>
-												<span class="comm_time">2018-03-13 11:36:56</span> <a
-													href="javascript:toreply('347');" class="comm_a">回复</a>
-											</p>
-											<div id="rep_347" class="none">
-												<form
-													action="https://blog.yzmcms.com/comment/index/init.html"
-													method="post" onsubmit="return check_rep(this)">
-													<input type="hidden" name="modelid" value="1"> <input
-														type="hidden" name="catid" value="9"> <input
-														type="hidden" name="id" value="90"> <input
-														type="hidden" name="title" value="YzmCMS常见问题汇总"> <input
-														type="hidden" name="url"
-														value="https://blog.yzmcms.com/php/90.html"> <input
-														type="hidden" name="reply" value="347"> <input
-														type="hidden" name="reply_to" value="YzmCMS博客网友">
-													<textarea name="content" class="textarea textarea2"
-														placeholder="让评论变得如此简单~"></textarea>
-													<input type="submit" class="sub_btn static" name="dosubmit"
-														value="提交" style="width: 100px"> <span
-														class="yzm yzm2"><img src=""
-														onclick="this.src='https://blog.yzmcms.com/api/index/code.html?v='+Math.random()"
-														style="cursor: pointer;" alt="点击加载" title="看不清？点击更换"><input
-														type="text" name="code" required="required"></span>
-												</form>
-											</div>
-										</div>
-									</li>
-									<li>
-										<!--<a class="user_pic" href="https://blog.yzmcms.com/member/myhome/init/userid/0.html" target="blank"><img src="https://blog.yzmcms.com/common/static/images/default.gif" height="35" width="35"></a>-->
-										<p class="user_pic">
-											<img
-												src="https://blog.yzmcms.com/common/static/images/default.gif"
-												height="35" width="35">
-										</p>
-										<div class="comm_right">
-											<!--<a class="user_name" href="https://blog.yzmcms.com/member/myhome/init/userid/0.html" target="blank">YzmCMS博客网友</a>-->
-											<p>网友评论：</p>
-											<p>为什么登录的时候验证码输入是正确的，还是提示验证码不正确</p>
-											<p>
-												<span class="comm_time">2018-02-11 10:08:39</span> <a
-													href="javascript:toreply('342');" class="comm_a">回复</a>
-											</p>
-											<div id="rep_342" class="none">
-												<form
-													action="https://blog.yzmcms.com/comment/index/init.html"
-													method="post" onsubmit="return check_rep(this)">
-													<input type="hidden" name="modelid" value="1"> <input
-														type="hidden" name="catid" value="9"> <input
-														type="hidden" name="id" value="90"> <input
-														type="hidden" name="title" value="YzmCMS常见问题汇总"> <input
-														type="hidden" name="url"
-														value="https://blog.yzmcms.com/php/90.html"> <input
-														type="hidden" name="reply" value="342"> <input
-														type="hidden" name="reply_to" value="YzmCMS博客网友">
-													<textarea name="content" class="textarea textarea2"
-														placeholder="让评论变得如此简单~"></textarea>
-													<input type="submit" class="sub_btn static" name="dosubmit"
-														value="提交" style="width: 100px"> <span
-														class="yzm yzm2"><img src=""
-														onclick="this.src='https://blog.yzmcms.com/api/index/code.html?v='+Math.random()"
-														style="cursor: pointer;" alt="点击加载" title="看不清？点击更换"><input
-														type="text" name="code" required="required"></span>
-												</form>
-											</div>
-										</div>
-									</li>
-									<li>
-										<!--<a class="user_pic" href="https://blog.yzmcms.com/member/myhome/init/userid/0.html" target="blank"><img src="https://blog.yzmcms.com/common/static/images/default.gif" height="35" width="35"></a>-->
-										<p class="user_pic">
-											<img
-												src="https://blog.yzmcms.com/common/static/images/default.gif"
-												height="35" width="35">
-										</p>
-										<div class="comm_right">
-											<!--<a class="user_name" href="https://blog.yzmcms.com/member/myhome/init/userid/0.html" target="blank">YzmCMS博客网友</a>-->
-											<p>网友评论：</p>
-											<p>
-												编辑器提交一个bug<br />
-												$this-&gt;stateMap[&#039;ERROR_TYPE_NOT_ALLOWED&#039;] =
-												mb_convert_encoding($this-&gt;stateMap[&#039;ERROR_TYPE_NOT_ALLOWED&#039;],
-												&#039;utf-8&#039;, &#039;auto&#039;);<br /> 这个行代码需要更新 <br />
-											</p>
-											<p>
-												<span class="comm_time">2018-02-06 13:42:10</span> <a
-													href="javascript:toreply('340');" class="comm_a">回复</a>
-											</p>
-											<div id="rep_340" class="none">
-												<form
-													action="https://blog.yzmcms.com/comment/index/init.html"
-													method="post" onsubmit="return check_rep(this)">
-													<input type="hidden" name="modelid" value="1"> <input
-														type="hidden" name="catid" value="9"> <input
-														type="hidden" name="id" value="90"> <input
-														type="hidden" name="title" value="YzmCMS常见问题汇总"> <input
-														type="hidden" name="url"
-														value="https://blog.yzmcms.com/php/90.html"> <input
-														type="hidden" name="reply" value="340"> <input
-														type="hidden" name="reply_to" value="YzmCMS博客网友">
-													<textarea name="content" class="textarea textarea2"
-														placeholder="让评论变得如此简单~"></textarea>
-													<input type="submit" class="sub_btn static" name="dosubmit"
-														value="提交" style="width: 100px"> <span
-														class="yzm yzm2"><img src=""
-														onclick="this.src='https://blog.yzmcms.com/api/index/code.html?v='+Math.random()"
-														style="cursor: pointer;" alt="点击加载" title="看不清？点击更换"><input
-														type="text" name="code" required="required"></span>
-												</form>
-											</div>
-										</div>
-									</li>
-									<li>
-										<!--<a class="user_pic" href="https://blog.yzmcms.com/member/myhome/init/userid/0.html" target="blank"><img src="https://blog.yzmcms.com/common/static/images/default.gif" height="35" width="35"></a>-->
-										<p class="user_pic">
-											<img
-												src="https://blog.yzmcms.com/common/static/images/default.gif"
-												height="35" width="35">
-										</p>
-										<div class="comm_right">
-											<!--<a class="user_name" href="https://blog.yzmcms.com/member/myhome/init/userid/0.html" target="blank">YzmCMS博客网友</a>-->
-											<p>网友评论：</p>
-											<p>请问我在虚拟空间搭建、为什么3.5版水印功能失效？本地调试、后台添加内容、上传图片（或者直接远程图片）也都不能自动水印自动本地化倒是成功了！请教了</p>
-											<p>
-												<span class="comm_time">2017-10-23 16:33:14</span> <a
-													href="javascript:toreply('306');" class="comm_a">回复</a>
-											</p>
-											<div id="rep_306" class="none">
-												<form
-													action="https://blog.yzmcms.com/comment/index/init.html"
-													method="post" onsubmit="return check_rep(this)">
-													<input type="hidden" name="modelid" value="1"> <input
-														type="hidden" name="catid" value="9"> <input
-														type="hidden" name="id" value="90"> <input
-														type="hidden" name="title" value="YzmCMS常见问题汇总"> <input
-														type="hidden" name="url"
-														value="https://blog.yzmcms.com/php/90.html"> <input
-														type="hidden" name="reply" value="306"> <input
-														type="hidden" name="reply_to" value="YzmCMS博客网友">
-													<textarea name="content" class="textarea textarea2"
-														placeholder="让评论变得如此简单~"></textarea>
-													<input type="submit" class="sub_btn static" name="dosubmit"
-														value="提交" style="width: 100px"> <span
-														class="yzm yzm2"><img src=""
-														onclick="this.src='https://blog.yzmcms.com/api/index/code.html?v='+Math.random()"
-														style="cursor: pointer;" alt="点击加载" title="看不清？点击更换"><input
-														type="text" name="code" required="required"></span>
-												</form>
-											</div>
-										</div>
-									</li>
-									<li>
-										<!--<a class="user_pic" href="https://blog.yzmcms.com/member/myhome/init/userid/0.html" target="blank"><img src="https://blog.yzmcms.com/common/static/images/default.gif" height="35" width="35"></a>-->
-										<p class="user_pic">
-											<img
-												src="https://blog.yzmcms.com/common/static/images/default.gif"
-												height="35" width="35">
-										</p>
-										<div class="comm_right">
-											<!--<a class="user_name" href="https://blog.yzmcms.com/member/myhome/init/userid/0.html" target="blank">YzmCMS博客网友</a>-->
-											<p>网友评论：</p>
-											<p>请问系统发生错误这个页面怎么设置自定的错误页？</p>
-											<p>
-												<span class="comm_time">2017-10-23 09:32:25</span> <a
-													href="javascript:toreply('305');" class="comm_a">回复</a>
-											</p>
-											<div id="rep_305" class="none">
-												<form
-													action="https://blog.yzmcms.com/comment/index/init.html"
-													method="post" onsubmit="return check_rep(this)">
-													<input type="hidden" name="modelid" value="1"> <input
-														type="hidden" name="catid" value="9"> <input
-														type="hidden" name="id" value="90"> <input
-														type="hidden" name="title" value="YzmCMS常见问题汇总"> <input
-														type="hidden" name="url"
-														value="https://blog.yzmcms.com/php/90.html"> <input
-														type="hidden" name="reply" value="305"> <input
-														type="hidden" name="reply_to" value="YzmCMS博客网友">
-													<textarea name="content" class="textarea textarea2"
-														placeholder="让评论变得如此简单~"></textarea>
-													<input type="submit" class="sub_btn static" name="dosubmit"
-														value="提交" style="width: 100px"> <span
-														class="yzm yzm2"><img src=""
-														onclick="this.src='https://blog.yzmcms.com/api/index/code.html?v='+Math.random()"
-														style="cursor: pointer;" alt="点击加载" title="看不清？点击更换"><input
-														type="text" name="code" required="required"></span>
-												</form>
-											</div>
-										</div>
-									</li>
-									<li>
-										<!--<a class="user_pic" href="https://blog.yzmcms.com/member/myhome/init/userid/0.html" target="blank"><img src="https://blog.yzmcms.com/common/static/images/default.gif" height="35" width="35"></a>-->
-										<p class="user_pic">
-											<img
-												src="https://blog.yzmcms.com/common/static/images/default.gif"
-												height="35" width="35">
-										</p>
-										<div class="comm_right">
-											<!--<a class="user_name" href="https://blog.yzmcms.com/member/myhome/init/userid/0.html" target="blank">YzmCMS博客网友</a>-->
-											<p>网友评论：</p>
-											<p>
-												<a href="javascript:void(0);" class="user_name"
-													rel="nofollow"><strong style="color: #DE4C1C">管理员</strong></a>
-												回复 <a href="javascript:void(0);" class="user_name"
-													rel="nofollow">YzmCMS博客网友</a>
-												：后台管理员在发布内容时，有一个阅读权限，可以设置不同会员的阅读权限，还可以设置消费积分等。
-											</p>
-											<p>
-												<span class="comm_time">2017-10-05 17:17:10</span> <a
-													href="javascript:toreply('303');" class="comm_a">回复</a>
-											</p>
-											<div id="rep_303" class="none">
-												<form
-													action="https://blog.yzmcms.com/comment/index/init.html"
-													method="post" onsubmit="return check_rep(this)">
-													<input type="hidden" name="modelid" value="1"> <input
-														type="hidden" name="catid" value="9"> <input
-														type="hidden" name="id" value="90"> <input
-														type="hidden" name="title" value="YzmCMS常见问题汇总"> <input
-														type="hidden" name="url"
-														value="https://blog.yzmcms.com/php/90.html"> <input
-														type="hidden" name="reply" value="303"> <input
-														type="hidden" name="reply_to" value="YzmCMS博客网友">
-													<textarea name="content" class="textarea textarea2"
-														placeholder="让评论变得如此简单~"></textarea>
-													<input type="submit" class="sub_btn static" name="dosubmit"
-														value="提交" style="width: 100px"> <span
-														class="yzm yzm2"><img src=""
-														onclick="this.src='https://blog.yzmcms.com/api/index/code.html?v='+Math.random()"
-														style="cursor: pointer;" alt="点击加载" title="看不清？点击更换"><input
-														type="text" name="code" required="required"></span>
-												</form>
-											</div>
-										</div>
-									</li>
-									<li>
-										<!--<a class="user_pic" href="https://blog.yzmcms.com/member/myhome/init/userid/0.html" target="blank"><img src="https://blog.yzmcms.com/common/static/images/default.gif" height="35" width="35"></a>-->
-										<p class="user_pic">
-											<img
-												src="https://blog.yzmcms.com/common/static/images/default.gif"
-												height="35" width="35">
-										</p>
-										<div class="comm_right">
-											<!--<a class="user_name" href="https://blog.yzmcms.com/member/myhome/init/userid/0.html" target="blank">YzmCMS博客网友</a>-->
-											<p>网友评论：</p>
-											<p>请问在3.5里面怎么修改或创建会员组权限功能？比如说：我想在下载模型里面设置下载权限、不同的会员级别设置不同的下载权限等等、文章和产品模型也一样、文章设置阅读权限；产品模型设置不同会员级别优惠不同等等！！！请教了！！！！</p>
-											<p>
-												<span class="comm_time">2017-10-05 14:52:27</span> <a
-													href="javascript:toreply('302');" class="comm_a">回复</a>
-											</p>
-											<div id="rep_302" class="none">
-												<form
-													action="https://blog.yzmcms.com/comment/index/init.html"
-													method="post" onsubmit="return check_rep(this)">
-													<input type="hidden" name="modelid" value="1"> <input
-														type="hidden" name="catid" value="9"> <input
-														type="hidden" name="id" value="90"> <input
-														type="hidden" name="title" value="YzmCMS常见问题汇总"> <input
-														type="hidden" name="url"
-														value="https://blog.yzmcms.com/php/90.html"> <input
-														type="hidden" name="reply" value="302"> <input
-														type="hidden" name="reply_to" value="YzmCMS博客网友">
-													<textarea name="content" class="textarea textarea2"
-														placeholder="让评论变得如此简单~"></textarea>
-													<input type="submit" class="sub_btn static" name="dosubmit"
-														value="提交" style="width: 100px"> <span
-														class="yzm yzm2"><img src=""
-														onclick="this.src='https://blog.yzmcms.com/api/index/code.html?v='+Math.random()"
-														style="cursor: pointer;" alt="点击加载" title="看不清？点击更换"><input
-														type="text" name="code" required="required"></span>
-												</form>
-											</div>
-										</div>
-									</li>
-									<li>
-										<!--<a class="user_pic" href="https://blog.yzmcms.com/member/myhome/init/userid/0.html" target="blank"><img src="https://blog.yzmcms.com/common/static/images/default.gif" height="35" width="35"></a>-->
-										<p class="user_pic">
-											<img
-												src="https://blog.yzmcms.com/common/static/images/default.gif"
-												height="35" width="35">
-										</p>
-										<div class="comm_right">
-											<!--<a class="user_name" href="https://blog.yzmcms.com/member/myhome/init/userid/0.html" target="blank">YzmCMS博客网友</a>-->
-											<p>网友评论：</p>
-											<p>
-												<a href="javascript:void(0);" class="user_name"
-													rel="nofollow"><strong style="color: #DE4C1C">管理员</strong></a>
-												回复 <a href="javascript:void(0);" class="user_name"
-													rel="nofollow">YzmCMS官方博客_袁志蒙个人博客网友</a>
-												：采集的流程是：测试采集-&gt;采集网址-&gt;采集内容-&gt;发布内容，如果有什么不明白的，可以加入到官方QQ群。
-											</p>
-											<p>
-												<span class="comm_time">2017-09-20 21:45:56</span> <a
-													href="javascript:toreply('298');" class="comm_a">回复</a>
-											</p>
-											<div id="rep_298" class="none">
-												<form
-													action="https://blog.yzmcms.com/comment/index/init.html"
-													method="post" onsubmit="return check_rep(this)">
-													<input type="hidden" name="modelid" value="1"> <input
-														type="hidden" name="catid" value="9"> <input
-														type="hidden" name="id" value="90"> <input
-														type="hidden" name="title" value="YzmCMS常见问题汇总"> <input
-														type="hidden" name="url"
-														value="https://blog.yzmcms.com/php/90.html"> <input
-														type="hidden" name="reply" value="298"> <input
-														type="hidden" name="reply_to" value="YzmCMS博客网友">
-													<textarea name="content" class="textarea textarea2"
-														placeholder="让评论变得如此简单~"></textarea>
-													<input type="submit" class="sub_btn static" name="dosubmit"
-														value="提交" style="width: 100px"> <span
-														class="yzm yzm2"><img src=""
-														onclick="this.src='https://blog.yzmcms.com/api/index/code.html?v='+Math.random()"
-														style="cursor: pointer;" alt="点击加载" title="看不清？点击更换"><input
-														type="text" name="code" required="required"></span>
-												</form>
-											</div>
-										</div>
-									</li>
+									
 								</ul>
 							</div>
 						</div>
@@ -981,8 +224,7 @@
 				<div class="tag_list">
 					<ul>
 						<li th:each="hl : ${hotLabel}"><a th:text="${hl.labelName}"
-							th:href="${hl.url}"
-							target="_blank">维护</a></li>
+							th:href="${hl.url}" target="_blank">维护</a></li>
 					</ul>
 				</div>
 			</div>
@@ -990,94 +232,29 @@
 				<h3 class="widget_tit">推荐文章</h3>
 				<ul>
 
-					<li th:each="ra : ${recommendArticle}"><a th:href="'/detail/' + ${ra.artid}"> <span
-							class="thumbnail"> <img
-								src="https://www.yzmcms.com/doc/images/1.png"
-								alt="图片损坏" th:title="${ra.title}"></span> <span
-							class="text" th:text="${ra.title}">维护</span> <span class="muted" th:text="${#dates.format(ra.arttime, 'yyyy-MM-dd')}">1970-01-01</span>
+					<li th:each="ra : ${recommendArticle}"><a
+						th:href="'/detail/' + ${ra.artid}"> <span class="thumbnail">
+								<img src="https://www.yzmcms.com/doc/images/1.png" alt="图片损坏"
+								th:title="${ra.title}">
+						</span> <span class="text" th:text="${ra.title}">维护</span> <span
+							class="muted"
+							th:text="${#dates.format(ra.arttime, 'yyyy-MM-dd')}">1970-01-01</span>
 							<span class="muted"> <span class="ds-thread-count"
 								data-replace="1"><span th:text="${ra.readcnt}">0</span>次阅读</span>
 						</span>
 					</a></li>
 
-					
+
 				</ul>
 			</div>
 			<div class="widget d_textbanner">
 				<h3 class="widget_tit">文章归档(近18个月)</h3>
 				<ul style="margin-top: 15px">
 
-					<li><a
-						href="https://blog.yzmcms.com/search/index/archives/pubtime/1583295317.html"
-						target="_blank">2020年03月(3)</a></li>
-
-					<li><a
-						href="https://blog.yzmcms.com/search/index/archives/pubtime/1582100653.html"
-						target="_blank">2020年02月(1)</a></li>
-
-					<li><a
-						href="https://blog.yzmcms.com/search/index/archives/pubtime/1578221763.html"
-						target="_blank">2020年01月(3)</a></li>
-
-					<li><a
-						href="https://blog.yzmcms.com/search/index/archives/pubtime/1575646513.html"
-						target="_blank">2019年12月(2)</a></li>
-
-					<li><a
-						href="https://blog.yzmcms.com/search/index/archives/pubtime/1571565025.html"
-						target="_blank">2019年10月(1)</a></li>
-
-					<li><a
-						href="https://blog.yzmcms.com/search/index/archives/pubtime/1568643310.html"
-						target="_blank">2019年09月(1)</a></li>
-
-					<li><a
-						href="https://blog.yzmcms.com/search/index/archives/pubtime/1564242790.html"
-						target="_blank">2019年07月(2)</a></li>
-
-					<li><a
-						href="https://blog.yzmcms.com/search/index/archives/pubtime/1554739001.html"
-						target="_blank">2019年04月(1)</a></li>
-
-					<li><a
-						href="https://blog.yzmcms.com/search/index/archives/pubtime/1551675458.html"
-						target="_blank">2019年03月(4)</a></li>
-
-					<li><a
-						href="https://blog.yzmcms.com/search/index/archives/pubtime/1544550554.html"
-						target="_blank">2018年12月(2)</a></li>
-
-					<li><a
-						href="https://blog.yzmcms.com/search/index/archives/pubtime/1541342215.html"
-						target="_blank">2018年11月(4)</a></li>
-
-					<li><a
-						href="https://blog.yzmcms.com/search/index/archives/pubtime/1540541419.html"
-						target="_blank">2018年10月(3)</a></li>
-
-					<li><a
-						href="https://blog.yzmcms.com/search/index/archives/pubtime/1535802909.html"
-						target="_blank">2018年09月(4)</a></li>
-
-					<li><a
-						href="https://blog.yzmcms.com/search/index/archives/pubtime/1533396955.html"
-						target="_blank">2018年08月(5)</a></li>
-
-					<li><a
-						href="https://blog.yzmcms.com/search/index/archives/pubtime/1530896913.html"
-						target="_blank">2018年07月(5)</a></li>
-
-					<li><a
-						href="https://blog.yzmcms.com/search/index/archives/pubtime/1528892704.html"
-						target="_blank">2018年06月(4)</a></li>
-
-					<li><a
-						href="https://blog.yzmcms.com/search/index/archives/pubtime/1525713177.html"
-						target="_blank">2018年05月(4)</a></li>
-
-					<li><a
-						href="https://blog.yzmcms.com/search/index/archives/pubtime/1522678932.html"
-						target="_blank">2018年04月(5)</a></li>
+					<li th:each="tal : ${timeArtList}"><a
+						th:text="${tal.time}+'('+${tal.amount}+')'"
+						th:href="'/catalog/'+${timeArtListUrl}+'?time=' + ${tal.time}"
+						target="_blank">2020年03月(3) </a></li>
 
 				</ul>
 			</div>

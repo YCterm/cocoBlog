@@ -65,7 +65,7 @@
 				</header>
 				<article th:each="artcle : ${artcleList}" class="excerpt">
 					<div class="focus">
-						<a href="https://blog.yzmcms.com/css/196.html" class="thumbnail"
+						<a th:href="'/detail/' + ${artcle.artid}" class="thumbnail"
 							target="_blank"> <img
 							src="/uploads/202003/04/200304121335900.png"
 							th:alt="${artcle.title}" th:title="${artcle.title}" /></a>
@@ -73,7 +73,7 @@
 					<header>
 						<h2>
 							<a th:text="${artcle.title}"
-								href="https://blog.yzmcms.com/css/196.html" target="_blank">维护</a>
+								th:href="'/detail/' + ${artcle.artid}" target="_blank">维护</a>
 						</h2>
 					</header>
 					<p class="note" th:text="${artcle.content}">css3中常见的单位：1.
@@ -133,7 +133,7 @@
 				<h3 class="widget_tit">频道点击排行</h3>
 				<ul>
 
-					<li th:each="hotart:${hotArtList}"><a href="https://blog.yzmcms.com/htm/175.html"> <span
+					<li th:each="hotart:${hotArtList}"><a th:href="'/detail/' + ${hotart.artid}"> <span
 							class="thumbnail"> <img
 								src="/uploads/thumbnail/20181104223408664.jpg"
 								alt="图片维护" th:title="${hotart.title}" /></span> <span th:text="${hotart.title}"

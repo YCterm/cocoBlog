@@ -18,8 +18,29 @@ public class Comment {
     private Integer comstatus;
 
     private String comtemp;
+    
+    private User user;
+    
+    private User reUser;
+      
 
-    public Integer getComid() {
+    public User getReUser() {
+		return reUser;
+	}
+
+	public void setReUser(User reUser) {
+		this.reUser = reUser;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public Integer getComid() {
         return comid;
     }
 

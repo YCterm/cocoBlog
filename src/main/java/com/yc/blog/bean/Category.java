@@ -52,4 +52,11 @@ public class Category {
     public void setCatestatus(Integer catestatus) {
         this.catestatus = catestatus;
     }
+
+	@Override
+	public String toString() {
+		return "Category [cateid=" + cateid + ", catename=" + catename + ", supercateid=" + supercateid
+				+ ", catestatus=" + catestatus + ", menuList=" + menuList + "]";
+	}
+    
 }
