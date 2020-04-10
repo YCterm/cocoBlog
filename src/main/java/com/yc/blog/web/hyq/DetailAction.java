@@ -1,6 +1,7 @@
 package com.yc.blog.web.hyq;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.yc.blog.bean.Article;
@@ -18,6 +20,7 @@ import com.yc.blog.bean.ArticleExample;
 import com.yc.blog.bean.Category;
 import com.yc.blog.bean.Comment;
 import com.yc.blog.bean.CommentExample;
+import com.yc.blog.bean.User;
 import com.yc.blog.bean.container.LabelBean;
 import com.yc.blog.bean.container.TimeBean;
 import com.yc.blog.biz.BizUtil;
@@ -45,7 +48,7 @@ public class DetailAction {
 
 	@Resource
 	private CategoryMapper cm;
-	
+
 	@Resource
 	private CommentMapper cmm;
 
@@ -119,19 +122,20 @@ public class DetailAction {
 		// 获得/{group}/{menu}
 		String timeArtListUrl = null;
 		Category menuCate = cm.selectByPrimaryKey(cateid);
-		if(menuCate.getSupercateid() == null) {
+		if (menuCate.getSupercateid() == null) {
 			timeArtListUrl = menuCate.getCatename();
 		} else {
 			Category groupCate = cm.selectByPrimaryKey(menuCate.getSupercateid());
 			timeArtListUrl = groupCate.getCatename() + "/" + menuCate.getCatename();
 		}
-		
-		//评论
+
+		// 评论
 		CommentExample cme = new CommentExample();
 		cme.createCriteria().andArtidEqualTo(number).andComstatusEqualTo(1);
 		List<Comment> commentList = cmm.selectByExample(cme);
 		Integer commentListSize = commentList.size();
 
+		mav.addObject("number", number);
 		mav.addObject("article", article);
 		mav.addObject("artAbstract", artAbstract);
 		mav.addObject("randomArticle", randomArticle);
@@ -147,11 +151,35 @@ public class DetailAction {
 		mav.setViewName("detail.html");
 		return mav;
 	}
-	
-	
-	@PostMapping("sendComment")
-	public ModelAndView sendComment() {
-		return null;
+
+	@PostMapping("detail/{numberStr}/sendComment")
+	public ModelAndView sendComment(@SessionAttribute("loginedUser") User user,
+			@PathVariable("numberStr") String numberStr, Comment comment, ModelAndView mav) {
+		// 后端判断是否登录
+		if (user == null) {
+			mav.setViewName("login.html");
+			return mav;
+		}
+
+		// 输入非数字字符
+		Integer number = 0;
+		try {
+			number = Integer.parseInt(numberStr);
+		} catch (Exception e) {
+			mav.setViewName("index.html");
+			return mav;
+		}
+
+		comment.setArtid(number);
+		comment.setComtime(new Date());
+		comment.setUid(user.getUid());
+		comment.setComstatus(1);
+		System.out.println(comment.toString());
+		cmm.insert(comment);
+		
+		mav.setViewName("redirect:/detail/" + number);
+
+		return mav;
 	}
 
 }
