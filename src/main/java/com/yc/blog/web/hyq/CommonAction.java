@@ -3,22 +3,34 @@ package com.yc.blog.web.hyq;
 import java.util.List;
 import java.util.Map;
 import javax.annotation.Resource;
+
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import com.yc.blog.bean.Article;
 import com.yc.blog.bean.Category;
 import com.yc.blog.bean.container.TimeBean;
+import com.yc.blog.biz.BizUtil;
 import com.yc.blog.biz.CommonBiz;
+import com.yc.blog.dao.ArticleMapper;
 
 @RestController
 public class CommonAction {
 
 	@Resource
 	private CommonBiz cb;
+	
+	@Resource
+	private ArticleMapper am;
+	
+	
 
 	@ModelAttribute
 	public ModelAndView init(ModelAndView mav) {
@@ -27,11 +39,7 @@ public class CommonAction {
 		return mav;
 	}
 
-	@GetMapping({ "/", "index", "index.html" })
-	public ModelAndView getIndex(ModelAndView mav) {
-		mav.setViewName("index.html");
-		return mav;
-	}
+	
 
 	@GetMapping("catalog/{grouplabel}/{menulabel}")
 	public ModelAndView getMenuData(@RequestParam(defaultValue = "1") Integer page,
@@ -110,4 +118,12 @@ public class CommonAction {
 		mav.setViewName("common.html");
 		return mav;
 	}
+	
+	
+	
+	
+	
+	
+	
+	
 }

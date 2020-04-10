@@ -222,16 +222,16 @@ public class UserAction {
 			//获取文件名
 			String strFilename=head.getOriginalFilename();
 			//原文件存储路径
-			File OriginalFile = new File("c:/coco/originalImg");
+			File OriginalFile = new File("g:/coco/originalImg");
 			if( !OriginalFile.exists()) {
 				OriginalFile.mkdirs();
 			}
-			File ProfileFile = new File("c:/coco/new");
+			File ProfileFile = new File("g:/coco/new");
 			if( !ProfileFile.exists()) {
 				ProfileFile.mkdirs();
 			}
 			//获取磁盘路径
-			String strDiskPath = "c:/coco/originalImg/"+strFilename;
+			String strDiskPath = "g:/coco/originalImg/"+strFilename;
 			
 			System.out.println("上传图片路径===="+strDiskPath);
 		
@@ -242,7 +242,7 @@ public class UserAction {
 			//使用ThumbnailatiorUtil工具类 进行图片的像素(50*50）压缩
 			ThumbnailatorUtil objThumbnailatorUtil =new ThumbnailatorUtil();
 			//创建文件夹存放压缩后的图片
-			String strProfileDiskPath = "c:/coco/new/"+strFilename;
+			String strProfileDiskPath = "g:/coco/new/"+strFilename;
 			System.out.println("保存图片路径===="+strProfileDiskPath);
 			objThumbnailatorUtil.changeImgSize(strDiskPath, strProfileDiskPath);
 			

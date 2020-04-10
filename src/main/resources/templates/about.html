@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html> 
+<html xmlns:th="http://www.thymeleaf.org"> 
   <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=10,IE=9,IE=8,ie=7">
@@ -43,83 +43,17 @@
   })
 </script>	
 <header class="header" style="height: 52px;">
-  <div class="navbar">
-	<h1 class="logo">
-	  <a href="https://blog.yzmcms.com/" title="袁志蒙个人博客 - YzmCMS博客" alt="袁志蒙个人博客 - YzmCMS博客">袁志蒙个人博客 - YzmCMS博客</a></h1>
-	<ul class="nav">
-	  <li class="menu-item menu-item-type-custom menu-item-object-custom  menu-item-home"><a href="https://blog.yzmcms.com/">首页</a></li>
-					    <li class="menu-item menu-item-type-custom menu-item-object-custom  menu-item-has-children">
-		<a href="https://blog.yzmcms.com/qianduan/">前端</a><ul class="sub-menu">
-			<!-- 这里是二级栏目的循环，不需要的可以删除，代码开始 -->
-			 
-											<li class="menu-item menu-item-type-taxonomy menu-item-object-category"><a href="https://blog.yzmcms.com/htm/">html</a></li>
-								<li class="menu-item menu-item-type-taxonomy menu-item-object-category"><a href="https://blog.yzmcms.com/css/">css</a></li>
-								<li class="menu-item menu-item-type-taxonomy menu-item-object-category"><a href="https://blog.yzmcms.com/js/">js</a></li>
-					
-						<!-- 这里是二级栏目的循环，不需要的可以删除，代码结束 -->
-		</ul></li>
-				    <li class="menu-item menu-item-type-custom menu-item-object-custom  menu-item-has-children">
-		<a href="https://blog.yzmcms.com/chengxu/">程序</a><ul class="sub-menu">
-			<!-- 这里是二级栏目的循环，不需要的可以删除，代码开始 -->
-			 
-											<li class="menu-item menu-item-type-taxonomy menu-item-object-category"><a href="https://blog.yzmcms.com/php/">php</a></li>
-								<li class="menu-item menu-item-type-taxonomy menu-item-object-category"><a href="https://blog.yzmcms.com/mysql/">mysql</a></li>
-								<li class="menu-item menu-item-type-taxonomy menu-item-object-category"><a href="https://blog.yzmcms.com/server/">server</a></li>
-					
-						<!-- 这里是二级栏目的循环，不需要的可以删除，代码结束 -->
-		</ul></li>
-				    <li class="menu-item menu-item-type-custom menu-item-object-custom  menu-item-has-children">
-		<a href="https://blog.yzmcms.com/shenghuo/">生活</a><ul class="sub-menu">
-			<!-- 这里是二级栏目的循环，不需要的可以删除，代码开始 -->
-						<!-- 这里是二级栏目的循环，不需要的可以删除，代码结束 -->
-		</ul></li>
-				    <li class="menu-item menu-item-type-custom menu-item-object-custom  menu-item-has-children">
-		<a href="https://blog.yzmcms.com/yule/">娱乐</a><ul class="sub-menu">
-			<!-- 这里是二级栏目的循环，不需要的可以删除，代码开始 -->
-						<!-- 这里是二级栏目的循环，不需要的可以删除，代码结束 -->
-		</ul></li>
-				    <li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-has-children">
-		<a href="https://blog.yzmcms.com/guanyu/">关于</a><ul class="sub-menu">
-			<!-- 这里是二级栏目的循环，不需要的可以删除，代码开始 -->
-			 
-											<li class="menu-item menu-item-type-taxonomy menu-item-object-category"><a href="/guestbook/index/init.html">留言联系</a></li>
-								<li class="menu-item menu-item-type-taxonomy menu-item-object-category"><a href="https://blog.yzmcms.com/guanyuzuozhe/">关于作者</a></li>
-								<li class="menu-item menu-item-type-taxonomy menu-item-object-category"><a href="https://bbs.yzmcms.com">官方论坛</a></li>
-					
-						<!-- 这里是二级栏目的循环，不需要的可以删除，代码结束 -->
-		</ul></li>
-		
-	</ul>
-	<div class="menu pull-right">
-	  <form name="formsearch" action="https://blog.yzmcms.com/search/index/init.html" method="get">
-		<input class="search-input" name="q" id="search-keyword" type="text" required="required" placeholder=" 输入你要找的内容" />
-		<button type="submit" class="searchbtn" title="搜一下！">
-			<!-- <input type="hidden" name="modelid" value="1" id="modelid" /> -->
-		  	<i class="fa"></i>
-		</button>
-	  </form>
-	</div>
-	
-	<div id="mobile_nav">
-		<div class="nav_box"><span class="navicon"></span></div>
-		<ul class="nav_ul">
-			<li><a href="https://blog.yzmcms.com/">首页</a></li>
-								<li><a href="https://blog.yzmcms.com/qianduan/">前端</a></li>
-								<li><a href="https://blog.yzmcms.com/chengxu/">程序</a></li>
-								<li><a href="https://blog.yzmcms.com/shenghuo/">生活</a></li>
-								<li><a href="https://blog.yzmcms.com/yule/">娱乐</a></li>
-								<li><a href="https://blog.yzmcms.com/guanyu/">关于</a></li>
-				
-		</ul>
-	</div>	
-</header>	 <section class="container">
+  <div th:replace="base/base::.header"></div>	
+</header>	
+
+ <section class="container">
 		<div class="page_left">
 		<ul>
 									<li>
-				<a href="/guestbook/index/init.html"  >留言联系</a>
+				<a href="init.html"  >留言联系</a>
 			</li>	
 						<li>
-				<a href="https://blog.yzmcms.com/guanyuzuozhe/"  >关于作者</a>
+				<a href="aboutauthor.html"  >关于作者</a>
 			</li>	
 						<li>
 				<a href="https://bbs.yzmcms.com"   target="_blank" >官方论坛</a>
@@ -129,23 +63,25 @@
 		<div class="page_right">
 		   <h1 class="page_title">关于</h1>   
 		   <div class="page_content">
-			  <p style="text-align: center;"><img src="/uploads/ueditor/image/20200111/1578753482172543.jpg" title="关于yzmcms" alt="关于yzmcms"/></p><p><br/></p><p><a href="https://www.yzmcms.com/" target="_blank">YzmCMS</a>是一款轻量级开源内容管理系统，它采用自主研发的框架YZMPHP开发。程序基于PHP+Mysql架构，并采用MVC框架式开发的一款高效开源的内容管理系统，可运行在Linux、Windows、MacOSX、Solaris等各种平台上。</p><p><br/></p><p>它可以让您不需要任何专业技术轻松搭建您需要的网站，操作简单，很容易上手，快捷方便的后台操作让您10分钟就会建立自己的爱站。在同类产品的比较中，YzmCMS更是凸显出了体积轻巧、功能强大、源码简洁、系统安全等特点，无论你是做企业网站、新闻网站、个人博客、门户网站、行业网站、电子商城等，它都能完全胜任，而且还提供了非常方便的二次开发体系，是一款全能型的建站系统！</p><p><br/></p><p>我之所以开发这个CMS，是因为我对IT互联网技术的兴趣，程序开发纯属于个人爱好兴趣，不然也不可能坚持这么多年，由于个人时间和精力有限，程序中可能会存在一些问题，请大家及时反馈。</p><p><br/></p><p><strong>YzmCMS官方QQ群号码：161208398</strong></p>		   </div>
+			  <p style="text-align: center;"><img src="/uploads/ueditor/image/20200111/1578753482172543.jpg" title="关于yzmcms" alt="关于yzmcms"/></p><p><br/></p><p><a href="https://www.yzmcms.com/" target="_blank">
+			  YzmCMS</a>是一款轻量级开源内容管理系统，它采用自主研发的框架YZMPHP开发。
+			  程序基于PHP+Mysql架构，并采用MVC框架式开发的一款高效开源的内容管理系统，
+			  可运行在Linux、Windows、MacOSX、Solaris等各种平台上。</p><p>
+			  <br/>
+			  </p><p>它可以让您不需要任何专业技术轻松搭建您需要的网站，
+			  操作简单，很容易上手，快捷方便的后台操作让您10分钟就会建立自己的爱站。
+			  在同类产品的比较中，YzmCMS更是凸显出了体积轻巧、功能强大、源码简洁、系统安全等特点，
+			  无论你是做企业网站、新闻网站、个人博客、门户网站、行业网站、电子商城等，它都能完全胜任，而且还提供了非常方便的二次开发体系，是一款全能型的建站系统！
+			  </p><p><br/></p><p>
+			  我之所以开发这个CMS，是因为我对IT互联网技术的兴趣，程序开发纯属于个人爱好兴趣，不然也不可能坚持这么多年，
+			  由于个人时间和精力有限，程序中可能会存在一些问题，请大家及时反馈。</p>
+			  <p><br/></p>
+			  <p><strong>YzmCMS官方QQ群号码：161208398</strong></p>		   </div>
 		</div>
 	</section>
-    <footer class="footer">
-      <div class="footer-inner">
-        <div style="padding:0 20px;overflow:hidden;">
-          <div class="copyright pull-left">
-            <a href="https://blog.yzmcms.com/" target="_blank">Powered By YzmCMS内容管理系统 © 2014-2020 袁志蒙工作室</a> | 京ICP备16034624号</div>
-          <div class="trackcode pull-right"><script src="https://s4.cnzz.com/z_stat.php?id=1259844929&web_id=1259844929" language="JavaScript"></script></div>
-        </div>
-      </div>
-    </footer>
-	<div id="button">
-	<a href="javascript:;" rel="nofollow" class="totop" title="返回顶部"></a>
-	<a href="https://www.yzmcms.com/" target="_blank" class="guanwang" title="返回官网"></a>
-	<a href="https://blog.yzmcms.com/guestbook/index/init.html"  target="_blank" class="lianxi" title="留言联系"></a>
-	</div>
+    <div th:replace="base/base::.footer"></div>	
+	
+	<div th:replace="base/base::#button"></div>	
 	
 	
    <div id="share_wechat" style="display:none;position:fixed;left:0%;top:0%;z-index:99;width:100%;height:100%;background:rgba(0,0,0,0.3);"><div style="position:fixed;border-radius:3px;left:50%;top:50%;z-index:100;width:260px;margin-left:-140px;margin-top:-200px;background:#fff;padding:20px 25px 15px 25px;text-align:center"><span title="关闭" onclick="yzmcms_share_wechat()" style="width:100%;font-size:14px;color:#333;cursor:pointer;margin-bottom:10px;float:right;text-align:right">关闭</span><img src="https://blog.yzmcms.com/common/static/images/share_code.png" width="220"><p style="text-align:center;font-size:16px">用微信“扫一扫”</p></div></div>

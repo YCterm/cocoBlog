@@ -17,7 +17,7 @@ spring:
       classpath:/META-INF/resources/,
       classpath:/resources/,
       classpath:/public/,
-      file:C:/coco
+      file:g:/coco
   #连接数据库配置  
   datasource:
     url: jdbc:mysql://127.0.0.1:3306/cocoblog

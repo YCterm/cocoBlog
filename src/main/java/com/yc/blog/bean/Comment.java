@@ -82,4 +82,16 @@ public class Comment {
     public void setComtemp(String comtemp) {
         this.comtemp = comtemp == null ? null : comtemp.trim();
     }
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Comment [comid=" + comid + ", artid=" + artid + ", recomid=" + recomid + ", comtime=" + comtime
+				+ ", uid=" + uid + ", comcontent=" + comcontent + ", comstatus=" + comstatus + ", comtemp=" + comtemp
+				+ "]";
+	}
+    
+    
 }

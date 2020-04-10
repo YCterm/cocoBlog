@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
   
   <head>
     <meta charset="UTF-8">
@@ -46,96 +46,28 @@
 	});
   })
 </script>	
-<header class="header" style="height: 52px;">
-  <div class="navbar">
-	<h1 class="logo">
-	  <a href="https://blog.yzmcms.com/" title="袁志蒙个人博客 - YzmCMS博客" alt="袁志蒙个人博客 - YzmCMS博客">袁志蒙个人博客 - YzmCMS博客</a></h1>
-	<ul class="nav">
-	  <li class="menu-item menu-item-type-custom menu-item-object-custom  menu-item-home"><a href="https://blog.yzmcms.com/">首页</a></li>
-					    <li class="menu-item menu-item-type-custom menu-item-object-custom  menu-item-has-children">
-		<a href="https://blog.yzmcms.com/qianduan/">前端</a><ul class="sub-menu">
-			<!-- 这里是二级栏目的循环，不需要的可以删除，代码开始 -->
-			 
-											<li class="menu-item menu-item-type-taxonomy menu-item-object-category"><a href="https://blog.yzmcms.com/htm/">html</a></li>
-								<li class="menu-item menu-item-type-taxonomy menu-item-object-category"><a href="https://blog.yzmcms.com/css/">css</a></li>
-								<li class="menu-item menu-item-type-taxonomy menu-item-object-category"><a href="https://blog.yzmcms.com/js/">js</a></li>
-					
-						<!-- 这里是二级栏目的循环，不需要的可以删除，代码结束 -->
-		</ul></li>
-				    <li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-has-children">
-		<a href="https://blog.yzmcms.com/chengxu/">程序</a><ul class="sub-menu">
-			<!-- 这里是二级栏目的循环，不需要的可以删除，代码开始 -->
-			 
-											<li class="menu-item menu-item-type-taxonomy menu-item-object-category"><a href="https://blog.yzmcms.com/php/">php</a></li>
-								<li class="menu-item menu-item-type-taxonomy menu-item-object-category"><a href="https://blog.yzmcms.com/mysql/">mysql</a></li>
-								<li class="menu-item menu-item-type-taxonomy menu-item-object-category"><a href="https://blog.yzmcms.com/server/">server</a></li>
-					
-						<!-- 这里是二级栏目的循环，不需要的可以删除，代码结束 -->
-		</ul></li>
-				    <li class="menu-item menu-item-type-custom menu-item-object-custom  menu-item-has-children">
-		<a href="https://blog.yzmcms.com/shenghuo/">生活</a><ul class="sub-menu">
-			<!-- 这里是二级栏目的循环，不需要的可以删除，代码开始 -->
-						<!-- 这里是二级栏目的循环，不需要的可以删除，代码结束 -->
-		</ul></li>
-				    <li class="menu-item menu-item-type-custom menu-item-object-custom  menu-item-has-children">
-		<a href="https://blog.yzmcms.com/yule/">娱乐</a><ul class="sub-menu">
-			<!-- 这里是二级栏目的循环，不需要的可以删除，代码开始 -->
-						<!-- 这里是二级栏目的循环，不需要的可以删除，代码结束 -->
-		</ul></li>
-				    <li class="menu-item menu-item-type-custom menu-item-object-custom  menu-item-has-children">
-		<a href="https://blog.yzmcms.com/guanyu/">关于</a><ul class="sub-menu">
-			<!-- 这里是二级栏目的循环，不需要的可以删除，代码开始 -->
-			 
-											<li class="menu-item menu-item-type-taxonomy menu-item-object-category"><a href="/guestbook/index/init.html">留言联系</a></li>
-								<li class="menu-item menu-item-type-taxonomy menu-item-object-category"><a href="https://blog.yzmcms.com/guanyuzuozhe/">关于作者</a></li>
-								<li class="menu-item menu-item-type-taxonomy menu-item-object-category"><a href="https://bbs.yzmcms.com">官方论坛</a></li>
-					
-						<!-- 这里是二级栏目的循环，不需要的可以删除，代码结束 -->
-		</ul></li>
-		
-	</ul>
-	<div class="menu pull-right">
-	  <form name="formsearch" action="https://blog.yzmcms.com/search/index/init.html" method="get">
-		<input class="search-input" name="q" id="search-keyword" type="text" required="required" placeholder=" 输入你要找的内容" />
-		<button type="submit" class="searchbtn" title="搜一下！">
-			<!-- <input type="hidden" name="modelid" value="1" id="modelid" /> -->
-		  	<i class="fa"></i>
-		</button>
-	  </form>
-	</div>
-	
-	<div id="mobile_nav">
-		<div class="nav_box"><span class="navicon"></span></div>
-		<ul class="nav_ul">
-			<li><a href="https://blog.yzmcms.com/">首页</a></li>
-								<li><a href="https://blog.yzmcms.com/qianduan/">前端</a></li>
-								<li><a href="https://blog.yzmcms.com/chengxu/">程序</a></li>
-								<li><a href="https://blog.yzmcms.com/shenghuo/">生活</a></li>
-								<li><a href="https://blog.yzmcms.com/yule/">娱乐</a></li>
-								<li><a href="https://blog.yzmcms.com/guanyu/">关于</a></li>
-				
-		</ul>
-	</div>	
-</header>    <section class="container">
+<div th:replace="base/base::.header"></div>	  
+
+<section class="container">
       <div class="content-wrap">
         <div class="content">
           <header class="article-header">
-            <h1 class="article-title"><h1>YzmCMS常见问题汇总</h1></h1>
+            <h1 class="article-title"><a th:text="${article.title}">YzmCMS常见问题汇总</a></h1>
             <div class="meta">
-              <span class="muted">
+              <span class="muted" th:text="${article.author}">
                 <i class="icon-user icon12"></i>
-                袁志蒙</span>
+                     	袁志蒙</span>
               <time class="muted">
-                <i class="ico icon-time icon12"></i>2017-04-02 18:56:15</time>
-              <span class="muted">
+                <i class="ico icon-time icon12"></i>
+                <span th:text="${article.arttime}">2020-03-18</span></time>
+              <span class="muted" th:text="${article.readcnt}">
                 <i class="ico icon-eye-open icon12"></i>7028次浏览</span>
             </div>
           </header>
           <article class="article-content" id="yzmcms_viewer">
-            <blockquote>
-              <p> <strong>摘要：</strong>1、YzmCMS如何安装？浏览器访问http://www.yourname.com/index.html(yourname表示你的域名),按照安装提示说明进行程序安装即可。2、YzmCMS是收费还是免费的...</p>
-			</blockquote>
-            <p style="font-weight:bold;color:#00b050">1、YzmCMS如何安装？</p><p>浏览器访问http://www.yourname.com/index.html(yourname表示你的域名),按照安装提示说明进行程序安装即可。</p><p><br/></p><p style="font-weight:bold;color:#00b050">2、YzmCMS是收费还是免费的？免费版本有功能限制吗？</p><p>个人非商业性质网站永久免费使用，用于商业网站或企业请购买授权，授权价格请访问 www.yzmcms.com了解。免费版本无任何功能限制，免费用户在使用时请在底部保留官方版权声明，并添加官网链接。</p><p><br/></p><p style="font-weight:bold;color:#00b050">3、YzmCMS后台地址在哪？</p><p>后台地址为：您的网址/admin， 例如：www.yzmcms.com/admin</p><p style="color:red">后台地址不可修改，您也不必担心网站安全问题，您所有的担心，我都已经考虑到了，不会存在安全隐患，请放心使用！</p><p><br/></p><p style="font-weight:bold;color:#00b050">4.YzmCMS除了首页可以打开，其他页面都打不开（报404）？</p><p>原因：您的环境不支持伪静态，或者未配置对应环境的伪静态，</p><p>YzmCMS伪静态规则请参考：<a href="http://blog.yzmcms.com/html/php/155.html" target="_blank" style="color:blue">http://blog.yzmcms.com/html/php/155.html</a></p><p><br/></p><p style="font-weight:bold;color:#00b050">5.YzmCMS后台验证码不显示？</p><p>产生原因：用户自行用笔记本等非编辑器工具修改PHP文件导致文件编码错误，所以后台验证码不显示</p><p>解决方案：检查自行修改过的PHP文件，并用编辑器修改文件编码为<strong>UTF-8无BOM格式</strong>即可。</p><p><br/></p><p style="white-space: normal; font-weight: bold; color: rgb(0, 176, 80);">6.前端页面报错：SQL Error!</p><p style="white-space: normal;">产生原因：用户自行修改模板，导致该页面存在SQL语法错误！</p><p style="white-space: normal;">解决方案：开启APP_DEBUG查看详细错误后修复。</p><p style="font-weight:bold;color:#00b050"><br/></p><p style="font-weight:bold;color:#00b050">7.YzmCMS怎么发布内容？</p><p>这个很简单的操作，本来不想在这里写的，无奈很多小白都不知怎么发布操作，只好说一下了。</p><p><strong>①首先如果你想发布的内容是文章模型，那就直接点击：内容管理-&gt;添加内容即可。</strong></p><p><strong><br/></strong></p><p><strong>②如果你想发布的内容不是文章模型的，那么你的步骤是这样的：内容管理-&gt;点击模型(选择模型)-&gt;添加内容。</strong></p><p>选择好模型后，在添加内容，系统会根据你选择的模型自动加载不同的字段和栏目。</p><p><img src="https://www.yzmcms.com/uploads/ueditor/image/20170915/1505457114211857.png" title="1505457114211857.png" alt="yzmcms添加内容"/></p><p><strong>如果你嫌上面的方法麻烦，或者你还可以这样：</strong></p><p>选择栏目管理-&gt;选择你想要发布的栏目-&gt;点击即可。</p><p><img src="https://www.yzmcms.com/uploads/ueditor/image/20170915/1505457176320784.png" title="1505457176320784.png" alt="yzmcms添加内容"/></p><p style="font-weight:bold;color:#00b050"><br/></p><p style="font-weight:bold;color:#00b050">8.YzmCMS前端模板目录在哪里？</p><p>电脑版前端模板目录为：/application/index/view/default/，</p><p>手机版前端模板目录为：/application/mobile/view/default/，</p><p>“category_”开头的模板是频道页模板，“list_”开头的是列表页模板，“show_”开头的是内容页模板。</p><p><span style="color:#c00000">如果想设置不同栏目不同模板，可以新增模板，编辑“/application/index/view/default/config.php”文件，按照规则新建模板即可，手机端模板暂不支持自定义模板。</span></p><p><br/></p><p style="font-weight:bold;color:#00b050">9.YzmCMS如何添加广告？</p><p>YzmCMS 3.7版本前：登录后台-系统管理-自定义配置-添加配置（配置名称为您的广告标识，配置值为您的广告代码，如添加的配置名为“guanggao”，则前台调用方法为{$site[guanggao]}。）</p><p><br/></p><p style="font-weight:bold;color:#00b050">10.YzmCMS忘记密码怎么办？</p><p>新手站长忘记密码时，可以加入官方QQ群进行求助，QQ群：161208398</p><p><br/></p><p style="font-weight: bold; color: red;">YzmCMS是作者呕心沥血编写的一套CMS系统，如果您在使用过程中发现什么问题，可以加入官方QQ群进行求助！</p>			            <div class="related-post">
+            <div th:utext="${article.content}"></div>
+			  
+             <div class="related-post">
               <h6>随机内容</h6>
               <dl class="fix">
                 <div id='tag741ea220ff5887504d724069fe0ee1bf'>
@@ -852,20 +784,9 @@ $(function(){
 <script type="text/javascript" src="https://blog.yzmcms.com/common/static/highlight/highlight.pack.js"></script>
 <script>hljs.initHighlightingOnLoad();</script>
 <!--代码高亮 end-->
-    <footer class="footer">
-      <div class="footer-inner">
-        <div style="padding:0 20px;overflow:hidden;">
-          <div class="copyright pull-left">
-            <a href="https://blog.yzmcms.com/" target="_blank">Powered By YzmCMS内容管理系统 © 2014-2020 袁志蒙工作室</a> | 京ICP备16034624号</div>
-          <div class="trackcode pull-right"><script src="https://s4.cnzz.com/z_stat.php?id=1259844929&web_id=1259844929" language="JavaScript"></script></div>
-        </div>
-      </div>
-    </footer>
-	<div id="button">
-	<a href="javascript:;" rel="nofollow" class="totop" title="返回顶部"></a>
-	<a href="https://www.yzmcms.com/" target="_blank" class="guanwang" title="返回官网"></a>
-	<a href="https://blog.yzmcms.com/guestbook/index/init.html"  target="_blank" class="lianxi" title="留言联系"></a>
-	</div>
+    <div th:replace="base/base::.footer"></div>	
+	
+	<div th:replace="base/base::#button"></div>
 	
 	
    <div id="share_wechat" style="display:none;position:fixed;left:0%;top:0%;z-index:99;width:100%;height:100%;background:rgba(0,0,0,0.3);"><div style="position:fixed;border-radius:3px;left:50%;top:50%;z-index:100;width:260px;margin-left:-140px;margin-top:-200px;background:#fff;padding:20px 25px 15px 25px;text-align:center"><span title="关闭" onclick="yzmcms_share_wechat()" style="width:100%;font-size:14px;color:#333;cursor:pointer;margin-bottom:10px;float:right;text-align:right">关闭</span><img src="https://blog.yzmcms.com/common/static/images/share_code.png" width="220"><p style="text-align:center;font-size:16px">用微信“扫一扫”</p></div></div>

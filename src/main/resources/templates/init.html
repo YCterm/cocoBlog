@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html> 
+<html xmlns:th="http://www.thymeleaf.org"> 
   <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=10,IE=9,IE=8,ie=7">
@@ -43,84 +43,41 @@
   })
 </script>	
 <header class="header" style="height: 52px;">
-  <div class="navbar">
-	<h1 class="logo">
-	  <a href="https://blog.yzmcms.com/" title="袁志蒙个人博客 - YzmCMS博客" alt="袁志蒙个人博客 - YzmCMS博客">袁志蒙个人博客 - YzmCMS博客</a></h1>
-	<ul class="nav">
-	  <li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-home"><a href="https://blog.yzmcms.com/">首页</a></li>
-					    <li class="menu-item menu-item-type-custom menu-item-object-custom  menu-item-has-children">
-		<a href="https://blog.yzmcms.com/qianduan/">前端</a><ul class="sub-menu">
-			<!-- 这里是二级栏目的循环，不需要的可以删除，代码开始 -->
-			 
-											<li class="menu-item menu-item-type-taxonomy menu-item-object-category"><a href="https://blog.yzmcms.com/htm/">html</a></li>
-								<li class="menu-item menu-item-type-taxonomy menu-item-object-category"><a href="https://blog.yzmcms.com/css/">css</a></li>
-								<li class="menu-item menu-item-type-taxonomy menu-item-object-category"><a href="https://blog.yzmcms.com/js/">js</a></li>
-					
-						<!-- 这里是二级栏目的循环，不需要的可以删除，代码结束 -->
-		</ul></li>
-				    <li class="menu-item menu-item-type-custom menu-item-object-custom  menu-item-has-children">
-		<a href="https://blog.yzmcms.com/chengxu/">程序</a><ul class="sub-menu">
-			<!-- 这里是二级栏目的循环，不需要的可以删除，代码开始 -->
-			 
-											<li class="menu-item menu-item-type-taxonomy menu-item-object-category"><a href="https://blog.yzmcms.com/php/">php</a></li>
-								<li class="menu-item menu-item-type-taxonomy menu-item-object-category"><a href="https://blog.yzmcms.com/mysql/">mysql</a></li>
-								<li class="menu-item menu-item-type-taxonomy menu-item-object-category"><a href="https://blog.yzmcms.com/server/">server</a></li>
-					
-						<!-- 这里是二级栏目的循环，不需要的可以删除，代码结束 -->
-		</ul></li>
-				    <li class="menu-item menu-item-type-custom menu-item-object-custom  menu-item-has-children">
-		<a href="https://blog.yzmcms.com/shenghuo/">生活</a><ul class="sub-menu">
-			<!-- 这里是二级栏目的循环，不需要的可以删除，代码开始 -->
-						<!-- 这里是二级栏目的循环，不需要的可以删除，代码结束 -->
-		</ul></li>
-				    <li class="menu-item menu-item-type-custom menu-item-object-custom  menu-item-has-children">
-		<a href="https://blog.yzmcms.com/yule/">娱乐</a><ul class="sub-menu">
-			<!-- 这里是二级栏目的循环，不需要的可以删除，代码开始 -->
-						<!-- 这里是二级栏目的循环，不需要的可以删除，代码结束 -->
-		</ul></li>
-				    <li class="menu-item menu-item-type-custom menu-item-object-custom  menu-item-has-children">
-		<a href="https://blog.yzmcms.com/guanyu/">关于</a><ul class="sub-menu">
-			<!-- 这里是二级栏目的循环，不需要的可以删除，代码开始 -->
-			 
-											<li class="menu-item menu-item-type-taxonomy menu-item-object-category"><a href="/guestbook/index/init.html">留言联系</a></li>
-								<li class="menu-item menu-item-type-taxonomy menu-item-object-category"><a href="https://blog.yzmcms.com/guanyuzuozhe/">关于作者</a></li>
-								<li class="menu-item menu-item-type-taxonomy menu-item-object-category"><a href="https://bbs.yzmcms.com">官方论坛</a></li>
-					
-						<!-- 这里是二级栏目的循环，不需要的可以删除，代码结束 -->
-		</ul></li>
-		
-	</ul>
-	<div class="menu pull-right">
-	  <form name="formsearch" action="https://blog.yzmcms.com/search/index/init.html" method="get">
-		<input class="search-input" name="q" id="search-keyword" type="text" required="required" placeholder=" 输入你要找的内容" />
-		<button type="submit" class="searchbtn" title="搜一下！">
-			<!-- <input type="hidden" name="modelid" value="1" id="modelid" /> -->
-		  	<i class="fa"></i>
-		</button>
-	  </form>
-	</div>
-	
-	<div id="mobile_nav">
-		<div class="nav_box"><span class="navicon"></span></div>
-		<ul class="nav_ul">
-			<li><a href="https://blog.yzmcms.com/">首页</a></li>
-								<li><a href="https://blog.yzmcms.com/qianduan/">前端</a></li>
-								<li><a href="https://blog.yzmcms.com/chengxu/">程序</a></li>
-								<li><a href="https://blog.yzmcms.com/shenghuo/">生活</a></li>
-								<li><a href="https://blog.yzmcms.com/yule/">娱乐</a></li>
-								<li><a href="https://blog.yzmcms.com/guanyu/">关于</a></li>
-				
-		</ul>
-	</div>	
-</header><script type="text/javascript" src="https://blog.yzmcms.com/common/static/plugin/layer/layer.js"></script>
+  <div th:replace="base/base::.header"></div>
+</header>
+<script type="text/javascript">
+	function init(){
+	    var formData = new FormData(guest);
+	    
+	    $.ajax({
+	        url:'init.html', /*接口域名地址*/
+	        type:'post',
+	        data: formData,
+	        contentType: false,
+	        processData: false,
+	        success:function(res){
+	        	
+	            if(res.resultCode == 0){
+	                alert('留言成功！');
+	            }else{
+	                alert('留言失败！');
+	            } 
+	        }
+	    });
+	}
+
+</script>
+
+
+<script type="text/javascript" src="https://blog.yzmcms.com/common/static/plugin/layer/layer.js"></script>
 <section class="container">
 		<div class="page_left">
 		<ul>
 												<li>
-				<a href="/guestbook/index/init.html"  class="cur" >留言联系</a>
+				<a href="init.html"  class="cur" >留言联系</a>
 			</li>		
 						<li>
-				<a href="https://blog.yzmcms.com/guanyuzuozhe/"  >关于作者</a>
+				<a href="aboutauthor.html"  >关于作者</a>
 			</li>		
 						<li>
 				<a href="https://bbs.yzmcms.com"   target="_blank" >官方论坛</a>
@@ -130,41 +87,31 @@
 		<div class="page_right">
 		   <h1 class="page_title">留言联系</h1>   
 		   <div class="page_content">
-				<form action="" method="post" name="guest" onsubmit="return check()">
+				<form id="guest" action="" method="post" name="guest" onsubmit="return check()">
 					<table class='message_table'>
-					<tr>
-					<td>留言主题</td>
-					<td><input name='title' type='text' class='input_text' /><span class='xing'>*</span></td>
-					</tr>
+					
 					<tr>
 					<td>联系人</td>
-					<td><input name='name' type='text' class='input_text' /><span class='xing'>*</span></td>
+					<td><input name='uid' type='text' class='input_text' /><span class='xing'>*</span></td>
 					</tr>
+					
 					<tr>
-					<td>Email</td>
-					<td><input name='email' type='email' class='input_text' /></td>
-					</tr>
-					<tr>
-					<td>QQ</td>
-					<td><input name='qq' type='text' class='input_text' /></td>
-					</tr>		
+							
 					<tr>
 					<td>留言内容</td>
-					<td><textarea name='bookmsg' cols='50' rows='6' class='textarea_text'></textarea><span class='xing'>*</span></td>
+					<td><textarea name='comcontent' cols='50' rows='6' class='textarea_text'></textarea><span class='xing'>*</span></td>
 					</tr>
 					<tr>
-					<td>验证码</td>
-					<td><input name="code" type="text" class='input_text' style="width:100px;margin:5px 10px 10px 0;"><img src="https://blog.yzmcms.com/api/index/code.html" onclick="this.src=this.src+'?'" style="cursor:pointer;" title="看不清？点击更换"><span class='xing'>*</span></td>
-					</tr>		
+							
 					<tr><td></td>
-					<td><input type="submit" name="dosubmit" value="提交留言" class="dosubmit" style="width:100%;max-width:320px"></td>
+					<td><input type="button" onclick="init()" name="button" value="提交留言" class="button" style="width:100%;max-width:320px"></td>
 					</tr>
 					</table>
 				</form>
 				<div style="margin-top:30px">
-				   <p>YzmCMS留言板</p>
-				   <p>1.您的每一条留言，管理员将会认真查看。</p>
-				   <p>2.请您填写正确的联系方式，方便我们与您取得联系。</p>
+				   <p>CocoBlog留言板</p>
+				   <p>您的每一条留言，管理员将会认真查看。</p>
+				   
 				
 				</div>
 		   </div>
@@ -191,20 +138,9 @@
  		return true;
  	}
  </script>
-     <footer class="footer">
-      <div class="footer-inner">
-        <div style="padding:0 20px;overflow:hidden;">
-          <div class="copyright pull-left">
-            <a href="https://blog.yzmcms.com/" target="_blank">Powered By YzmCMS内容管理系统 © 2014-2020 袁志蒙工作室</a> | 京ICP备16034624号</div>
-          <div class="trackcode pull-right"><script src="https://s4.cnzz.com/z_stat.php?id=1259844929&web_id=1259844929" language="JavaScript"></script></div>
-        </div>
-      </div>
-    </footer>
-	<div id="button">
-	<a href="javascript:;" rel="nofollow" class="totop" title="返回顶部"></a>
-	<a href="https://www.yzmcms.com/" target="_blank" class="guanwang" title="返回官网"></a>
-	<a href="https://blog.yzmcms.com/guestbook/index/init.html"  target="_blank" class="lianxi" title="留言联系"></a>
-	</div>
+     <div th:replace="base/base::.footer"></div>	
+	
+	<div th:replace="base/base::#button"></div>	
 	
 	
    <div id="share_wechat" style="display:none;position:fixed;left:0%;top:0%;z-index:99;width:100%;height:100%;background:rgba(0,0,0,0.3);"><div style="position:fixed;border-radius:3px;left:50%;top:50%;z-index:100;width:260px;margin-left:-140px;margin-top:-200px;background:#fff;padding:20px 25px 15px 25px;text-align:center"><span title="关闭" onclick="yzmcms_share_wechat()" style="width:100%;font-size:14px;color:#333;cursor:pointer;margin-bottom:10px;float:right;text-align:right">关闭</span><img src="https://blog.yzmcms.com/common/static/images/share_code.png" width="220"><p style="text-align:center;font-size:16px">用微信“扫一扫”</p></div></div>
