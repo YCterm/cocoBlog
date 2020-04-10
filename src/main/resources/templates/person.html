@@ -153,7 +153,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<ul class="resp-tabs-list">
        									 <a>
             								<span>上传头像</span>
-            								<img th:src="${loginedUser.head}" style="width:5%; margin-top: 0.5%; margin-bottom: 0.5%;">
+            								<img id="myhead" style="width:5%; margin-top: 0.5%; margin-bottom: 0.5%;">
         								</a>
 
 								</ul>		
@@ -275,6 +275,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 									$('#uphone').val(obj.uphone);
 									$('#uemail').val(obj.uemail);
 									$('#originalPassword').val(obj.originalPassword);
+									$('#myhead').attr('src',obj.head);
 								}else{
 									alert(data.msg);
 									window.location.href = '/login.html';
