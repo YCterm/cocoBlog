@@ -103,4 +103,13 @@ public class Comment {
     public void setComtemp(String comtemp) {
         this.comtemp = comtemp == null ? null : comtemp.trim();
     }
+
+	@Override
+	public String toString() {
+		return "Comment [comid=" + comid + ", artid=" + artid + ", recomid=" + recomid + ", comtime=" + comtime
+				+ ", uid=" + uid + ", comcontent=" + comcontent + ", comstatus=" + comstatus + ", comtemp=" + comtemp
+				+ ", user=" + user + ", reUser=" + reUser + "]";
+	}
+    
+    
 }

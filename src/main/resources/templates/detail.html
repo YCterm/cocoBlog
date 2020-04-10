@@ -57,16 +57,14 @@
 				}
 			});
 		})
-		
-		
-		function sendComment(){
+
+		function sendComment() {
 			//thymeleaf框架内获取session
 			var loginedUser = '[[${session.loginedUser}]]';
-			if(loginedUser==""){
+			if (loginedUser == "") {
 				alert("请先登录！");
 				return false;
 			}
-			alert("正在发送数据！")
 		}
 	</script>
 	<div th:replace="base/base::.header"></div>
@@ -102,10 +100,11 @@
 							<div id='tag741ea220ff5887504d724069fe0ee1bf'>
 
 								<dd th:each="ra : ${randomArticle}">
-									<a th:href="'/detail/' + ${ra.artid}"
-										th:title="${ra.title}"> <img
+									<a th:href="'/detail/' + ${ra.artid}" th:title="${ra.title}">
+										<img
 										src="https://www.yzmcms.com/uploads/201802/01/180201081943386.jpg"
-										alt="图片损坏"> <span th:text="${ra.title}">标题维护</span></a>
+										alt="图片损坏"> <span th:text="${ra.title}">标题维护</span>
+									</a>
 								</dd>
 
 							</div>
@@ -133,15 +132,15 @@
 					<div class="comment_box">
 						<div class="comment">
 							<div class="com_form">
-								<form onsubmit="return sendComment()" >
-									
-									<textarea class="textarea" id="content" name="content"
+								<form th:action="'/detail/' + ${number} + '/sendComment'"
+									method="POST" onsubmit="return sendComment()">
+									<input type="hidden" name="recomid">
+									<textarea class="textarea" id="content" name="comcontent"
 										placeholder="让评论变得如此简单~"></textarea>
 									<p>
 										<input type="submit" class="sub_btn" name="dosubmit"
-											value="提交" style="width: 100px">
-											<span class="emotion">表情</span><span
-											class="yzm"><img
+											value="提交" style="width: 100px"> <span
+											class="emotion">表情</span><span class="yzm"><img
 											src="https://blog.yzmcms.com/api/index/code.html"
 											onclick="this.src=this.src+'?'" style="cursor: pointer;"
 											title="看不清？点击更换"><input type="text" name="code"
@@ -152,7 +151,9 @@
 						</div>
 						<div class="clearfix"></div>
 						<div class="comment_list">
-							<div class="comment_list_top">共<span th:text="${commentListSize}">0</span>条评论</div>
+							<div class="comment_list_top">
+								共<span th:text="${commentListSize}">0</span>条评论
+							</div>
 							<div class="comment_list_body">
 								<ul>
 									<li th:each="cl : ${commentList}">
@@ -164,52 +165,53 @@
 										</p>
 										<div class="comm_right">
 											<!--<a class="user_name" href="https://blog.yzmcms.com/member/myhome/init/userid/0.html" target="blank">YzmCMS博客网友</a>-->
-											<p><span th:text="${cl.user.unamme}">网友评论</span>：</p>
+											<p>
+												<span th:text="${cl.user.unamme}">网友评论</span>：
+											</p>
 											<!-- 直接回复文章 -->
 											<p th:if="${cl.recomid == null}" th:text="${cl.comcontent}">评论内容</p>
 											<!-- 回复评论者 -->
 											<p th:if="${cl.recomid != null}">
-												<a href="javascript:void(0);" class="user_name" rel="nofollow">
-												<strong th:if="${cl.user.ustatus == 1}" style="color: #DE4C1C"><span th:text="${cl.user.unamme}">管理员</span>(管理员)</strong>
-												<strong th:if="${cl.user.ustatus == 2}" th:text="${cl.user.unamme}" >粉丝</strong>
-												</a>
-												回复 
-												<a href="javascript:void(0);" class="user_name" rel="nofollow">
-												<strong th:if="${cl.reUser.ustatus == 1}" style="color: #DE4C1C"><span th:text="${cl.reUser.unamme}">管理员</span>(管理员)</strong>
-												<strong th:if="${cl.reUser.ustatus == 2}" th:text="${cl.reUser.unamme}" >粉丝</strong>
-												</a>
-												<span th:text="${cl.comcontent}"></span>
+												<a href="javascript:void(0);" class="user_name"
+													rel="nofollow"> <strong th:if="${cl.user.utype == 1}"
+													style="color: #DE4C1C"><span
+														th:text="${cl.user.unamme}">管理员</span>(管理员)</strong> <strong
+													th:if="${cl.user.utype == 2}" th:text="${cl.user.unamme}">粉丝</strong>
+												</a> 回复 <a href="javascript:void(0);" class="user_name"
+													rel="nofollow"> <strong
+													th:if="${cl.reUser.utype == 1}" style="color: #DE4C1C"><span
+														th:text="${cl.reUser.unamme}">管理员</span>(管理员)</strong> <strong
+													th:if="${cl.reUser.utype == 2}"
+													th:text="${cl.reUser.unamme}">粉丝</strong>
+												</a> <span th:text="${cl.comcontent}"></span>
 											</p>
-											
+
 											<p>
-												<span class="comm_time" th:text="${#dates.format(cl.comtime, 'yyyy-MM-dd hh:mm:ss')}">评论时间</span> <a
-													href="javascript:toreply('510');" class="comm_a">回复</a>
+												<span class="comm_time"
+													th:text="${#dates.format(cl.comtime, 'yyyy-MM-dd hh:mm:ss')}">评论时间</span>
+												<a th:href="'javascript:toreply(' + ${cl.comid} + ');'"
+													class="comm_a">回复</a>
 											</p>
-											<div id="rep_510" class="none">
-												<form
-													action="https://blog.yzmcms.com/comment/index/init.html"
-													method="post" onsubmit="return check_rep(this)">
-													<input type="hidden" name="modelid" value="1"> <input
-														type="hidden" name="catid" value="9"> <input
-														type="hidden" name="id" value="90"> <input
-														type="hidden" name="title" value="YzmCMS常见问题汇总"> <input
-														type="hidden" name="url"
-														value="https://blog.yzmcms.com/php/90.html"> <input
-														type="hidden" name="reply" value="510"> <input
-														type="hidden" name="reply_to" value="YzmCMS博客网友">
-													<textarea name="content" class="textarea textarea2"
+											<div th:id="'rep_' +  ${cl.comid}" class="none">
+												<form th:action="'/detail/' + ${number} + '/sendComment'"
+													method="POST" onsubmit="return sendComment()">
+													<input type="hidden" name="recomid" th:value="${cl.comid}">
+													<textarea class="textarea" id="content" name="comcontent"
 														placeholder="让评论变得如此简单~"></textarea>
-													<input type="submit" class="sub_btn static" name="dosubmit"
+													<p>
+														<input type="submit" class="sub_btn static" name="dosubmit"
 														value="提交" style="width: 100px"> <span
 														class="yzm yzm2"><img src=""
 														onclick="this.src='https://blog.yzmcms.com/api/index/code.html?v='+Math.random()"
 														style="cursor: pointer;" alt="点击加载" title="看不清？点击更换"><input
 														type="text" name="code" required="required"></span>
+													</p>
 												</form>
+												
 											</div>
 										</div>
 									</li>
-									
+
 								</ul>
 							</div>
 						</div>
