@@ -25,7 +25,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import com.yc.blog.bean.User;
 import com.yc.blog.bean.UserExample;
-import com.yc.blog.biz.BizException1;
+import com.yc.blog.biz.BizException;
 import com.yc.blog.biz.UserBiz;
 import com.yc.blog.dao.UserMapper;
 import com.yc.blog.utils.MD5Util;
@@ -84,7 +84,7 @@ public class UserAction {
 			User us = ubiz.loginUser(user);
 			mav.addObject("loginedUser",us);
 			return CommonAction.getIndex(mav);
-		} catch (BizException1 e) {
+		} catch (BizException e) {
 			e.printStackTrace();
 			mav.addObject("msg",e.getMessage());
 			mav.setViewName("login");
@@ -107,7 +107,7 @@ public class UserAction {
 			if (ubiz.validation(unamme)) {
 				return new Result(1);
 			}
-		} catch (BizException1 e) {
+		} catch (BizException e) {
 			e.printStackTrace();
 		}
 		return new Result(0);
@@ -128,7 +128,7 @@ public class UserAction {
 			if (ubiz.reg(user)) {
 				return new Result(1, "注册成功");
 			}
-		} catch (BizException1 e) {
+		} catch (BizException e) {
 			e.printStackTrace();
 		}
 		return new Result(0, "注册失败");
@@ -159,7 +159,7 @@ public class UserAction {
 				// 1代表成功
 				return new Result(1, "验证码已发送，请及时查收！", null);
 			}
-		} catch (BizException1 e) {
+		} catch (BizException e) {
 			e.printStackTrace();
 			return new Result(2, e.getMessage(), null);
 		}
@@ -194,7 +194,7 @@ public class UserAction {
 					repasssword, strOrginalUser,strReallyVerificationCode, 
 					objValidTime, new Date(System.currentTimeMillis()));
 			return new Result(1,"修改成功，3s后跳转登录页面",null);
-		} catch (BizException1 e) {
+		} catch (BizException e) {
 			e.printStackTrace();
 			return new Result(2,e.getMessage(),null);
 		}
@@ -221,7 +221,7 @@ public class UserAction {
 	public Result updateInfo(@SessionAttribute("loginedUser") User user, String uemail,String unamme,String nickname, 
 			String uphone,String originalPassword, String confirmNewPassword, String newPassword,
 			MultipartFile head,HttpServletRequest request,
-			HttpServletResponse response) throws IllegalStateException, IOException, BizException1 {
+			HttpServletResponse response) throws IllegalStateException, IOException, BizException {
 	
 		//获取文件名
 		String strFilename=head.getOriginalFilename();
@@ -271,7 +271,7 @@ public class UserAction {
 		 try {
 			ubiz.updatePasssword(user,newPassword,confirmNewPassword, originalPassword);
 			return new Result(1, "信息修改成功", null);
-		} catch (BizException1 e) {
+		} catch (BizException e) {
 			e.printStackTrace();
 			return new Result(2, e.getMessage(), null);
 		}
