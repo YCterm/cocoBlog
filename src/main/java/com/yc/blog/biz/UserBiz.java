@@ -47,7 +47,7 @@ public class UserBiz {
 		List<User> listuser = um.selectByExample(userExample);
 		System.out.println("listuser" + listuser);
 		if (listuser.size() == 0) {
-			throw new BizException1("员工用户名或密码不正确，请确认后输入！");
+			throw new BizException1("用户名或密码不正确，请确认后输入！");
 		} else {
 			user = listuser.get(0);
 			user.setPasssword("");
@@ -321,4 +321,6 @@ public class UserBiz {
 			return true;
 		}
 	}
+
+	
 }

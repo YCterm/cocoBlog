@@ -23,39 +23,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
 <!-- //web font -->
 </head>
-<style>
-.submit-w3l input[type="botton"] {
-    background: #fff;
-    color: #000;
-    outline: none;
-    display: block;
-    margin: 0 auto;
-    border: none;
-    cursor: pointer;
-    padding: 13px 38px;
-    font-size: 14px;
-    width: 100%;
-    margin-top: 1em;
-    font-weight: bold;
-    text-transform: uppercase;
-    font-family: 'Open Sans', sans-serif;
-    transition: 0.3s all;
-    -webkit-transition: 0.3s all;
-    -moz-transition: 0.3s all;
-    -o-transition: 0.3s all;
-    -ms-transition: 0.3s all;
-}
-.submit-w3l input[type="botton"]:hover{
-    background: #df5799;
-	color:#ffffff;
-	transition: 0.3s all;
-    -webkit-transition: 0.3s all;
-    -moz-transition: 0.3s all;
-    -o-transition: 0.3s all;
-    -ms-transition: 0.3s all;
-}
 
-</style>
 
 <body>
 <div class="snow-container">
@@ -76,7 +44,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		<div class="form-w3-agile">
 			<h2 class="sub-agileits-w3layouts">注册</h2>
 			<form id="signUpForm">	
-					<input type="text" id="unamme" name="unamme" placeholder="用户名" required="" />
+					<input id="unamme" type="text" name="unamme" placeholder="用户名" required="" /> 
 					
 					<input id="nickname" type="text" name="nickname" placeholder="昵称" required="" />
 					
@@ -103,30 +71,29 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
 <script>
 		function check() {
-			var name = document.getElementById("unamme").value;
-			if (name == '' || name == 'Your Full Name') {
+
+ 			if (signUpForm['unamme'].value == '') {
 				alert("用户名不能为空!");
-				return false;
+			return false;
 			}
-			if (signUpForm['uphone'].value == ''
-					|| signUpForm['uphone'].value == 'Your Phone Number') {
-				alert("联系电话不能为空!");
-				return false;
-			}
-			if (signUpForm['nickname'].value == ''
-					|| signUpForm['nickname'].value == 'Your ID Card Number') {
+			
+			if (signUpForm['nickname'].value == '') {
 				alert("昵称不能为空!");
-				return false;
-			}
-			if (signUpForm['uemail'].value == ''
-					|| signUpForm['uemail'].value == 'Email@address.com') {
-				alert("邮箱地址不能为空!");
 				return false;
 			}
 			if (signUpForm['passsword'].value == '') {
 				alert("密码不能为空!");
 				return false;
 			}
+			if (signUpForm['uphone'].value == '') {
+			alert("联系电话不能为空!");
+			return false;
+		}
+			if (signUpForm['uemail'].value == '') {
+				alert("邮箱地址不能为空!");
+				return false;
+			}
+			
 			return true;
 		}
 		
@@ -153,15 +120,34 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 			var userName = signUpForm['unamme'].value;
 			$.post("doname",{unamme:userName},function(result){
 				if(result.resultCode==1){
-					$("#unamme").css("color","green");
+					
 				}else{
-					$("#unamme").css("color","red");
+					alert("用户名已注册！")
 					
 					$("#unamme").val("");
 				}
 			})
 		});
-		
+		uemail.onchange = function(){
+			var uemail = this.value;
+			var reg = /^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/;
+			if(reg.test(uemail)){
+			
+			}else{
+				alert("邮箱格式不正确");
+			}
+		}
+		uphone.onchange = function(){
+			var uphone = this.value;
+			var reg =/^1\d{10}$/;
+			if(reg.test(uphone)){
+			
+			}else{
+				alert("电话格式不正确");
+			}
+		}
+
+	 
 	</script>
 </body>
 </html>
