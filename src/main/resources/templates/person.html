@@ -268,7 +268,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							type:"POST",
 							url:"getUserInfo",
 								success:function(data){
-								if(data.resultCode === 1){
+								if(data.code === 1){
 									var obj = data.data;
 									$('#unamme').val(obj.unamme);
 									$('#nickname').val(obj.nickname);
@@ -276,7 +276,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 									$('#uemail').val(obj.uemail);
 									$('#originalPassword').val(obj.originalPassword);
 								}else{
-									alert(data.message);
+									alert(data.msg);
 									window.location.href = '/login.html';
 								}
 							},
