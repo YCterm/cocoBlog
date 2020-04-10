@@ -52,3 +52,9 @@ logging:
           dao: debug
           #web:
             #hyq: warn
+# pagehelper   
+pagehelper:
+   helperDialect: mysql
+   reasonable: true
+   supportMethodsArguments: true
+   params: count=countSql
