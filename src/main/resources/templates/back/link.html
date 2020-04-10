@@ -68,7 +68,7 @@
 										th:title="${links.fstatus} == 1 ? '停用' : '启用'"
 										th:class="${links.fstatus} == 1 ? 'btn btn-xs btn-success' : 'btn btn-xs'"><i
 											class="icon-ok bigger-120"></i></a> <a title="编辑"
-										th:onclick="edit([[${links.fid}]])" href="javascript:;"
+										th:onclick="edit([[${links.fid}]],[[${links.fname}]],[[${links.furl}]],[[${links.fstatus}]])" href="javascript:;"
 										class="btn btn-xs btn-info"><i
 											class="icon-edit bigger-120"></i></a></td>
 								</tr>
@@ -208,7 +208,14 @@
 				});
 		}
 		/*链接-编辑*/
-		function edit(id) {
+		function edit(id,fname,furl,fstate) {
+			$("#furl").attr("value",furl);
+			$("#fname").attr("value",fname);
+			if(fstate == 1){
+				$("#fstate1").prop("checked",true);
+			}else{
+				$("#fstate2").prop("checked",true);
+			}
 			layer.open({
 				type : 1,
 				title : '修改用户信息',

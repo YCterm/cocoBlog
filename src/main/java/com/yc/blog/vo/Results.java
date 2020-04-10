@@ -1,6 +1,6 @@
 package com.yc.blog.vo;
 
-public class Result {
+public class Results {
 	// 返回的消息
 		private String msg;
 		/*
@@ -15,18 +15,18 @@ public class Result {
 		private Object data;
 		
 		
-		public Result() {
+		public Results() {
 			super();
 		}
 		
-		public Result(int code,String msg) {
+		public Results(int code,String msg) {
 			super();
 			this.msg = msg;
 			this.code = code;
 		}
 
 
-		public Result(int code,String msg,  Object data) {
+		public Results(int code,String msg,  Object data) {
 			super();
 			this.msg = msg;
 			this.code = code;
@@ -38,14 +38,14 @@ public class Result {
 		 * @param msg
 		 * @return
 		 */
-		public static Result success(String msg){
-			Result result = new Result();
+		public static Results success(String msg){
+			Results result = new Results();
 			result.code = 0;
 			result.msg = msg;
 			return result;
 		}
-		public static Result success(String msg,Object data){
-			Result result = new Result();
+		public static Results success(String msg,Object data){
+			Results result = new Results();
 			result.code = 0;
 			result.msg = msg;
 			result.data = data;
@@ -56,15 +56,15 @@ public class Result {
 		 * @param msg
 		 * @return
 		 */
-		public static Result failure(String msg){
-			Result result = new Result();
+		public static Results failure(String msg){
+			Results result = new Results();
 			result.code = 1000;
 			result.msg = msg;
 			return result;
 		}
 		
-		public static Result failure(String msg ,Object data){
-			Result result = new Result();
+		public static Results failure(String msg ,Object data){
+			Results result = new Results();
 			result.code = 1000;
 			result.msg = msg;
 			result.data =data;
