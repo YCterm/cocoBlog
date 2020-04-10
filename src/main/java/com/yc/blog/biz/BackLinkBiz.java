@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import com.yc.blog.bean.Links;
 import com.yc.blog.bean.LinksExample;
 import com.yc.blog.dao.LinksMapper;
-import com.yc.blog.vo.Results;
+import com.yc.blog.vo.Result;
 
 @Service
 public class BackLinkBiz {
@@ -33,7 +33,7 @@ public class BackLinkBiz {
 	 */
 	public int updateFstatus(Links links) throws BizException {
 		if(links.getFid() == 0) {
-			throw new BizException(new Results(1002,"未选择任何友情链接！！！"));
+			throw new BizException(new Result(1002,"未选择任何友情链接！！！"));
 		}
 		return lm.updateByPrimaryKeySelective(links);
 	}
@@ -42,7 +42,7 @@ public class BackLinkBiz {
 	 */
 	public int updateLink(Links links) throws BizException {
 		if(links.getFid() == 0) {
-			throw new BizException(new Results(1002,"未选择任何友情链接！！！"));
+			throw new BizException(new Result(1002,"未选择任何友情链接！！！"));
 		}
 		return lm.updateByPrimaryKeySelective(links);
 	}
