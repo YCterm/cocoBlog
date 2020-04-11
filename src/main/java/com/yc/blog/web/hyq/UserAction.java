@@ -5,18 +5,11 @@ import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.Part;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
@@ -25,7 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import com.yc.blog.bean.User;
 import com.yc.blog.bean.UserExample;
-import com.yc.blog.biz.BizException1;
+import com.yc.blog.biz.BizException;
 import com.yc.blog.biz.UserBiz;
 import com.yc.blog.dao.UserMapper;
 import com.yc.blog.utils.MD5Util;
@@ -80,11 +73,11 @@ public class UserAction {
 	@ResponseBody
 	public ModelAndView dologin(User user,ModelAndView mav) {
 		try {
-			// 获取ubiz中已登录的职员信息
+			// 获取ubiz中已登录的用户信息
 			User us = ubiz.loginUser(user);
 			mav.addObject("loginedUser",us);
 			return CommonAction.getIndex(mav);
-		} catch (BizException1 e) {
+		} catch (BizException e) {
 			e.printStackTrace();
 			mav.addObject("msg",e.getMessage());
 			mav.setViewName("login");
@@ -105,12 +98,12 @@ public class UserAction {
 	public Result validation(@RequestParam String unamme) {
 		try {
 			if (ubiz.validation(unamme)) {
-				return new Result(1);
+				return new Result(1, unamme);
 			}
-		} catch (BizException1 e) {
+		} catch (BizException e) {
 			e.printStackTrace();
 		}
-		return new Result(0);
+		return new Result(0, unamme);
 	}
 
 	/**
@@ -128,7 +121,7 @@ public class UserAction {
 			if (ubiz.reg(user)) {
 				return new Result(1, "注册成功");
 			}
-		} catch (BizException1 e) {
+		} catch (BizException e) {
 			e.printStackTrace();
 		}
 		return new Result(0, "注册失败");
@@ -159,7 +152,7 @@ public class UserAction {
 				// 1代表成功
 				return new Result(1, "验证码已发送，请及时查收！", null);
 			}
-		} catch (BizException1 e) {
+		} catch (BizException e) {
 			e.printStackTrace();
 			return new Result(2, e.getMessage(), null);
 		}
@@ -194,7 +187,7 @@ public class UserAction {
 					repasssword, strOrginalUser,strReallyVerificationCode, 
 					objValidTime, new Date(System.currentTimeMillis()));
 			return new Result(1,"修改成功，3s后跳转登录页面",null);
-		} catch (BizException1 e) {
+		} catch (BizException e) {
 			e.printStackTrace();
 			return new Result(2,e.getMessage(),null);
 		}
@@ -221,7 +214,7 @@ public class UserAction {
 	public Result updateInfo(@SessionAttribute("loginedUser") User user, String uemail,String unamme,String nickname, 
 			String uphone,String originalPassword, String confirmNewPassword, String newPassword,
 			MultipartFile head,HttpServletRequest request,
-			HttpServletResponse response) throws IllegalStateException, IOException, BizException1 {
+			HttpServletResponse response) throws IllegalStateException, IOException, BizException {
 	
 		//获取文件名
 		String strFilename=head.getOriginalFilename();
@@ -271,7 +264,7 @@ public class UserAction {
 		 try {
 			ubiz.updatePasssword(user,newPassword,confirmNewPassword, originalPassword);
 			return new Result(1, "信息修改成功", null);
-		} catch (BizException1 e) {
+		} catch (BizException e) {
 			e.printStackTrace();
 			return new Result(2, e.getMessage(), null);
 		}
@@ -294,8 +287,5 @@ public class UserAction {
 		User loginedUser = userList.get(0);	
 		return new Result(1,"加载成功",loginedUser);
 	}
- 
-
-	
 
 }

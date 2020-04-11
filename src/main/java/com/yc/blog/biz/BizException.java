@@ -22,7 +22,7 @@ public class BizException extends Exception {
 		// TODO Auto-generated constructor stub
 	}
 	public BizException( Result result) {
-		super(result.getMessage());
+		super(result.getMsg());
 		this.result = result ;
 		// TODO Auto-generated constructor stub
 	}
@@ -48,3 +48,4 @@ public class BizException extends Exception {
 	}
 
 }
+
