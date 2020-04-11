@@ -100,6 +100,7 @@ public class UserAction {
 	 * @param unamme 用户名
 	 * @return
 	 */
+	
 	@PostMapping("doname")
 	@ResponseBody
 	public Results validation(@RequestParam String unamme) {
