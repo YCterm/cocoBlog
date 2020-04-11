@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import com.yc.blog.bean.Comment;
 import com.yc.blog.bean.CommentExample;
 import com.yc.blog.dao.CommentMapper;
-import com.yc.blog.vo.Results;
+import com.yc.blog.vo.Result;
 
 
 @Service
@@ -32,7 +32,7 @@ public class BackMessageBiz {
 	 */
 	public int updateComstate( Comment comment) throws BizException {
 		if(comment.getComid() == 0) {
-			throw new BizException(new Results(1002,"未选择任何留言！！！"));
+			throw new BizException(new Result(1002,"未选择任何留言！！！"));
 		}
 		return cm.updateByPrimaryKeySelective(comment);
 	}

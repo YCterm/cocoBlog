@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.yc.blog.bean.Comment;
 import com.yc.blog.biz.BackMessageBiz;
 import com.yc.blog.biz.BizException;
-import com.yc.blog.vo.Results;
+import com.yc.blog.vo.Result;
 
 @Controller
 public class BackMessageAction {
@@ -33,15 +33,15 @@ public class BackMessageAction {
 	 */
 	@PostMapping("changeComstatus")
 	@ResponseBody
-	public Results changeComstate(String comstate,String comid,Model m) {
+	public Result changeComstate(String comstate,String comid,Model m) {
 		Comment comment = new Comment();
 		comment.setComid(Integer.parseInt(comid));
 		comment.setComstatus(Integer.parseInt(comstate));
 		try {
 			if(bmb.updateComstate(comment) <= 0 ) {
-				return new Results(1000,"修改失败！！！");
+				return new Result(1000,"修改失败！！！");
 			}
-			return new Results(1,"修改成功！！！");
+			return new Result(1,"修改成功！！！");
 		} catch (BizException e) {
 			e.printStackTrace();
 			return e.getResult();

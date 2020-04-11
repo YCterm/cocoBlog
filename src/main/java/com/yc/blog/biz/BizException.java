@@ -1,6 +1,6 @@
 package com.yc.blog.biz;
 
-import com.yc.blog.vo.Results;
+import com.yc.blog.vo.Result;
 
 /**
  * @author Hooy
@@ -9,20 +9,20 @@ import com.yc.blog.vo.Results;
 public class BizException extends Exception {
 
 	private static final long serialVersionUID = 1L;
-	private  Results result;
+	private  Result result;
 
-	public Results getResult() {
+	public Result getResult() {
 		return result;
 	}
-	public void setResult(Results result) {
+	public void setResult(Result result) {
 		this.result = result;
 	}
 	public BizException() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public BizException( Results result) {
-		super(result.getMsg());
+	public BizException( Result result) {
+		super(result.getMessage());
 		this.result = result ;
 		// TODO Auto-generated constructor stub
 	}

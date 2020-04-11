@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.yc.blog.bean.Links;
 import com.yc.blog.biz.BackLinkBiz;
 import com.yc.blog.biz.BizException;
-import com.yc.blog.vo.Results;
+import com.yc.blog.vo.Result;
 
 @Controller
 public class BackLinksAction {
@@ -30,7 +30,7 @@ public class BackLinksAction {
 	 */
 	@PostMapping("changeFstatus")
 	@ResponseBody
-	public Results changeFstatus(String fstate, String fid,Model m) {
+	public Result changeFstatus(String fstate, String fid,Model m) {
 		try {
 				if(fstate != null && !fstate.isEmpty() && fid != null && !fid.isEmpty()) {
 					Links links = new Links();
@@ -38,12 +38,12 @@ public class BackLinksAction {
 					links.setFstatus(Integer.parseInt(fstate));
 					if(blb.updateFstatus(links) > 0 ) {
 						m.addAttribute("linklist",blb.selectAllLinks());
-						return new Results(1,"修改成功！！！");
+						return new Result(1,"修改成功！！！");
 					}else {
-						return new Results(1000,"修改失败！！！");
+						return new Result(1000,"修改失败！！！");
 					}
 				}else {
-					return new Results(1001,"数据为空！！！");
+					return new Result(1001,"数据为空！！！");
 				}
 		} catch (BizException e) {
 			e.printStackTrace();
@@ -55,16 +55,16 @@ public class BackLinksAction {
 	 */
 	@PostMapping("checkFname")
 	@ResponseBody
-	public Results checkFname(String fname) {
+	public Result checkFname(String fname) {
 		//链接名正则：中文、英文、数字包括下划线等字符
 		String regFname = "^[\\u4E00-\\u9FA5A-Za-z0-9]+$";
 		if(fname != null && !fname.isEmpty()) {
 			if(!fname.matches(regFname)) {
-				return  new Results(1003,"请输入中文、英文或数字！！！");
+				return  new Result(1003,"请输入中文、英文或数字！！！");
 			}
-			return new Results(1,"输入正确！！！");
+			return new Result(1,"输入正确！！！");
 		}else {
-			return new Results(1001,"数据为空！！！");
+			return new Result(1001,"数据为空！！！");
 		}
 	}
 	/**
@@ -72,16 +72,16 @@ public class BackLinksAction {
 	 */
 	@PostMapping("checkFurl")
 	@ResponseBody
-	public Results checkFurl(String furl) {
+	public Result checkFurl(String furl) {
 		//链接名正则：
 		String regFurl = "^(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]";
 		if(furl != null && !furl.isEmpty()) {
 			if(!furl.matches(regFurl)) {
-				return  new Results(1003,"请输入合法地址！！！");
+				return  new Result(1003,"请输入合法地址！！！");
 			}
-			return new Results(1,"输入正确！！！");
+			return new Result(1,"输入正确！！！");
 		}else {
-			return new Results(1001,"数据为空！！！");
+			return new Result(1001,"数据为空！！！");
 		}
 	}
 	/**
@@ -89,7 +89,7 @@ public class BackLinksAction {
 	 */
 	@PostMapping("updateLink")
 	@ResponseBody
-	public Results updateLink(String fname,String furl,String fid,Model m){
+	public Result updateLink(String fname,String furl,String fid,Model m){
 		if(fid != null && !fid.isEmpty()) {
 			Links links = new Links();
 			if(furl != null && !furl.isEmpty()) {
@@ -104,15 +104,15 @@ public class BackLinksAction {
 			try {
 				if(blb.updateLink(links) > 0 ) {
 					m.addAttribute("linklist",blb.selectAllLinks());
-					return new Results(1,"更新成功！！！",links);
+					return new Result(1,"更新成功！！！",links);
 				}
-				return new Results(1000,"更新失败！！！");
+				return new Result(1000,"更新失败！！！");
 			} catch (BizException e) {
 				e.printStackTrace();
 				return e.getResult();
 			}
 		}else {
-			return new Results(1002,"未选择任何友情链接！！！");
+			return new Result(1002,"未选择任何友情链接！！！");
 		}
 	}
 	
@@ -121,17 +121,17 @@ public class BackLinksAction {
 	 */
 	@PostMapping("addLinks")
 	@ResponseBody
-	public Results addLinks(String fname,String furl,Model m) {
+	public Result addLinks(String fname,String furl,Model m) {
 		Links links = new Links();
 		links.setFurl(furl);
 		links.setFname(fname);
 		links.setFstatus(1);
 		try {
 			if(blb.insertLink(links) <=0) {
-				return new Results(1000,"添加失败！！！");
+				return new Result(1000,"添加失败！！！");
 			}
 			m.addAttribute("linklist",blb.selectAllLinks());
-			return new Results(1,"添加成功！！！",blb.selectLink(links).get(0));
+			return new Result(1,"添加成功！！！",blb.selectLink(links).get(0));
 		} catch (BizException e) {
 			e.printStackTrace();
 			return e.getResult();

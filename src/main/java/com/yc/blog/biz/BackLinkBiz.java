@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import com.yc.blog.bean.Links;
 import com.yc.blog.bean.LinksExample;
 import com.yc.blog.dao.LinksMapper;
-import com.yc.blog.vo.Results;
+import com.yc.blog.vo.Result;
 
 @Service
 public class BackLinkBiz {
@@ -35,7 +35,7 @@ public class BackLinkBiz {
 	 */
 	public int updateFstatus(Links links) throws BizException {
 		if(links.getFid() == 0) {
-			throw new BizException(new Results(1002,"未选择任何友情链接！！！"));
+			throw new BizException(new Result(1002,"未选择任何友情链接！！！"));
 		}
 		return lm.updateByPrimaryKeySelective(links);
 	}
@@ -44,10 +44,10 @@ public class BackLinkBiz {
 	 */
 	public int updateLink(Links links) throws BizException {
 		if(links.getFid() == 0) {
-			throw new BizException(new Results(1002,"未选择任何友情链接！！！"));
+			throw new BizException(new Result(1002,"未选择任何友情链接！！！"));
 		}
 		if(backLinkBiz.selectLink(links).size() > 1) {
-			throw new  BizException(new Results(1004,"该数据已存在！！！"));
+			throw new  BizException(new Result(1004,"该数据已存在！！！"));
 		}
 		return lm.updateByPrimaryKeySelective(links);
 	}
@@ -58,10 +58,10 @@ public class BackLinkBiz {
 	public int insertLink(Links links) throws BizException {
 		if(!links.getFname().isEmpty() && links.getFname() != null && !links.getFurl().isEmpty() && links.getFurl() != null ) {
 		}else {
-			throw new  BizException(new Results(1001,"没有任何数据！！！"));
+			throw new  BizException(new Result(1001,"没有任何数据！！！"));
 		}
 		if(backLinkBiz.selectLink(links).size() > 0) {
-			throw new  BizException(new Results(1004,"该数据已存在！！！"));
+			throw new  BizException(new Result(1004,"该数据已存在！！！"));
 		}
 		return lm.insertSelective(links);
 	}
