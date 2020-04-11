@@ -36,7 +36,7 @@ public class UserBiz {
 	 * @return
 	 * @throws BizException
 	 */
-	public User loginUser(User user) throws BizException1 {
+	public User loginUser(User user) throws BizException {
 		MD5Util objMD5Util = new MD5Util();
 		UserExample userExample = new UserExample();
 		// 判断用户名和密码是否合法
@@ -47,7 +47,7 @@ public class UserBiz {
 		List<User> listuser = um.selectByExample(userExample);
 		System.out.println("listuser" + listuser);
 		if (listuser.size() == 0) {
-			throw new BizException1("用户名或密码不正确，请确认后输入！");
+			throw new BizException("用户名或密码不正确，请确认后输入！");
 		} else {
 			user = listuser.get(0);
 			user.setPasssword("");
@@ -64,12 +64,12 @@ public class UserBiz {
 	 * @return
 	 * @throws BizException
 	 */
-	public boolean reg(User user) throws BizException1 {
+	public boolean reg(User user) throws BizException {
 		try {
 			um.insert(user);
 			return true;
 		} catch (Exception e) {
-			throw new BizException1("失败！",e);
+			throw new BizException("失败！",e);
 		}
 
 	}
@@ -81,7 +81,7 @@ public class UserBiz {
 	 * @return
 	 * @throws BizException
 	 */
-	public boolean validation(String unamme) throws BizException1 {
+	public boolean validation(String unamme) throws BizException {
 		try {
 			UserExample userexample = new UserExample();
 			userexample.createCriteria().andUnammeEqualTo(unamme);
@@ -91,7 +91,7 @@ public class UserBiz {
 				return false;
 			}
 		} catch (Exception e) {
-			throw new BizException1("业务繁忙！");
+			throw new BizException("业务繁忙！");
 		}
 	}
 
@@ -102,12 +102,12 @@ public class UserBiz {
 	 * @return
 	 * @throws BizException
 	 */
-	public boolean userAndEmaiIsValid(String user, String uemail) throws BizException1 {
+	public boolean userAndEmaiIsValid(String user, String uemail) throws BizException {
 		if (user.equals("Your Full Name")) {
-			throw new BizException1("请输入用户名");
+			throw new BizException("请输入用户名");
 		}
 		if (uemail.equals("Email@address.com")) {
-			throw new BizException1("请输入邮箱地址");
+			throw new BizException("请输入邮箱地址");
 		}
 		UserExample userexample = new UserExample();
 		userexample.or().andUnammeEqualTo(user).andUemailEqualTo(uemail);
@@ -115,7 +115,7 @@ public class UserBiz {
 		userexample.or().andUemailEqualTo(user).andUemailEqualTo(uemail);
 		List<User> listUser = um.selectByExample(userexample);
 		if (listUser.size() == 0) {
-			throw new BizException1("您输入的账号不存在，请查验后再重新填写");
+			throw new BizException("您输入的账号不存在，请查验后再重新填写");
 		}
 		return true;
 	}
@@ -135,18 +135,18 @@ public class UserBiz {
 	 */
 	public void resetPasswordInfoValid(String user, String uemail, String verificationCode, String passsword,
 			String repasssword, String orginalUser, String reallyVerificationCode, Date objValidTime,
-			Date presentTime) throws BizException1 {
+			Date presentTime) throws BizException {
 		if(!orginalUser.equals(user)) {
-			throw new BizException1("用户名信息被修改，请重新输入正确的用户名");
+			throw new BizException("用户名信息被修改，请重新输入正确的用户名");
 		}
 		if(!reallyVerificationCode.equals(verificationCode)) {
-			throw new BizException1("验证码输入错误，请重新输入");
+			throw new BizException("验证码输入错误，请重新输入");
 		}
 		if(!passsword.equals(repasssword)) {
-			throw new BizException1("两次密码输入不一致，请确认后重新输入");
+			throw new BizException("两次密码输入不一致，请确认后重新输入");
 		}
 		if(!objValidTime.after(presentTime)) {
-			throw new BizException1("验证码已经失效,请重新获取验证码");
+			throw new BizException("验证码已经失效,请重新获取验证码");
 		}
 		resetPassword(user,passsword,uemail);
 	}
@@ -208,20 +208,20 @@ public class UserBiz {
  * @throws BizException
  */
 	public boolean updatePasssword(User logineduser,String newPassword,
-			String repasssword,String oldPassword) throws BizException1 {
+			String repasssword,String oldPassword) throws BizException {
 		UserExample userExample= new UserExample();
 		MD5Util objMD5Util = new MD5Util();
 		
 			logineduser=um.selectByPrimaryKey(logineduser.getUid());
 			if(	 ! logineduser.getPasssword().equals(objMD5Util.MD5(oldPassword))) {
-				throw new BizException1("原密码输入错误，请认真核对后输入！");
+				throw new BizException("原密码输入错误，请认真核对后输入！");
 			}else {
 			/*
 			 * if(oldPassword.equals(newPassword)) { throw new
-			 * BizException1("原密码与新密码输入一致，请重新输入！"); }else {
+			 * BizException("原密码与新密码输入一致，请重新输入！"); }else {
 			 */
 					if(  ! newPassword.equals(repasssword) ) {
-						throw new BizException1("输入的两次新密码不一致，请仔细核对后输入");
+						throw new BizException("输入的两次新密码不一致，请仔细核对后输入");
 					}
 					System.out.println("进入修改密码");
 					User user = new User();

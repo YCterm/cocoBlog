@@ -67,7 +67,7 @@
 					<div class="focus">
 						<a th:href="'/detail/' + ${artcle.artid}" class="thumbnail"
 							target="_blank"> <img
-							src="/uploads/202003/04/200304121335900.png"
+							th:src="${artcle.imgs}"
 							th:alt="${artcle.title}" th:title="${artcle.title}" /></a>
 					</div>
 					<header>
@@ -135,7 +135,7 @@
 
 					<li th:each="hotart:${hotArtList}"><a th:href="'/detail/' + ${hotart.artid}"> <span
 							class="thumbnail"> <img
-								src="/uploads/thumbnail/20181104223408664.jpg"
+								th:src="${hotart.imgs}"
 								alt="图片维护" th:title="${hotart.title}" /></span> <span th:text="${hotart.title}"
 							class="text">维护</span> <span th:text="${#dates.format(hotart.arttime, 'yyyy-MM-dd')}" class="muted">1970-01-01</span>
 							<span class="muted"> <span th:text="${hotart.readcnt}" class="ds-thread-count"
