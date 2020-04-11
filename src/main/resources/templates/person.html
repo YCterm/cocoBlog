@@ -232,10 +232,37 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
       </div>
     </footer>
     <script>
-				
+				//修改头像
 				$("#update").click(function(){
 					 var formData = new FormData($('#updateForm')[0]);
 					formData.append('head',$('#head')[0].files[0]);
+						$.ajax({
+							url:'updatehead',
+							type:'post',
+							data:formData,
+							async:false,
+							cache:false,
+							contentType:false,
+							processData:false,
+							success:function(result){
+								if(result.code==2){
+									$("#alertDiv").attr("class","alert alert-warning");
+									$("#alertDiv").css("display", "block");
+									$("#alertDiv").html(result.msg);
+								}else{
+									$("#alertDiv").attr("class","alert alert-success");
+									$("#alertDiv").css("display", "block");
+									$("#alertDiv").html(result.msg+"3秒后跳回主页。");
+									alert("修改成功！")
+									setTimeout("location.href = 'person.html'",3000);//3000毫秒后跳转
+								}	
+							}
+						}); 
+					 
+				});
+				//修改个人信息
+				$("#update").click(function(){
+					 var formData = new FormData($('#updateForm')[0]);
 						$.ajax({
 							url:'updateInfo',
 							type:'post',
