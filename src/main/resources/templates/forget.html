@@ -70,30 +70,30 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		var user=$("#repasswordform>input[name='user']").val();
 		var uemail=$("#repasswordform>input[name='uemail']").val();
 		$.post("getVerificationCode",{user:user,uemail:uemail},function(result){
-			if(result.resultCode==1){
-				if (result.resultCode == 1) {
-					alert(result.message);
+			if(result.code==1){
+				if (result.code == 1) {
+					alert(result.msg);
 				}
-				if (result.resultCode == 2) {
-					alert(result.message);
+				if (result.code == 1000) {
+					alert(result.msg);
 				}
-				if (result.resultCode == 0) {
-					alert(result.message);
+				if (result.code == 0) {
+					alert(result.msg);
 				}
 			}
 		})
 	}
 	function resetPassword(){
 		$.post("repassword",$("#repasswordform").serialize(),function(result){
-			if (result.resultCode == 1) {
-				alert(result.message);
+			if (result.code == 1) {
+				alert(result.msg);
 				setTimeout("location.href = 'login.html'",3000);//3000毫秒后跳转
 			}
-			if (result.resultCode == 2) {
-				alert(result.message);
+			if (result.code == 1000) {
+				alert(result.msg);
 			}
-			if (result.resultCode == 0) {
-				alert(result.message);
+			if (result.code == 0) {
+				alert(result.msg);
 			}
 		})
 	}

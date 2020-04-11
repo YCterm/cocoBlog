@@ -154,7 +154,7 @@ public class UserAction {
 			}
 		} catch (BizException e) {
 			e.printStackTrace();
-			return new Result(2, e.getMessage(), null);
+			return new Result(1000,e.getMessage(), null);
 		}
 		return null;
 	}
@@ -193,15 +193,8 @@ public class UserAction {
 		}
 	}
 	/**
-	 * 修改个人信息
+	 * 修改头像
 	 * @param user			会话中登录用户信息
-	 * @param uemail  		邮件
-	 * @param unamme		用户名
-	 * @param nickname		昵称
-	 * @param uphone		电话	
-	 * @param originalPassword		原密码
-	 * @param confirmNewPassword	确认新密码
-	 * @param newPassword			新密码
 	 * @param head					头像
 	 * @param request
 	 * @param response
@@ -209,10 +202,9 @@ public class UserAction {
 	 * @throws IllegalStateException
 	 * @throws IOException
 	 */
-	@PostMapping("updateInfo")
+	@PostMapping("updatehead")
 	@ResponseBody
-	public Result updateInfo(@SessionAttribute("loginedUser") User user, String uemail,String unamme,String nickname, 
-			String uphone,String originalPassword, String confirmNewPassword, String newPassword,
+	public Result updateHead(@SessionAttribute("loginedUser") User user,
 			MultipartFile head,HttpServletRequest request,
 			HttpServletResponse response) throws IllegalStateException, IOException, BizException {
 	
@@ -242,18 +234,37 @@ public class UserAction {
 		String strProfileDiskPath = "c:/coco/new/"+strFilename;
 		System.out.println("保存图片路径===="+strProfileDiskPath);
 		objThumbnailatorUtil.changeImgSize(strDiskPath, strProfileDiskPath);
-		
-		ubiz.updateUnamme(user, unamme);
-		ubiz.updateNickname(user, nickname);
-		
-		/*
-		 * ubiz.updatePasssword(user,newPassword,confirmNewPassword, originalPassword);
-		 */
-		ubiz.updateUphone(user, uphone);
-		ubiz.updateUemail(user, uemail);
-		
 		ubiz.updateHead(user, strFilename);
 		
+		return new Result(1, "信息修改成功", null);
+	}
+	/**
+	 * 修改个人信息
+	 * @param user			会话中登录用户信息
+	 * @param uemail  		邮件
+	 * @param unamme		用户名
+	 * @param nickname		昵称
+	 * @param uphone		电话	
+	 * @param originalPassword		原密码
+	 * @param confirmNewPassword	确认新密码
+	 * @param newPassword			新密码
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws IllegalStateException
+	 * @throws IOException
+	 */
+	@PostMapping("updateInfo")
+	@ResponseBody
+	public Result updateInfo(@SessionAttribute("loginedUser") User user, String uemail,String unamme,String nickname, 
+			String uphone,String originalPassword, String confirmNewPassword, String newPassword,
+			MultipartFile head,HttpServletRequest request,
+			HttpServletResponse response) throws IllegalStateException, IOException, BizException {
+	 
+		ubiz.updateUnamme(user, unamme);
+		ubiz.updateNickname(user, nickname);
+		ubiz.updateUphone(user, uphone);
+		ubiz.updateUemail(user, uemail);		
 		return new Result(1, "信息修改成功", null);
 	}
 	@PostMapping("passwordInfo")
