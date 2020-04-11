@@ -30,7 +30,7 @@ import com.yc.blog.biz.UserBiz;
 import com.yc.blog.dao.UserMapper;
 import com.yc.blog.utils.MD5Util;
 import com.yc.blog.utils.ThumbnailatorUtil;
-import com.yc.blog.vo.Result;
+import com.yc.blog.vo.Results;
 
 @Controller
 @SessionAttributes("loginedUser")
@@ -102,15 +102,15 @@ public class UserAction {
 	 */
 	@PostMapping("doname")
 	@ResponseBody
-	public Result validation(@RequestParam String unamme) {
+	public Results validation(@RequestParam String unamme) {
 		try {
 			if (ubiz.validation(unamme)) {
-				return new Result(1);
+				return new Results(1, unamme);
 			}
 		} catch (BizException1 e) {
 			e.printStackTrace();
 		}
-		return new Result(0);
+		return new Results(0, unamme);
 	}
 
 	/**
@@ -121,17 +121,17 @@ public class UserAction {
 	 */
 	@PostMapping("doreg")
 	@ResponseBody
-	public Result doreg(User user) {
+	public Results doreg(User user) {
 		String pwd = new MD5Util().MD5(user.getPasssword());
 		user.setPasssword(pwd);
 		try {
 			if (ubiz.reg(user)) {
-				return new Result(1, "注册成功");
+				return new Results(1, "注册成功");
 			}
 		} catch (BizException1 e) {
 			e.printStackTrace();
 		}
-		return new Result(0, "注册失败");
+		return new Results(0, "注册失败");
 	}
 
 	/**
@@ -143,7 +143,7 @@ public class UserAction {
 	 */
 	@PostMapping("getVerificationCode")
 	@ResponseBody
-	public Result getVerificationCode(String user, String uemail, HttpServletRequest httpServletRequest) {
+	public Results getVerificationCode(String user, String uemail, HttpServletRequest httpServletRequest) {
 		httpServletRequest.getSession().invalidate();
 		System.out.println(user);
 		System.out.println(uemail);
@@ -157,11 +157,11 @@ public class UserAction {
 						new Date(System.currentTimeMillis() + 3 * 60 * 1000));
 				httpServletRequest.getSession().setAttribute("orginalUser", user);
 				// 1代表成功
-				return new Result(1, "验证码已发送，请及时查收！", null);
+				return new Results(1, "验证码已发送，请及时查收！", null);
 			}
 		} catch (BizException1 e) {
 			e.printStackTrace();
-			return new Result(2, e.getMessage(), null);
+			return new Results(2, e.getMessage(), null);
 		}
 		return null;
 	}
@@ -177,7 +177,7 @@ public class UserAction {
 	 */
 	@PostMapping("repassword")
 	@ResponseBody
-	public Result resetPassword(String user, String uemail, String verificationCode, String passsword,
+	public Results resetPassword(String user, String uemail, String verificationCode, String passsword,
 			String repasssword, HttpServletRequest httpServletRequest) {
 		System.out.println("user=" + user);
 		System.out.println("uemail" + uemail);
@@ -193,10 +193,10 @@ public class UserAction {
 			ubiz.resetPasswordInfoValid(user, uemail, verificationCode, passsword, 
 					repasssword, strOrginalUser,strReallyVerificationCode, 
 					objValidTime, new Date(System.currentTimeMillis()));
-			return new Result(1,"修改成功，3s后跳转登录页面",null);
+			return new Results(1,"修改成功，3s后跳转登录页面",null);
 		} catch (BizException1 e) {
 			e.printStackTrace();
-			return new Result(2,e.getMessage(),null);
+			return new Results(2,e.getMessage(),null);
 		}
 	}
 	/**
@@ -218,7 +218,7 @@ public class UserAction {
 	 */
 	@PostMapping("updateInfo")
 	@ResponseBody
-	public Result updateInfo(@SessionAttribute("loginedUser") User user, String uemail,String unamme,String nickname, 
+	public Results updateInfo(@SessionAttribute("loginedUser") User user, String uemail,String unamme,String nickname, 
 			String uphone,String originalPassword, String confirmNewPassword, String newPassword,
 			MultipartFile head,HttpServletRequest request,
 			HttpServletResponse response) throws IllegalStateException, IOException, BizException1 {
@@ -261,19 +261,19 @@ public class UserAction {
 		
 		ubiz.updateHead(user, strFilename);
 		
-		return new Result(1, "信息修改成功", null);
+		return new Results(1, "信息修改成功", null);
 	}
 	@PostMapping("passwordInfo")
 	@ResponseBody
-	public Result passwordInfo(@SessionAttribute("loginedUser") User user,String originalPassword, String confirmNewPassword, String newPassword,
+	public Results passwordInfo(@SessionAttribute("loginedUser") User user,String originalPassword, String confirmNewPassword, String newPassword,
 			MultipartFile head,HttpServletRequest request,
 			HttpServletResponse response) throws IllegalStateException, IOException{
 		 try {
 			ubiz.updatePasssword(user,newPassword,confirmNewPassword, originalPassword);
-			return new Result(1, "信息修改成功", null);
+			return new Results(1, "信息修改成功", null);
 		} catch (BizException1 e) {
 			e.printStackTrace();
-			return new Result(2, e.getMessage(), null);
+			return new Results(2, e.getMessage(), null);
 		}
 	}
 	/**
@@ -282,17 +282,17 @@ public class UserAction {
 	 */
 	@PostMapping("getUserInfo")
 	@ResponseBody
-	public Result getUserInfo(@SessionAttribute("loginedUser") User user) {
+	public Results getUserInfo(@SessionAttribute("loginedUser") User user) {
 		//获取当前用户的账号
 		String uname = user.getUnamme();
 		UserExample ue = new UserExample();
 		ue.createCriteria().andUnammeEqualTo(uname);
 		List<User> userList = um.selectByExample(ue);
 		if(userList.size() < 1) {
-			return new Result(0,"请先登录",null);
+			return new Results(0,"请先登录",null);
 		}
 		User loginedUser = userList.get(0);	
-		return new Result(1,"加载成功",loginedUser);
+		return new Results(1,"加载成功",loginedUser);
 	}
  
 
