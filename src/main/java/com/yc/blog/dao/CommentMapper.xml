@@ -18,33 +18,44 @@
 			select="getReUser"></collection>
 	</resultMap>
 
-	<resultMap id="DetailResultMap" type="com.yc.blog.bean.CommentShow">
+	<resultMap id="DetailResultMap"
+		type="com.yc.blog.bean.CommentShow">
 		<id column="comid" jdbcType="INTEGER" property="comid" />
 		<result column="artid" jdbcType="INTEGER" property="artid" />
 		<result column="recomid" jdbcType="INTEGER" property="recomid" />
-		<result column="comtime" jdbcType="TIMESTAMP"
-			property="comtime" />
+		<result column="comtime" jdbcType="TIMESTAMP" property="comtime" />
 		<result column="uid" jdbcType="INTEGER" property="uid" />
-		<result column="comcontent" jdbcType="VARCHAR"
-			property="comcontent" />
-		<result column="comstatus" jdbcType="INTEGER"
-			property="comstatus" />
+		<result column="comcontent" jdbcType="VARCHAR" property="comcontent" />
+		<result column="comstatus" jdbcType="INTEGER" property="comstatus" />
 		<result column="comtemp" jdbcType="VARCHAR" property="comtemp" />
+		<result column="title" jdbcType="VARCHAR" property="title" />
+		<result column="nickname" jdbcType="VARCHAR" property="nickname" />
 		<collection property="user" column="uid" select="getUser"></collection>
 		<collection property="reUser" column="recomid"
 			select="getReUser"></collection>
-			<!-- 外键映射 -->
-			<association property=""></association>
+
 	</resultMap>
-	
-	
-	<select id="getUser" resultType="com.yc.blog.bean.User">
-		SELECT * FROM user WHERE uid = #{uid}
+
+	<select id="getCommentDetail" parameterType="com.yc.blog.bean.CommentShow" resultMap="DetailResultMap">
+		SELECT comid,comment.artid,recomid,comtime,comment.uid,comcontent,comstatus,comtemp,title,nickname 
+		FROM user,article,comment 
+		WHERE comment.artid = article.artid and comment.uid = user.uid 
+		<if test="uid != null">
+			and comment.uid = #{uid,jdbcType=INTEGER}
+		</if> 
+		<if test="artid != null">
+			and  comment.artid= #{artid,jdbcType=INTEGER}
+		</if> 
 	</select>
-	
-	
+	<select id="getUser" resultType="com.yc.blog.bean.User">
+		SELECT * FROM user WHERE uid =
+		#{uid}
+	</select>
+
+
 	<select id="getReUser" resultType="com.yc.blog.bean.User">
-		SELECT * FROM user where uid = (SELECT uid FROM comment WHERE comid =
+		SELECT * FROM user where uid =
+		(SELECT uid FROM comment WHERE comid =
 		#{recomid})
 	</select>
 
@@ -63,7 +74,8 @@
 									and ${criterion.condition} #{criterion.value}
 								</when>
 								<when test="criterion.betweenValue">
-									and ${criterion.condition} #{criterion.value} and
+									and ${criterion.condition} #{criterion.value}
+									and
 									#{criterion.secondValue}
 								</when>
 								<when test="criterion.listValue">
@@ -95,7 +107,8 @@
 									and ${criterion.condition} #{criterion.value}
 								</when>
 								<when test="criterion.betweenValue">
-									and ${criterion.condition} #{criterion.value} and
+									and ${criterion.condition} #{criterion.value}
+									and
 									#{criterion.secondValue}
 								</when>
 								<when test="criterion.listValue">
@@ -113,7 +126,8 @@
 		</where>
 	</sql>
 	<sql id="Base_Column_List">
-		comid, artid, recomid, comtime, uid, comcontent, comstatus, comtemp
+		comid, artid, recomid, comtime, uid, comcontent, comstatus,
+		comtemp
 	</sql>
 	<select id="selectByExample"
 		parameterType="com.yc.blog.bean.CommentExample"
@@ -141,7 +155,8 @@
 	<delete id="deleteByPrimaryKey"
 		parameterType="java.lang.Integer">
 		delete from comment
-		where comid = #{comid,jdbcType=INTEGER}
+		where comid =
+		#{comid,jdbcType=INTEGER}
 	</delete>
 	<delete id="deleteByExample"
 		parameterType="com.yc.blog.bean.CommentExample">
@@ -151,12 +166,15 @@
 		</if>
 	</delete>
 	<insert id="insert" parameterType="com.yc.blog.bean.Comment">
-		insert into comment (comid, artid, recomid,
+		insert into comment (comid,
+		artid, recomid,
 		comtime, uid, comcontent,
 		comstatus, comtemp)
-		values (#{comid,jdbcType=INTEGER}, #{artid,jdbcType=INTEGER},
+		values
+		(#{comid,jdbcType=INTEGER}, #{artid,jdbcType=INTEGER},
 		#{recomid,jdbcType=INTEGER},
-		#{comtime,jdbcType=TIMESTAMP}, #{uid,jdbcType=INTEGER}, #{comcontent,jdbcType=VARCHAR},
+		#{comtime,jdbcType=TIMESTAMP},
+		#{uid,jdbcType=INTEGER}, #{comcontent,jdbcType=VARCHAR},
 		#{comstatus,jdbcType=INTEGER}, #{comtemp,jdbcType=VARCHAR})
 	</insert>
 	<insert id="insertSelective"
@@ -258,13 +276,20 @@
 	<update id="updateByExample" parameterType="map">
 		update comment
 		set comid = #{record.comid,jdbcType=INTEGER},
-		artid = #{record.artid,jdbcType=INTEGER},
-		recomid = #{record.recomid,jdbcType=INTEGER},
-		comtime = #{record.comtime,jdbcType=TIMESTAMP},
-		uid = #{record.uid,jdbcType=INTEGER},
-		comcontent = #{record.comcontent,jdbcType=VARCHAR},
-		comstatus = #{record.comstatus,jdbcType=INTEGER},
-		comtemp = #{record.comtemp,jdbcType=VARCHAR}
+		artid =
+		#{record.artid,jdbcType=INTEGER},
+		recomid =
+		#{record.recomid,jdbcType=INTEGER},
+		comtime =
+		#{record.comtime,jdbcType=TIMESTAMP},
+		uid =
+		#{record.uid,jdbcType=INTEGER},
+		comcontent =
+		#{record.comcontent,jdbcType=VARCHAR},
+		comstatus =
+		#{record.comstatus,jdbcType=INTEGER},
+		comtemp =
+		#{record.comtemp,jdbcType=VARCHAR}
 		<if test="_parameter != null">
 			<include refid="Update_By_Example_Where_Clause" />
 		</if>
@@ -302,10 +327,12 @@
 		update comment
 		set artid = #{artid,jdbcType=INTEGER},
 		recomid = #{recomid,jdbcType=INTEGER},
-		comtime = #{comtime,jdbcType=TIMESTAMP},
+		comtime =
+		#{comtime,jdbcType=TIMESTAMP},
 		uid = #{uid,jdbcType=INTEGER},
 		comcontent = #{comcontent,jdbcType=VARCHAR},
-		comstatus = #{comstatus,jdbcType=INTEGER},
+		comstatus =
+		#{comstatus,jdbcType=INTEGER},
 		comtemp = #{comtemp,jdbcType=VARCHAR}
 		where comid = #{comid,jdbcType=INTEGER}
 	</update>

@@ -9,6 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import com.yc.blog.bean.Comment;
 import com.yc.blog.bean.CommentExample;
+import com.yc.blog.bean.CommentShow;
 import com.yc.blog.bean.container.TimeBean;
 import com.yc.blog.biz.BizUtil;
 import com.yc.blog.dao.ArticleMapper;
@@ -24,7 +25,8 @@ public class CocoBlogApplicationTests {
 	private ArticleMapper am;
 	@Resource
 	private CategoryMapper cm;
-	
+	@Resource
+	private CommentMapper com;
 //	@Test
 //	public void test1() {
 //		CommentExample ce = new CommentExample();
@@ -38,4 +40,15 @@ public class CocoBlogApplicationTests {
 //		List<TimeBean> list = am.getTimeList(7);
 //		System.out.println(list.toString());
 //	}
+	@Test
+	public void test3() {
+		CommentShow show = new CommentShow();
+		show.setArtid(Integer.parseInt("1"));
+		com.getCommentDetail(show);
+		
+		List<Comment> list = com.getCommentDetail(show);
+		for (Comment comment : list) {
+			System.out.println(comment.toString());
+		}
+	}
 }

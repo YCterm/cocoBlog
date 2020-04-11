@@ -3,6 +3,14 @@ package com.yc.blog.vo;
 public class Result {
 	//结果码
 	private int resultCode;
+	/*
+	 *  返回的结果码  1 成功
+	 *   1000 失败
+	 *    1001数据为零
+	 *  1002,"未选择任何友情链接
+	 *  1003,"请输入中文、英文或数字！！！"
+	 *  1004,"该数据已存在！！！"
+	 */
 	//需要传递的消息
 	private String message;
 	//需要传输的数据
