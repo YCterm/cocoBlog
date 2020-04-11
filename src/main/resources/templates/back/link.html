@@ -118,7 +118,7 @@
 								if(result.code == 1){
 									layer.msg('已停用!',{icon: 1,time:1000});
 									$(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" class="btn btn-xs " onClick="stop(this,'+id+',2)" href="javascript:;" title="启用"><i class="icon-ok bigger-120"></i></a>');
-									$(obj).parents("tr").find(".td-status").html('<span class="label label-defaunt radius">已停用</span>');
+									$(obj).parents("tr").find(".td-status").html('<span style="color:white;" class="label label-defaunt radius">已停用</span>');
 									$(obj).remove();
 					        		return;
 					        	}else{
@@ -147,7 +147,7 @@
 				        success: function(result) {
 				        	if(result.code == 1){
 				        		$(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" class="btn btn-xs btn-success" onClick="stop(this,'+id+',1)" href="javascript:;" title="停用"><i class="icon-ok bigger-120"></i></a>');
-								$(obj).parents("tr").find(".td-status").html('<span class="label label-success radius">已启用</span>');
+								$(obj).parents("tr").find(".td-status").html('<span style="color:white;" class="label label-success radius">已启用</span>');
 								$(obj).remove();
 								layer.msg('已启用!', {
 									icon : 6,
