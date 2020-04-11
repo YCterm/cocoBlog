@@ -1,8 +1,6 @@
 package com.yc.blog.vo;
 
 public class Result {
-
-
 	
 	// 返回的消息
 		private String msg;

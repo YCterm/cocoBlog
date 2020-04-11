@@ -287,8 +287,5 @@ public class UserAction {
 		User loginedUser = userList.get(0);	
 		return new Result(1,"加载成功",loginedUser);
 	}
- 
-
-	
 
 }
