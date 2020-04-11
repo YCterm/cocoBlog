@@ -102,7 +102,7 @@
 								<dd th:each="ra : ${randomArticle}">
 									<a th:href="'/detail/' + ${ra.artid}" th:title="${ra.title}">
 										<img
-										src="https://www.yzmcms.com/uploads/201802/01/180201081943386.jpg"
+										th:src="${ra.imgs}"
 										alt="图片损坏"> <span th:text="${ra.title}">标题维护</span>
 									</a>
 								</dd>
