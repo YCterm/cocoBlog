@@ -89,7 +89,7 @@ public class BackLinksAction {
 	 */
 	@PostMapping("updateLink")
 	@ResponseBody
-	public Results updateLink(String fname,String furl,String fstate,String fid,Model m){
+	public Results updateLink(String fname,String furl,String fid,Model m){
 		if(fid != null && !fid.isEmpty()) {
 			Links links = new Links();
 			if(furl != null && !furl.isEmpty()) {
@@ -100,9 +100,6 @@ public class BackLinksAction {
 			}
 			if(fid != null && !fid.isEmpty()) {
 				links.setFid(Integer.parseInt(fid));
-			}
-			if(fstate != null && !fstate.isEmpty()) {
-				links.setFstatus(Integer.parseInt(fstate));
 			}
 			try {
 				if(blb.updateLink(links) > 0 ) {
@@ -116,6 +113,28 @@ public class BackLinksAction {
 			}
 		}else {
 			return new Results(1002,"未选择任何友情链接！！！");
+		}
+	}
+	
+	/**
+	 * 添加链接信息
+	 */
+	@PostMapping("addLinks")
+	@ResponseBody
+	public Results addLinks(String fname,String furl,Model m) {
+		Links links = new Links();
+		links.setFurl(furl);
+		links.setFname(fname);
+		links.setFstatus(1);
+		try {
+			if(blb.insertLink(links) <=0) {
+				return new Results(1000,"添加失败！！！");
+			}
+			m.addAttribute("linklist",blb.selectAllLinks());
+			return new Results(0,"添加成功！！！",blb.selectLink(links).get(0));
+		} catch (BizException e) {
+			e.printStackTrace();
+			return e.getResult();
 		}
 	}
 }

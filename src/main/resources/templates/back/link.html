@@ -3,6 +3,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="css/pintuer.css">
+    <link rel="stylesheet" href="css/admin.css">
 <link rel="stylesheet" href="css/style.css" />
 <link href="assets/css/codemirror.css" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/ace.min.css" />
@@ -35,6 +37,13 @@
 			&nbsp;&nbsp;&nbsp;&nbsp;<strong class="icon-reorder">&nbsp;
 				友情链接</strong>
 		</div>
+		<div class="padding border-bottom">
+	      <ul class="search">
+	        <li>
+	          <button type="button"  class="button border-green" id="addLink" th:onclick="addLinks();"><span class="icon-check"></span> 添加链接</button>
+	        </li>
+	      </ul>
+	    </div>
 		<div class="page-content clearfix">
 			<div id="Member_Ratings">
 				<div class="d_Confirm_Order_style">
@@ -57,18 +66,18 @@
 									<td><label><input type="checkbox" class="ace"><span
 											class="lbl"></span></label></td>
 									<td th:text="${links.fid}"></td>
-									<td th:text="${links.fname}"></td>
-									<td th:text="${links.furl}"></td>
-									<td class="td-status"><span
+									<td th:text="${links.fname}" class="td-fname"></td>
+									<td th:text="${links.furl }" class="td-furl"></td>
+									<td class="td-status"><span style="color:white;"
 										th:class="${links.fstatus} == 1 ? 'label label-success radius':'label label-defaunt radius' "
 										th:text="${links.fstatus} == 1 ? '已启用':'已停用'"></span></td>
 									<td class="td-manage">
-									<a
+									<a 
 										th:onClick="stop(this,[[${links.fid}]],[[${links.fstatus}]])"
 										th:title="${links.fstatus} == 1 ? '停用' : '启用'"
 										th:class="${links.fstatus} == 1 ? 'btn btn-xs btn-success' : 'btn btn-xs'"><i
 											class="icon-ok bigger-120"></i></a> <a title="编辑"
-										th:onclick="edit([[${links.fid}]],[[${links.fname}]],[[${links.furl}]],[[${links.fstatus}]])" href="javascript:;"
+										th:onclick="edit(this,[[${links.fid}]],[[${links.fname}]],[[${links.furl}]],[[${links.fstatus}]])" href="javascript:;"
 										class="btn btn-xs btn-info"><i
 											class="icon-edit bigger-120"></i></a></td>
 								</tr>
@@ -84,13 +93,9 @@
   
     <ul class=" page-content">
      <li><label class="label_name">链&nbsp;&nbsp;接 &nbsp;名：</label><span class="add_name"><input value="" id="fname" name="fname" type="text"  class="text_add" oninput="checkFname();"/></span ><span class="add_name" id="fnameTishi"></span><div class="prompt r_f"></div></li>
-     <li><label class="label_name">链接地址：</label><span class="add_name"><input id="furl"name="furl" type="text"  class="text_add" oninput="checkFurl();"/></span><span class="add_name" id="furlTishi"></span><div class="prompt r_f"></div></li>
-    
-     <li><label class="label_name">状&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;态：</label><span class="add_name">
-     <label><input name="form-field-radio" id="fstate1" type="radio" checked="checked" value="1"class="ace"><span class="lbl">启用</span></label>&nbsp;&nbsp;&nbsp;
-     <label><input name="form-field-radio" id="fstate2" type="radio" class="ace"  value="2"><span class="lbl">未启用</span></label>
-     </span>
+     <li>
      <div class="prompt r_f"></div>
+      <li><label class="label_name">链接地址：</label><span class="add_name"><input id="furl"name="furl" type="text"  class="text_add" oninput="checkFurl();"/></span><span class="add_name" id="furlTishi"></span><div class="prompt r_f"></div></li>
     </ul>
  </div>
 	<script>
@@ -203,22 +208,16 @@
 			        		$("#furlTishi").text("");
 			        		return;
 			        	}
-			        	
 					}
 				});
 		}
 		/*链接-编辑*/
-		function edit(id,fname,furl,fstate) {
-			$("#furl").attr("value",furl);
-			$("#fname").attr("value",fname);
-			if(fstate == 1){
-				$("#fstate1").prop("checked",true);
-			}else{
-				$("#fstate2").prop("checked",true);
-			}
+		function edit(obj,id,fnameOld,furlOld) {
+			$("#furl").attr("value",furlOld);
+			$("#fname").attr("value",fnameOld);
 			layer.open({
 				type : 1,
-				title : '修改用户信息',
+				title : '修改友情链接',
 				maxmin : true,
 				shadeClose : false, //点击遮罩关闭层
 				area : [ '600px', '' ],
@@ -227,11 +226,55 @@
 				yes : function(index, layero) {
 					var furl = $("#furl").val().replace(/\ +/g,"");
 					var fname = $("#fname").val().replace(/\ +/g,"");
-					var fstate = $("input[name='form-field-radio']:checked ").val().replace(/\ +/g,"");
-					var param ="fname="+fname+"&furl="+furl+"&fstate="+fstate+"&fid="+id;
+					var param ="fname="+fname+"&furl="+furl+"&fid="+id;
 					$.ajax({
 					        type: "post",
 					        url: "updateLink",
+					        data: param,
+					        async:true, // 异步请求
+					        cache:true, // 设置为 false 将不缓存此页面
+					        dataType: 'json', // 返回对象
+					        success: function(result) {
+						        	if(result.code == 0){
+						        		$(obj).parents("tr").find(".td-fname").html(fname);
+						        		$(obj).parents("tr").find(".td-furl").html(furl);
+						        		layer.msg(result.msg, {
+											icon :6,
+											time : 1000,
+											title: "提示"
+										});
+						        		layer.close(index);	
+						        		return;
+						        	}else{
+						        		layer.msg(result.msg, {
+											icon : 5,
+											time : 1000,
+											title: "提示"
+											});
+						        		return false;
+						        	}
+								}
+							});
+				}
+			});
+		}
+		/*链接-添加*/
+		function addLinks(){
+			layer.open({
+				type : 1,
+				title : '添加友情链接',
+				maxmin : true,
+				shadeClose : false, //点击遮罩关闭层
+				area : [ '600px', '' ],
+				content : $('#add_menber_style'),
+				btn : [ '提交', '取消' ],
+				yes : function(index, layero) {
+					var furl = $("#furl").val().replace(/\ +/g,"");
+					var fname = $("#fname").val().replace(/\ +/g,"");
+					var param ="fname="+fname+"&furl="+furl;
+					$.ajax({
+					        type: "post",
+					        url: "addLinks",
 					        data: param,
 					        async:true, // 异步请求
 					        cache:true, // 设置为 false 将不缓存此页面
@@ -243,6 +286,14 @@
 											time : 1000,
 											title: "提示"
 										});
+						        		$("#sample-table tbody").prepend('<tr><td><label><input type="checkbox" class="ace"><span class="lbl"></span></label></td>'+
+						        				'<td >'+result.data.fid+'</td>'+
+						        				'<td  class="td-fname">'+result.data.fname+'</td>'+
+						        				'<td  class="td-furl">'+result.data.furl+'</td>'+
+						        				'<td class="td-status"><span style="color:white;" class="label label-success radius">已启用</span></td>'+
+						        				'<td class="td-manage"><a  onClick="stop(this,'+result.data.fid+','+result.data.fstatus+')" title="停用" class="btn btn-xs btn-success"><i class="icon-ok bigger-120"></i></a> '+
+						        				'<a title="编辑" onclick="edit(this,'+result.data.fid+','+result.data.fname+','+result.data.furl+','+result.data.fstatus+')" '+
+						        				'class="btn btn-xs btn-info"><i class="icon-edit bigger-120"></i></a></td> </tr>');
 						        		layer.close(index);	
 						        		return;
 						        	}else{
