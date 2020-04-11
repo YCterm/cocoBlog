@@ -38,7 +38,7 @@ public class BackLinksAction {
 					links.setFstatus(Integer.parseInt(fstate));
 					if(blb.updateFstatus(links) > 0 ) {
 						m.addAttribute("linklist",blb.selectAllLinks());
-						return new Results(0,"修改成功！！！");
+						return new Results(1,"修改成功！！！");
 					}else {
 						return new Results(1000,"修改失败！！！");
 					}
@@ -62,7 +62,7 @@ public class BackLinksAction {
 			if(!fname.matches(regFname)) {
 				return  new Results(1003,"请输入中文、英文或数字！！！");
 			}
-			return new Results(0,"输入正确！！！");
+			return new Results(1,"输入正确！！！");
 		}else {
 			return new Results(1001,"数据为空！！！");
 		}
@@ -79,7 +79,7 @@ public class BackLinksAction {
 			if(!furl.matches(regFurl)) {
 				return  new Results(1003,"请输入合法地址！！！");
 			}
-			return new Results(0,"输入正确！！！");
+			return new Results(1,"输入正确！！！");
 		}else {
 			return new Results(1001,"数据为空！！！");
 		}
@@ -104,7 +104,7 @@ public class BackLinksAction {
 			try {
 				if(blb.updateLink(links) > 0 ) {
 					m.addAttribute("linklist",blb.selectAllLinks());
-					return new Results(0,"更新成功！！！",links);
+					return new Results(1,"更新成功！！！",links);
 				}
 				return new Results(1000,"更新失败！！！");
 			} catch (BizException e) {
@@ -131,7 +131,7 @@ public class BackLinksAction {
 				return new Results(1000,"添加失败！！！");
 			}
 			m.addAttribute("linklist",blb.selectAllLinks());
-			return new Results(0,"添加成功！！！",blb.selectLink(links).get(0));
+			return new Results(1,"添加成功！！！",blb.selectLink(links).get(0));
 		} catch (BizException e) {
 			e.printStackTrace();
 			return e.getResult();

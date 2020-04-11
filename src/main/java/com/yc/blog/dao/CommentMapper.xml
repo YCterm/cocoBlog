@@ -18,10 +18,31 @@
 			select="getReUser"></collection>
 	</resultMap>
 
+	<resultMap id="DetailResultMap" type="com.yc.blog.bean.CommentShow">
+		<id column="comid" jdbcType="INTEGER" property="comid" />
+		<result column="artid" jdbcType="INTEGER" property="artid" />
+		<result column="recomid" jdbcType="INTEGER" property="recomid" />
+		<result column="comtime" jdbcType="TIMESTAMP"
+			property="comtime" />
+		<result column="uid" jdbcType="INTEGER" property="uid" />
+		<result column="comcontent" jdbcType="VARCHAR"
+			property="comcontent" />
+		<result column="comstatus" jdbcType="INTEGER"
+			property="comstatus" />
+		<result column="comtemp" jdbcType="VARCHAR" property="comtemp" />
+		<collection property="user" column="uid" select="getUser"></collection>
+		<collection property="reUser" column="recomid"
+			select="getReUser"></collection>
+			<!-- 外键映射 -->
+			<association property=""></association>
+	</resultMap>
+	
+	
 	<select id="getUser" resultType="com.yc.blog.bean.User">
 		SELECT * FROM user WHERE uid = #{uid}
 	</select>
-
+	
+	
 	<select id="getReUser" resultType="com.yc.blog.bean.User">
 		SELECT * FROM user where uid = (SELECT uid FROM comment WHERE comid =
 		#{recomid})
