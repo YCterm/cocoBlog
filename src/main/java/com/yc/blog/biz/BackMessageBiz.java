@@ -29,6 +29,7 @@ public class BackMessageBiz {
 	/**
 	 * 修改评论状态
 	 * @throws BizException 
+	 * 
 	 */
 	public int updateComstate( Comment comment) throws BizException {
 		if(comment.getComid() == 0) {
