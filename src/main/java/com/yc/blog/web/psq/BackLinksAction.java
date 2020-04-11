@@ -38,7 +38,7 @@ public class BackLinksAction {
 					links.setFstatus(Integer.parseInt(fstate));
 					if(blb.updateFstatus(links) > 0 ) {
 						m.addAttribute("linklist",blb.selectAllLinks());
-						return new Result(0,"修改成功！！！");
+						return new Result(1,"修改成功！！！");
 					}else {
 						return new Result(1000,"修改失败！！！");
 					}
@@ -62,7 +62,7 @@ public class BackLinksAction {
 			if(!fname.matches(regFname)) {
 				return  new Result(1003,"请输入中文、英文或数字！！！");
 			}
-			return new Result(0,"输入正确！！！");
+			return new Result(1,"输入正确！！！");
 		}else {
 			return new Result(1001,"数据为空！！！");
 		}
@@ -79,7 +79,7 @@ public class BackLinksAction {
 			if(!furl.matches(regFurl)) {
 				return  new Result(1003,"请输入合法地址！！！");
 			}
-			return new Result(0,"输入正确！！！");
+			return new Result(1,"输入正确！！！");
 		}else {
 			return new Result(1001,"数据为空！！！");
 		}
@@ -89,7 +89,7 @@ public class BackLinksAction {
 	 */
 	@PostMapping("updateLink")
 	@ResponseBody
-	public Result updateLink(String fname,String furl,String fstate,String fid,Model m){
+	public Result updateLink(String fname,String furl,String fid,Model m){
 		if(fid != null && !fid.isEmpty()) {
 			Links links = new Links();
 			if(furl != null && !furl.isEmpty()) {
@@ -101,13 +101,10 @@ public class BackLinksAction {
 			if(fid != null && !fid.isEmpty()) {
 				links.setFid(Integer.parseInt(fid));
 			}
-			if(fstate != null && !fstate.isEmpty()) {
-				links.setFstatus(Integer.parseInt(fstate));
-			}
 			try {
 				if(blb.updateLink(links) > 0 ) {
 					m.addAttribute("linklist",blb.selectAllLinks());
-					return new Result(0,"更新成功！！！",links);
+					return new Result(1,"更新成功！！！",links);
 				}
 				return new Result(1000,"更新失败！！！");
 			} catch (BizException e) {
@@ -116,6 +113,28 @@ public class BackLinksAction {
 			}
 		}else {
 			return new Result(1002,"未选择任何友情链接！！！");
+		}
+	}
+	
+	/**
+	 * 添加链接信息
+	 */
+	@PostMapping("addLinks")
+	@ResponseBody
+	public Result addLinks(String fname,String furl,Model m) {
+		Links links = new Links();
+		links.setFurl(furl);
+		links.setFname(fname);
+		links.setFstatus(1);
+		try {
+			if(blb.insertLink(links) <=0) {
+				return new Result(1000,"添加失败！！！");
+			}
+			m.addAttribute("linklist",blb.selectAllLinks());
+			return new Result(1,"添加成功！！！",blb.selectLink(links).get(0));
+		} catch (BizException e) {
+			e.printStackTrace();
+			return e.getResult();
 		}
 	}
 }

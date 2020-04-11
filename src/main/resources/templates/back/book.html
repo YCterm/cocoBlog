@@ -40,6 +40,7 @@
 <script type="text/javascript" src="js/H-ui.admin.js"></script>
 <script src="assets/layer/layer.js" type="text/javascript"></script>
 <script src="assets/laydate/laydate.js" type="text/javascript"></script>  
+<title>留言管理</title>
 </head>
 <body>
 <form method="post" action="">
@@ -70,11 +71,11 @@
 									<td><label><input type="checkbox" class="ace"><span
 											class="lbl"></span></label></td>
 									<td th:text="${comments.comid}"></td>
-									<td th:text="${comments.artid}"></td>
+									<td ><a th:text="${comments.artid}" th:href="'detail/'+'${comments.artid}'" style="color:blue;"> </a></td>
 									<td th:text="${comments.recomid}"></td>
 									<td th:text="${comments.comtime}"></td>
 									<td th:text="${comments.comcontent}"></td>
-									<td th:text="${comments.uid}"></td>
+									<td ><a th:text="${comments.uid}" href="" style="color:blue;"></a></td>
 									<td class="td-status"><span
 										th:class="${comments.comstatus} == 1 ? 'label label-success radius':'label label-defaunt radius' "
 										th:text="${comments.comstatus} == 1 ? '已启用':'已停用'"></span></td>
@@ -83,10 +84,7 @@
 										th:onClick="stop(this,[[${comments.comid}]],[[${comments.comstatus}]])"
 										th:title="${comments.comstatus} == 1 ? '停用' : '启用'"
 										th:class="${comments.comstatus} == 1 ? 'btn btn-xs btn-success' : 'btn btn-xs'"><i
-											class="icon-ok bigger-120"></i></a> <a title="编辑"
-										th:onclick="edit([[${comments.comid}]])" href="javascript:;"
-										class="btn btn-xs btn-info"><i
-											class="icon-edit bigger-120"></i></a></td>
+											class="icon-ok bigger-120"></i></a></td>
 								</tr>
 							</tbody>
 						</table>
@@ -104,16 +102,16 @@ $(document).ready( function () {
 	function stop(obj, id,status) {
 		if(status == 1 ){
 			layer.confirm('确认要停用吗？',function(index) {
-				var param ="fstate="+2+"&fid="+id;
+				var param ="comstate="+2+"&comid="+id;
 				$.ajax({
 			        type: "post",
-			        url: "changeFstatus",
+			        url: "changeComstatus",
 			        data: param,
 			        async:true, // 异步请求
 			        cache:true, // 设置为 false 将不缓存此页面
 			        dataType: 'json', // 返回对象
 			        success: function(result) {
-							if(result.code == 0){
+							if(result.code == 1){
 								layer.msg('已停用!',{icon: 1,time:1000});
 								$(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" class="btn btn-xs " onClick="stop(this,'+id+',2)" href="javascript:;" title="启用"><i class="icon-ok bigger-120"></i></a>');
 								$(obj).parents("tr").find(".td-status").html('<span class="label label-defaunt radius">已停用</span>');
@@ -134,16 +132,16 @@ $(document).ready( function () {
 		/*链接-启用*/
 		if(status == 2){
 			layer.confirm('确认要启用吗？',function(index) {
-				var param ="fstate="+1+"&fid="+id;
+				var param ="comstate="+1+"&comid="+id;
 				$.ajax({
 			        type: "post",
-			        url: "changeFstatus",
+			        url: "changeComstatus",
 			        data: param,
 			        async:true, // 异步请求
 			        cache:true, // 设置为 false 将不缓存此页面
 			        dataType: 'json', // 返回对象
 			        success: function(result) {
-			        	if(result.code == 0){
+			        	if(result.code == 1){
 			        		$(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" class="btn btn-xs btn-success" onClick="stop(this,'+id+',1)" href="javascript:;" title="停用"><i class="icon-ok bigger-120"></i></a>');
 							$(obj).parents("tr").find(".td-status").html('<span class="label label-success radius">已启用</span>');
 							$(obj).remove();
@@ -164,95 +162,6 @@ $(document).ready( function () {
 				});
 			});
 		}
-	}
-	/*链接名-验证*/
-	function checkFname(){
-		var fname = $("#fname").val().replace(/\ +/g,"");
-		var param ="fname="+fname;
-		$.ajax({
-	        type: "post",
-	        url: "checkFname",
-	        data: param,
-	        async:true, // 异步请求
-	        cache:true, // 设置为 false 将不缓存此页面
-	        dataType: 'json', // 返回对象
-	        success: function(result) {
-		        	if(result.code != 0){
-		        		$("#fnameTishi").text(result.msg).css("color", 'red');
-		        		return;
-		        	}else{
-		        		$("#fnameTishi").text("");
-		        		return;
-		        	}
-				}
-			});
-	}
-	/*链接地址-验证*/
-	function checkFurl(){
-		var furl = $("#furl").val().replace(/\ +/g,"");
-		var param ="furl="+furl;
-		$.ajax({
-	        type: "post",
-	        url: "checkFurl",
-	        data: param,
-	        async:true, // 异步请求
-	        cache:true, // 设置为 false 将不缓存此页面
-	        dataType: 'json', // 返回对象
-	        success: function(result) {
-		        	if(result.code != 0){
-		        		$("#furlTishi").text(result.msg).css("color", 'red');
-		        		return;
-		        	}else{
-		        		$("#furlTishi").text("");
-		        		return;
-		        	}
-		        	
-				}
-			});
-	}
-	/*链接-编辑*/
-	function edit(id) {
-		layer.open({
-			type : 1,
-			title : '修改用户信息',
-			maxmin : true,
-			shadeClose : false, //点击遮罩关闭层
-			area : [ '600px', '' ],
-			content : $('#add_menber_style'),
-			btn : [ '提交', '取消' ],
-			yes : function(index, layero) {
-				var furl = $("#furl").val().replace(/\ +/g,"");
-				var fname = $("#fname").val().replace(/\ +/g,"");
-				var fstate = $("input[name='form-field-radio']:checked ").val().replace(/\ +/g,"");
-				var param ="fname="+fname+"&furl="+furl+"&fstate="+fstate+"&fid="+id;
-				$.ajax({
-				        type: "post",
-				        url: "updateLink",
-				        data: param,
-				        async:true, // 异步请求
-				        cache:true, // 设置为 false 将不缓存此页面
-				        dataType: 'json', // 返回对象
-				        success: function(result) {
-					        	if(result.code == 0){
-					        		layer.msg(result.msg, {
-										icon :6,
-										time : 1000,
-										title: "提示"
-									});
-					        		layer.close(index);	
-					        		return;
-					        	}else{
-					        		layer.msg(result.msg, {
-										icon : 5,
-										time : 1000,
-										title: "提示"
-										});
-					        		return false;
-					        	}
-							}
-						});
-			}
-		});
 	}
 	laydate({
 		elem : '#start',
