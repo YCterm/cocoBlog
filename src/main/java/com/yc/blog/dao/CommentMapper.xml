@@ -33,8 +33,6 @@
 		<collection property="user" column="uid" select="getUser"></collection>
 		<collection property="reUser" column="recomid"
 			select="getReUser"></collection>
-			<!-- 外键映射 -->
-			<association property=""></association>
 	</resultMap>
 	
 	
