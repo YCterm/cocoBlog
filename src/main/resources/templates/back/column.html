@@ -5,14 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <meta name="renderer" content="webkit">
-    <title></title>  
-    <link rel="stylesheet" href="css/pintuer.css">
+    <title>粉丝管理</title>  
+  <link rel="stylesheet" href="css/pintuer.css">
     <link rel="stylesheet" href="css/admin.css">
      <link href="css/bootstrap.min.css" rel="stylesheet" />
         <link href="css/codemirror.css" rel="stylesheet">
         <link rel="stylesheet" href="css/ace.min.css" />
         <link rel="stylesheet" href="css/font-awesome.min.css" />
-        <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
+  
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
 <link rel="stylesheet" href="css/style.css" />
 <link href="assets/css/codemirror.css" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/ace.min.css" />
@@ -28,6 +29,8 @@
 		document.write("<script src='assets/js/jquery.mobile.custom.min.js'>"
 				+ "<"+"/script>");
 </script>
+<script src="js/jquery.js"></script>
+<script src="js/pintuer.js"></script>
 <script src="assets/js/bootstrap.min.js"></script>
 <script src="assets/js/typeahead-bs2.min.js"></script>
 <!-- page specific plugin scripts -->
@@ -36,14 +39,19 @@
 <script type="text/javascript" src="js/H-ui.js"></script>
 <script type="text/javascript" src="js/H-ui.admin.js"></script>
 <script src="assets/layer/layer.js" type="text/javascript"></script>
-<script src="assets/laydate/laydate.js" type="text/javascript"></script>
-    <script src="js/jquery.js"></script>
-    <script src="js/pintuer.js"></script>  
+<script src="assets/laydate/laydate.js" type="text/javascript"></script>   
 </head>
 <body>
 <form method="post" action="">
   <div class="panel admin-panel">
     <div class="panel-head"><strong class="icon-reorder"> 游客管理</strong></div>
+    <div class="padding border-bottom">
+	      <ul class="search">
+	        <li>
+	          <button type="button"  class="button border-green" id="addLink" th:onclick="addLinks();"><span class="icon-check"></span> 添加用户</button>
+	        </li>
+	      </ul>
+	    </div>
     <div class="page-content clearfix">
 			<div id="Member_Ratings">
 				<div class="d_Confirm_Order_style">
@@ -75,8 +83,8 @@
 									<td th:text="${users.uphone}"></td>
 									<td th:text="${users.uemail}"></td>
 									<td th:text="${users.createtime}"></td>
-									<td th:text="${users.utype}"></td>
-									<td class="td-status"><span
+									<td th:text="${users.utype == 1 ? '博主' : '粉丝'}"></td>
+									<td class="td-status"><span style="color:white;"
 										th:class="${users.ustatus} == 1 ? 'label label-success radius':'label label-defaunt radius' "
 										th:text="${users.ustatus} == 1 ? '已启用':'已停用'"></span></td>
 									<td class="td-manage">
@@ -85,7 +93,7 @@
 										th:title="${users.ustatus} == 1 ? '停用' : '启用'"
 										th:class="${users.ustatus} == 1 ? 'btn btn-xs btn-success' : 'btn btn-xs'"><i
 											class="icon-ok bigger-120"></i></a> <a title="编辑"
-										th:onclick="edit([[${users.uid}]])" href="javascript:;"
+										th:onclick="edit([[${users.uid}]])" 
 										class="btn btn-xs btn-info"><i
 											class="icon-edit bigger-120"></i></a></td>
 								</tr>
@@ -101,23 +109,23 @@
 $(document).ready( function () {
     $('#sample-table').DataTable();
 });
-	/*链接-停用*/
+	/*游客-停用*/
 	function stop(obj, id,status) {
 		if(status == 1 ){
 			layer.confirm('确认要停用吗？',function(index) {
-				var param ="fstate="+2+"&fid="+id;
+				var param ="ustate="+2+"&uid="+id;
 				$.ajax({
 			        type: "post",
-			        url: "changeFstatus",
+			        url: "changeUstatus",
 			        data: param,
 			        async:true, // 异步请求
 			        cache:true, // 设置为 false 将不缓存此页面
 			        dataType: 'json', // 返回对象
 			        success: function(result) {
-							if(result.code == 0){
+							if(result.code == 1){
 								layer.msg('已停用!',{icon: 1,time:1000});
-								$(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" class="btn btn-xs " onClick="stop(this,'+id+',2)" href="javascript:;" title="启用"><i class="icon-ok bigger-120"></i></a>');
-								$(obj).parents("tr").find(".td-status").html('<span class="label label-defaunt radius">已停用</span>');
+								$(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" class="btn btn-xs btn-success" onClick="stop(this,'+id+',1)" href="javascript:;" title="停用"><i class="icon-ok bigger-120"></i></a>');
+								$(obj).parents("tr").find(".td-status").html('<span class="label label-success radius">已启用</span>');
 								$(obj).remove();
 				        		return;
 				        	}else{
@@ -132,22 +140,23 @@ $(document).ready( function () {
 					});
 			});
 		}
-		/*链接-启用*/
+		/*游客-启用*/
 		if(status == 2){
 			layer.confirm('确认要启用吗？',function(index) {
-				var param ="fstate="+1+"&fid="+id;
+				var param ="ustate="+1+"&uid="+id;
 				$.ajax({
 			        type: "post",
-			        url: "changeFstatus",
+			        url: "changeUstatus",
 			        data: param,
 			        async:true, // 异步请求
 			        cache:true, // 设置为 false 将不缓存此页面
 			        dataType: 'json', // 返回对象
 			        success: function(result) {
-			        	if(result.code == 0){
-			        		$(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" class="btn btn-xs btn-success" onClick="stop(this,'+id+',1)" href="javascript:;" title="停用"><i class="icon-ok bigger-120"></i></a>');
-							$(obj).parents("tr").find(".td-status").html('<span class="label label-success radius">已启用</span>');
+			        	if(result.code == 1){
+			        		$(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" class="btn btn-xs " onClick="stop(this,'+id+',1)" href="javascript:;" title="启用"><i class="icon-ok bigger-120"></i></a>');
+							$(obj).parents("tr").find(".td-status").html('<span class="label label-defaunt radius">已停用</span>');
 							$(obj).remove();
+			        		
 							layer.msg('已启用!', {
 								icon : 6,
 								time : 1000
@@ -166,93 +175,12 @@ $(document).ready( function () {
 			});
 		}
 	}
-	/*链接名-验证*/
-	function checkFname(){
-		var fname = $("#fname").val().replace(/\ +/g,"");
-		var param ="fname="+fname;
-		$.ajax({
-	        type: "post",
-	        url: "checkFname",
-	        data: param,
-	        async:true, // 异步请求
-	        cache:true, // 设置为 false 将不缓存此页面
-	        dataType: 'json', // 返回对象
-	        success: function(result) {
-		        	if(result.code != 0){
-		        		$("#fnameTishi").text(result.msg).css("color", 'red');
-		        		return;
-		        	}else{
-		        		$("#fnameTishi").text("");
-		        		return;
-		        	}
-				}
-			});
-	}
-	/*链接地址-验证*/
-	function checkFurl(){
-		var furl = $("#furl").val().replace(/\ +/g,"");
-		var param ="furl="+furl;
-		$.ajax({
-	        type: "post",
-	        url: "checkFurl",
-	        data: param,
-	        async:true, // 异步请求
-	        cache:true, // 设置为 false 将不缓存此页面
-	        dataType: 'json', // 返回对象
-	        success: function(result) {
-		        	if(result.code != 0){
-		        		$("#furlTishi").text(result.msg).css("color", 'red');
-		        		return;
-		        	}else{
-		        		$("#furlTishi").text("");
-		        		return;
-		        	}
-		        	
-				}
-			});
-	}
-	/*链接-编辑*/
-	function edit(id) {
-		layer.open({
-			type : 1,
-			title : '修改用户信息',
-			maxmin : true,
-			shadeClose : false, //点击遮罩关闭层
-			area : [ '600px', '' ],
-			content : $('#add_menber_style'),
-			btn : [ '提交', '取消' ],
-			yes : function(index, layero) {
-				var furl = $("#furl").val().replace(/\ +/g,"");
-				var fname = $("#fname").val().replace(/\ +/g,"");
-				var fstate = $("input[name='form-field-radio']:checked ").val().replace(/\ +/g,"");
-				var param ="fname="+fname+"&furl="+furl+"&fstate="+fstate+"&fid="+id;
-				$.ajax({
-				        type: "post",
-				        url: "updateLink",
-				        data: param,
-				        async:true, // 异步请求
-				        cache:true, // 设置为 false 将不缓存此页面
-				        dataType: 'json', // 返回对象
-				        success: function(result) {
-					        	if(result.code == 0){
-					        		layer.msg(result.msg, {
-										icon :6,
-										time : 1000,
-										title: "提示"
-									});
-					        		layer.close(index);	
-					        		return;
-					        	}else{
-					        		layer.msg(result.msg, {
-										icon : 5,
-										time : 1000,
-										title: "提示"
-										});
-					        		return false;
-					        	}
-							}
-						});
-			}
+	/*游客-编辑*/
+	function edit(id){
+		layer.msg("暂未开发！！！", {
+			icon : 5,
+			time : 1000,
+			title: "提示"
 		});
 	}
 	laydate({

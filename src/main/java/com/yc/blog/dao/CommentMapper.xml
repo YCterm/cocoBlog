@@ -27,12 +27,9 @@
 		<result column="uid" jdbcType="INTEGER" property="uid" />
 		<result column="comcontent" jdbcType="VARCHAR" property="comcontent" />
 		<result column="comstatus" jdbcType="INTEGER" property="comstatus" />
-		<result column="comtemp" jdbcType="VARCHAR" property="comtemp" />
 		<result column="title" jdbcType="VARCHAR" property="title" />
 		<result column="nickname" jdbcType="VARCHAR" property="nickname" />
-		<collection property="user" column="uid" select="getUser"></collection>
-		<collection property="reUser" column="recomid"
-			select="getReUser"></collection>
+		<result column="comtemp" jdbcType="VARCHAR" property="comtemp" />
 	</resultMap>
 
 	<select id="getCommentDetail" parameterType="com.yc.blog.bean.CommentShow" resultMap="DetailResultMap">
