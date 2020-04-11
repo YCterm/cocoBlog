@@ -245,14 +245,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							contentType:false,
 							processData:false,
 							success:function(result){
-								if(result.resultCode==2){
+								if(result.code==2){
 									$("#alertDiv").attr("class","alert alert-warning");
 									$("#alertDiv").css("display", "block");
-									$("#alertDiv").html(result.message);
+									$("#alertDiv").html(result.msg);
 								}else{
 									$("#alertDiv").attr("class","alert alert-success");
 									$("#alertDiv").css("display", "block");
-									$("#alertDiv").html(result.message+"3秒后跳回主页。");
+									$("#alertDiv").html(result.msg+"3秒后跳回主页。");
 									alert("修改成功！")
 									setTimeout("location.href = 'person.html'",3000);//3000毫秒后跳转
 								}	
@@ -278,7 +278,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 									$('#myhead').attr('src',obj.head);
 								}else{
 									alert(data.msg);
-									window.location.href = '/login.html';
+									window.location.href = '/index.html';
 								}
 							},
 							error:function(){
@@ -301,10 +301,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							contentType:false,
 							processData:false,
 							success:function(result){
-								if(result.resultCode==2){
+								if(result.code==2){
 									$("#alertDiv").attr("class","alert alert-warning");
 									$("#alertDiv").css("display", "block");
-									$("#alertDiv").html(result.message);
+									$("#alertDiv").html(result.msg);
 								}else{
 									alert("修改成功，3秒后跳转到登录页面")
 									setTimeout("location.href = 'login.html'",3000);//3000毫秒后跳转
@@ -313,7 +313,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						}); 
 					 
 				});
-
 </script>
 	 
 </body>

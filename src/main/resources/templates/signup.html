@@ -102,7 +102,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				if (signUpForm['passsword'].value == signUpForm['repasssword'].value) {
 					$.post("doreg", $("#signUpForm").serialize(), function(
 							result) {
-						if (result.resultCode == 1) {
+						if (result.code == 1) {
 							alert("成功")
 							
 						} else {
@@ -119,7 +119,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		$("#unamme").change(function () {
 			var userName = signUpForm['unamme'].value;
 			$.post("doname",{unamme:userName},function(result){
-				if(result.resultCode==1){
+				if(result.code==1){
 					
 				}else{
 					alert("用户名已注册！")
@@ -147,7 +147,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 			}
 		}
 
-	 
 	</script>
 </body>
 </html>
