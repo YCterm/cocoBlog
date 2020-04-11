@@ -1,6 +1,7 @@
 package com.yc.blog.vo;
 
 public class Result {
+
 	// 返回的消息
 		private String msg;
 		/*
@@ -13,35 +14,24 @@ public class Result {
 		private int code;
 		// 返回的数据
 		private Object data;
-		
-		
 		public Result() {
 			super();
 		}
-		
-		
-		
 		public Result(int code) {
 			super();
 			this.code = code;
 		}
-
-
-
 		public Result(int code,String msg) {
 			super();
 			this.msg = msg;
 			this.code = code;
 		}
-
-
 		public Result(int code,String msg,  Object data) {
 			super();
 			this.msg = msg;
 			this.code = code;
 			this.data = data;
 		}
-
 		/**
 		 * 默认成功的结果对象
 		 * @param msg
