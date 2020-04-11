@@ -98,12 +98,12 @@ public class UserAction {
 	public Result validation(@RequestParam String unamme) {
 		try {
 			if (ubiz.validation(unamme)) {
-				return new Result(1);
+				return new Result(1, unamme);
 			}
 		} catch (BizException e) {
 			e.printStackTrace();
 		}
-		return new Result(0);
+		return new Result(0, unamme);
 	}
 
 	/**
