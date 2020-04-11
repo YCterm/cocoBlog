@@ -2,7 +2,6 @@ package com.yc.blog.vo;
 
 public class Results {
 	// 返回的消息
-	
 		private String msg;
 		/*
 		 *  返回的结果码  1 成功
