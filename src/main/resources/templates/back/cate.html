@@ -1,154 +1,205 @@
-<!DOCTYPE html>
-<html lang="zh-cn">
+<!doctype html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <meta name="renderer" content="webkit">
-<title></title>
-<link rel="stylesheet" href="css/pintuer.css">
-<link rel="stylesheet" href="css/admin.css">
-<script src="js/jquery.js"></script>
-<script src="js/pintuer.js"></script>
+<title>分类管理</title>
+ <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
+        <link rel="stylesheet" href="css/style.css"/>       
+        <link href="assets/css/codemirror.css" rel="stylesheet">
+        <link rel="stylesheet" href="assets/css/ace.min.css" />
+        <link rel="stylesheet" href="Widget/zTree/css/zTreeStyle/zTreeStyle.css" type="text/css">
+        <link rel="stylesheet" href="assets/css/font-awesome.min.css" />
+<script src="js/jquery-1.9.1.min.js"></script>
+		<script src="assets/js/jquery.min.js"></script>
+		<script type="text/javascript">
+			window.jQuery || document.write("<script src='assets/js/jquery-2.0.3.min.js'>"+"<"+"/script>");
+		</script>
+        <script src="assets/js/ace-elements.min.js"></script>
+		<script src="assets/js/ace.min.js"></script>
+        <script src="assets/js/bootstrap.min.js"></script>
+		<script src="assets/js/typeahead-bs2.min.js"></script>
+        <script type="text/javascript" src="Widget/zTree/js/jquery.ztree.all-3.5.min.js"></script> 
+        <script src="js/lrtk.js" type="text/javascript" ></script>
+<script type="text/javascript" th:inline="none"> 
+$(function() { 
+	$("#category").fix({
+		float : 'left',
+		skin : 'green',	
+		durationTime :false
+	});
+});
+
+//初始化宽度、高度  
+ $(".widget-box").height($(window).height()); 
+ $(".page_right_style").width($(window).width()-220);
+  //当文档窗口发生改变时 触发  
+    $(window).resize(function(){
+	$(".widget-box").height($(window).height());
+	 $(".page_right_style").width($(window).width()-220);
+	})
+ 
+/**************/
+var setting = {
+	view: {
+		dblClickExpand: false,
+		showLine: false,
+		selectedMulti: false
+	},
+	data: {
+		simpleData: {
+			enable:true,
+			idKey: "id",
+			pIdKey: "pId",
+			rootPId: ""
+		}
+	},
+	callback: {
+		//点击事件
+		beforeClick: function(treeId, treeNode) {
+			var zTree = $.fn.zTree.getZTreeObj("tree");
+			if (treeNode.isParent) {
+				zTree.expandNode(treeNode);
+				return false;
+			} else {
+				clickCate(treeNode.name,treeNode.getParentNode().name);
+				return true;
+			}
+		}
+	}
+};
+/*节点点击事件*/
+    function clickCate(name,pname){
+    	$("#kidname").val("");
+    	$("#parname").val("");
+    	$("#kidname").val(name);
+    	if(pname != "博文分类列表"){
+    		$("#parname").val(pname);
+    	}
+    }
+var code;
+	
+function showCode(str) {
+	if (!code) code = $("#code");
+	code.empty();
+	code.append("<li>"+str+"</li>");
+}
+	
+$(document).ready(function(){
+	var data = document.getElementById("ztreeA").innerText;
+	var d=eval(data);
+	var t = $("#treeDemo");
+	$.fn.zTree.init(t, setting, d);
+	demoIframe = $("#testIframe");
+	demoIframe.bind("load", loadReady);
+	var zTree = $.fn.zTree.getZTreeObj("tree");
+});	
+/*新增分类类型事件*/
+function addCate(){
+	var parname = $("#parname").val().replace(/\ +/g,"");
+	var kidname = $("#kidname").val().replace(/\ +/g,"");
+	var param ="parname="+parname+"&kidname="+kidname;
+	$.ajax({
+	        type: "post",
+	        url: "addCate",
+	        data: param,
+	        async:true, // 异步请求
+	        cache:true, // 设置为 false 将不缓存此页面
+	        dataType: 'json', // 返回对象
+	        success: function(result) {
+		        	if(result.code ==1){
+		        		layer.msg(result.msg, {
+							icon : 6,
+							time : 1000,
+							title: "提示"
+							});
+		        		return;
+		        	}else{
+		        		layer.msg(result.msg, {
+							icon : 5,
+							time : 1000,
+							title: "提示"
+							});
+		        		return;
+		        	}
+				}
+			});
+}
+/*更新分类类型事件*/
+function changeState(state){
+	var parname = $("#parname").val().replace(/\ +/g,"");
+	var kidname = $("#kidname").val().replace(/\ +/g,"");
+	var param ="parname="+parname+"&kidname="+kidname+"&state="+state;
+	$.ajax({
+	        type: "post",
+	        url: "changeCateState",
+	        data: param,
+	        async:true, // 异步请求
+	        cache:true, // 设置为 false 将不缓存此页面
+	        dataType: 'json', // 返回对象
+	        success: function(result) {
+		        	if(result.code ==1){
+		        		layer.msg(result.msg, {
+							icon : 6,
+							time : 1000,
+							title: "提示"
+							});
+		        		return;
+		        	}else{
+		        		layer.msg(result.msg, {
+							icon : 5,
+							time : 1000,
+							title: "提示"
+							});
+		        		return;
+		        	}
+				}
+			});
+}
+
+</script>
 </head>
 <body>
 <div class="panel admin-panel">
-  <div class="panel-head"><strong class="icon-reorder"> 内容列表</strong></div>
-  <div class="padding border-bottom">
-    <button type="button" class="button border-yellow" onclick="window.location.href='#add'"><span class="icon-plus-square-o"></span> 添加分类</button>
+  <div class="panel-head"><strong class="icon-reorder"> 分类列表</strong></div>
+  <div class=" clearfix">
+ <div id="category">
+    <div id="scrollsidebar" class="left_Treeview">
+    <div class="show_btn" id="rightArrow"><span></span></div>
+    <div class="widget-box side_content" >
+    <div class="side_title"><a title="隐藏" class="close_btn"><span></span></a></div>
+     <div class="side_list">
+      <div class="widget-header header-color-green2">
+          <h4 class="lighter smaller">博文类型列表</h4>
+      </div>
+      <div class="widget-body">
+          <div class="widget-main padding-8">
+              <div  id="treeDemo" class="ztree"></div>
+          </div>
   </div>
-  <table class="table table-hover text-center">
-    <tr>
-      <th width="5%">ID</th>
-      <th width="15%">一级分类</th>
-      <th width="10%">排序</th>
-      <th width="10%">操作</th>
-    </tr>
-    <tr>
-      <td>1</td>
-      <td>产品分类</td>
-      <td>1</td>
-      <td><div class="button-group"> <a class="button border-main" href="cateedit.html"><span class="icon-edit"></span> 修改</a> <a class="button border-red" href="javascript:void(0)" onclick="return del(1,2)"><span class="icon-trash-o"></span> 删除</a> </div></td>
-    </tr>
-    <tr>
-      <td>1</td>
-      <td>产品分类</td>
-      <td>1</td>
-      <td><div class="button-group"> <a class="button border-main" href="cateedit.html"><span class="icon-edit"></span> 修改</a> <a class="button border-red" href="javascript:void(0)" onclick="return del(1,2)"><span class="icon-trash-o"></span> 删除</a> </div></td>
-    </tr>
-    <tr>
-      <td>1</td>
-      <td>产品分类</td>
-      <td>1</td>
-      <td><div class="button-group"> <a class="button border-main" href="cateedit.html"><span class="icon-edit"></span> 修改</a> <a class="button border-red" href="javascript:void(0)" onclick="return del(1,2)"><span class="icon-trash-o"></span> 删除</a> </div></td>
-    </tr>
-    <tr>
-      <td>1</td>
-      <td>产品分类</td>
-      <td>1</td>
-      <td><div class="button-group"> <a class="button border-main" href="cateedit.html"><span class="icon-edit"></span> 修改</a> <a class="button border-red" href="javascript:void(0)" onclick="return del(1,2)"><span class="icon-trash-o"></span> 删除</a> </div></td>
-    </tr>
-    <tr>
-      <td>1</td>
-      <td>产品分类</td>
-      <td>1</td>
-      <td><div class="button-group"> <a class="button border-main" href="cateedit.html"><span class="icon-edit"></span> 修改</a> <a class="button border-red" href="javascript:void(0)" onclick="return del(1,2)"><span class="icon-trash-o"></span> 删除</a> </div></td>
-    </tr>
-    <tr>
-      <td>1</td>
-      <td>产品分类</td>
-      <td>1</td>
-      <td><div class="button-group"> <a class="button border-main" href="cateedit.html"><span class="icon-edit"></span> 修改</a> <a class="button border-red" href="javascript:void(0)" onclick="return del(1,2)"><span class="icon-trash-o"></span> 删除</a> </div></td>
-    </tr>
-  </table>
-</div>
-<script type="text/javascript">
-function del(id,mid){
-	if(confirm("您确定要删除吗?")){			
-		
-	}
-}
-</script>
-<div class="panel admin-panel margin-top">
-  <div class="panel-head" id="add"><strong><span class="icon-pencil-square-o"></span>添加内容</strong></div>
-  <div class="body-content">
-    <form method="post" class="form-x" action="">
-      <div class="form-group">
-        <div class="label">
-          <label>上级分类：</label>
-        </div>
-        <div class="field">
-          <select name="pid" class="input w50">
-            <option value="">请选择分类</option>
-            <option value="">产品分类</option>
-            <option value="">产品分类</option>
-            <option value="">产品分类</option>
-            <option value="">产品分类</option>
-          </select>
-          <div class="tips">不选择上级分类默认为一级分类</div>
-        </div>
-      </div>
-      <div class="form-group">
-        <div class="label">
-          <label>分类标题：</label>
-        </div>
-        <div class="field">
-          <input type="text" class="input w50" name="title" />
-          <div class="tips"></div>
-        </div>
-      </div>
-      <div class="form-group">
-        <div class="label">
-          <label>批量添加：</label>
-        </div>
-        <div class="field">
-          <textarea type="text" class="input w50" name="tits" style="height:150px;" placeholder="多个分类标题请转行"></textarea>
-          <div class="tips">多个分类标题请转行</div>
-        </div>
-      </div>
-      <div class="form-group">
-        <div class="label">
-          <label>关键字标题：</label>
-        </div>
-        <div class="field">
-          <input type="text" class="input" name="s_title" />
-        </div>
-      </div>
-      <div class="form-group">
-        <div class="label">
-          <label>分类关键字：</label>
-        </div>
-        <div class="field">
-          <input type="text" class="input" name="s_keywords" />
-        </div>
-      </div>
-      <div class="form-group">
-        <div class="label">
-          <label>关键字描述：</label>
-        </div>
-        <div class="field">
-          <input type="text" class="input" name="s_desc"/>
-        </div>
-      </div>
-      <div class="form-group">
-        <div class="label">
-          <label>排序：</label>
-        </div>
-        <div class="field">
-          <input type="text" class="input w50" name="sort" value="0"  data-validate="number:排序必须为数字" />
-          <div class="tips"></div>
-        </div>
-      </div>
-      <div class="form-group">
-        <div class="label">
-          <label></label>
-        </div>
-        <div class="field">
-          <button class="button bg-main icon-check-square-o" type="submit"> 提交</button>
-        </div>
-      </div>
-    </form>
   </div>
+  </div>  
+  </div>
+  <span id="ztreeA" style="display:none;" th:text="${session.ztree}"></span>
+<!---->
+      <label class="form-label"><span class="c-red" style="color:red;">*</span>父名称：</label>
+      <div class="formControls ">
+        <input type="text" class="input-text" value="" placeholder="" id="parname" name="product-category-name">
+     
+      </div>
+      <label class="form-label"><span class="c-red" style="color:red;">*</span>分类名称：</label>
+      <div class="formControls ">
+        <input type="text" class="input-text" value="" placeholder="" id="kidname" name="product-category-name">
+       </div>
+  		 <a  th:onClcik="changeState(1)" title="启用"  class="btn btn-xs btn-success"><i class="icon-ok bigger-120"></i></a> 
+          <a title="新增" th:onClcik="addCate()" class="btn btn-xs btn-info" ><i class="icon-edit bigger-120"></i></a> 
+         <a title="禁用" th:onClcik="changeState(2)"class="btn btn-xs btn-warning" ><i class="icon-trash  bigger-120"></i></a>
+</div> 
+	
 </div>
+</div>
+
 </body>
 </html>
