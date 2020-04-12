@@ -45,9 +45,13 @@ public class UserBiz {
 
 		// 存放从数据库中查找到的登录用户的信息
 		List<User> listuser = um.selectByExample(userExample);
-		System.out.println("listuser" + listuser);
+		System.out.println(user.toString());
+		for (User user2 : listuser) {
+			System.out.println(user2.toString());
+		}
 		if (listuser.size() == 0) {
 			throw new BizException("用户名或密码不正确，请确认后输入！");
+			
 		} else {
 			user = listuser.get(0);
 			user.setPasssword("");

@@ -26,12 +26,12 @@ public class CommonAction {
 		mav.addObject("groupList", header);
 		return mav;
 	}
-
-	@GetMapping({ "/", "index", "index.html" })
+	
+	/*@GetMapping({ "/", "index", "index.html" })
 	public static ModelAndView getIndex(ModelAndView mav) {
 		mav.setViewName("index.html");
 		return mav;
-	}
+	}*/
 
 	@GetMapping("catalog/{grouplabel}/{menulabel}")
 	public ModelAndView getMenuData(@RequestParam(defaultValue = "1") Integer page,

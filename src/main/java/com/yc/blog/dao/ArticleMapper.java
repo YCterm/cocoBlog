@@ -23,6 +23,8 @@ public interface ArticleMapper {
 	
 	List<Article> getRandomArticle();
 	
+	List<Article> getMostArticle();
+	
 	@Select(value = { "SELECT * FROM article WHERE cateid = #{cateid,jdbcType=INTEGER} ORDER BY RAND() LIMIT 5" })
 	List<Article> getRecommendArticle(@Param("cateid") int cateid);
 	

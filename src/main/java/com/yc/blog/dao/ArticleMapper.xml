@@ -75,6 +75,10 @@
 		SELECT * FROM article where artstatus = 1 ORDER BY RAND() LIMIT 5
 	</select>
 	
+	<select id="getMostArticle" resultType="com.yc.blog.bean.Article">
+		SELECT * FROM article where artstatus = 1 ORDER BY readcnt DESC LIMIT 6
+	</select>
+	
 	<select id="getPrevArticle" resultType="com.yc.blog.bean.Article">
 		SELECT * FROM article WHERE artid &lt; #{number,jdbcType=INTEGER} and artstatus = 1 ORDER BY artid DESC LIMIT 1
 	</select>
