@@ -56,7 +56,7 @@
 									<th width="5%"><label><input type="checkbox"
 											class="ace"><span class="lbl"></span></label></th>
 									<th>ID</th>
-									<th>文章ID</th>
+									<th>文章标题</th>
 									<th>回复ID</th>
 									<th>评论时间</th>
 									<th>评论内容</th>
@@ -70,11 +70,11 @@
 									<td><label><input type="checkbox" class="ace"><span
 											class="lbl"></span></label></td>
 									<td th:text="${comments.comid}"></td>
-									<td ><a th:text="${comments.artid}" th:href="'detail/'+'${comments.artid}'" style="color:blue;"> </a></td>
+									<td ><a th:text="${comments.title}" th:href="'detail/'+'${comments.artid}'" style="color:blue;"> </a></td>
 									<td th:text="${comments.recomid}"></td>
 									<td th:text="${comments.comtime}"></td>
 									<td th:text="${comments.comcontent}"></td>
-									<td ><a th:text="${comments.uid}" href="" style="color:blue;"></a></td>
+									<td ><a th:text="${comments.nickname}" href="" style="color:blue;"></a></td>
 									<td class="td-status"><span
 										th:class="${comments.comstatus} == 1 ? 'label label-success radius':'label label-defaunt radius' "
 										th:text="${comments.comstatus} == 1 ? '已启用':'已停用'"></span></td>

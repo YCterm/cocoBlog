@@ -7,7 +7,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.yc.blog.bean.Comment;
-import com.yc.blog.bean.CommentExample;
+import com.yc.blog.bean.CommentShow;
 import com.yc.blog.dao.CommentMapper;
 import com.yc.blog.vo.Result;
 
@@ -22,8 +22,8 @@ public class BackMessageBiz {
 	 * 查询所有的评论
 	 */
 	public List<Comment> selectComments (){
-		CommentExample ce = new CommentExample();
-		return cm.selectByExample(ce);
+		CommentShow cs = new CommentShow();
+		return cm.getCommentDetail(cs);
 	}
 	
 	/**
