@@ -7,7 +7,11 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,6 +28,7 @@ import com.yc.blog.dao.UserMapper;
 import com.yc.blog.utils.MD5Util;
 import com.yc.blog.utils.ThumbnailatorUtil;
 import com.yc.blog.vo.Result;
+import com.yc.blog.web.tml.IndexAction;
 
 @Controller
 @SessionAttributes("loginedUser")
@@ -70,19 +75,17 @@ public class UserAction {
 	 * @return
 	 */
 	@PostMapping("dologin")
-	@ResponseBody
-	public ModelAndView dologin(User user,ModelAndView mav) {
+	public String dologin(User user,ModelMap md,HttpSession session) {
 		try {
 			// 获取ubiz中已登录的用户信息
 			User us = ubiz.loginUser(user);
-			mav.addObject("loginedUser",us);
-			return CommonAction.getIndex(mav);
+			session.setAttribute("loginedUser", us);
+			return "redirect:index";
 		} catch (BizException e) {
 			e.printStackTrace();
-			mav.addObject("msg",e.getMessage());
-			mav.setViewName("login");
-		}
-		return mav; 		
+			md.addAttribute("msg",e.getMessage());
+			return "login";
+		}		
 	}
 
 
