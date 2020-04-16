@@ -286,7 +286,9 @@
 											time : 1000,
 											title: "提示"
 										});
-						        		$("#sample-table tbody").prepend('<tr><td><label><input type="checkbox" class="ace"><span class="lbl"></span></label></td>'+
+						        		var $tr = $("#sample-table tr").eq(0);
+						        		$tr.after(
+						        				'<tr><td><label><input type="checkbox" class="ace"><span class="lbl"></span></label></td>'+
 						        				'<td >'+result.data.fid+'</td>'+
 						        				'<td  class="td-fname">'+result.data.fname+'</td>'+
 						        				'<td  class="td-furl">'+result.data.furl+'</td>'+
