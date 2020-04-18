@@ -44,7 +44,21 @@ public class BizUtil {
 		}
 		return originalList;
 	}
+	
+	private static final int CONTENT1 = 50;
 
+	public List<Article> cleanHTML1(List<Article> originalList1) {
+		for (Article temp : originalList1) {
+			String tempStr = Jsoup.parse(temp.getContent()).text();
+			// 过长的文本被省略
+			int tempStrLen = tempStr.length();
+			if (tempStrLen > CONTENT1) {
+				tempStr = tempStr.substring(0, CONTENT1) + "...";
+			}
+			temp.setContent(tempStr);
+		}
+		return originalList1;
+	}
 	/*
 	 * 获取页码 参数：1.当前页码(currentPage) 2.记录总条数(cateid)
 	 */

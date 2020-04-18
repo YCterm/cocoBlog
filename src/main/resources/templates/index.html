@@ -53,12 +53,12 @@
 			<div class="swiper-container">
 				<div class="swiper-wrapper">
 											
-					<div class="swiper-slide"><a href="https://www.yzmcms.com" target="_blank"><img src="/uploads/202001/11/200111075456968.jpg" alt="YzmCMS轻松建站，更自由"></a></div>
+					<div class="swiper-slide"><a href="https://www.yzmcms.com" target="_blank"><img src="/images/top-1.jpg" alt="YzmCMS轻松建站，更自由"></a></div>
 						
-					<div class="swiper-slide"><a href="https://blog.yzmcms.com/shenghuo/86.html" target="_blank"><img src="/uploads/202001/11/200111075535707.jpg" alt="为什么要开发自己的CMS?"></a></div>
+					<div class="swiper-slide"><a href="https://blog.yzmcms.com/shenghuo/86.html" target="_blank"><img src="/images/top-2.jpg" alt="为什么要开发自己的CMS?"></a></div>
 						
-					<div class="swiper-slide"><a href="https://www.yzmcms.com" target="_blank"><img src="/uploads/202001/11/200111075614137.jpg" alt="YzmCMS开源CMS"></a></div>
-									</div>
+					<div class="swiper-slide"><a href="https://www.yzmcms.com" target="_blank"><img src="/images/top-3.png" alt="YzmCMS开源CMS"></a></div>
+				</div>
 				<div class="swiper-pagination"></div>
 				<div class="swiper-button-next"></div>
 				<div class="swiper-button-prev"></div>
@@ -86,7 +86,7 @@
 				   <a th:href="'/detail/' + ${ma.artid}" target="_blank">
                   <img th:src="@{'images/article/'+${ma.imgs}}" alt="YzmCMS v5.5正式版发布" title="YzmCMS v5.5正式版发布"/>
                   <h3 th:text="${ma.title}">标题</h3>
-                  <p  class="muted">产品说明：YzmCMS是一款轻量级开源内容管理系统，它采用OOP（面向对象）方式自主开...</p></a></li>
+                  <p th:utext="${ma.content}" class="muted"></p></a></li>
 				  
 			</ul>
           </div>
@@ -165,59 +165,17 @@
         </div>
         <div class="widget">
 		  <h3 class="widget_tit">最新评论</h3>
-          <div class="com_list">
+          <div class="com_list" th:each="lc : ${latestComment}">
 		   		   <ul>
 				
 				<li>
-					<span class="comment_article"><a href="https://blog.yzmcms.com/html/shenghuo/122.html" title="YzmCMS将继续100%开源">YzmCMS将继续100%开源</a></span>
-					<span class="comment_comment">网友评论：希望作者考虑买一次授权  可以授权多个域名的这种方式</span>
+					<a th:href="'detail/'+ ${lc.artid}">
+					<span th:text="${lc.title}" class="comment_article">评论标题</span>
+					<span th:text="${lc.unamme}+'  :  '+${lc.comcontent}" class="comment_comment">评论内容</span>
+					</a>
 				</li>
 				
-				<li>
-					<span class="comment_article"><a href="https://blog.yzmcms.com/html/shenghuo/122.html" title="YzmCMS将继续100%开源">YzmCMS将继续100%开源</a></span>
-					<span class="comment_comment">网友评论：其实像我，我一般也是用网上大神的cms（yzmcms暂时还没有用过，这几天听QQ群里有人推荐，所以过来先了解一下），但是我有时候接个仿站业务才500块800块，要是保留您的版权客户又不让，其实我也知道这样不好，但是为了生活也是没办法，但是我也不会在后台改成是我的版权，如果客户要求的话，我会去掉版权信息
-要是说购买授权的话，我一个业务一整套做下来也就几百块，（仿个站我也要花个3天5天做好模板，还要给客户七改改八改改，整个业务下来平均时间一般在15天左右）我说这话的意思不是不想买版权，而是想说希望您能考虑一下，比如说企业购买版权和个人用户购买分开收费，或者说买一次版权限制授权多少个域名不要每一个域名就要买一次授权，虽然可能一个域名的授权费用比较便宜 但是像我如果接个站  整个费用才几百块，我也是真的买不起的感觉，如果觉得我说的不好 您别审核我留言吧，我也不会到处乱说，我这点良心还是有的</span>
-				</li>
 				
-				<li>
-					<span class="comment_article"><a href="https://blog.yzmcms.com/html/shenghuo/190.html" title="最近的烦心事有点多">最近的烦心事有点多</a></span>
-					<span class="comment_comment">网友评论：支持作者  支持开源  建议作者可以搞一个授权的大包 </span>
-				</li>
-				
-				<li>
-					<span class="comment_article"><a href="/php/198.html" title="PHP实现RSA或RSA2算法的签名和验签">PHP实现RSA或RSA2算法的签名和验签</a></span>
-					<span class="comment_comment">网友评论：多端</span>
-				</li>
-				
-				<li>
-					<span class="comment_article"><a href="/css/196.html" title="css3中常见的单位及总结">css3中常见的单位及总结</a></span>
-					<span class="comment_comment">网友评论：有收获！</span>
-				</li>
-				
-				<li>
-					<span class="comment_article"><a href="/shenghuo/197.html" title="盗版YzmCMS系统，从未见过这么贱的人！">盗版YzmCMS系统，从未见过这么贱的人！</a></span>
-					<span class="comment_comment">网友评论：这种人就该得肺炎<img src="https://blog.yzmcms.com/common/static/images/face/28.gif"/></span>
-				</li>
-				
-				<li>
-					<span class="comment_article"><a href="https://blog.yzmcms.com/html/php/192.html" title="YzmCMS v5.5正式版发布">YzmCMS v5.5正式版发布</a></span>
-					<span class="comment_comment">网友评论：大神，能否把模板调用数据的标签改成像织梦那样子呢</span>
-				</li>
-				
-				<li>
-					<span class="comment_article"><a href="https://blog.yzmcms.com/html/shenghuo/190.html" title="最近的烦心事有点多">最近的烦心事有点多</a></span>
-					<span class="comment_comment">网友评论：支持作者很好用</span>
-				</li>
-				
-				<li>
-					<span class="comment_article"><a href="https://blog.yzmcms.com/html/php/189.html" title="YzmCMS v5.4正式版发布">YzmCMS v5.4正式版发布</a></span>
-					<span class="comment_comment">网友评论：想问问博主，请问博主选服务器是选什么类型的，带宽多少，cpu，多少核</span>
-				</li>
-				
-				<li>
-					<span class="comment_article"><a href="https://blog.yzmcms.com/html/php/96.html" title="json_encode不转义中文汉字的方法">json_encode不转义中文汉字的方法</a></span>
-					<span class="comment_comment">网友评论：感谢，可以正常显示中文了。</span>
-				</li>
 			 
 			</ul>
           </div>

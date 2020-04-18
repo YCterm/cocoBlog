@@ -23,6 +23,8 @@ public interface CommentMapper {
     List<Comment> getCommentDetail(CommentShow show);
 
     Comment selectByPrimaryKey(Integer comid);
+    
+    List<Comment> getCommentLatest();
 
     int updateByExampleSelective(@Param("record") Comment record, @Param("example") CommentExample example);
 
