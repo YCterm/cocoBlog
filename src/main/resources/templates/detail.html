@@ -56,7 +56,7 @@
 					$('.container').removeAttr('style');
 				}
 			});
-		})
+		});
 
 		function sendComment() {
 			//thymeleaf框架内获取session
@@ -66,6 +66,13 @@
 				return false;
 			}
 		}
+
+		$(function() {
+			var msg = '[[${vcodemsg}]]';
+			if (msg != "") {
+				alert(msg);
+			}
+		});
 	</script>
 	<div th:replace="base/base::.header"></div>
 	<section class="container">
@@ -101,9 +108,8 @@
 
 								<dd th:each="ra : ${randomArticle}">
 									<a th:href="'/detail/' + ${ra.artid}" th:title="${ra.title}">
-										<img
-										th:src="@{'images/article/'+${ra.imgs}}"
-										> <span th:text="${ra.title}">标题维护</span>
+										<img th:src="@{'images/article/'+${ra.imgs}}">
+										<span th:text="${ra.title}">标题维护</span>
 									</a>
 								</dd>
 
@@ -141,10 +147,9 @@
 										<input type="submit" class="sub_btn" name="dosubmit"
 											value="提交" style="width: 100px"> <span
 											class="emotion">表情</span><span class="yzm"><img
-											src="https://blog.yzmcms.com/api/index/code.html"
-											onclick="this.src=this.src+'?'" style="cursor: pointer;"
-											title="看不清？点击更换"><input type="text" name="code"
-											required="required"></span>
+											src="/defaultKaptcha" onclick="this.src=this.src+'?'"
+											style="cursor: pointer;" title="看不清？点击更换"><input
+											type="text" name="code" required="required"></span>
 									</p>
 								</form>
 							</div>
@@ -178,8 +183,8 @@
 														th:text="${cl.user.unamme}">管理员</span>(管理员)</strong> <strong
 													th:if="${cl.user.utype == 2}" th:text="${cl.user.unamme}">粉丝</strong>
 												</a> 回复 <a href="javascript:void(0);" class="user_name"
-													rel="nofollow"> <strong
-													th:if="${cl.reUser.utype == 1}" style="color: #DE4C1C"><span
+													rel="nofollow"> <strong th:if="${cl.reUser.utype == 1}"
+													style="color: #DE4C1C"><span
 														th:text="${cl.reUser.unamme}">管理员</span>(管理员)</strong> <strong
 													th:if="${cl.reUser.utype == 2}"
 													th:text="${cl.reUser.unamme}">粉丝</strong>
@@ -199,15 +204,15 @@
 													<textarea class="textarea" id="content" name="comcontent"
 														placeholder="让评论变得如此简单~"></textarea>
 													<p>
-														<input type="submit" class="sub_btn static" name="dosubmit"
-														value="提交" style="width: 100px"> <span
-														class="yzm yzm2"><img src=""
-														onclick="this.src='https://blog.yzmcms.com/api/index/code.html?v='+Math.random()"
-														style="cursor: pointer;" alt="点击加载" title="看不清？点击更换"><input
-														type="text" name="code" required="required"></span>
+														<input type="submit" class="sub_btn static"
+															name="dosubmit" value="提交" style="width: 100px">
+														<span class="yzm yzm2"><img src="/defaultKaptcha"
+															onclick="this.src='/defaultKaptcha'"
+															style="cursor: pointer;" alt="点击加载" title="看不清？点击更换"><input
+															type="text" name="code" required="required"></span>
 													</p>
 												</form>
-												
+
 											</div>
 										</div>
 									</li>

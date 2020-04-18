@@ -5,12 +5,17 @@ import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.ModelAndView;
@@ -28,6 +33,7 @@ import com.yc.blog.biz.CommonBiz;
 import com.yc.blog.dao.ArticleMapper;
 import com.yc.blog.dao.CategoryMapper;
 import com.yc.blog.dao.CommentMapper;
+import com.yc.blog.vo.Result;
 
 /**
  * 
@@ -59,8 +65,9 @@ public class DetailAction {
 		return mav;
 	}
 
-	@GetMapping("detail/{numberStr}")
-	public ModelAndView getDetail(@PathVariable("numberStr") String numberStr, ModelAndView mav) {
+	@RequestMapping("detail/{numberStr}")
+	public ModelAndView getDetail(@PathVariable("numberStr") String numberStr, ModelAndView mav,
+			@RequestParam(required = false) String cf) {
 		ModelMap mavMap = mav.getModelMap();
 
 		// 输入非数字字符
@@ -70,6 +77,11 @@ public class DetailAction {
 		} catch (Exception e) {
 			mav.setViewName("index.html");
 			return mav;
+		}
+
+		String vcodemsg = null;
+		if ("1".equals(cf)) {
+			vcodemsg = "验证码错误！";
 		}
 
 		ArticleExample ae = new ArticleExample();
@@ -82,8 +94,8 @@ public class DetailAction {
 
 		// 文章主体
 		Article article = artList.get(0);
-		
-		//增加点击量
+
+		// 增加点击量
 		am.updateReadcnt(number);
 
 		// clone
@@ -138,6 +150,7 @@ public class DetailAction {
 		List<Comment> commentList = cmm.selectByExample(cme);
 		Integer commentListSize = commentList.size();
 
+		mav.addObject("vcodemsg", vcodemsg);
 		mav.addObject("number", number);
 		mav.addObject("article", article);
 		mav.addObject("artAbstract", artAbstract);
@@ -157,7 +170,10 @@ public class DetailAction {
 
 	@PostMapping("detail/{numberStr}/sendComment")
 	public ModelAndView sendComment(@SessionAttribute("loginedUser") User user,
-			@PathVariable("numberStr") String numberStr, Comment comment, ModelAndView mav) {
+			@PathVariable("numberStr") String numberStr, Comment comment, ModelAndView mav, String code,
+			HttpSession session) {
+		System.out.println(code);
+
 		// 后端判断是否登录
 		if (user == null) {
 			mav.setViewName("login.html");
@@ -173,14 +189,19 @@ public class DetailAction {
 			return mav;
 		}
 
+		mav.setViewName("redirect:/detail/" + number);
+
+		// 验证码判断
+		if (!code.equalsIgnoreCase(session.getAttribute("vrifyCode") + "")) {
+			mav.addObject("cf", "1");
+			return mav;
+		}
+
 		comment.setArtid(number);
 		comment.setComtime(new Date());
 		comment.setUid(user.getUid());
 		comment.setComstatus(1);
-		System.out.println(comment.toString());
 		cmm.insert(comment);
-		
-		mav.setViewName("redirect:/detail/" + number);
 
 		return mav;
 	}
