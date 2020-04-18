@@ -75,8 +75,13 @@ public class IndexAction {
 		
 		List<Article> artList = bu.cleanHTML(am.selectByExampleWithBLOBs(null));
 		
+		List<Comment> latestComment = cm.getCommentLatest();
+		
+		// 随机内容
+		List<Article> randomArticle = am.getRandomArticle();
+		
 		// 热门文章
-		List<Article> mostArticle = am.getMostArticle();
+		List<Article> mostArticle = bu.cleanHTML1(am.getMostArticle());
 		
 		// 文章主体
 		Article article = artList.get(0);
@@ -105,6 +110,8 @@ public class IndexAction {
 		mav.addObject("article", article);
 		mav.addObject("recommendArticle", recommendArticle);
 		mav.addObject("alist",artList);
+		mav.addObject("latestComment",latestComment);
+		mav.addObject("randomArticle",randomArticle);
 		
 		mav.setViewName("index.html");
 		return mav;

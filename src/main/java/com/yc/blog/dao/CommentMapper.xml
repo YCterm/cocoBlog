@@ -17,7 +17,27 @@
 		<collection property="reUser" column="recomid"
 			select="getReUser"></collection>
 	</resultMap>
-
+	
+	<resultMap id="LatestResultMap"
+		type="com.yc.blog.bean.CommentLatest">
+		<id column="comid" jdbcType="INTEGER" property="comid" />
+		<result column="artid" jdbcType="INTEGER" property="artid" />
+		<result column="recomid" jdbcType="INTEGER" property="recomid" />
+		<result column="comtime" jdbcType="TIMESTAMP" property="comtime" />
+		<result column="uid" jdbcType="INTEGER" property="uid" />
+		<result column="comcontent" jdbcType="VARCHAR" property="comcontent" />
+		<result column="comstatus" jdbcType="INTEGER" property="comstatus" />
+		<result column="title" jdbcType="VARCHAR" property="title" />
+		<result column="unamme" jdbcType="VARCHAR" property="unamme" />
+		<result column="comtemp" jdbcType="VARCHAR" property="comtemp" />
+	</resultMap>
+	<select id="getCommentLatest" parameterType="com.yc.blog.bean.CommentLatest" resultMap="LatestResultMap">
+		SELECT comid,comment.artid,recomid,comtime,comment.uid,comcontent,comstatus,comtemp,title,unamme 
+		FROM user,article,comment 
+		WHERE comment.artid = article.artid and comment.uid = user.uid 
+		AND comment.artid = ANY(SELECT artid FROM comment where comstatus = 1 ORDER BY comtime DESC)
+	</select>
+	
 	<resultMap id="DetailResultMap"
 		type="com.yc.blog.bean.CommentShow">
 		<id column="comid" jdbcType="INTEGER" property="comid" />
