@@ -102,8 +102,8 @@
 								<dd th:each="ra : ${randomArticle}">
 									<a th:href="'/detail/' + ${ra.artid}" th:title="${ra.title}">
 										<img
-										th:src="${ra.imgs}"
-										alt="图片损坏"> <span th:text="${ra.title}">标题维护</span>
+										th:src="@{'images/article/'+${ra.imgs}}"
+										> <span th:text="${ra.title}">标题维护</span>
 									</a>
 								</dd>
 
@@ -236,7 +236,7 @@
 
 					<li th:each="ra : ${recommendArticle}"><a
 						th:href="'/detail/' + ${ra.artid}"> <span class="thumbnail">
-								<img src="https://www.yzmcms.com/doc/images/1.png" alt="图片损坏"
+								<img th:src="@{'images/article/'+${ra.imgs}}" alt="图片损坏"
 								th:title="${ra.title}">
 						</span> <span class="text" th:text="${ra.title}">维护</span> <span
 							class="muted"
