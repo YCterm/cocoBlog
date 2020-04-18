@@ -84,7 +84,7 @@
             <ul>
 				   <li class="item" th:each="ma : ${mostArticle}">
 				   <a th:href="'/detail/' + ${ma.artid}" target="_blank">
-                  <img src="https://www.yzmcms.com/doc/images/1.png" alt="YzmCMS v5.5正式版发布" title="YzmCMS v5.5正式版发布"/>
+                  <img th:src="@{'images/article/'+${ma.imgs}}" alt="YzmCMS v5.5正式版发布" title="YzmCMS v5.5正式版发布"/>
                   <h3 th:text="${ma.title}">标题</h3>
                   <p  class="muted">产品说明：YzmCMS是一款轻量级开源内容管理系统，它采用OOP（面向对象）方式自主开...</p></a></li>
 				  
@@ -97,7 +97,7 @@
 			<article th:each="a : ${alist}" class="excerpt">
             <div class="focus">
               <a th:href="'/detail/' + ${a.artid}" class="thumbnail" target="_blank">
-                <img src="https://blog.yzmcms.com/uploads/thumbnail/20160705180250573.jpg" alt="PHP实现RSA或RSA2算法的签名和验签" title="PHP实现RSA或RSA2算法的签名和验签"/></a>
+                <img th:src="@{'images/article/'+${a.imgs}}" alt="PHP实现RSA或RSA2算法的签名和验签" title="PHP实现RSA或RSA2算法的签名和验签"/></a>
             </div>
             <header>
               <h2>
@@ -149,7 +149,7 @@
 				  
 				<li th:each="ra : ${recommendArticle}"><a th:href="'detail'+ ${ra.artid}">
                 <span class="thumbnail">
-                  <img src="https://blog.yzmcms.com/uploads/thumbnail/20160705180250573.jpg" alt="PHP实现RSA或RSA2算法的签名和验签" th:title="${ra.title}"/></span>
+                  <img th:src="@{'images/article/'+${ra.imgs}}" alt="PHP实现RSA或RSA2算法的签名和验签" th:title="${ra.title}"/></span>
                 <span class="text" th:text="${ra.title}">标题</span>
                 <span class="muted" th:text="${#dates.format(ra.arttime, 'yyyy-MM-dd')}">2020-2020-03-18</span>
                 <span class="muted">
