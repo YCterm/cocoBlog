@@ -82,6 +82,9 @@ public class DetailAction {
 
 		// 文章主体
 		Article article = artList.get(0);
+		
+		//增加点击量
+		am.updateReadcnt(number);
 
 		// clone
 		Article articleClone = new Article();

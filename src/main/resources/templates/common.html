@@ -67,7 +67,7 @@
 					<div class="focus">
 						<a th:href="'/detail/' + ${artcle.artid}" class="thumbnail"
 							target="_blank"> <img
-							th:src="@{'images/article/'+${artcle.imgs}}"
+							th:src="@{'/images/article/'+${artcle.imgs}}"
 							th:alt="${artcle.title}" th:title="${artcle.title}" /></a>
 					</div>
 					<header>
@@ -135,7 +135,7 @@
 
 					<li th:each="hotart:${hotArtList}"><a th:href="'/detail/' + ${hotart.artid}"> <span
 							class="thumbnail"> <img
-								th:src="@{'images/article/'+${hotart.imgs}}" 
+								th:src="@{'/images/article/'+${hotart.imgs}}" 
 								th:title="${hotart.title}" /></span> <span th:text="${hotart.title}"
 							class="text">维护</span> <span th:text="${#dates.format(hotart.arttime, 'yyyy-MM-dd')}" class="muted">1970-01-01</span>
 							<span class="muted"> <span th:text="${hotart.readcnt}" class="ds-thread-count"
@@ -150,7 +150,7 @@
 				<h3 class="widget_tit">文章归档(近18个月)</h3>
 				<ul style="margin-top: 15px">
 					<li th:each="tal : ${timeArtList}">
-						<a th:text="${tal.time}+'('+${tal.amount}+')'" th:href="${type}+'?time=' + ${tal.time}"
+						<a th:if="${tal.time!=null && tal.amount!=0}" th:text="${tal.time}+'('+${tal.amount}+')'" th:href="${type}+'?time=' + ${tal.time}"
 						   target="_blank">2020年03月(3)
 						</a>
 					</li>

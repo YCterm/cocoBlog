@@ -7,8 +7,12 @@ import com.yc.blog.bean.container.TimeBean;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 public interface ArticleMapper {
+	@Update("UPDATE article SET readcnt = readcnt + 1 WHERE artid = #{artid}")
+	void updateReadcnt(@Param("artid") int artid);
+	
 	List<Article> getGroupArtArticle(@Param("array") List<Integer> array, @Param("page") int page,
 			@Param("ART_NUMBER") int ART_NUMBER, @Param("time") String time);
 
