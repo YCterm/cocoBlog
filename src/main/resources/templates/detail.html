@@ -258,7 +258,7 @@
 				<h3 class="widget_tit">文章归档(近18个月)</h3>
 				<ul style="margin-top: 15px">
 
-					<li th:each="tal : ${timeArtList}"><a
+					<li th:each="tal : ${timeArtList}"><a th:if="${tal.time!=null && tal.amount!=0}"
 						th:text="${tal.time}+'('+${tal.amount}+')'"
 						th:href="'/catalog/'+${timeArtListUrl}+'?time=' + ${tal.time}"
 						target="_blank">2020年03月(3) </a></li>
