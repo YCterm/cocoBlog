@@ -64,7 +64,7 @@
 
 			</ul>
 			<div class="pull-right">
-				<!-- 登录状态 -->
+				<!-- 粉丝登录状态 -->
 				<ul th:if="${session.loginedUser} !=null" class="nav">
 					<li
 						class="menu-item menu-item-type-custom menu-item-object-custom  menu-item-has-children">
@@ -72,6 +72,9 @@
 					<ul class="sub-menu">
 							<li class="menu-item menu-item-type-taxonomy menu-item-object-category">
 								<a href="/person.html">个人信息</a>
+							</li>
+							<li th:if="${session.loginedUser.utype} == 2" class="menu-item menu-item-type-taxonomy menu-item-object-category">
+								<a href="/backIndex">后台管理</a>
 							</li>
 						</ul>
 					</li>

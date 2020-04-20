@@ -147,7 +147,7 @@
           <ul>
 		  		   
 				  
-				<li th:each="ra : ${recommendArticle}"><a th:href="'detail'+ ${ra.artid}">
+				<li th:each="ra : ${recommendArticle}"><a th:href="'detail/'+ ${ra.artid}">
                 <span class="thumbnail">
                   <img th:src="@{'images/article/'+${ra.imgs}}" alt="PHP实现RSA或RSA2算法的签名和验签" th:title="${ra.title}"/></span>
                 <span class="text" th:text="${ra.title}">标题</span>
