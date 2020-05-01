@@ -5,11 +5,17 @@ import com.yc.blog.bean.ArticleExample;
 import com.yc.blog.bean.container.TimeBean;
 
 import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
+import org.springframework.data.jpa.repository.Query;
 
 public interface ArticleMapper {
+	@Select("select * from article where title like concat('%',#{title},'%')")
+	  Object selectByName(@Param("title") String title);
+
+	
 	@Update("UPDATE article SET readcnt = readcnt + 1 WHERE artid = #{artid}")
 	void updateReadcnt(@Param("artid") int artid);
 	
