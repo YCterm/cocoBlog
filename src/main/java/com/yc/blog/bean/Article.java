@@ -1,8 +1,12 @@
 package com.yc.blog.bean;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Article {
+public class Article implements Serializable{
+
+	private static final long serialVersionUID = 1L;
+
 	private Integer artid;
 
 	private String author;
