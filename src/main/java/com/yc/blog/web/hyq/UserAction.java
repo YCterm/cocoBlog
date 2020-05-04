@@ -60,6 +60,13 @@ public class UserAction {
 		return "forget";
 	}
 	
+	@GetMapping("singout")
+	public String signOut(ModelMap md,HttpSession session){
+		session.removeAttribute("loginedUser");
+		md.remove("loginedUser");
+		return "redirect:index";
+	}
+	
 	
 	
 	  @GetMapping("person.html") 
